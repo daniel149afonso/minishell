@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitest.c                                         :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 15:33:27 by apiscopo         ###   ########.fr       */
+/*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
+/*   Updated: 2025/03/12 15:44:50 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int main(void)
-{
-	char *result;
+int main(void);
+char	**ft_splitou(char const *s);
 
-	while (1)
-	{
-		result = readline("minishell :");
-		printf("%s\n", result);
-		if (*result)
-			add_history(result);
-		free (result);
-	}
-	return 0;
-}
+
+#endif
