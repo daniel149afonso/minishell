@@ -6,20 +6,11 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 21:29:17 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:34:53 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int metachar(char c)
-{
-	if (c == '|' || c == ';' || c == '(' || c == ')' ||
-		c == '<' || c == '>')
-		return (0);
-	else
-		return (1);
-}
 
 /*
 			 /\_/\
@@ -39,7 +30,7 @@ char	**tokenize(const char *s, char **tokens)
 	int j = 0;
 	int	len = 0;
 	int	start = 0;
-	
+
 	while (s[i])
 	{
 		while (isspace(s[i]))
