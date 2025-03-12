@@ -6,11 +6,20 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 16:31:49 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:36:59 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft. h"
+#include "minishell.h"
+
+static int metachar(char c)
+{
+	if (c == '|' || c == ';' || c == '(' || c == ')' ||
+		c == '<' || c == '>')
+		return (0);
+	else
+		return (1);
+}
 
 static char	**free_array(char **dest, int i)
 {
@@ -22,7 +31,7 @@ static char	**free_array(char **dest, int i)
 	return (0);
 }
 
-static int	count_word(char const *s, char c)
+static int	count_word(char const *s)
 {
 	int	i;
 	int	count;
@@ -31,12 +40,26 @@ static int	count_word(char const *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == ' ')
 			i++;
 		else
 		{
-			count++;
-			while (s[i] && s[i] != c)
+			if (s[i] == '|' || s[i] == ';' || s[i] == '(' || s[i] == ')' ||
+				s[i] == '<' || s[i] == '>')
+			{
+				if ((s[i] == '<' && s[i + 1] == '<') ||
+					(s[i] == '<' && s[i + 1] == '>'))
+				{
+					count++;
+					i += 2;
+				}
+				else
+				{
+					count++;
+					i++;
+				}
+			}
+			while (s[i] && s[i] != metachar(s[i]))
 				i++;
 		}
 	}
@@ -69,7 +92,7 @@ static char	*strword(const char *start, const char *end)
 	return (str);
 }
 
-static char	**splitword(const char *s, char c, char **dest)
+static char	**splitword(const char *s, char **dest)
 {
 	size_t		i;
 	const char	*start;
@@ -104,11 +127,11 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	nbword = count_word(s, c);
+	nbword = count_word(s);
 	dest = (char **)malloc((nbword + 1) * sizeof(char *));
 	if (dest == NULL)
 		return (NULL);
-	dest = splitword(s, c, dest);
+	dest = splitword(s, dest);
 	return (dest);
 }
 
