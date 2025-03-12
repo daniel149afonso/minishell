@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 21:28:09 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:36:47 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int main(void)
 		}
 		while (result[i] != NULL)
 		{
-			printf("%s\n", result[i]);
-			i++;
+			printf("%s\n", result[i++]);
 		}
 		i = 0;
 		free (input);
