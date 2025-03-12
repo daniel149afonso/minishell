@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 16:30:34 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:31:42 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	count_word(char const *s)
 					i++;
 				}
 			}
-			while (s[i] && s[i] != metachar(s[i]))
+			while (s[i] && metachar(s[i]))
 				i++;
 		}
 	}
@@ -67,12 +67,12 @@ static int	count_word(char const *s)
 }
 
 /*
-		 /\_/\
-		( o.o )
-		 > ^ <
+			 /\_/\
+			( o.o )
+			 > ^ <
 */
 
-static char	*strword(const char *start, const char *end)
+static char	*strword(const char start, const char end)
 {
 	size_t	len;
 	size_t	i;
@@ -95,28 +95,31 @@ static char	*strword(const char *start, const char *end)
 static char	**splitword(const char *s, char **dest)
 {
 	size_t		i;
+	size_t		j;
 	const char	*start;
 
 	i = 0;
-	while (*s != '\0')
+	j = i;
+	while (s[i])
 	{
-		if (*s != c)
+		if (s[i])
 		{
+			if (s[i])
 			start = s;
-			while (*s != '\0' && *s != c)
-				s++;
-			dest[i] = strword(start, s);
-			if (dest[i] == NULL)
+			while (s[i] != '\0' && metachar(s[i]))
+				i++;
+			dest[j] = strword(start, s[i]);
+			if (dest[j] == NULL)
 			{
 				free_array(dest, i);
 				return (NULL);
 			}
-			i++;
+			j++;
 		}
 		else
 			s++;
 	}
-	dest[i] = NULL;
+	dest[j] = NULL;
 	return (dest);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 15:44:50 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:35:06 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(void);
 char	**ft_splitou(char const *s);
-
 
 #endif
