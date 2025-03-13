@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 17:35:02 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:17:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft/libft.h"
 
+//INIT LIST
+void	ft_init_lst(t_list **lst, char **tokens);
+void	ft_put_lst(t_list *lst);
+
+//FT_SPLIT
 char	**ft_splitou(char const *s);
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*prev;
-	struct s_list	*next;
-}	t_list;
+//FREE AND ERROR
+void	ft_error(char *msg, t_list **lst);
+void	ft_free_lst(t_list **lst);
 
 #endif

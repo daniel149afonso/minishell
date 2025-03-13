@@ -6,65 +6,11 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 17:34:38 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:34:53 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int metachar(char c)
-{
-	if (c == '|' || c == ';' || c == '(' || c == ')' ||
-		c == '<' || c == '>')
-		return (0);
-	else
-		return (1);
-}
-
-static char	**free_array(char **dest, int i)
-{
-	while (i > 0)
-	{
-		free(dest[--i]);
-	}
-	free(dest);
-	return (0);
-}
-
-static int	count_word(char const *s)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		if (s[i] == ' ')
-			i++;
-		else
-		{
-			if (s[i] == '|' || s[i] == ';' || s[i] == '(' || s[i] == ')' ||
-				s[i] == '<' || s[i] == '>')
-			{
-				if ((s[i] == '<' && s[i + 1] == '<') ||
-					(s[i] == '<' && s[i + 1] == '>'))
-				{
-					count++;
-					i += 2;
-				}
-				else
-				{
-					count++;
-					i++;
-				}
-			}
-			while (s[i] && metachar(s[i]))
-				i++;
-		}
-	}
-	return (count);
-}
 
 /*
 			 /\_/\
@@ -72,79 +18,81 @@ static int	count_word(char const *s)
 			 > ^ <
 */
 
-static char	*strword(const char start, const char end)
-{
-	size_t	len;
-	size_t	i;
-	char	*str;
-
-	len = end - start;
-	i = 0;
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = start[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+void free_tokens(char **tokens, size_t count) {
+    for (size_t i = 0; i < count; i++)
+        free(tokens[i]);
+    free(tokens);
 }
 
-static char	**splitword(const char *s, char **dest)
+char	**tokenize(const char *s, char **tokens)
 {
-	size_t		i;
-	size_t		j;
-	const char	*start;
+	int i = 0;
+	int j = 0;
+	int	len = 0;
+	int	start = 0;
 
-	i = 0;
-	j = i;
 	while (s[i])
 	{
-		if (s[i])
+		while (isspace(s[i]))
+			i++;
+		if (!s[i])
+			break;
+		if (strchr("|;()<>", s[i]))
 		{
-			if (s[i])
-			start = s;
-			while (s[i] != '\0' && metachar(s[i]))
-				i++;
-			dest[j] = strword(start, s[i]);
-			if (dest[j] == NULL)
+			len = 1;
+			if ((s[i] == '<' && s[i + 1] == '<') ||
+				(s[i] == '>' && s[i + 1] == '>') ||
+				(s[i] == '<' && s[i + 1] == '>'))
 			{
-				free_array(dest, i);
-				return (NULL);
+				len = 2;
+			}
+			tokens[j] = strndup(&s[i], len);
+			if (!tokens[j])
+			{
+				free_tokens(tokens, j);
+				return NULL;
+			}
+			j++;
+			i += len;
+		}
+		else
+		{
+			start = i;
+			while (s[i] && !isspace(s[i]) && !strchr("|;()<>", s[i]))
+				i++;
+			tokens[j] = strndup(&s[start], i - start);
+			if (!tokens[j])
+			{
+				free_tokens(tokens, j);
+				return NULL;
 			}
 			j++;
 		}
-		else
-			s++;
 	}
-	dest[j] = NULL;
-	return (dest);
+	tokens[j] = NULL;
+	return (tokens);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_splitou(char const *s)
 {
-	char		**dest;
-	size_t		nbword;
+	char **tokens;
 
 	if (!s)
 		return (NULL);
-	nbword = count_word(s);
-	dest = (char **)malloc((nbword + 1) * sizeof(char *));
-	if (dest == NULL)
+	tokens = malloc(500 * sizeof(char *));
+	if (!tokens)
 		return (NULL);
-	dest = splitword(s, dest);
-	return (dest);
+	tokens = tokenize(s, tokens);
+	return (tokens);
 }
-
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 
 int main() {
 	char **result;
 	size_t i;
 
-	result = ft_split("hello world!", ' ');
+	result = ft_split("echo<ls|cat -e|ls");
 	if (result) {
 		for (i = 0; result[i] != NULL; i++) {
 			printf("%s\n", result[i]);
@@ -153,5 +101,6 @@ int main() {
 		free(result); // Libération du tableau de pointeurs
 	}
 	return 0;
-}
-*/
+}*/
+
+//mange moi la queue Didi ptn

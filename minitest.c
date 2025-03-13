@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   minitest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 15:33:27 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:04:51 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
+#include "minishell.h"
 
-int main(void)
+int	main(void)
 {
-	char *result;
+	char	*input;
+	char	**result;
+	int		i;
+	t_list	*lst;
 
+	i = 0;
+	lst = NULL;
 	while (1)
 	{
-		result = readline("minishell :");
-		printf("%s\n", result);
-		if (*result)
-			add_history(result);
-		free (result);
+		input = readline("minishell:");
+		if (*input)
+		{
+			result = ft_splitou(input);
+			ft_init_lst(&lst, result);
+			//ft_put_lst(lst); ICI!!!!!!!!!!!!!!!!!!!! decomente si tu veux tester mon choux (;
+			add_history(input);
+		}
+		while (result[i] != NULL)
+		{
+			printf("%s\n", result[i++]);
+		}
+		i = 0;
+		free (input);
 	}
-	return 0;
+	return (0);
 }
