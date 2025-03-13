@@ -27,9 +27,8 @@ int main(void)
 			add_history(input);
 		}
 		while (result[i] != NULL)
-		{
 			printf("%s\n", result[i++]);
-		}
+		free (result[i]);
 		i = 0;
 		free (input);
 	}
