@@ -27,6 +27,7 @@ int	main(void)
 			result = ft_splitou(input);
 			ft_init_lst(&lst, result);
 			ft_put_lst(lst);
+			free_tokens(result, 0);
 			add_history(input);
 		}
 		free (input);

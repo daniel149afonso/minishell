@@ -39,9 +39,9 @@ int	isstring(const char *s)
 	}
 	if (trigger == 0)
 		return (1);
-	if (i == 0)
+	if (i == 1)
 		return (0);
-	return (i + 1);
+	return (i);
 }
 
 static int	is_lococo(const char *s)
@@ -56,30 +56,33 @@ static int	is_lococo(const char *s)
 	return (len);
 }
 
-static void	tokenize_2(const char *s, char **tokens, int *i, int *j)
+static int	tokenize_2(const char *s, char **tokens)
 {
 	int start;
 	int	len;
+	int i;
 
+	i = 0;
 	start = 0;
-	if (ft_strchr("|;()<>", s[*(i)]))
+	len = 0;
+	if (ft_strchr("|;()<>", s[i]))
 	{
-		len = is_lococo(&s[*(i)]);
-		tokens[*(j)] = ft_strndup(&s[*(i)], len);
-		if (!tokens[*(j)])
-			return (free_tokens(tokens, *(j)));
-		j++;
+		len = is_lococo(&s[i]);
+		*(tokens) = ft_strndup(&s[i], len);
+		if (!tokens)
+			return (free_tokens(tokens, 0), 0);
 	}
 	else
 	{
-		start = *(i);
-		while (s[*(i)] && !is_space(s[*(i)]) && !ft_strchr("|;()<>", s[*(i)]))
+		start = i;
+		while (s[i] && !is_space(s[i]) && !ft_strchr("|;()<>", s[i]))
 			i++;
-		tokens[*(j)] = ft_strndup(&s[start], *(i) - start);
-		if (!tokens[*(j)])
-			return (free_tokens(tokens, *(j)));
-		j++;
+		*(tokens) = ft_strndup(&s[start], i - start);
+		if (!tokens)
+			return (free_tokens(tokens, 0), 0);
 	}
+	i += len;
+	return (i);
 }
 
 //JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX
@@ -92,6 +95,7 @@ char	**tokenize(const char *s, char **tokens)
 
 	i = 0;
 	j = 0;
+	len = 0;
 	while (s[i])
 	{
 		while (is_space(s[i]))
@@ -101,15 +105,11 @@ char	**tokenize(const char *s, char **tokens)
 			len = isstring(&s[i]);
 			if (len > 0)
 				tokens[j] = ft_strndup(&s[i], len);
-			if (!tokens[j])
-				return (free_tokens(tokens, j), NULL);
 			j++;
-			if (s[i] == '\0')
-				break ;
 		}
-		tokenize_2(&s[i], &tokens[j], &i, &j);
+		else
+			len = tokenize_2(&s[i], &tokens[j++]);
 		i += len;
-		j++;
 	}
 	return (tokens[j] = NULL, tokens);
 }
@@ -120,7 +120,7 @@ char	**ft_splitou(char const *s)
 
 	if (!s)
 		return (NULL);
-	tokens = malloc(500 * sizeof(char *));
+	tokens = malloc(1000 * sizeof(char *));
 	if (!tokens)
 		return (NULL);
 	tokens = tokenize(s, tokens);
