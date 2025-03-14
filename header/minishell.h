@@ -18,13 +18,17 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
+
+// UTILS
+int	is_space(int c);
 
 //INIT LIST
 void	ft_init_lst(t_list **lst, char **tokens);
 void	ft_put_lst(t_list *lst);
 
 //FT_SPLIT
+void    free_tokens(char **tokens, size_t count);
 char	**ft_splitou(char const *s);
 
 //FREE AND ERROR

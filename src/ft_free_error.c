@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 void	ft_error(char *msg, t_list **lst)
 {
@@ -31,4 +31,16 @@ void	ft_free_lst(t_list **lst)
 		*lst = tmp;
 	}
 	*lst = NULL;
+}
+
+void free_tokens(char **tokens, size_t count)
+{
+	size_t i;
+
+	i = 0;
+	if (count == 0)
+		count = ft_strlen(tokens[count]);
+    while (i < count)
+		free(tokens[i++]);
+	free(tokens);
 }
