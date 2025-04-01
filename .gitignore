@@ -1,8 +1,8 @@
 README.md
-.vscode
+*.vscode
 *.o
 *.a
-.DStore
-a.out
+*.DStore
+*.out
 *.identifiers
 minishell
