@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 void	ft_init_lst(t_list **lst, char **tokens)
 {
@@ -31,12 +31,13 @@ void	ft_put_lst(t_list *lst)
 {
 	t_list	*tmp;
 
-	while (tmp)
+	while (lst)
 	{
 		tmp = lst->next;
 		printf("Content: %s\n", (char *)lst->content);
 		lst = tmp;
 	}
+	ft_lstclear(&(lst), NULL);
 }
 //FT_INIT_LST:
 //crée un nouvel element de type t_list pour chaque token

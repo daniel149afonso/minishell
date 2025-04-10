@@ -1,1 +1,8 @@
-*.
+README.md
+*.vscode
+*.o
+*.a
+*.DStore
+*.out
+*.identifiers
+minishell

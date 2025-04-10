@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_error.c                                    :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 17:09:06 by daafonso          #+#    #+#             */
-/*   Updated: 2025/03/13 21:27:03 by daniel149af      ###   ########.fr       */
+/*   Created: 2024/10/07 15:42:34 by daniel149af       #+#    #+#             */
+/*   Updated: 2024/10/07 16:14:26 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_error(char *msg, t_list **lst)
+int	ft_tolower(int c)
 {
-	ft_free_lst(lst);
-	printf("%s\n", msg);
-	exit(EXIT_FAILURE);
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
 }
 
-void	ft_free_lst(t_list **lst)
+/*int	main(void)
 {
-	t_list	*tmp;
-
-	tmp = NULL;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
-}
+	printf("%c", ft_tolower('0'));
+	return (0);
+}*/

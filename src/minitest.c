@@ -10,32 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 int	main(void)
 {
 	char	*input;
 	char	**result;
-	int		i;
 	t_list	*lst;
 
-	i = 0;
 	lst = NULL;
 	while (1)
 	{
 		input = readline("minishell:");
-		if (*input)
+		if (input && *input)
 		{
 			result = ft_splitou(input);
 			ft_init_lst(&lst, result);
-			//ft_put_lst(lst); ICI!!!!!!!!!!!!!!!!!!!! decomente si tu veux tester mon choux (;
+			ft_put_lst(lst);
+			free_tokens(result, 0);
 			add_history(input);
 		}
-		while (result[i] != NULL)
-		{
-			printf("%s\n", result[i++]);
-		}
-		i = 0;
 		free (input);
 	}
 	return (0);
