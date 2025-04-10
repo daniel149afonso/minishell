@@ -6,7 +6,7 @@
 #    By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2024/10/22 12:54:55 by daniel149af      ###   ########.fr        #
+#    Updated: 2025/04/10 15:34:15 by daniel149af      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ ft_strlcat.c \
 ft_strlcpy.c \
 ft_strlen.c \
 ft_strncmp.c \
+ft_strndup.c \
 ft_strnstr.c \
 ft_strrchr.c \
 ft_substr.c \
