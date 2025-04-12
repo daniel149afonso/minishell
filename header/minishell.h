@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/13 21:17:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/12 00:39:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,21 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+typedef struct s_command
+{
+	char	**tab;
+	
+}	t_command;
+
 // UTILS
-int	is_space(int c);
+int		is_space(int c);
 
 //INIT LIST
 void	ft_init_lst(t_list **lst, char **tokens);
 void	ft_put_lst(t_list *lst);
 
 //FT_SPLIT
-void    free_tokens(char **tokens, size_t count);
+void	free_tokens(char **tokens, size_t count);
 char	**ft_splitou(char const *s);
 
 //FREE AND ERROR
