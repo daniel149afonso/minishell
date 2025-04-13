@@ -6,7 +6,7 @@
 #    By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2024/10/22 12:54:55 by daniel149af      ###   ########.fr        #
+#    Updated: 2025/04/14 00:54:26 by daniel149af      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ ft_putstr_fd.c \
 ft_split.c \
 ft_strchr.c \
 ft_strdup.c \
+ft_strndup.c \
 ft_striteri.c \
 ft_strmapi.c \
 ft_strjoin.c \

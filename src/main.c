@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitest.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/13 21:04:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/14 00:48:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	main(void)
 {
-	char	*input;
-	char	**result;
-	t_list	*lst;
+	char		*input;
+	char		**result;
+	t_list		*lst;
+	// t_builtin	builtins[8];
 
 	lst = NULL;
+	// ft_init_commands()
 	while (1)
 	{
 		input = readline("minishell:");

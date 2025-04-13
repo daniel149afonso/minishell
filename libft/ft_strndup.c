@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/14 00:59:56 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/04/14 00:51:17 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/04/14 00:53:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "libft.h"
 
-void	ft_init_commands(t_builtin *builtins)
+char	*ft_strndup(const char *s, size_t n)
 {
-	builtins[0].name = "cd";
-	builtins[0].f = &ft_cd;
-	char	*tab[] = {"cd", "echo", "pwd", "export", "unset", "env", "exit", NULL};
-}
+	char	*dup;
+	size_t	i;
 
-void	ft_cd(void)
-{
-	return ;
-}
-
-int	is_command(t_list *lst)
-{
-	t_list	*tmp;
-
-	tmp = NULL;
-	while (lst)
+	i = 0;
+	dup = (char *)malloc((n + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while (i < n && s[i])
 	{
-		if (strcmp((const char *)lst->content, ))
-		{
-			
-		}
+		dup[i] = s[i];
+		i++;
 	}
-	return (0);
+	dup[i] = '\0';
+	return (dup);
 }
