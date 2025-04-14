@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/14 15:28:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/14 23:29:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,21 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
 
-typedef struct s_command
-{
-	char	**tab;
-}	t_command;
-
 typedef struct s_builtin
 {
 	char	*name;
-	void	(*f)(void);
+	void	(*f)(t_list *lst);
 }	t_builtin;
 
 //FT_INIT_COMMANDS
 void	ft_init_commands(t_builtin *builtins);
 int		is_command(t_list *lst, t_builtin *builtins);
-void	ft_cd(void);
+void	ft_cd(t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
