@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/14 00:48:17 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/14 15:28:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@
 typedef struct s_command
 {
 	char	**tab;
-	
 }	t_command;
 
 typedef struct s_builtin
 {
 	char	*name;
-	int		(*f)(char **args);
+	void	(*f)(void);
 }	t_builtin;
 
 //FT_INIT_COMMANDS
 void	ft_init_commands(t_builtin *builtins);
+int		is_command(t_list *lst, t_builtin *builtins);
+void	ft_cd(void);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:09:06 by daafonso          #+#    #+#             */
-/*   Updated: 2025/03/13 21:27:03 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/14 16:00:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_free_lst(t_list **lst)
 	*lst = NULL;
 }
 
-void free_tokens(char **tokens, size_t count)
+void	free_tokens(char **tokens, size_t count)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (count == 0)

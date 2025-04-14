@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/03/13 21:05:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/14 19:33:01 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_init_lst(t_list **lst, char **tokens)
 	while (tokens[j])
 	{
 		if (j == 0)
-			*lst = ft_lstnew((char *)tokens[j]);
+			*lst = ft_lstnew(ft_strdup(tokens[j]));
 		else
-			ft_lstadd_back(lst, ft_lstnew((char *)tokens[j]));
+			ft_lstadd_back(lst, ft_lstnew(ft_strdup(tokens[j])));
 		j++;
 	}
 }
@@ -37,7 +37,6 @@ void	ft_put_lst(t_list *lst)
 		printf("Content: %s\n", (char *)lst->content);
 		lst = tmp;
 	}
-	ft_lstclear(&(lst), NULL);
 }
 //FT_INIT_LST:
 //crée un nouvel element de type t_list pour chaque token
