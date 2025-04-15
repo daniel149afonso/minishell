@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/15 20:11:47 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:10:58 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,24 @@ void	ft_pwd(t_list *lst)
 
 void	ft_cd(t_list *lst)
 {
-	int	ret;
+	int		result;
+	char	*path;
 
+	path = NULL;
 	if (!lst->next || !lst->next->content)
 	{
-		perror("cd: missing argument\n"); //pas vraie erreur sans argument retourne a la racine
+		printf("Je suis rentre\n");
+		path = getenv("HOME");
+		if (!path)
+		{
+			perror("cd: HOME not set\n");
+			return ;
+		}
 		return ;
 	}
-	ret = chdir((char *)lst->next->content);
-	if (ret != 0)
-		printf("cd: no such file or directory: %s\n", (char *)lst->next->content);
+	result = chdir((char *)lst->next->content);
+	if (result != 0)
+		print_cd_error((char *)lst->next->content);
 	else
 		printf("Répertoire changé : %s\n", (char *)lst->next->content);
 }

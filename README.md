@@ -1,13 +1,13 @@
-# Ordre des commandes:
-cd (en cours)
+# Commandes status:
+cd (en cours - Daniel): manque gestion si HOME n'existe pas
 
-pwd (très simple)
+pwd (très simple - Daniel): fini
 
-echo (facile, bon exercice sur les arguments)
+echo (facile, bon exercice sur les arguments - a voir?)
 
-exit (important pour gérer la fin de minishell)
+exit (important pour gérer la fin de minishell - Alessio)
 
-env (juste afficher l’environnement)
+env (juste afficher l’environnement - Alessio)
 
 export / unset (un peu plus complexes : manipuler envp)
 

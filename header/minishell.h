@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 18:57:11 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/15 20:57:02 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**ft_splitou(char const *s);
 //FREE AND ERROR
 void	ft_error(char *msg, t_list **lst);
 void	ft_free_lst(t_list **lst);
+void	print_cd_error(char *path);
 
 // UTILS
 int		is_space(int c);
