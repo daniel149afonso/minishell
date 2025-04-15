@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 21:34:53 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/15 22:38:36 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	isstring(const char *s)
 		return (1);
 	if (i == 1)
 		return (0);
-	return (i);
+	return (i + 1);
 }
 
 static int	is_lococo(const char *s)

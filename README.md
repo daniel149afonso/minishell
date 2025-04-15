@@ -8,6 +8,7 @@ echo (facile, bon exercice sur les arguments - a voir?)
 exit (important pour gérer la fin de minishell - Alessio)
 
 env (juste afficher l’environnement - Alessio)
+3
 
 export / unset (un peu plus complexes : manipuler envp)
 
