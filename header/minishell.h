@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/14 23:29:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/15 18:57:11 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_builtin
 {
 	char	*name;
+	int		len;
 	void	(*f)(t_list *lst);
 }	t_builtin;
 
@@ -31,6 +32,7 @@ typedef struct s_builtin
 void	ft_init_commands(t_builtin *builtins);
 int		is_command(t_list *lst, t_builtin *builtins);
 void	ft_cd(t_list *lst);
+void	ft_pwd(t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
