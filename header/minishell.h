@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 20:57:02 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:52:50 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,32 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+//STRUCTS
+
+typedef struct s_env
+{
+	char		*key;
+	char		*value;
+	struct s_env *next;
+}	t_env;
+
 typedef struct s_builtin
 {
 	char	*name;
 	int		len;
 	void	(*f)(t_list *lst);
+	void	(*e)(t_env *env);
 }	t_builtin;
 
 //FT_INIT_COMMANDS
 void	ft_init_commands(t_builtin *builtins);
-int		is_command(t_list *lst, t_builtin *builtins);
+int		is_command(t_env *env, t_list *lst, t_builtin *builtins);
 void	ft_cd(t_list *lst);
 void	ft_pwd(t_list *lst);
+void	ft_env(t_env *env);
+
+//ENV
+void	init_env(t_env *env, char **envp);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
