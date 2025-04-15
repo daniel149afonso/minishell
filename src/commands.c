@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/15 21:10:58 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/15 22:36:14 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ void	ft_cd(t_list *lst)
 	int		result;
 	char	*path;
 
-	path = NULL;
-	if (!lst->next || !lst->next->content)
+	if (lst->next && lst->next->content)
+		path = (char *)lst->next->content;
+	else
 	{
-		printf("Je suis rentre\n");
 		path = getenv("HOME");
 		if (!path)
 		{
 			perror("cd: HOME not set\n");
 			return ;
 		}
-		return ;
+		printf("Home path: %s\n", path);
 	}
-	result = chdir((char *)lst->next->content);
+	result = chdir(path);
 	if (result != 0)
-		print_cd_error((char *)lst->next->content);
+		print_cd_error(path);
 	else
-		printf("Répertoire changé : %s\n", (char *)lst->next->content);
+		printf("Répertoire changé : %s\n", path);
 }
 
 int	is_command(t_list *lst, t_builtin *builtins)
@@ -74,7 +74,10 @@ int	is_command(t_list *lst, t_builtin *builtins)
 		while (i < 2)
 		{
 			if ((ft_strncmp((char *)lst->content, builtins[i].name, builtins[i].len)) == 0)
+			{
 				builtins[i].f(lst);
+				return (1);
+			}
 			i++;
 		}
 		lst = tmp;
