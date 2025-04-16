@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 23:52:53 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:03:22 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	(void)ac;
-	(void)**av;
 	char		*input;
 	char		**result;
 	t_list		*lst;
@@ -24,6 +22,8 @@ int	main(int ac, char **av, char **envp)
 
 	lst = NULL;
 	env = NULL;
+	(void)ac;
+	(void)**av;
 	init_env(env, envp);
 	ft_init_commands(builtins);
 	while (1)
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 			is_command(env, lst, builtins);
 		}
 		free (input);
-		ft_lstclear(&lst, NULL);
+		ft_lstclear(&lst, free);
 	}
 	return (0);
 }

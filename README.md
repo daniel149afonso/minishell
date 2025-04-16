@@ -1,5 +1,5 @@
 # Commandes status:
-cd (en cours - Daniel): manque gestion si HOME n'existe pas
+cd (en cours - Daniel): manque gestion si HOME n'existe pas + arguments en trop
 
 pwd (très simple - Daniel): manque gestion d'erreur des arguments
 

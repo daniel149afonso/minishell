@@ -6,11 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/15 22:47:54 by daafonso         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/15 23:50:47 by apiscopo         ###   ########.fr       */
->>>>>>> 5d5ab06 (Init env without print env)
+/*   Updated: 2025/04/16 17:11:07 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +57,11 @@ void	ft_cd(t_list *lst)
 		}
 		printf("Home path: %s\n", path);
 	}
+	if (lst->next->next)
+	{
+		perror("cd");
+		return ;
+	}
 	result = chdir(path);
 	if (result != 0)
 		print_cd_error(path);
@@ -70,7 +71,7 @@ void	ft_cd(t_list *lst)
 
 void	ft_env(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	printf("Entering ft_env\n");
 	tmp = env;
@@ -88,7 +89,6 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins)
 	t_list	*tmp;
 	int		i;
 
-	printf("hehehehe\n");
 	while (lst)
 	{
 		tmp = lst->next;
@@ -103,7 +103,10 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins)
 			i++;
 		}
 		if (ft_strncmp((char *)lst->content, builtins[3].name, builtins[3].len) == 0)
+		{
 			builtins[3].e(env);
+			return (1);
+		}
 		lst = tmp;
 	}
 	return (0);
