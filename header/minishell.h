@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 17:16:47 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:56:45 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,23 @@ typedef struct s_env
 	struct s_env *next;
 }	t_env;
 
+typedef struct s_envbuilt
+{
+	char	*name;
+	int		len;
+	void	(*e)(t_env *env);
+}	t_envbuilt;
+
 typedef struct s_builtin
 {
 	char	*name;
 	int		len;
 	void	(*f)(t_list *lst);
-	void	(*e)(t_env *env);
 }	t_builtin;
 
 //FT_INIT_COMMANDS
-void	ft_init_commands(t_builtin *builtins);
-int		is_command(t_env *env, t_list *lst, t_builtin *builtins);
+void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins);
+int		is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt);
 void	ft_cd(t_list *lst);
 void	ft_pwd(t_list *lst);
 void	ft_env(t_env *env);

@@ -6,13 +6,13 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 18:29:18 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:44:12 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	ft_init_commands(t_builtin *builtins)
+void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins)
 {
 	builtins[0].name = "cd";
 	builtins[0].len = strlen("cd");
@@ -23,9 +23,9 @@ void	ft_init_commands(t_builtin *builtins)
 	builtins[2].name = NULL;
 	builtins[2].len = 0;
 	builtins[2].f = NULL;
-	builtins[3].name = "env";
-	builtins[3].len = strlen("env");
-	builtins[3].e = &ft_env;
+	envbuilt[0].name = "env";
+	envbuilt[0].len = strlen("env");
+	envbuilt[0].e = &ft_env;
 	//char	*tab[] = {"cd", "echo", "pwd", "export", "unset", "env", "exit", NULL};
 }
 
@@ -73,6 +73,7 @@ void	ft_env(t_env *env)
 {
 	t_env	*tmp;
 
+	printf("caca\n");
 	tmp = env;
 	while (tmp)
 	{
@@ -83,7 +84,7 @@ void	ft_env(t_env *env)
 }
 
 
-int	is_command(t_env *env, t_list *lst, t_builtin *builtins)
+int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt)
 {
 	t_list	*tmp;
 	int		i;
@@ -101,9 +102,9 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins)
 			}
 			i++;
 		}
-		if (ft_strncmp((char *)lst->content, builtins[3].name, builtins[3].len) == 0)
+		if (ft_strncmp((char *)lst->content, envbuilt[0].name, envbuilt[0].len) == 0)
 		{
-			builtins[3].e(env);
+			envbuilt[0].e(env);
 			return (1);
 		}
 		lst = tmp;
