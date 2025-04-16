@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:56:45 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:38:41 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 typedef struct s_env
 {
-	char		*key;
-	char		*value;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_envbuilt
@@ -59,13 +59,13 @@ void	ft_init_lst(t_list **lst, char **tokens);
 void	ft_put_lst(t_list *lst);
 
 //FT_SPLIT
-void	free_tokens(char **tokens, size_t count);
+void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
 
 //FREE AND ERROR
 void	ft_error(char *msg, t_list **lst);
 void	ft_free_lst(t_list **lst);
-void	print_cd_error(char *path);
+void	print_path_error(char *path);
 
 // UTILS
 int		is_space(int c);
