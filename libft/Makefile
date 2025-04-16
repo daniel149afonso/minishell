@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+         #
+#    By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2025/04/10 15:34:15 by daniel149af      ###   ########.fr        #
+#    Updated: 2025/04/16 18:40:21 by daafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ ft_putstr_fd.c \
 ft_split.c \
 ft_strchr.c \
 ft_strdup.c \
+ft_strndup.c \
 ft_striteri.c \
 ft_strmapi.c \
 ft_strjoin.c \

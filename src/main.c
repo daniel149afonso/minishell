@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitest.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/13 21:04:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/16 18:30:00 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
-	char	*input;
-	char	**result;
-	t_list	*lst;
+	char		*input;
+	char		**result;
+	t_list		*lst;
+	t_env		*env = NULL;
+	t_builtin	builtins[8];
 
+	(void)ac;
+	(void)**av;
 	lst = NULL;
+	env = NULL;
+	init_env(&env, envp);
+	ft_init_commands(builtins);
 	while (1)
 	{
-		input = readline("minishell:");
+		lst = NULL;
+		input = readline("minishell 🤖 : ");
 		if (input && *input)
 		{
 			result = ft_splitou(input);
@@ -29,8 +37,10 @@ int	main(void)
 			ft_put_lst(lst);
 			free_tokens(result, 0);
 			add_history(input);
+			is_command(env, lst, builtins);
 		}
 		free (input);
+		ft_lstclear(&lst, free);
 	}
 	return (0);
 }

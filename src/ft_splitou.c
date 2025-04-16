@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/03/12 21:34:53 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:24:08 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	isstring(const char *s)
 		return (1);
 	if (i == 1)
 		return (0);
-	return (i);
+	return (i + 1);
 }
 
 static int	is_lococo(const char *s)
@@ -58,9 +58,9 @@ static int	is_lococo(const char *s)
 
 static int	tokenize_2(const char *s, char **tokens)
 {
-	int start;
+	int	start;
 	int	len;
-	int i;
+	int	i;
 
 	i = 0;
 	start = 0;
@@ -89,8 +89,8 @@ static int	tokenize_2(const char *s, char **tokens)
  //faut que je norm ptn
 char	**tokenize(const char *s, char **tokens)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	len;
 
 	i = 0;
