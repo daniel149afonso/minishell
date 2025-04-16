@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:03:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/16 18:13:24 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	main(int ac, char **av, char **envp)
 	t_env		*env = NULL;
 	t_builtin	builtins[8];
 
-	lst = NULL;
-	init_env(&env, envp);
-	env = NULL;
 	(void)ac;
 	(void)**av;
+	lst = NULL;
+	env = NULL;
+	init_env(&env, envp);
 	ft_init_commands(builtins);
 	while (1)
 	{
