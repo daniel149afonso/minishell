@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 21:04:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:13:33 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_cd(t_list *lst)
 		printf("Répertoire changé : %s\n", path);
 }
 
-void ft_exp(t_env *env)
+void	ft_exp(t_env *env)
 {
 	t_env	*tmp;
 
