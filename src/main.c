@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:30:00 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:52:42 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		lst = NULL;
-		input = readline("minishell 🤖 : ");
+		input = readline("minishell: ");
 		if (input && *input)
 		{
 			result = ft_splitou(input);
