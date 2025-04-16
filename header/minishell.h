@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:56:45 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:47:04 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_env
 {
 	char		*key;
 	char		*value;
+	t_list		*lst;
 	struct s_env *next;
 }	t_env;
 
@@ -53,6 +54,7 @@ void	ft_env(t_env *env);
 
 //ENV
 void	init_env(t_env **env, char **envp);
+void	ft_exp(t_env *env);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

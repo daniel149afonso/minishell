@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:09:06 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/15 20:56:07 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:21:55 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	free_tokens(char **tokens, size_t count)
 	size_t	i;
 
 	i = 0;
-	if (count == 0)
-		count = ft_strlen(tokens[count]);
 	while (i < count)
 		free(tokens[i++]);
 	free(tokens);
