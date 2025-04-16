@@ -10,10 +10,8 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_splitou.c \
 		$(SRC_DIR)main.c \
 		$(SRC_DIR)utils.c \
-		$(SRC_DIR)commands.c \
-		$(SRC_DIR)environnement.c
-
-
+		commands/commands.c \
+		commands/environnement.c \
 
 # Objects
 OBJS = $(SRCS:.c=.o)
