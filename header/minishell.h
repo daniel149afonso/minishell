@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 23:52:50 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:16:47 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_pwd(t_list *lst);
 void	ft_env(t_env *env);
 
 //ENV
-void	init_env(t_env *env, char **envp);
+void	init_env(t_env **env, char **envp);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

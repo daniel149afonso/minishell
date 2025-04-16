@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 17:11:07 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:52:05 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	ft_env(t_env *env)
 {
 	t_env	*tmp;
 
-	printf("Entering ft_env\n");
 	tmp = env;
 	while (tmp)
 	{
