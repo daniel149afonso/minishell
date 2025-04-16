@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/15 22:47:54 by daafonso         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/15 23:50:47 by apiscopo         ###   ########.fr       */
->>>>>>> 5d5ab06 (Init env without print env)
+/*   Updated: 2025/04/16 17:49:57 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +68,6 @@ void	ft_env(t_env *env)
 {
 	t_env *tmp;
 
-	printf("Entering ft_env\n");
 	tmp = env;
 	while (tmp)
 	{
@@ -88,7 +83,6 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins)
 	t_list	*tmp;
 	int		i;
 
-	printf("hehehehe\n");
 	while (lst)
 	{
 		tmp = lst->next;

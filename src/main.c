@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 23:52:53 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:28:52 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ int	main(int ac, char **av, char **envp)
 	char		*input;
 	char		**result;
 	t_list		*lst;
-	t_env		*env;
+	t_env		*env = NULL;
 	t_builtin	builtins[8];
 
 	lst = NULL;
-	env = NULL;
-	init_env(env, envp);
+	init_env(&env, envp);
 	ft_init_commands(builtins);
 	while (1)
 	{
