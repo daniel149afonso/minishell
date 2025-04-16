@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:09:06 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/16 20:24:36 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:34:34 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ void	ft_free_lst(t_list **lst)
 	*lst = NULL;
 }
 
-void	free_tokens(char **tokens, size_t count)
+void	free_tokens(char **tokens)
 {
 	int	i;
 
-	(void)count;
 	i = 0;
 	while (tokens[i])
 	{
