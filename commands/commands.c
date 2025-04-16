@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 17:52:05 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:22:32 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ void	ft_cd(t_list *lst)
 			return ;
 		}
 		printf("Home path: %s\n", path);
-	}
-	if (lst->next->next)
-	{
-		perror("cd");
-		return ;
 	}
 	result = chdir(path);
 	if (result != 0)
