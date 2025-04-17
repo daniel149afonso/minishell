@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/17 14:33:45 by apiscopo         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/17 14:49:49 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/minishell.h"
 
@@ -50,6 +51,11 @@ int	main(int ac, char **av, char **envp)
 			free_tokens(result, 0);
 			add_history(input);
 			is_command(env, lst, builtins, envbuilt);
+		}
+		if (!input)
+		{
+			printf("exit\n");
+			break;
 		}
 		if (!input)
 		{
