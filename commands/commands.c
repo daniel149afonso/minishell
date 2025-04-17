@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 20:51:14 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:14:38 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,15 @@ void ft_exp(t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
-	while (tmp)
+	if (!env->lst->next)
 	{
-		printf("declare -x %s", tmp->key);
-		if (tmp->value)
-			printf("=\"%s\"\n", tmp->value);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			printf("declare -x %s", tmp->key);
+			if (tmp->value)
+				printf("=\"%s\"\n", tmp->value);
+			tmp = tmp->next;
+		}
 	}
 	return ;
 }
