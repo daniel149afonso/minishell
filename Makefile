@@ -32,7 +32,8 @@ all: $(NAME)
 # Compilation
 $(NAME): $(OBJS) $(LIBFT)
 	@printf "\rCompiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline -lhistory -lncurses
+
 	@printf "\r$(NAME) compiled successfully.\n"
 
 # Compile libft

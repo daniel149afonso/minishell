@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 20:36:49 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/17 17:15:46 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/minishell.h"
 
@@ -26,6 +27,9 @@ void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins)
 	envbuilt[0].name = "env";
 	envbuilt[0].len = ft_strlen("env");
 	envbuilt[0].e = &ft_env;
+	envbuilt[1].name = "export";
+	envbuilt[1].len = strlen("export");
+	envbuilt[1].e = &ft_exp;
 	//char	*tab[] = {"cd", "echo", "pwd", "export", "unset", "env", "exit", NULL};
 }
 
@@ -71,11 +75,28 @@ void	ft_cd(t_list *lst)
 		printf("Répertoire changé : %s\n", path);
 }
 
+void ft_exp(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	if (!env->lst->next)
+	{
+		while (tmp)
+		{
+			printf("declare -x %s", tmp->key);
+			if (tmp->value)
+				printf("=\"%s\"\n", tmp->value);
+			tmp = tmp->next;
+		}
+	}
+	return ;
+}
+
 void	ft_env(t_env *env)
 {
 	t_env	*tmp;
 
-	printf("caca\n");
 	tmp = env;
 	while (tmp)
 	{
@@ -85,8 +106,7 @@ void	ft_env(t_env *env)
 	}
 }
 
-
-int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt)
+static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 {
 	t_list	*tmp;
 	int		i;
@@ -97,17 +117,38 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuil
 		i = 0;
 		while (i < 2)
 		{
+			if (ft_strncmp((char *)lst->content, envbuilt[i].name, envbuilt[i].len) == 0)
+			{
+				envbuilt[i].e(env);
+				return (1);
+			}
+			i++;
+		}
+		lst = tmp;
+	}
+	return (0);
+}
+
+int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt)
+{
+	t_list	*tmp;
+	int		i;
+
+	env->lst = lst;
+	while (lst)
+	{
+		tmp = lst->next;
+		i = 0;
+		while (i < 2)
+		{
+			if (is_command_2(env, lst, envbuilt))
+				return (1);
 			if ((ft_strncmp((char *)lst->content, builtins[i].name, builtins[i].len)) == 0)
 			{
 				builtins[i].f(lst);
 				return (1);
 			}
 			i++;
-		}
-		if (ft_strncmp((char *)lst->content, envbuilt[0].name, envbuilt[0].len) == 0)
-		{
-			envbuilt[0].e(env);
-			return (1);
 		}
 		lst = tmp;
 	}

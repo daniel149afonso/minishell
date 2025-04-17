@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 15:43:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 20:38:41 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/17 17:14:20 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -19,15 +20,18 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
+# include <signal.h>
 # include "../libft/libft.h"
 
 //STRUCTS
 
 typedef struct s_env
 {
-	char			*key;
-	char			*value;
-	struct s_env	*next;
+	char		*key;
+	char		*value;
+	t_list		*lst;
+	struct s_env *next;
 }	t_env;
 
 typedef struct s_envbuilt
@@ -53,6 +57,7 @@ void	ft_env(t_env *env);
 
 //ENV
 void	init_env(t_env **env, char **envp);
+void	ft_exp(t_env *env);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
