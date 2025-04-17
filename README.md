@@ -1,7 +1,7 @@
 # Commandes status:
-cd (en cours - Daniel): manque gestion si HOME n'existe pas + arguments en trop
+cd (changement de dossier - Daniel): ✅
 
-pwd (très simple - Daniel): manque gestion d'erreur des arguments
+pwd (très simple - Daniel): ✅
 
 echo (facile, bon exercice sur les arguments - a voir?)
 
