@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 17:02:12 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:08:25 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	**tokenize(const char *s, char **tokens)
 
 char	**ft_splitou(char const *s)
 {
-	char **tokens;
+	char	**tokens;
 
 	if (!s)
 		return (NULL);

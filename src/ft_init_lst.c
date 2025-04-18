@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/18 17:02:17 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:07:39 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init_lst(t_list **lst, char **tokens)
 		j++;
 	}
 	free_tokens(tokens);
-	ft_put_lst(*(lst));
+	ft_put_lst(*lst);
 }
 
 void	ft_put_lst(t_list *lst)

@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:01:16 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:08:14 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 typedef struct s_env
 {
-	char		*key;
-	char		*value;
-	t_list		*lst;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	t_list			*lst;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_envbuilt
@@ -52,12 +52,12 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
-	t_env 		*env;
+	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
 
-} t_g;
+}	t_g;
 
 //FT_INIT_COMMANDS
 void	init(t_g **g, char **envp);

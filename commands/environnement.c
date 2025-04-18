@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 17:11:34 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 01:04:25 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	add_env_node(t_env **env, const char *str)
 
 void	init_env(t_env **env, char **envp)
 {
-	int i = 0;
+	int	i = 0;
 
 	while (envp[i])
 	{
