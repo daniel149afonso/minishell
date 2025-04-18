@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:14:14 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:32:41 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_env(t_env *env);
 
 //ENV
 void	init_env(t_env **env, char **envp);
+void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
 
 //FT_INIT_LIST

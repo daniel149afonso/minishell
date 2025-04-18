@@ -13,6 +13,8 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)init.c \
 		commands/commands.c \
 		commands/environnement.c \
+		commands/export.c \
+
 
 # Objects
 OBJS = $(SRCS:.c=.o)

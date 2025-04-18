@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:12:37 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:51:57 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,6 @@ void	ft_cd(t_list *lst)
 void	ft_echo(t_list *lst)
 {
 	(void)lst;
-	return ;
-}
-
-void	ft_exp(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	if (!env->lst->next)
-	{
-		while (tmp)
-		{
-			printf("declare -x %s", tmp->key);
-			if (tmp->value)
-				printf("=\"%s\"\n", tmp->value);
-			tmp = tmp->next;
-		}
-	}
 	return ;
 }
 
