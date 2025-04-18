@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 14:59:50 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:25:35 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins)
 	builtins[1].name = "pwd";
 	builtins[1].len = ft_strlen("pwd");
 	builtins[1].f = &ft_pwd;
-	builtins[2].name = NULL;
-	builtins[2].len = 0;
-	builtins[2].f = NULL;
+	builtins[2].name = "echo";
+	builtins[2].len = ft_strlen("echo");
+	builtins[2].f = &ft_pwd;
+	builtins[3].name = NULL;
+	builtins[3].len = 0;
+	builtins[3].f = NULL;
 	envbuilt[0].name = "env";
 	envbuilt[0].len = ft_strlen("env");
 	envbuilt[0].e = &ft_env;
@@ -74,6 +77,11 @@ void	ft_cd(t_list *lst)
 	else
 		printf("Répertoire changé : %s\n", path);
 }
+
+// void	ft_echo(t_list *lst)
+// {
+
+// }
 
 void	ft_exp(t_env *env)
 {
