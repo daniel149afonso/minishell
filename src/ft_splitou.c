@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 00:44:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/18 15:30:36 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	**ft_splitou(char const *s)
 	if (!tokens)
 		return (NULL);
 	tokens = tokenize(s, tokens);
+	add_history(s);
 	return (tokens);
 }
 /*        .--'''''''''--.
