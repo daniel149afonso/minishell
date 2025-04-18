@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:08:00 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:12:37 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_cd(t_list *lst)
 
 void	ft_echo(t_list *lst)
 {
+	(void)lst;
 	return ;
 }
 

@@ -3,7 +3,7 @@ cd (changement de dossier - Daniel): ✅
 
 pwd (très simple - Daniel): ✅
 
-echo (facile, bon exercice sur les arguments - Daniel)
+echo (facile, bon exercice sur les arguments - Daniel) en cours
 
 exit (important pour gérer la fin de minishell - Alessio)
 
