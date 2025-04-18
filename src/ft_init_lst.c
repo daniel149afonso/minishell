@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/14 19:33:01 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/17 23:24:37 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_init_lst(t_list **lst, char **tokens)
 			ft_lstadd_back(lst, ft_lstnew(ft_strdup(tokens[j])));
 		j++;
 	}
+	free_tokens(tokens, 0);
+	ft_put_lst(*(lst));
 }
 
 void	ft_put_lst(t_list *lst)
@@ -34,7 +36,7 @@ void	ft_put_lst(t_list *lst)
 	while (lst)
 	{
 		tmp = lst->next;
-		printf("Content: %s\n", (char *)lst->content);
+		printf("DEBUG | Content: %s\n", (char *)lst->content);
 		lst = tmp;
 	}
 }

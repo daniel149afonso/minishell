@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/17 14:48:34 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:05:33 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_builtin
 }	t_builtin;
 
 //FT_INIT_COMMANDS
+void	init(t_env **env, char **envp, t_envbuilt *envbuilt, t_builtin *builtins);
 void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins);
 int		is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt);
 void	ft_cd(t_list *lst);

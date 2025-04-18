@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/15 22:38:36 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:52:24 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	**ft_splitou(char const *s)
 	if (!tokens)
 		return (NULL);
 	tokens = tokenize(s, tokens);
+	add_history(s);
 	return (tokens);
 }
 /*        .--'''''''''--.
