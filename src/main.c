@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 16:03:05 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:52:39 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	sigint_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
-	rl_on_new_line(); // remet une nouvelle ligne
-	rl_replace_line("", 0); // clean l’input
-	rl_redisplay(); // réaffiche le prompt
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 static void	free_for_nextl(char *input, t_list *lst)
@@ -30,12 +30,12 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_g			*g;
+	t_g	*g;
 
-	g = NULL;
-	init(&g, envp);
 	(void)ac;
 	(void)**av;
+	g = NULL;
+	init(&g, envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -54,3 +54,5 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (0);
 }
+//sigint_handler:
+//remet une nouvelle ligne, clean l’input, réaffiche le prompt

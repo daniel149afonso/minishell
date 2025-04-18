@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 16:23:26 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:54:08 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 typedef struct s_env
 {
-	char		*key;
-	char		*value;
-	t_list		*lst;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	t_list			*lst;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_envbuilt
@@ -52,12 +52,12 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
-	t_env 		*env;
+	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
-	
-} t_g;
+
+}	t_g;
 
 //FT_INIT_COMMANDS
 void	init(t_g **g, char **envp);
@@ -76,13 +76,13 @@ void	ft_init_lst(t_list **lst, char **tokens);
 void	ft_put_lst(t_list *lst);
 
 //FT_SPLIT
-void	free_tokens(char **tokens, size_t count);
+void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
 
 //FREE AND ERROR
 void	ft_error(char *msg, t_list **lst);
 void	ft_free_lst(t_list **lst);
-void	print_cd_error(char *path);
+void	print_path_error(char *path);
 
 // UTILS
 int		is_space(int c);

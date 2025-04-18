@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 17:09:06 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/16 20:21:55 by apiscopo         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/18 15:00:00 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/minishell.h"
 
@@ -33,19 +34,24 @@ void	ft_free_lst(t_list **lst)
 	*lst = NULL;
 }
 
-void	free_tokens(char **tokens, size_t count)
+void	free_tokens(char **tokens)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < count)
-		free(tokens[i++]);
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
 	free(tokens);
+	tokens = NULL;
 }
 
-void	print_cd_error(char *path)
+void	print_path_error(char *path)
 {
-	write(2, "cd: no such file or directory: ", 32);
-	write(2, path, strlen(path));
+	write(2, "minishell: cd: ", 16);
+	write(2, path, ft_strlen(path));
+	write(2, ": No such file or directory", 28);
 	write(2, "\n", 1);
 }

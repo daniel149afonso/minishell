@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/17 22:52:24 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:30:36 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static int	is_lococo(const char *s)
 
 static int	tokenize_2(const char *s, char **tokens)
 {
-	int start;
+	int	start;
 	int	len;
-	int i;
+	int	i;
 
 	i = 0;
 	start = 0;
@@ -70,7 +70,7 @@ static int	tokenize_2(const char *s, char **tokens)
 		len = is_lococo(&s[i]);
 		*(tokens) = ft_strndup(&s[i], len);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ static int	tokenize_2(const char *s, char **tokens)
 			i++;
 		*(tokens) = ft_strndup(&s[start], i - start);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	i += len;
 	return (i);
@@ -89,8 +89,8 @@ static int	tokenize_2(const char *s, char **tokens)
  //faut que je norm ptn
 char	**tokenize(const char *s, char **tokens)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	len;
 
 	i = 0;
@@ -116,7 +116,7 @@ char	**tokenize(const char *s, char **tokens)
 
 char	**ft_splitou(char const *s)
 {
-	char **tokens;
+	char	**tokens;
 
 	if (!s)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 16:23:29 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:49:43 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 {
 	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
+	if (!(*envbuilt))
+		return ;
 	*builtins = malloc(sizeof(t_builtin) * 8);
+	if (!(*builtins))
+		return ;
 	(*builtins)[0].name = "cd";
-	(*builtins)[0].len = strlen("cd");
+	(*builtins)[0].len = ft_strlen("cd");
 	(*builtins)[0].f = &ft_cd;
 	(*builtins)[1].name = "pwd";
-	(*builtins)[1].len = strlen("pwd");
+	(*builtins)[1].len = ft_strlen("pwd");
 	(*builtins)[1].f = &ft_pwd;
-	(*builtins)[2].name = NULL;
-	(*builtins)[2].len = 0;
-	(*builtins)[2].f = NULL;
+	(*builtins)[2].name = "echo";
+	(*builtins)[2].len = ft_strlen("echo");
+	(*builtins)[2].f = &ft_echo;
+	(*builtins)[3].name = NULL;
+	(*builtins)[3].len = 0;
+	(*builtins)[3].f = NULL;
 	(*envbuilt)[0].name = "env";
-	(*envbuilt)[0].len = strlen("env");
+	(*envbuilt)[0].len = ft_strlen("env");
 	(*envbuilt)[0].e = &ft_env;
 	(*envbuilt)[1].name = "export";
-	(*envbuilt)[1].len = strlen("export");
+	(*envbuilt)[1].len = ft_strlen("export");
 	(*envbuilt)[1].e = &ft_exp;
 }
 
@@ -51,25 +58,37 @@ void	ft_cd(t_list *lst)
 	char	*path;
 
 	if (lst->next && lst->next->content)
+	{
 		path = (char *)lst->next->content;
+		if (lst->next->next)
+		{
+			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+			return ;
+		}
+	}
 	else
 	{
 		path = getenv("HOME");
 		if (!path)
 		{
-			perror("cd: HOME not set\n");
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return ;
 		}
 		printf("Home path: %s\n", path);
 	}
 	result = chdir(path);
 	if (result != 0)
-		print_cd_error(path);
+		print_path_error(path);
 	else
 		printf("Répertoire changé : %s\n", path);
 }
 
-void ft_exp(t_env *env)
+void	ft_echo(t_list *lst)
+{
+	return ;
+}
+
+void	ft_exp(t_env *env)
 {
 	t_env	*tmp;
 
