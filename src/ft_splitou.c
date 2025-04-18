@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:24:08 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:44:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	tokenize_2(const char *s, char **tokens)
 		len = is_lococo(&s[i]);
 		*(tokens) = ft_strndup(&s[i], len);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ static int	tokenize_2(const char *s, char **tokens)
 			i++;
 		*(tokens) = ft_strndup(&s[start], i - start);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	i += len;
 	return (i);
@@ -116,7 +116,7 @@ char	**tokenize(const char *s, char **tokens)
 
 char	**ft_splitou(char const *s)
 {
-	char **tokens;
+	char	**tokens;
 
 	if (!s)
 		return (NULL);

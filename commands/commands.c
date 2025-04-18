@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 21:13:33 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/18 14:59:50 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/minishell.h"
 
@@ -79,12 +80,15 @@ void	ft_exp(t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
-	while (tmp)
+	if (!env->lst->next)
 	{
-		printf("declare -x %s", tmp->key);
-		if (tmp->value)
-			printf("=\"%s\"\n", tmp->value);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			printf("declare -x %s", tmp->key);
+			if (tmp->value)
+				printf("=\"%s\"\n", tmp->value);
+			tmp = tmp->next;
+		}
 	}
 	return ;
 }

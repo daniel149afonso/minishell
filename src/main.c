@@ -5,12 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 20:46:17 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/18 15:00:11 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header/minishell.h"
+
+void	sigint_handler(int sig)
+{
+	(void)sig;
+	printf("\n");
+	rl_on_new_line(); // remet une nouvelle ligne
+	rl_replace_line("", 0); // clean l’input
+	rl_redisplay(); // réaffiche le prompt
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -27,6 +37,8 @@ int	main(int ac, char **av, char **envp)
 	env = NULL;
 	init_env(&env, envp);
 	ft_init_commands(envbuilt, builtins);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		lst = NULL;
@@ -39,6 +51,16 @@ int	main(int ac, char **av, char **envp)
 			free_tokens(result);
 			add_history(input);
 			is_command(env, lst, builtins, envbuilt);
+		}
+		if (!input)
+		{
+			printf("exit\n");
+			break;
+		}
+		if (!input)
+		{
+			printf("exit\n");
+			break;
 		}
 		free (input);
 		ft_lstclear(&lst, free);
