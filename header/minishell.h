@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 16:54:08 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:21:46 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins);
 int		is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt);
 void	ft_cd(t_list *lst);
 void	ft_pwd(t_list *lst);
+void	ft_echo(t_list *lst);
 void	ft_env(t_env *env);
 
 //ENV
