@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:24:08 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:02:12 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	tokenize_2(const char *s, char **tokens)
 		len = is_lococo(&s[i]);
 		*(tokens) = ft_strndup(&s[i], len);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ static int	tokenize_2(const char *s, char **tokens)
 			i++;
 		*(tokens) = ft_strndup(&s[start], i - start);
 		if (!tokens)
-			return (free_tokens(tokens, 0), 0);
+			return (free_tokens(tokens), 0);
 	}
 	i += len;
 	return (i);
@@ -124,6 +124,7 @@ char	**ft_splitou(char const *s)
 	if (!tokens)
 		return (NULL);
 	tokens = tokenize(s, tokens);
+	add_history(s);
 	return (tokens);
 }
 /*        .--'''''''''--.

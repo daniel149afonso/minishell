@@ -5,43 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:19 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/16 20:46:17 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/18 17:01:34 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header/minishell.h"
+
+static void	sigint_handler(int sig)
+{
+	(void)sig;
+	printf("\n");
+	rl_on_new_line(); // remet une nouvelle ligne
+	rl_replace_line("", 0); // clean l’input
+	rl_redisplay(); // réaffiche le prompt
+}
+
+static void	free_for_nextl(char *input, t_list *lst)
+{
+	free (input);
+	ft_lstclear(&lst, free);
+}
 
 int	main(int ac, char **av, char **envp)
 {
-	char		*input;
-	char		**result;
-	t_list		*lst;
-	t_env		*env;
-	t_builtin	builtins[8];
-	t_envbuilt	envbuilt[3];
+	t_g			*g;
 
+	g = NULL;
+	init(&g, envp);
 	(void)ac;
 	(void)**av;
-	lst = NULL;
-	env = NULL;
-	init_env(&env, envp);
-	ft_init_commands(envbuilt, builtins);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		lst = NULL;
-		input = readline("minishell: ");
-		if (input && *input)
+		g->lst = NULL;
+		g->input = readline("minishell :");
+		if (g->input && *g->input)
 		{
-			result = ft_splitou(input);
-			ft_init_lst(&lst, result);
-			ft_put_lst(lst);
-			free_tokens(result);
-			add_history(input);
-			is_command(env, lst, builtins, envbuilt);
+			g->result = ft_splitou(g->input);
+			ft_init_lst(&g->lst, g->result);
+			is_command(g->env, g->lst, g->builtin, g->envbuilt);
 		}
-		free (input);
-		ft_lstclear(&lst, free);
+		if (!g->input)
+			return (ft_lstclear(&g->lst, free), printf("exit\n"), 0);
+		free_for_nextl(g->input, g->lst);
 	}
 	return (0);
 }

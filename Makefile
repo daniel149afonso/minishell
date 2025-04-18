@@ -10,6 +10,7 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_splitou.c \
 		$(SRC_DIR)main.c \
 		$(SRC_DIR)utils.c \
+		$(SRC_DIR)init.c \
 		commands/commands.c \
 		commands/environnement.c \
 
@@ -32,7 +33,8 @@ all: $(NAME)
 # Compilation
 $(NAME): $(OBJS) $(LIBFT)
 	@printf "\rCompiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline -lhistory -lncurses
+
 	@printf "\r$(NAME) compiled successfully.\n"
 
 # Compile libft

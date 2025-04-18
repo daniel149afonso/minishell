@@ -5,31 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 00:32:07 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/16 21:13:33 by daafonso         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/18 17:01:07 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header/minishell.h"
 
-void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins)
+void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 {
-	builtins[0].name = "cd";
-	builtins[0].len = ft_strlen("cd");
-	builtins[0].f = &ft_cd;
-	builtins[1].name = "pwd";
-	builtins[1].len = ft_strlen("pwd");
-	builtins[1].f = &ft_pwd;
-	builtins[2].name = NULL;
-	builtins[2].len = 0;
-	builtins[2].f = NULL;
-	envbuilt[0].name = "env";
-	envbuilt[0].len = ft_strlen("env");
-	envbuilt[0].e = &ft_env;
-	envbuilt[1].name = "export";
-	envbuilt[1].len = strlen("export");
-	envbuilt[1].e = &ft_exp;
-	//char	*tab[] = {"cd", "echo", "pwd", "export", "unset", "env", "exit", NULL};
+	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
+	*builtins = malloc(sizeof(t_builtin) * 8);
+	(*builtins)[0].name = "cd";
+	(*builtins)[0].len = strlen("cd");
+	(*builtins)[0].f = &ft_cd;
+	(*builtins)[1].name = "pwd";
+	(*builtins)[1].len = strlen("pwd");
+	(*builtins)[1].f = &ft_pwd;
+	(*builtins)[2].name = NULL;
+	(*builtins)[2].len = 0;
+	(*builtins)[2].f = NULL;
+	(*envbuilt)[0].name = "env";
+	(*envbuilt)[0].len = strlen("env");
+	(*envbuilt)[0].e = &ft_env;
+	(*envbuilt)[1].name = "export";
+	(*envbuilt)[1].len = strlen("export");
+	(*envbuilt)[1].e = &ft_exp;
 }
 
 void	ft_pwd(t_list *lst)
@@ -79,12 +81,15 @@ void	ft_exp(t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
-	while (tmp)
+	if (!env->lst->next)
 	{
-		printf("declare -x %s", tmp->key);
-		if (tmp->value)
-			printf("=\"%s\"\n", tmp->value);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			printf("declare -x %s", tmp->key);
+			if (tmp->value)
+				printf("=\"%s\"\n", tmp->value);
+			tmp = tmp->next;
+		}
 	}
 	return ;
 }
