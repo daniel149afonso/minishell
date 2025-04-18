@@ -6,31 +6,32 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/17 14:47:58 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:23:29 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../header/minishell.h"
 
-void	ft_init_commands(t_envbuilt *envbuilt, t_builtin *builtins)
+void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 {
-	builtins[0].name = "cd";
-	builtins[0].len = strlen("cd");
-	builtins[0].f = &ft_cd;
-	builtins[1].name = "pwd";
-	builtins[1].len = strlen("pwd");
-	builtins[1].f = &ft_pwd;
-	builtins[2].name = NULL;
-	builtins[2].len = 0;
-	builtins[2].f = NULL;
-	envbuilt[0].name = "env";
-	envbuilt[0].len = strlen("env");
-	envbuilt[0].e = &ft_env;
-	envbuilt[1].name = "export";
-	envbuilt[1].len = strlen("export");
-	envbuilt[1].e = &ft_exp;
-	//char	*tab[] = {"cd", "echo", "pwd", "export", "unset", "env", "exit", NULL};
+	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
+	*builtins = malloc(sizeof(t_builtin) * 8);
+	(*builtins)[0].name = "cd";
+	(*builtins)[0].len = strlen("cd");
+	(*builtins)[0].f = &ft_cd;
+	(*builtins)[1].name = "pwd";
+	(*builtins)[1].len = strlen("pwd");
+	(*builtins)[1].f = &ft_pwd;
+	(*builtins)[2].name = NULL;
+	(*builtins)[2].len = 0;
+	(*builtins)[2].f = NULL;
+	(*envbuilt)[0].name = "env";
+	(*envbuilt)[0].len = strlen("env");
+	(*envbuilt)[0].e = &ft_env;
+	(*envbuilt)[1].name = "export";
+	(*envbuilt)[1].len = strlen("export");
+	(*envbuilt)[1].e = &ft_exp;
 }
 
 void	ft_pwd(t_list *lst)

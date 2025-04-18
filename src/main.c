@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 15:20:05 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:03:05 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,27 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 int	main(int ac, char **av, char **envp)
 {
-	char		*input;
-	char		**result;
-	t_list		*lst;
-	t_env		*env;
-	t_builtin	builtins[8];
-	t_envbuilt	envbuilt[3];
+	t_g			*g;
 
+	g = NULL;
+	init(&g, envp);
 	(void)ac;
 	(void)**av;
-	env = NULL;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-	init(&env, envp, envbuilt, builtins);
 	while (1)
 	{
-		lst = NULL;
-		input = readline("minishell :");
-		if (input && *input)
+		g->lst = NULL;
+		g->input = readline("minishell :");
+		if (g->input && *g->input)
 		{
-			result = ft_splitou(input);
-			ft_init_lst(&lst, result);
-			is_command(env, lst, builtins, envbuilt);
+			g->result = ft_splitou(g->input);
+			ft_init_lst(&g->lst, g->result);
+			is_command(g->env, g->lst, g->builtin, g->envbuilt);
 		}
-		if (!input)
-			return (ft_lstclear(&lst, free), printf("exit\n"), 0);
-		free_for_nextl(input, lst);
+		if (!g->input)
+			return (ft_lstclear(&g->lst, free), printf("exit\n"), 0);
+		free_for_nextl(g->input, g->lst);
 	}
 	return (0);
 }
