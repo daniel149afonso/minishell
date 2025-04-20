@@ -3,7 +3,7 @@ cd (changement de dossier - Daniel): changer la var d'environnement PWD et OLD_P
 
 pwd (très simple - Daniel): ✅
 
-echo (facile, bon exercice sur les arguments - Daniel) en cours
+echo (facile, bon exercice sur les arguments - Daniel) manque echo -n blaba -n (doit afficher le dernier -n) + gestion des singles quote avec prompt + double quotes a gerer
 
 exit (important pour gérer la fin de minishell - Alessio)
 
