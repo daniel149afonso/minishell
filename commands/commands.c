@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:12:37 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:45:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,23 @@ void	ft_cd(t_list *lst)
 
 void	ft_echo(t_list *lst)
 {
-	(void)lst;
+	t_list	*arg;
+
+	arg = lst->next;
+	if (arg && arg->content)
+	{
+		if (ft_strcmp((char *)arg->content, "-n") == 0 \
+		&& arg->next && arg->next->content)
+			printf("%s", (char *)arg->next->content);
+		else if (ft_strcmp((char *)arg->content, "-n") == 0 && !arg->next)
+			printf("\n");//printf(a new line) a corriger
+		else if (arg && arg->content)
+			printf("%s\n", (char *)arg->content);
+		else
+			printf("Error\n");
+	}
+	else
+		printf("\n");
 	return ;
 }
 
@@ -153,7 +169,7 @@ int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuil
 	{
 		tmp = lst->next;
 		i = 0;
-		while (i < 2)
+		while (i < 3)
 		{
 			if (is_command_2(env, lst, envbuilt))
 				return (1);
