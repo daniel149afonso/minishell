@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/19 23:45:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/20 03:13:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,32 @@ void	ft_cd(t_list *lst)
 		printf("Répertoire changé : %s\n", path);
 }
 
+void	display_with_args(t_list *arg)
+{
+	t_list	*tmp;
+	int		option;
+	int		newline;
+
+	option = 0;
+	newline = 1;
+	if (ft_strcmp((char *)arg->content, "-n") == 0)
+	{
+		option = 1;
+		newline = 0;
+	}
+	while (arg && arg->content)
+	{
+		tmp = arg->next;
+		if (ft_strcmp((char *)arg->content, "-n") != 0)
+			printf("%s", (char *)arg->content);
+		option = 0;
+		arg = tmp;
+	}
+	(void)option;
+	if (newline == 1)
+		printf("\n");
+}
+
 void	ft_echo(t_list *lst)
 {
 	t_list	*arg;
@@ -90,15 +116,7 @@ void	ft_echo(t_list *lst)
 	arg = lst->next;
 	if (arg && arg->content)
 	{
-		if (ft_strcmp((char *)arg->content, "-n") == 0 \
-		&& arg->next && arg->next->content)
-			printf("%s", (char *)arg->next->content);
-		else if (ft_strcmp((char *)arg->content, "-n") == 0 && !arg->next)
-			printf("\n");//printf(a new line) a corriger
-		else if (arg && arg->content)
-			printf("%s\n", (char *)arg->content);
-		else
-			printf("Error\n");
+		display_with_args(arg);
 	}
 	else
 		printf("\n");
