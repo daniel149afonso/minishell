@@ -6,7 +6,7 @@
 #    By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2025/04/16 18:40:21 by daafonso         ###   ########.fr        #
+#    Updated: 2025/04/18 19:49:22 by daafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ ft_strjoin.c \
 ft_strlcat.c \
 ft_strlcpy.c \
 ft_strlen.c \
+ft_strcmp.c \
 ft_strncmp.c \
 ft_strndup.c \
 ft_strnstr.c \

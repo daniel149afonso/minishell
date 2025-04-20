@@ -1,5 +1,5 @@
 # Commandes status:
-cd (changement de dossier - Daniel): ✅
+cd (changement de dossier - Daniel): changer la var d'environnement PWD et OLD_PWD a chaque appel
 
 pwd (très simple - Daniel): ✅
 
