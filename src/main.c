@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 17:08:33 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/22 00:25:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)**av;
 	g = NULL;
-	init(&g, envp);
+	init_global_struct(&g, envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -46,7 +46,13 @@ int	main(int ac, char **av, char **envp)
 		{
 			g->result = ft_splitou(g->input);
 			ft_init_lst(&g->lst, g->result);
-			is_command(g->env, g->lst, g->builtin, g->envbuilt);
+			if (!is_command(g))
+			{
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+				else
+					printf("Unknown: command not found\n");
+			}
 		}
 		if (!g->input)
 			return (ft_lstclear(&g->lst, free), printf("exit\n"), 0);

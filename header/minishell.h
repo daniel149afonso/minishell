@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/19 23:40:59 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/22 00:02:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # include <signal.h>
 # include "../libft/libft.h"
 
-//STRUCTS
+//PREVIOUS DEFINITION OF GLOBAL
+typedef struct s_g	t_g;
 
+//ENVIRONNEMENT
 typedef struct s_env
 {
 	char			*key;
@@ -34,6 +36,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+//ENVBUILT
 typedef struct s_envbuilt
 {
 	char	*name;
@@ -41,13 +44,14 @@ typedef struct s_envbuilt
 	void	(*e)(t_env *env);
 }	t_envbuilt;
 
+//BUILTINS COMMANDS
 typedef struct s_builtin
 {
 	char	*name;
-	int		len;
-	void	(*f)(t_list *lst);
+	void	(*f)(t_g *g);
 }	t_builtin;
 
+//GLOBAL STRUCT
 typedef struct s_g
 {
 	char		*input;
@@ -60,15 +64,15 @@ typedef struct s_g
 }	t_g;
 
 //FT_INIT_COMMANDS
-void	init(t_g **g, char **envp);
+void	init_global_struct(t_g **g, char **envp);
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins);
-int		is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt);
-void	ft_cd(t_list *lst);
-void	ft_pwd(t_list *lst);
-void	ft_echo(t_list *lst);
+int		is_command(t_g *g);
+void	ft_cd(t_g *g);
+void	ft_pwd(t_g *g);
+void	ft_echo(t_g *g);
 void	ft_env(t_env *env);
 
-//ENV
+//ENVIRONNEMENT
 void	init_env(t_env **env, char **envp);
 void	ft_exp(t_env *env);
 

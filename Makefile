@@ -15,7 +15,9 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)init.c \
 		$(CMD_DIR)commands.c \
 		$(CMD_DIR)environnement.c \
-		$(CMD_DIR)echo.c
+		$(CMD_DIR)echo.c \
+		$(CMD_DIR)pwd.c \
+		$(CMD_DIR)cd.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

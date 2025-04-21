@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/21 23:27:29 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/04/21 22:10:10 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/04/22 00:04:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	init_global_struct(t_g **g, char **envp)
+void	ft_pwd(t_g *g)
 {
-	*g = malloc(sizeof(t_g));
-	if (!*g)
-		return ;
-	ft_memset(*g, 0, sizeof(t_g));
-	init_env(&((*g)->env), envp);
-	ft_init_commands((&(*g)->envbuilt), (&(*g)->builtin));
+	char	buffer[1024];
+
+	(void)g;
+	if (getcwd(buffer, sizeof(buffer)) != NULL)
+		printf("%s\n", buffer);
+	else
+		perror("Error, pwd");
 }
