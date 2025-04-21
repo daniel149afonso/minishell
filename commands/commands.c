@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/21 22:01:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/21 22:18:10 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,49 +40,6 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[1].len = ft_strlen("export");
 	(*envbuilt)[1].e = &ft_exp;
 }
-
-void	ft_pwd(t_list *lst)
-{
-	char	buffer[1024];
-
-	(void)lst;
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
-		printf("%s\n", buffer);
-	else
-		perror("Error, pwd");
-}
-
-void	ft_cd(t_list *lst)
-{
-	int		result;
-	char	*path;
-
-	if (lst->next && lst->next->content)
-	{
-		path = (char *)lst->next->content;
-		if (lst->next->next)
-		{
-			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-			return ;
-		}
-	}
-	else
-	{
-		path = getenv("HOME");
-		if (!path)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			return ;
-		}
-		printf("Home path: %s\n", path);
-	}
-	result = chdir(path);
-	if (result != 0)
-		print_path_error(path);
-	else
-		printf("Répertoire changé : %s\n", path);
-}
-
 
 void	ft_exp(t_env *env)
 {

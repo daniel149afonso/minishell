@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 15:00:00 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/21 22:16:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header/minishell.h"
 
