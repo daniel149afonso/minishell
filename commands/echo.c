@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/21 22:01:18 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/22 00:03:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	display_with_args(t_list *arg)
 		printf("\n");
 }
 
-void	ft_echo(t_list *lst)
+void	ft_echo(t_g *g)
 {
 	t_list	*arg;
 
-	arg = lst->next;
+	arg = g->lst->next;
 	if (arg && arg->content)
 	{
 		display_with_args(arg);

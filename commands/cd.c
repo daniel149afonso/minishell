@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/21 23:33:34 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/22 00:05:14 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	set_path(t_list *lst, char **path)
 	return (1);
 }
 
-void	ft_cd(t_list *lst)
+void	ft_cd(t_g *g)
 {
 	int		result;
 	char	*path;
@@ -53,9 +53,9 @@ void	ft_cd(t_list *lst)
 
 	(void)oldpwd;
 	(void)newpwd;
-	if (lst->next && lst->next->content)
+	if (g->lst->next && g->lst->next->content)
 	{
-		if (!set_path(lst, &path))
+		if (!set_path(g->lst, &path))
 			return ;
 	}
 	else

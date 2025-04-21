@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/21 23:39:46 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/21 23:53:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	is_command(t_g *g)
 				return (1);
 			if ((ft_strcmp((char *)g->lst->content, g->builtin[i].name)) == 0)
 			{
-				g->builtin[i].f(g->lst);
+				g->builtin[i].f(g);
 				return (1);
 			}
 			i++;
