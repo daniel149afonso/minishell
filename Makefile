@@ -3,16 +3,19 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-# Sources
+# Directories
 SRC_DIR = src/
+CMD_DIR = commands/
+
 SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_init_lst.c \
 		$(SRC_DIR)ft_splitou.c \
 		$(SRC_DIR)main.c \
 		$(SRC_DIR)utils.c \
 		$(SRC_DIR)init.c \
-		commands/commands.c \
-		commands/environnement.c \
+		$(CMD_DIR)commands.c \
+		$(CMD_DIR)environnement.c \
+		$(CMD_DIR)echo.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
