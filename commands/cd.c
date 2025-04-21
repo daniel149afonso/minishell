@@ -6,11 +6,20 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/21 22:39:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/21 23:33:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+int	get_current_path(void)
+{
+	char	path[1024];
+
+	if (getcwd(path, sizeof(path)) == NULL)
+		return (0);
+	return (1);
+}
 
 int	set_home_path(char **path)
 {
@@ -39,7 +48,11 @@ void	ft_cd(t_list *lst)
 {
 	int		result;
 	char	*path;
+	char	oldpwd[1024];
+	char	newpwd[1024];
 
+	(void)oldpwd;
+	(void)newpwd;
 	if (lst->next && lst->next->content)
 	{
 		if (!set_path(lst, &path))

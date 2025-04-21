@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/21 22:17:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/21 23:40:52 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_envbuilt
 typedef struct s_builtin
 {
 	char	*name;
-	int		len;
 	void	(*f)(t_list *lst);
 }	t_builtin;
 
@@ -60,9 +59,9 @@ typedef struct s_g
 }	t_g;
 
 //FT_INIT_COMMANDS
-void	init(t_g **g, char **envp);
+void	init_global_struct(t_g **g, char **envp);
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins);
-int		is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt);
+int		is_command(t_g *g);
 void	ft_cd(t_list *lst);
 void	ft_pwd(t_list *lst);
 void	ft_echo(t_list *lst);

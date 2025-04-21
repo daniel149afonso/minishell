@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/21 22:18:10 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/21 23:39:46 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,16 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	if (!(*builtins))
 		return ;
 	(*builtins)[0].name = "cd";
-	(*builtins)[0].len = ft_strlen("cd");
 	(*builtins)[0].f = &ft_cd;
 	(*builtins)[1].name = "pwd";
-	(*builtins)[1].len = ft_strlen("pwd");
 	(*builtins)[1].f = &ft_pwd;
 	(*builtins)[2].name = "echo";
-	(*builtins)[2].len = ft_strlen("echo");
 	(*builtins)[2].f = &ft_echo;
 	(*builtins)[3].name = NULL;
-	(*builtins)[3].len = 0;
 	(*builtins)[3].f = NULL;
 	(*envbuilt)[0].name = "env";
-	(*envbuilt)[0].len = ft_strlen("env");
 	(*envbuilt)[0].e = &ft_env;
 	(*envbuilt)[1].name = "export";
-	(*envbuilt)[1].len = ft_strlen("export");
 	(*envbuilt)[1].e = &ft_exp;
 }
 
@@ -83,7 +77,7 @@ static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 		i = 0;
 		while (i < 2)
 		{
-			if (ft_strncmp((char *)lst->content, envbuilt[i].name, envbuilt[i].len) == 0)
+			if (ft_strcmp((char *)lst->content, envbuilt[i].name) == 0)
 			{
 				envbuilt[i].e(env);
 				return (1);
@@ -95,28 +89,28 @@ static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 	return (0);
 }
 
-int	is_command(t_env *env, t_list *lst, t_builtin *builtins, t_envbuilt *envbuilt)
+int	is_command(t_g *g)
 {
 	t_list	*tmp;
 	int		i;
 
-	env->lst = lst;
-	while (lst)
+	g->env->lst = g->lst;
+	while (g->lst)
 	{
-		tmp = lst->next;
+		tmp = g->lst->next;
 		i = 0;
 		while (i < 3)
 		{
-			if (is_command_2(env, lst, envbuilt))
+			if (is_command_2(g->env, g->lst, g->envbuilt))
 				return (1);
-			if ((ft_strncmp((char *)lst->content, builtins[i].name, builtins[i].len)) == 0)
+			if ((ft_strcmp((char *)g->lst->content, g->builtin[i].name)) == 0)
 			{
-				builtins[i].f(lst);
+				g->builtin[i].f(g->lst);
 				return (1);
 			}
 			i++;
 		}
-		lst = tmp;
+		g->lst = tmp;
 	}
 	return (0);
 }
