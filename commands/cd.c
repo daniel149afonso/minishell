@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/22 00:05:14 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/22 17:02:37 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	get_current_path(void)
-{
-	char	path[1024];
-
-	if (getcwd(path, sizeof(path)) == NULL)
-		return (0);
-	return (1);
-}
 
 int	set_home_path(char **path)
 {
@@ -44,15 +35,33 @@ int	set_path(t_list *lst, char **path)
 	return (1);
 }
 
+int	get_current_path(char **path)
+{
+	char	buffer[1024];
+
+	if (getcwd(buffer, sizeof(buffer)) == NULL)
+		return (0);
+	*path = ft_strdup(buffer);
+	if (!*path)
+		return (0);
+	return (1);
+}
+
 void	ft_cd(t_g *g)
 {
 	int		result;
 	char	*path;
-	char	oldpwd[1024];
-	char	newpwd[1024];
+	char	*oldpwd;
+	char	*newpwd;
 
-	(void)oldpwd;
-	(void)newpwd;
+	oldpwd = NULL;
+	newpwd = NULL;
+	if (!get_current_path(&oldpwd))
+	{
+		perror("cd");
+		return ;
+	}
+	printf("Old path:%s\n", oldpwd);
 	if (g->lst->next && g->lst->next->content)
 	{
 		if (!set_path(g->lst, &path))
@@ -67,5 +76,14 @@ void	ft_cd(t_g *g)
 	if (result != 0)
 		print_path_error(path);
 	else
+	{
 		printf("Répertoire changé : %s\n", path);
+		if (!get_current_path(&newpwd))
+		{
+			perror("cd");
+			return ;
+		}
+		printf("New path:%s\n", newpwd);
+	}
+
 }
