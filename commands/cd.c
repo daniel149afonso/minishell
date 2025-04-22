@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/22 17:02:37 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/22 20:29:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,41 @@ int	get_current_path(char **path)
 		return (0);
 	return (1);
 }
+void	set_env_value(t_env **env, const char *key, const char *value)
+{
+	t_env	*tmp = *env;
+
+	// chercher si la variable existe déjà
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->key, key) == 0)
+		{
+			free(tmp->value);
+			tmp->value = ft_strdup(value);
+			return;
+		}
+		tmp = tmp->next;
+	}
+	// sinon on l’ajoute comme une nouvelle
+	t_env *new = malloc(sizeof(t_env));
+	if (!new)
+		return;
+
+	new->key = ft_strdup(key);
+	new->value = ft_strdup(value);
+	new->next = NULL;
+	// ajouter à la fin
+	tmp = *env;
+	if (!tmp)
+		*env = new;
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
 
 void	ft_cd(t_g *g)
 {
@@ -62,6 +97,7 @@ void	ft_cd(t_g *g)
 		return ;
 	}
 	printf("Old path:%s\n", oldpwd);
+	set_env_value(&g->env, "OLDPWD", oldpwd);
 	if (g->lst->next && g->lst->next->content)
 	{
 		if (!set_path(g->lst, &path))
@@ -84,6 +120,6 @@ void	ft_cd(t_g *g)
 			return ;
 		}
 		printf("New path:%s\n", newpwd);
+		set_env_value(&g->env, "PWD", newpwd);
 	}
-
 }
