@@ -3,7 +3,7 @@ cd (changement de dossier - Daniel): ✅
 
 pwd (très simple - Daniel): ✅
 
-echo (facile, bon exercice sur les arguments - Daniel) manque echo -n blaba -n (doit afficher le dernier -n) + gestion des singles quote avec prompt + double quotes a gerer
+echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
 
 exit (important pour gérer la fin de minishell - Alessio)
 
