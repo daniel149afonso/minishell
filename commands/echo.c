@@ -3,41 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/29 17:14:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/29 23:33:38 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	display_content(t_list *arg)
-{
-	while (arg && arg->content)
-	{
-		printf("%s", (char *)arg->content);
-		if (arg->next && arg->next->content)
-			printf(" ");
-		arg = arg->next;
-	}
-}
+// void	search_variable(char *path)
+// {
+// 	char	*equal_sign;
+// 	int		len;
 
-void	search_variable(char *path)
-{
-	char	*equal_sign;
-	int		len;
+// 	len = ft_strlen(path);
+// 	equal_sign = ft_strchr(path, '=');
+// 	while (condition)
+// 	{
+// 		/* code */
+// 	}
 
-	len = ft_strlen(path);
-	equal_sign = ft_strchr(path, '=');
-	while (condition)
-	{
-		/* code */
-	}
+// }
 
-}
-
-void	update_or_add_var(t_env **env, char *arg)
+void	search_puts_var(t_env *env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
@@ -46,7 +35,9 @@ void	update_or_add_var(t_env **env, char *arg)
 
 	key = extract_key(arg);
 	value = extract_value(arg);
-	tmp = *env;
+	if (!key || !value)
+		return ;
+	tmp = env;
 	found = 0;
 	while (tmp)
 	{
@@ -59,42 +50,70 @@ void	update_or_add_var(t_env **env, char *arg)
 		}
 		tmp = tmp->next;
 	}
-	// if (!found)
-	// 	add_env_node(env, arg);
-	// free(key);
-	// if (!found)
-	// 	free(value);
+	if (found)
+		printf("%s", tmp->value);
+	if (key)
+		free(key);
+	if (value)
+		free(value);
 }
 
-void	display_inside_quotes(char *str)
+int	is_var_char(char c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	if ((c >= '0' && c <= '9') || c == '_')
+		return (1);
+	return (0);
+}
+
+char	*extract_var_name(char *str, int *i)
+{
+	int		len;
+	int		j;
+	char	*name;
+
+	len = 0;
+	while (str[*i + len] && is_var_char(str[*i + len]))
+		len++;
+	name = malloc(len + 1);
+	if (!name)
+		return (0);
+	j = 0;
+	while (j < len)
+	{
+		name[j] = str[*i + j];
+		j++;
+	}
+	name[j] = '\0';
+	*i += len;
+	return (name);
+}
+
+void	display_inside_quotes(t_g *g, char *str)
 {
 	int		i;
-	char	quote;
+	char	*var;
 
 	i = 0;
-	quote = '\0';
 	while (str[i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
+		if (str[i] == '$')
 		{
-			quote = str[i++];
-			while (str[i] && str[i] != quote)
+			i++;
+			var = extract_var_name(str, &i);
+			if (var)
 			{
-				printf("%c", str[i]);
-				i++;
+				search_puts_var(g->env, var);
+				free(var);
 			}
-			if (str[i])
-				i++; // passer la fermeture de quote
 		}
 		else
-		{
-			printf("%c", str[i]);
-			i++;
-		}
+			write(1, &str[i++], 1);
 	}
 }
 
-void	display_with_args_v2(t_list *arg)
+void	display_with_args(t_g *g, t_list *arg)
 {
 	int		newline;
 
@@ -106,7 +125,7 @@ void	display_with_args_v2(t_list *arg)
 	}
 	while (arg && arg->content)
 	{
-		display_inside_quotes((char *)arg->content);
+		display_inside_quotes(g, (char *)arg->content);
 		arg = arg->next;
 		if (arg && arg->content)
 			printf(" ");
@@ -122,7 +141,7 @@ void	ft_echo(t_g *g)
 	arg = g->lst->next;
 	if (arg && arg->content)
 	{
-		display_with_args_v2(arg);
+		display_with_args(g, arg);
 	}
 	else
 		printf("\n");

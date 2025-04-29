@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/29 19:02:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/29 19:06:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	ft_env(t_env *env);
 void	init_env(t_env **env, char **envp);
 void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
+char	*extract_key(char *str);
+char	*extract_value(char *str);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/29 19:03:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/29 19:40:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,6 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[0].e = &ft_env;
 	(*envbuilt)[1].name = "export";
 	(*envbuilt)[1].e = &ft_exp;
-}
-
-void	ft_exp(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	if (!env->lst->next)
-	{
-		while (tmp)
-		{
-			printf("declare -x %s", tmp->key);
-			if (tmp->value)
-				printf("=\"%s\"\n", tmp->value);
-			tmp = tmp->next;
-		}
-	}
-	return ;
 }
 
 void	ft_env(t_env *env)
