@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 01:04:25 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/18 18:37:15 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static void	add_env_node(t_env **env, const char *str)
+void	add_env_node(t_env **env, const char *str)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -23,11 +23,13 @@ static void	add_env_node(t_env **env, const char *str)
 		return ;
 
 	equal_sign = ft_strchr(str, '=');
-	if (!equal_sign)
-		return ;
-
-	new->key = ft_strndup(str, equal_sign - str);
-	new->value = ft_strdup(equal_sign + 1);
+	if (equal_sign)
+	{
+		new->key = ft_strndup(str, equal_sign - str);
+		new->value = ft_strdup(equal_sign + 1);
+	}
+	else
+		new->key = ft_strndup(str, ft_strlen(str));
 	new->next = NULL;
 
 	if (!*env)

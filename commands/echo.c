@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/27 20:17:29 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/29 17:14:42 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,49 @@ void	display_content(t_list *arg)
 			printf(" ");
 		arg = arg->next;
 	}
+}
+
+void	search_variable(char *path)
+{
+	char	*equal_sign;
+	int		len;
+
+	len = ft_strlen(path);
+	equal_sign = ft_strchr(path, '=');
+	while (condition)
+	{
+		/* code */
+	}
+
+}
+
+void	update_or_add_var(t_env **env, char *arg)
+{
+	t_env	*tmp;
+	char	*key;
+	char	*value;
+	int		found;
+
+	key = extract_key(arg);
+	value = extract_value(arg);
+	tmp = *env;
+	found = 0;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0)
+		{
+			free(tmp->value);
+			tmp->value = value;
+			found = 1;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	// if (!found)
+	// 	add_env_node(env, arg);
+	// free(key);
+	// if (!found)
+	// 	free(value);
 }
 
 void	display_inside_quotes(char *str)
