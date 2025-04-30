@@ -1,0 +1,809 @@
+==37613== Memcheck, a memory error detector
+==37613== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==37613== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==37613== Command: ./minishell
+==37613== Parent PID: 5856
+==37613== 
+==37613== 
+==37613== HEAP SUMMARY:
+==37613==     in use at exit: 228,794 bytes in 233 blocks
+==37613==   total heap usage: 707 allocs, 474 frees, 257,475 bytes allocated
+==37613== 
+==37613== 8 bytes in 1 blocks are still reachable in loss record 1 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C97: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489D5AE: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489DCCD: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C47F: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898891: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8 bytes in 1 blocks are still reachable in loss record 2 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x497E35E: strdup (strdup.c:42)
+==37613==    by 0x4AFBFE7: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 9 bytes in 1 blocks are still reachable in loss record 3 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC919: _rl_reset_region_color (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE6B: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 11 bytes in 1 blocks are still reachable in loss record 4 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC919: _rl_reset_region_color (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE7C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12 bytes in 1 blocks are still reachable in loss record 5 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C458: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898891: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12 bytes in 1 blocks are still reachable in loss record 6 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489DB2B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489DCCD: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C47F: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898891: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12 bytes in 1 blocks are still reachable in loss record 7 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x497E35E: strdup (strdup.c:42)
+==37613==    by 0x4AEB2D0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AEDF9D: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCA8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12 bytes in 1 blocks are still reachable in loss record 8 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AB3EB: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AB4C6: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985F9: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 13 bytes in 1 blocks are still reachable in loss record 9 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489EB35: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898600: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 14 bytes in 1 blocks are still reachable in loss record 10 of 73
+==37613==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC9DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF5657: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBF4F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBFD9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 15 bytes in 1 blocks are still reachable in loss record 11 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x497E35E: strdup (strdup.c:42)
+==37613==    by 0x4AF8328: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 16 bytes in 1 blocks are still reachable in loss record 12 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48986F1: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 20 bytes in 1 blocks are still reachable in loss record 13 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489BB93: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489E6AB: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489EAAB: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898600: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 24 bytes in 1 blocks are still reachable in loss record 14 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AED997: _nc_home_terminfo (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AEDF88: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCA8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 24 bytes in 1 blocks are still reachable in loss record 15 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x49F24E0: tsearch (tsearch.c:337)
+==37613==    by 0x4AF06C7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF5278: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBF4F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBFD9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 47 bytes in 1 blocks are still reachable in loss record 16 of 73
+==37613==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC9DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFB4A8: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613== 
+==37613== 47 bytes in 1 blocks are still reachable in loss record 17 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC000: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 48 bytes in 1 blocks are still reachable in loss record 18 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEDB9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCA8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 78 bytes in 1 blocks are still reachable in loss record 19 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC129: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 93 bytes in 1 blocks are still reachable in loss record 20 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEDAFF: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCA8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 93 bytes in 1 blocks are still reachable in loss record 21 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x497E35E: strdup (strdup.c:42)
+==37613==    by 0x4AF06A5: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF5278: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBF4F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBFD9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 94 bytes in 1 blocks are still reachable in loss record 22 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AF0237: _nc_tparm_analyze (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF05B2: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF5278: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBF4F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBFD9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 156 bytes in 1 blocks are still reachable in loss record 23 of 73
+==37613==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC9DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFB4C6: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613== 
+==37613== 168 bytes in 1 blocks are still reachable in loss record 24 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AF061E: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF5278: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBF4F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFBFD9: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF89B7: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 256 bytes in 1 blocks are still reachable in loss record 25 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898846: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 712 bytes in 1 blocks are still reachable in loss record 26 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AFB783: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 712 bytes in 1 blocks are still reachable in loss record 27 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC27D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 760 bytes in 1 blocks are still reachable in loss record 28 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AF826F: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 29 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C97: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489A9C2: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AAB8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 30 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C97: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489A9D1: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AAB8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 31 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C97: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489A9E8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AAB8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 32 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C97: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AA01: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AAB8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 33 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AB17: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 34 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AB2E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 35 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AB3D: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,024 bytes in 1 blocks are still reachable in loss record 36 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489AB4C: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48A41D6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DC6D: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48988BA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,107 bytes in 1 blocks are still reachable in loss record 37 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AFB66A: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,108 bytes in 1 blocks are still reachable in loss record 38 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC418: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,536 bytes in 1 blocks are still reachable in loss record 39 of 73
+==37613==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B1C81: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488E017: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488E057: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985F4: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 1,664 bytes in 1 blocks are still reachable in loss record 40 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AFACFD: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 2,032 bytes in 1 blocks are still reachable in loss record 41 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACF69: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 2,272 bytes in 142 blocks are still reachable in loss record 42 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488DFD0: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488E057: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985F4: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 2,337 bytes in 1 blocks are still reachable in loss record 43 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC210: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,000 bytes in 1 blocks are still reachable in loss record 44 of 73
+==37613==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC9DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFB4E4: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC5C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFC94C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AFCAB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF8135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613== 
+==37613== 4,000 bytes in 1 blocks are still reachable in loss record 45 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEC021: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF82F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AF87D6: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACCE4: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,080 bytes in 1 blocks are still reachable in loss record 46 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACF49: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 47 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC7E6: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE24: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 48 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC86B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE24: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 49 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC87E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE24: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 50 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC891: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE24: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 51 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC86B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE30: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 52 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC87E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE30: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 53 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC891: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE30: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 54 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC86B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE3C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 55 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC87E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE3C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 56 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC891: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE3C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 57 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489850E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489864C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 58 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489850E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489865B: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 4,112 bytes in 1 blocks are still reachable in loss record 59 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489850E: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489867C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 7,952 bytes in 1 blocks are still reachable in loss record 60 of 73
+==37613==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x4AEAC77: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AEC69D: _nc_find_type_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x4AEF3C1: tgetstr_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==37613==    by 0x48ACD22: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 61 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC858: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE24: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 62 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC7E6: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE30: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 63 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC858: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE30: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 64 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC7E6: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE3C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 65 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48AC858: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48ACE3C: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48985D7: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 66 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48984FF: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489864C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 67 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48984FF: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489865B: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 68 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48984FF: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489867C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 69 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898696: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 8,224 bytes in 2 blocks are still reachable in loss record 70 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48986AC: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12,336 bytes in 3 blocks are still reachable in loss record 71 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48984D6: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489865B: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 12,336 bytes in 3 blocks are still reachable in loss record 72 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898315: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x48984D6: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489867C: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== 24,672 bytes in 6 blocks are still reachable in loss record 73 of 73
+==37613==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==37613==    by 0x48B10EC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488C4E1: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x488D398: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489E8A1: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x489EAAB: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898600: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x4898896: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==37613==    by 0x109BB6: main (main.c:61)
+==37613== 
+==37613== LEAK SUMMARY:
+==37613==    definitely lost: 0 bytes in 0 blocks
+==37613==    indirectly lost: 0 bytes in 0 blocks
+==37613==      possibly lost: 0 bytes in 0 blocks
+==37613==    still reachable: 228,794 bytes in 233 blocks
+==37613==         suppressed: 0 bytes in 0 blocks
+==37613== 
+==37613== For lists of detected and suppressed errors, rerun with: -s
+==37613== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

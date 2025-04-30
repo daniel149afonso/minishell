@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 16:18:37 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:27:13 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	print_path_error(char *path);
 
 // UTILS
 int		is_space(int c);
+void	free_env(t_env **env);
 
 #endif

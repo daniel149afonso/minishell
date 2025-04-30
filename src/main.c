@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/22 00:25:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:27:41 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
+void	free_n_exit(t_g *g)
+{
+	if (g->input)
+		free(g->input);
+	if (g->result)
+		free(g->result);
+	if (g->lst)
+		ft_lstclear(&g->lst, free);
+	if (g->env)
+		free_env(&g->env);
+	if (g->builtin)
+		free(g->builtin);
+	if (g->envbuilt)
+		free(g->envbuilt);
+	free(g);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_g	*g;
@@ -47,18 +64,14 @@ int	main(int ac, char **av, char **envp)
 			g->result = ft_splitou(g->input);
 			ft_init_lst(&g->lst, g->result);
 			if (!is_command(g))
-			{
-				if (g->lst && g->lst->content)
-					printf("%s: command not found\n", (char *)g->lst->content);
-				else
-					printf("Unknown: command not found\n");
-			}
+				printf("Unknown: command not found\n");
 		}
 		if (!g->input)
-			return (ft_lstclear(&g->lst, free), printf("exit\n"), 0);
+			return (free_n_exit(g), printf("exit\n"), 0);
 		free_for_nextl(g->input, g->lst);
 	}
 	return (0);
 }
+
 //sigint_handler:
 //remet une nouvelle ligne, clean l’input, réaffiche le prompt
