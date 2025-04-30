@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/30 16:19:52 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:32:18 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,94 +26,26 @@
 
 // }
 
-void	search_puts_var(t_env *env, char *arg)
+void	display_inside_quotes(char *str)
 {
-	t_env	*tmp;
-	char	*key;
-	char	*value;
-	int		found;
-
-	key = extract_key(arg);
-	value = extract_value(arg);
-	if (!key || !value)
-		return ;
-	tmp = env;
-	found = 0;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0)
-		{
-			free(tmp->value);
-			tmp->value = value;
-			found = 1;
-			break ;
-		}
-		tmp = tmp->next;
-	}
-	if (found)
-		printf("%s", tmp->value);
-	if (key)
-		free(key);
-	if (value)
-		free(value);
-}
-
-int	is_var_char(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	if ((c >= '0' && c <= '9') || c == '_')
-		return (1);
-	return (0);
-}
-
-char	*extract_var_name(char *str, int *i)
-{
-	int		len;
-	int		j;
-	char	*name;
-
-	len = 0;
-	while (str[*i + len] && is_var_char(str[*i + len]))
-		len++;
-	name = malloc(len + 1);
-	if (!name)
-		return (0);
-	j = 0;
-	while (j < len)
-	{
-		name[j] = str[*i + j];
-		j++;
-	}
-	name[j] = '\0';
-	*i += len;
-	return (name);
-}
-
-void	display_inside_quotes(t_g *g, char *str)
-{
-	int		i;
-	char	*var;
+	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '\'' || str[i] == '"')
 		{
+			// On saute le caractère de quote
 			i++;
-			var = extract_var_name(str, &i);
-			if (var)
-			{
-				search_puts_var(g->env, var);
-				free(var);
-			}
+			continue ;
 		}
-		else
-			write(1, &str[i++], 1);
+		write(1, &str[i], 1);
+		i++;
 	}
 }
 
-void	display_with_args(t_g *g, t_list *arg)
+
+void	display_with_args(t_list *arg)
 {
 	int		newline;
 
@@ -125,7 +57,7 @@ void	display_with_args(t_g *g, t_list *arg)
 	}
 	while (arg && arg->content)
 	{
-		display_inside_quotes(g, (char *)arg->content);
+		display_inside_quotes((char *)arg->content);
 		arg = arg->next;
 		if (arg && arg->content)
 			printf(" ");
@@ -141,7 +73,7 @@ void	ft_echo(t_g *g)
 	arg = g->lst->next;
 	if (arg && arg->content)
 	{
-		display_with_args(g, arg);
+		display_with_args(arg);
 	}
 	else
 		printf("\n");
