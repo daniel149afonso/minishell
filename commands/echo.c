@@ -54,21 +54,12 @@ void	search_puts_var(t_env *env, char *arg)
 		}
 		tmp = tmp->next;
 	}
-<<<<<<< HEAD
-	printf("%s\n", tmp->value);
-	// if (!found)
-	// 	add_env_node(env, arg);
-	// free(key);
-	// if (!found)
-	// 	free(value);
-=======
 	if (found)
 		printf("%s", tmp->value);
 	if (key)
 		free(key);
 	if (value)
 		free(value);
->>>>>>> 981d5bb1b09e6477ae51ed541e0ba43197973ffe
 }
 
 int	is_var_char(char c)
