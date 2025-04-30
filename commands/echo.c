@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/29 17:14:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:20:29 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	display_content(t_list *arg)
 		arg = arg->next;
 	}
 }
-
+/*
 void	search_variable(char *path)
 {
 	char	*equal_sign;
@@ -31,30 +31,27 @@ void	search_variable(char *path)
 	len = ft_strlen(path);
 	equal_sign = ft_strchr(path, '=');
 	while (condition)
-	{
-		/* code */
-	}
-
 }
+*/
 
 void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
 	char	*value;
-	int		found;
+	//int		found;
 
 	key = extract_key(arg);
 	value = extract_value(arg);
 	tmp = *env;
-	found = 0;
+	//found = 0;
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0)
 		{
 			free(tmp->value);
 			tmp->value = value;
-			found = 1;
+			//found = 1;
 			break ;
 		}
 		tmp = tmp->next;

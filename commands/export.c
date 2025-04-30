@@ -6,13 +6,13 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 20:19:20 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:21:12 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static char	*extract_key(char *str)
+char	*extract_key(char *str)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ static char	*extract_key(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-static char	*extract_value(char *str)
+char	*extract_value(char *str)
 {
 	char	*equal;
 
@@ -32,7 +32,7 @@ static char	*extract_value(char *str)
 	return (ft_strdup(equal + 1));
 }
 
-void	update_or_add_var(t_env **env, char *arg)
+static void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
