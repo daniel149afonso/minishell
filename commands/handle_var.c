@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/30 22:08:14 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 22:11:31 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,26 @@ void	search_puts_var(t_env *env, char *arg)
 		free(value);
 }
 
-char	*expand_variables(char *str, t_env *env)
-{
-	t_env	*tmp;
-	int		i;
+// char	*expand_variables(char *str, t_env *env)
+// {
+// 	t_env	*tmp;
+// 	int		i;
 
-	i = 0;
-	tmp = NULL;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
+// 	i = 0;
+// 	tmp = NULL;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '$')
+// 		{
 
-		}
-	}
-	while (env)
-	{
-		tmp = env->
-	}
+// 		}
+// 	}
+// 	while (env)
+// 	{
+// 		tmp = env->
+// 	}
 
-}
+// }
 
 void	check_var(char **strs, t_env *env)
 {
