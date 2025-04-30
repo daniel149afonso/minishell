@@ -4,6 +4,7 @@
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
@@ -14,6 +15,12 @@
 /*   Created: Invalid date        by                   #+#    #+#             */
 /*   Updated: 2025/04/18 18:51:57 by apiscopo         ###   ########.fr       */
 >>>>>>> a57701459356786b47e5323297c800ddc37f4047
+=======
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/29 19:40:34 by daniel149af      ###   ########.fr       */
+>>>>>>> 981d5bb1b09e6477ae51ed541e0ba43197973ffe
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +49,7 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[1].e = &ft_exp;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void	ft_exp(t_env *env)
 {
@@ -108,6 +116,8 @@ void	ft_echo(t_list *lst)
 	return ;
 }
 
+=======
+>>>>>>> 981d5bb1b09e6477ae51ed541e0ba43197973ffe
 void	ft_env(t_env *env)
 {
 	t_env	*tmp;

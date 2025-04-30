@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 16:09:35 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:10:29 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	ft_env(t_env *env);
 void	init_env(t_env **env, char **envp);
 void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
+char	*extract_key(char *str);
+char	*extract_value(char *str);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 20:19:20 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:06:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static char	*extract_key(char *str)
+char	*extract_key(char *str)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ static char	*extract_key(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-static char	*extract_value(char *str)
+char	*extract_value(char *str)
 {
 	char	*equal;
 
