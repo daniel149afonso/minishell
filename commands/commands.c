@@ -3,27 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/27 19:25:03 by daniel149af      ###   ########.fr       */
-=======
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/18 18:51:57 by apiscopo         ###   ########.fr       */
->>>>>>> a57701459356786b47e5323297c800ddc37f4047
-=======
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/29 19:40:34 by daniel149af      ###   ########.fr       */
->>>>>>> 981d5bb1b09e6477ae51ed541e0ba43197973ffe
+/*   Created: 2025/04/30 16:19:36 by daafonso          #+#    #+#             */
+/*   Updated: 2025/04/30 16:23:08 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header/minishell.h"
 
@@ -49,75 +34,6 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[1].e = &ft_exp;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-void	ft_exp(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	if (!env->lst->next)
-	{
-		while (tmp)
-		{
-			printf("declare -x %s", tmp->key);
-			if (tmp->value)
-				printf("=\"%s\"\n", tmp->value);
-			tmp = tmp->next;
-		}
-	}
-=======
-void	ft_pwd(t_list *lst)
-{
-	char	buffer[1024];
-
-	(void)lst;
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
-		printf("%s\n", buffer);
-	else
-		perror("Error, pwd");
-}
-
-void	ft_cd(t_list *lst)
-{
-	int		result;
-	char	*path;
-
-	if (lst->next && lst->next->content)
-	{
-		path = (char *)lst->next->content;
-		if (lst->next->next)
-		{
-			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-			return ;
-		}
-	}
-	else
-	{
-		path = getenv("HOME");
-		if (!path)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			return ;
-		}
-		printf("Home path: %s\n", path);
-	}
-	result = chdir(path);
-	if (result != 0)
-		print_path_error(path);
-	else
-		printf("Répertoire changé : %s\n", path);
-}
-
-void	ft_echo(t_list *lst)
-{
-	(void)lst;
->>>>>>> a57701459356786b47e5323297c800ddc37f4047
-	return ;
-}
-
-=======
->>>>>>> 981d5bb1b09e6477ae51ed541e0ba43197973ffe
 void	ft_env(t_env *env)
 {
 	t_env	*tmp;
