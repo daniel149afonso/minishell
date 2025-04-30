@@ -6,12 +6,11 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/30 20:17:08 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 22:08:14 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
 
 int	is_var_char(char c)
 {
@@ -82,4 +81,45 @@ void	search_puts_var(t_env *env, char *arg)
 		free(key);
 	if (value)
 		free(value);
+}
+
+char	*expand_variables(char *str, t_env *env)
+{
+	t_env	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = NULL;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+
+		}
+	}
+	while (env)
+	{
+		tmp = env->
+	}
+
+}
+
+void	check_var(char **strs, t_env *env)
+{
+	int		i;
+	char	*var;
+
+	i = 0;
+	var = NULL;
+	while (strs[i])
+	{
+		if (ft_strchr(strs[i], '$'))
+		{
+			var = expand_variables(strs[i], env);
+			free(strs[i]);
+			strs[i] = var;
+		}
+		i++;
+	}
+
 }
