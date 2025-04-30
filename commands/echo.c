@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/29 17:14:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:31:01 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	update_or_add_var(t_env **env, char *arg)
 		}
 		tmp = tmp->next;
 	}
+	printf("%s\n", tmp->value);
 	// if (!found)
 	// 	add_env_node(env, arg);
 	// free(key);
