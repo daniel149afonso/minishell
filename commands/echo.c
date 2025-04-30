@@ -6,25 +6,11 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/30 20:32:18 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:37:39 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-// void	search_variable(char *path)
-// {
-// 	char	*equal_sign;
-// 	int		len;
-
-// 	len = ft_strlen(path);
-// 	equal_sign = ft_strchr(path, '=');
-// 	while (condition)
-// 	{
-// 		/* code */
-// 	}
-
-// }
 
 void	display_inside_quotes(char *str)
 {
@@ -43,7 +29,6 @@ void	display_inside_quotes(char *str)
 		i++;
 	}
 }
-
 
 void	display_with_args(t_list *arg)
 {
