@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/30 20:32:18 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:29:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-// void	search_variable(char *path)
-// {
-// 	char	*equal_sign;
-// 	int		len;
-
-// 	len = ft_strlen(path);
-// 	equal_sign = ft_strchr(path, '=');
-// 	while (condition)
-// 	{
-// 		/* code */
-// 	}
-
-// }
 
 void	display_inside_quotes(char *str)
 {
@@ -33,7 +19,7 @@ void	display_inside_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '"')
+		if ((str[i] == '\'' || str[i] == '"'))
 		{
 			// On saute le caractère de quote
 			i++;
@@ -43,7 +29,6 @@ void	display_inside_quotes(char *str)
 		i++;
 	}
 }
-
 
 void	display_with_args(t_list *arg)
 {

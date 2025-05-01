@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 16:10:29 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:22:55 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 
+//HANDLE VARIABLES
+void	search_var(char **strs, t_env *env);
+
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
 void	ft_put_lst(t_list *lst);
@@ -94,5 +97,6 @@ void	print_path_error(char *path);
 
 // UTILS
 int		is_space(int c);
+char	*ft_join_and_free(char *text, char *buffer);
 
 #endif
