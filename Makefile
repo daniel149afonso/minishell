@@ -18,7 +18,8 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)echo.c \
 		$(CMD_DIR)pwd.c \
 		$(CMD_DIR)cd.c \
-		$(CMD_DIR)export.c
+		$(CMD_DIR)export.c \
+		$(CMD_DIR)handle_var.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

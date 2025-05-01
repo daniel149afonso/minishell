@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/30 20:37:39 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:29:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	display_inside_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '"')
+		if ((str[i] == '\'' || str[i] == '"'))
 		{
 			// On saute le caractère de quote
 			i++;
