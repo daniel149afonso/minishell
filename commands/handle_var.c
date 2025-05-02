@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/01 19:27:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/02 01:56:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*expand_variables(char *str, t_env *env)
 			if (value)
 				res = ft_join_and_free(res, value);  // ajoute la valeur trouvée
 			free(var_name);
+			free(value);
 		}
 		else
 		{

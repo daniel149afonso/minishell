@@ -6,26 +6,75 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/01 19:29:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/01 23:38:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	display_inside_quotes(char *str)
+char	handle_single_double(char *str, int first_quote)
+{
+	if (first_quote == '\'')
+	{
+		while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\'')
+		{
+			first_quote = str[i];
+			handle_single_double(str, first_quote);
+			break ;
+		}
+		
+	}
+	}
+	else
+	{
+		while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\'')
+		{
+			first_quote = str[i];
+			handle_single_double(str, first_quote);
+			break ;
+		}
+		
+	}
+	}
+}
+
+void	find_first_quote(char *str)
 {
 	int	i;
+	int	first_quote;
 
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] == '\'' || str[i] == '"'))
+		if (str[i] == '\'' || str[i] == '\'')
 		{
-			// On saute le caractère de quote
-			i++;
-			continue ;
+			first_quote = str[i];
+			handle_single_double(str, first_quote);
+			break ;
 		}
-		write(1, &str[i], 1);
+		
+	}
+	
+}
+
+void	display_inside_quotes(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (ft_strchr(str, '\'') && ft_strchr(str, '"'))
+	{
+		find_first_quote(str);
+		return ;
+	}
+	while (str[i])
+	{
+		if ((str[i] != '\'' && str[i] != '"'))
+			write(1, &str[i], 1);
 		i++;
 	}
 }
