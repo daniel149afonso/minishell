@@ -26,27 +26,16 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*builtins)[1].f = &ft_pwd;
 	(*builtins)[2].name = "echo";
 	(*builtins)[2].f = &ft_echo;
-	(*builtins)[3].name = NULL;
-	(*builtins)[3].f = NULL;
+	(*builtins)[3].name = "exit";
+	(*builtins)[3].f = &free_n_exit;
+	(*builtins)[4].name = NULL;
+	(*builtins)[4].f = NULL;
 	(*envbuilt)[0].name = "env";
 	(*envbuilt)[0].e = &ft_env;
 	(*envbuilt)[1].name = "export";
 	(*envbuilt)[1].e = &ft_exp;
 	(*envbuilt)[2].name = "unset";
 	(*envbuilt)[2].e = &f_unset;
-}
-
-void	ft_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (tmp->value)
-			printf("%s=%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
-	}
 }
 
 static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
@@ -82,7 +71,7 @@ int	is_command(t_g *g)
 	{
 		tmp = g->lst->next;
 		i = 0;
-		while (i < 3)
+		while (i < 4)
 		{
 			if (is_command_2(g->env, g->lst, g->envbuilt))
 				return (1);

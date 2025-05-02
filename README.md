@@ -5,12 +5,11 @@ pwd (très simple - Daniel): ✅
 
 echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
 
-exit (important pour gérer la fin de minishell - Alessio)
+exit (important pour gérer la fin de minishell - Alessio) ✅
 
 env (juste afficher l’environnement - Alessio) ✅
-3
 
-export / unset (un peu plus complexes : manipuler envp)
+export / unset (un peu plus complexes : manipuler envp)  ✅
 
 # Ordre de travail:
 Termine les builtins simples

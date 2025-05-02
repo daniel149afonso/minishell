@@ -30,10 +30,6 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 void	free_n_exit(t_g *g)
 {
-	if (g->input)
-		free(g->input);
-	if (g->result)
-		free(g->result);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
@@ -43,6 +39,8 @@ void	free_n_exit(t_g *g)
 	if (g->envbuilt)
 		free(g->envbuilt);
 	free(g);
+	printf("exit\n");
+	exit (0);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -68,7 +66,7 @@ int	main(int ac, char **av, char **envp)
 				printf("Unknown: command not found\n");
 		}
 		if (!g->input)
-			return (free_n_exit(g), printf("exit\n"), 0);
+			return (free_n_exit(g), 0);
 		free_for_nextl(g->input, g->lst);
 	}
 	return (0);

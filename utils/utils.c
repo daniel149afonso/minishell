@@ -46,10 +46,11 @@ void	free_env(t_env **env)
 
 char	*extract_check_key(char *str)
 {
+	if (!str)
+		return (NULL);
 	return (ft_substr(str, 0, ft_strlen(str)));
 }
-
-static void	swap_env_nodes(t_env *a, t_env *b)
+void	swap_env_content(t_env *a, t_env *b)
 {
 	char	*tmp_key;
 	char	*tmp_value;
@@ -62,26 +63,26 @@ static void	swap_env_nodes(t_env *a, t_env *b)
 	b->value = tmp_value;
 }
 
-void	f_bubblesort(t_list *lst)
+void	f_bubblesort(t_env *head)
 {
-	t_env	*ptr;
 	int		sorted;
+	t_env	*current;
 
-	if (!env)
+	if (!head)
 		return ;
 	sorted = 0;
 	while (!sorted)
 	{
 		sorted = 1;
-		ptr = env;
-		while (ptr && ptr->next)
+		current = head;
+		while (current && current->next)
 		{
-			if (ft_strcmp(ptr->key, ptr->next->key) > 0)
+			if (ft_strcmp(current->key, current->next->key) > 0)
 			{
-				swap_env_nodes(ptr, ptr->next);
+				swap_env_content(current, current->next);
 				sorted = 0;
 			}
-			ptr = ptr->next;
+			current = current->next;
 		}
 	}
 }

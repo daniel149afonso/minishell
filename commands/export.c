@@ -61,6 +61,13 @@ static void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
+int	check_arg(char *value)
+{
+	if (ft_isalpha(value[0]) || value[0] == '_')
+		return (0);
+	return (1);
+}
+
 void	check_if_var(t_env **env)
 {
 	t_list	*arg;
@@ -72,13 +79,16 @@ void	check_if_var(t_env **env)
 	while(tmp)
 	{
 		value = extract_check_key(tmp->content);
-		if (value[0] == '=')
+		if (value[0] == '=' || check_arg(value))
 		{
 			printf("export: `%s': not a valid identifier\n", value);
 			tmp = tmp->next;
-			value = extract_check_key(tmp->content);
-			if (value)
+			while (tmp)
+			{
+				value = extract_check_key(tmp->content);
 				printf("export: `%s': not a valid identifier\n", value);
+				tmp = tmp->next;
+			}
 			return ;
 		}
 		tmp = tmp->next;
@@ -97,9 +107,9 @@ void	ft_exp(t_env *env)
 
 	tmp = env;
 	lst = env->lst;
-	f_bubblesort(lst);
 	if (!lst || !lst->next)
 	{
+		f_bubblesort(tmp);
 		while (tmp)
 		{
 			printf("declare -x %s", tmp->key);
