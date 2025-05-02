@@ -6,39 +6,34 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/01 23:38:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/02 13:21:46 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-char	handle_single_double(char *str, int first_quote)
+void	handle_single_double(char *str, int first_quote)
 {
+	int	i;
+
+	i = 0;
 	if (first_quote == '\'')
 	{
 		while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\'')
 		{
-			first_quote = str[i];
-			handle_single_double(str, first_quote);
-			break ;
+			if (str[i] != '\'')
+				write(1, &str[i], 1);
+			i++;
 		}
-		
-	}
 	}
 	else
 	{
 		while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\'')
 		{
-			first_quote = str[i];
-			handle_single_double(str, first_quote);
-			break ;
+			if (str[i] != '"')
+				write(1, &str[i], 1);
+			i++;
 		}
-		
-	}
 	}
 }
 
@@ -50,7 +45,7 @@ void	find_first_quote(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 		{
 			first_quote = str[i];
 			handle_single_double(str, first_quote);
