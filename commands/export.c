@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 17:43:24 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:08:06 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*extract_value(char *str)
 	return (ft_strdup(equal + 1));
 }
 
-void	update_or_add_var(t_env **env, char *arg)
+static void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
@@ -64,8 +64,25 @@ void	update_or_add_var(t_env **env, char *arg)
 void	check_if_var(t_env **env)
 {
 	t_list	*arg;
+	t_list	*tmp;
+	char	*value;
 
 	arg = (*env)->lst->next;
+	tmp = (*env)->lst->next;
+	while(tmp)
+	{
+		value = extract_check_key(tmp->content);
+		if (value[0] == '=')
+		{
+			printf("export: `%s': not a valid identifier\n", value);
+			tmp = tmp->next;
+			value = extract_check_key(tmp->content);
+			if (value)
+				printf("export: `%s': not a valid identifier\n", value);
+			return ;
+		}
+		tmp = tmp->next;
+	}
 	while (arg)
 	{
 		update_or_add_var(env, (char *)arg->content);
@@ -80,6 +97,7 @@ void	ft_exp(t_env *env)
 
 	tmp = env;
 	lst = env->lst;
+	f_bubblesort(lst);
 	if (!lst || !lst->next)
 	{
 		while (tmp)

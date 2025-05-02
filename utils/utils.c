@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/02 15:51:41 by daafonso         ###   ########.fr       */
+/*   Created: 2025/05/02 16:10:01 by daafonso          #+#    #+#             */
+/*   Updated: 2025/05/02 16:10:03 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,63 @@ char	*ft_join_and_free(char *text, char *buffer)
 	temp = ft_strjoin(text, buffer);
 	free(text);
 	return (temp);
+}
+
+void	free_env(t_env **env)
+{
+	t_env	*tmp;
+	t_env	*next;
+
+	tmp = *env;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
+	}
+	*env = NULL;
+}
+
+char	*extract_check_key(char *str)
+{
+	return (ft_substr(str, 0, ft_strlen(str)));
+}
+
+static void	swap_env_nodes(t_env *a, t_env *b)
+{
+	char	*tmp_key;
+	char	*tmp_value;
+
+	tmp_key = a->key;
+	tmp_value = a->value;
+	a->key = b->key;
+	a->value = b->value;
+	b->key = tmp_key;
+	b->value = tmp_value;
+}
+
+void	f_bubblesort(t_list *lst)
+{
+	t_env	*ptr;
+	int		sorted;
+
+	if (!env)
+		return ;
+	sorted = 0;
+	while (!sorted)
+	{
+		sorted = 1;
+		ptr = env;
+		while (ptr && ptr->next)
+		{
+			if (ft_strcmp(ptr->key, ptr->next->key) > 0)
+			{
+				swap_env_nodes(ptr, ptr->next);
+				sorted = 0;
+			}
+			ptr = ptr->next;
+		}
+	}
 }

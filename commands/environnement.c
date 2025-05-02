@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/18 18:37:15 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:24:02 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	add_env_node(t_env **env, const char *str)
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return ;
-
 	equal_sign = ft_strchr(str, '=');
 	if (equal_sign)
 	{
@@ -31,7 +30,6 @@ void	add_env_node(t_env **env, const char *str)
 	else
 		new->key = ft_strndup(str, ft_strlen(str));
 	new->next = NULL;
-
 	if (!*env)
 		*env = new;
 	else
@@ -51,5 +49,18 @@ void	init_env(t_env **env, char **envp)
 	{
 		add_env_node(env, envp[i]);
 		i++;
+	}
+}
+
+void	ft_env(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->value)
+			printf("%s=%s\n", tmp->key, tmp->value);
+		tmp = tmp->next;
 	}
 }
