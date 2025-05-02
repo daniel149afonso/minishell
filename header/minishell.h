@@ -96,5 +96,8 @@ void	print_path_error(char *path);
 // UTILS
 int		is_space(int c);
 void	free_env(t_env **env);
+char	*extract_check_key(char *str);
+void	f_bubblesort(t_env *env);
+
 
 #endif
