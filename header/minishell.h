@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:52:56 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
+void	update_or_add_var(t_env **env, char *arg);
+void	check_if_var(t_env **env);
 
 //HANDLE VARIABLES
 void	search_var(char **strs, t_env *env);

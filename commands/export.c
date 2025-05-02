@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 16:21:12 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:53:42 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*extract_value(char *str)
 	return (ft_strdup(equal + 1));
 }
 
-static void	update_or_add_var(t_env **env, char *arg)
+void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
@@ -59,45 +59,6 @@ static void	update_or_add_var(t_env **env, char *arg)
 	free(key);
 	if (!found)
 		free(value);
-}
-
-int	check_arg(char *value)
-{
-	if (ft_isalpha(value[0]) || value[0] == '_')
-		return (0);
-	return (1);
-}
-
-void	check_if_var(t_env **env)
-{
-	t_list	*arg;
-	t_list	*tmp;
-	char	*value;
-
-	arg = (*env)->lst->next;
-	tmp = (*env)->lst->next;
-	while(tmp)
-	{
-		value = extract_check_key(tmp->content);
-		if (value[0] == '=' || check_arg(value))
-		{
-			printf("export: `%s': not a valid identifier\n", value);
-			tmp = tmp->next;
-			while (tmp)
-			{
-				value = extract_check_key(tmp->content);
-				printf("export: `%s': not a valid identifier\n", value);
-				tmp = tmp->next;
-			}
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	while (arg)
-	{
-		update_or_add_var(env, (char *)arg->content);
-		arg = arg->next;
-	}
 }
 
 void	ft_exp(t_env *env)

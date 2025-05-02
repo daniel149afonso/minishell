@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/30 16:20:29 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:54:38 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	search_variable(char *path)
 }
 */
 
-void	update_or_add_var(t_env **env, char *arg)
+/*void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
 	char	*key;
@@ -61,7 +61,7 @@ void	update_or_add_var(t_env **env, char *arg)
 	// free(key);
 	// if (!found)
 	// 	free(value);
-}
+}*/
 
 void	display_inside_quotes(char *str)
 {
