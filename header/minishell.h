@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:53:00 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*extract_key(char *str);
 char	*extract_value(char *str);
 
 //HANDLE VARIABLES
-void	search_var(char **strs, t_env *env);
+char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
 
 //FT_INIT_LIST

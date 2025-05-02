@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 16:19:12 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:34:50 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,6 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[1].e = &ft_exp;
 	(*envbuilt)[2].name = "unset";
 	(*envbuilt)[2].e = &f_unset;
-}
-
-void	ft_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (tmp->value)
-			printf("%s=%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
-	}
 }
 
 static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:41 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:50:50 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	main(int ac, char **av, char **envp)
 		g->input = readline("minishell :");
 		if (g->input && *g->input)
 		{
-			g->result = ft_splitou(g->input);
-			search_var(g->result, g->env);
+			g->result = search_var(ft_splitou(g->input), g->env);
 			ft_init_lst(&g->lst, g->result);
 			if (!is_command(g))
 				printf("Unknown: command not found\n");

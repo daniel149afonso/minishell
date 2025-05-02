@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/02 15:31:17 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:53:10 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,56 +64,6 @@ char	*get_env_value(t_env *env, char *var_name)
 	return (value);
 }
 
-// char	*expand_variables(char *str, t_env *env)
-// {
-// 	int		i = 0;
-// 	char	*res = ft_calloc(1, 1); // string vide pour commencer
-// 	if (!res)
-// 		return (NULL);
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '$')
-// 		{
-// 			i++;
-// 			char *var_name = extract_var_name(str, &i);
-// 			char *value = get_env_value(env, var_name);
-// 			if (value)
-// 				res = ft_join_and_free(res, value);  // ajoute la valeur trouvée
-// 			free(var_name);
-// 			free(value);
-// 		}
-// 		else
-// 		{
-// 			char c[2] = {str[i], 0}; // créer une string d'un seul char
-// 			res = ft_join_and_free(res, c);
-// 			i++;
-// 		}
-// 	}
-// 	return (res);
-// }
-
-// void	search_var(char **strs, t_env *env)
-// {
-// 	int		i;
-// 	char	*var;
-
-// 	i = 0;
-// 	var = NULL;
-// 	while (strs[i])
-// 	{
-// 		if (ft_strchr(strs[i], '\''))
-// 		{
-// 			return ;
-// 		}
-// 		if (ft_strchr(strs[i], '$'))
-// 		{
-// 			var = expand_variables(strs[i], env);
-// 			free(strs[i]);
-// 			strs[i] = var;
-// 		}
-// 		i++;
-// 	}
-// }
 char	*expand_variables(char *str, t_env *env)
 {
 	int		i = 0;
@@ -159,7 +109,7 @@ char	*expand_variables(char *str, t_env *env)
 	return (res);
 }
 
-void	search_var(char **strs, t_env *env)
+char	**search_var(char **strs, t_env *env)
 {
 	int		i;
 	char	*var;
@@ -176,4 +126,5 @@ void	search_var(char **strs, t_env *env)
 		}
 		i++;
 	}
+	return (strs);
 }

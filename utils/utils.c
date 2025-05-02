@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/02 16:19:01 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:32:28 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ char	*extract_check_key(char *str)
 	return (ft_substr(str, 0, ft_strlen(str)));
 }
 
-static void	swap_env_nodes(t_env *a, t_env *b)
-{
-	char	*tmp_key;
-	char	*tmp_value;
+// static void	swap_env_nodes(t_env *a, t_env *b)
+// {
+// 	char	*tmp_key;
+// 	char	*tmp_value;
 
-	tmp_key = a->key;
-	tmp_value = a->value;
-	a->key = b->key;
-	a->value = b->value;
-	b->key = tmp_key;
-	b->value = tmp_value;
-}
+// 	tmp_key = a->key;
+// 	tmp_value = a->value;
+// 	a->key = b->key;
+// 	a->value = b->value;
+// 	b->key = tmp_key;
+// 	b->value = tmp_value;
+// }
 
 // void	f_bubblesort(t_list *lst)
 // {
