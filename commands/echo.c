@@ -3,15 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
 /*   Updated: 2025/05/01 19:29:13 by daniel149af      ###   ########.fr       */
+=======
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/04/30 16:20:29 by apiscopo         ###   ########.fr       */
+>>>>>>> krool
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+<<<<<<< HEAD
+=======
+void	display_content(t_list *arg)
+{
+	while (arg && arg->content)
+	{
+		printf("%s", (char *)arg->content);
+		if (arg->next && arg->next->content)
+			printf(" ");
+		arg = arg->next;
+	}
+}
+/*
+void	search_variable(char *path)
+{
+	char	*equal_sign;
+	int		len;
+
+	len = ft_strlen(path);
+	equal_sign = ft_strchr(path, '=');
+	while (condition)
+}
+*/
+
+void	update_or_add_var(t_env **env, char *arg)
+{
+	t_env	*tmp;
+	char	*key;
+	char	*value;
+	//int		found;
+
+	key = extract_key(arg);
+	value = extract_value(arg);
+	tmp = *env;
+	//found = 0;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0)
+		{
+			free(tmp->value);
+			tmp->value = value;
+			//found = 1;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	// if (!found)
+	// 	add_env_node(env, arg);
+	// free(key);
+	// if (!found)
+	// 	free(value);
+}
+
+>>>>>>> krool
 void	display_inside_quotes(char *str)
 {
 	int	i;

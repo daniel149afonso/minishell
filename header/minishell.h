@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/05/01 19:22:55 by daniel149af      ###   ########.fr       */
+=======
+/*   Updated: 2025/04/30 17:27:13 by apiscopo         ###   ########.fr       */
+>>>>>>> krool
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +82,13 @@ void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
+<<<<<<< HEAD
 
 //HANDLE VARIABLES
 void	search_var(char **strs, t_env *env);
+=======
+void	f_unset(t_env *env);
+>>>>>>> krool
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
@@ -97,6 +105,13 @@ void	print_path_error(char *path);
 
 // UTILS
 int		is_space(int c);
+<<<<<<< HEAD
 char	*ft_join_and_free(char *text, char *buffer);
+=======
+void	free_env(t_env **env);
+char	*extract_check_key(char *str);
+void	f_bubblesort(t_env *env);
+
+>>>>>>> krool
 
 #endif

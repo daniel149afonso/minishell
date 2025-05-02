@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:19:36 by daafonso          #+#    #+#             */
 /*   Updated: 2025/04/30 16:23:08 by daafonso         ###   ########.fr       */
+=======
+/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/30 16:29:34 by apiscopo         ###   ########.fr       */
+>>>>>>> krool
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +39,8 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[0].e = &ft_env;
 	(*envbuilt)[1].name = "export";
 	(*envbuilt)[1].e = &ft_exp;
+	(*envbuilt)[2].name = "unset";
+	(*envbuilt)[2].e = &f_unset;
 }
 
 void	ft_env(t_env *env)
@@ -56,7 +65,7 @@ static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 	{
 		tmp = lst->next;
 		i = 0;
-		while (i < 2)
+		while (i < 3)
 		{
 			if (ft_strcmp((char *)lst->content, envbuilt[i].name) == 0)
 			{
