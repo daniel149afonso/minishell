@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 16:19:36 by daafonso          #+#    #+#             */
-/*   Updated: 2025/04/30 16:23:08 by daafonso         ###   ########.fr       */
-=======
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
 /*   Updated: 2025/04/30 16:29:34 by apiscopo         ###   ########.fr       */
->>>>>>> krool
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/01 19:29:13 by daniel149af      ###   ########.fr       */
-=======
 /*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
 /*   Updated: 2025/04/30 16:20:29 by apiscopo         ###   ########.fr       */
->>>>>>> krool
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-<<<<<<< HEAD
-=======
 void	display_content(t_list *arg)
 {
 	while (arg && arg->content)
@@ -72,7 +63,6 @@ void	update_or_add_var(t_env **env, char *arg)
 	// 	free(value);
 }
 
->>>>>>> krool
 void	display_inside_quotes(char *str)
 {
 	int	i;

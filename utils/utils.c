@@ -6,11 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-<<<<<<< HEAD:src/utils.c
-/*   Updated: 2025/05/01 19:22:39 by daniel149af      ###   ########.fr       */
-=======
 /*   Updated: 2025/04/30 17:27:01 by apiscopo         ###   ########.fr       */
->>>>>>> krool:utils/utils.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +18,6 @@ int	is_space(int c)
 		return (1);
 	return (0);
 }
-<<<<<<< HEAD:src/utils.c
 
 char	*ft_join_and_free(char *text, char *buffer)
 {
@@ -32,7 +27,6 @@ char	*ft_join_and_free(char *text, char *buffer)
 	free(text);
 	return (temp);
 }
-=======
 void	free_env(t_env **env)
 {
 	t_env	*tmp;
@@ -91,4 +85,3 @@ void	f_bubblesort(t_list *lst)
 		}
 	}
 }
->>>>>>> krool:utils/utils.c
