@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:01 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:19:01 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_join_and_free(char *text, char *buffer)
 	free(text);
 	return (temp);
 }
+
 void	free_env(t_env **env)
 {
 	t_env	*tmp;
@@ -62,26 +63,26 @@ static void	swap_env_nodes(t_env *a, t_env *b)
 	b->value = tmp_value;
 }
 
-void	f_bubblesort(t_list *lst)
-{
-	t_env	*ptr;
-	int		sorted;
+// void	f_bubblesort(t_list *lst)
+// {
+// 	t_env	*ptr;
+// 	int		sorted;
 
-	if (!env)
-		return ;
-	sorted = 0;
-	while (!sorted)
-	{
-		sorted = 1;
-		ptr = env;
-		while (ptr && ptr->next)
-		{
-			if (ft_strcmp(ptr->key, ptr->next->key) > 0)
-			{
-				swap_env_nodes(ptr, ptr->next);
-				sorted = 0;
-			}
-			ptr = ptr->next;
-		}
-	}
-}
+// 	if (!env)
+// 		return ;
+// 	sorted = 0;
+// 	while (!sorted)
+// 	{
+// 		sorted = 1;
+// 		ptr = env;
+// 		while (ptr && ptr->next)
+// 		{
+// 			if (ft_strcmp(ptr->key, ptr->next->key) > 0)
+// 			{
+// 				swap_env_nodes(ptr, ptr->next);
+// 				sorted = 0;
+// 			}
+// 			ptr = ptr->next;
+// 		}
+// 	}
+// }

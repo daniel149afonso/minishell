@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 16:21:12 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:19:51 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	check_if_var(t_env **env)
 
 	arg = (*env)->lst->next;
 	tmp = (*env)->lst->next;
-	while(tmp)
+	while (tmp)
 	{
 		value = extract_check_key(tmp->content);
 		if (value[0] == '=')
@@ -97,7 +97,7 @@ void	ft_exp(t_env *env)
 
 	tmp = env;
 	lst = env->lst;
-	f_bubblesort(lst);
+	//f_bubblesort(lst);
 	if (!lst || !lst->next)
 	{
 		while (tmp)
