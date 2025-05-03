@@ -6,9 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/03 23:14:55 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/03 23:25:38 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../header/minishell.h"
 
@@ -61,15 +63,10 @@ void	display_inside_quotes(char *str)
 	int		i;
 
 	i = 0;
-	if (ft_strchr(str, '\'') && ft_strchr(str, '"'))
-	{
-		find_first_quote(str);
-		return ;
-	}
+	printf("DEBUG: [%s]\n", str);
 	while (str[i])
 	{
-		if ((str[i] != '\'' && str[i] != '"'))
-			write(1, &str[i], 1);
+		write(1, &str[i], 1);
 		i++;
 	}
 }
@@ -87,9 +84,9 @@ void	display_with_args(t_list *arg)
 	while (arg && arg->content)
 	{
 		display_inside_quotes((char *)arg->content);
-		arg = arg->next;
-		if (arg && arg->content)
+		if (arg->next && arg->next->content)
 			printf(" ");
+		arg = arg->next;
 	}
 	if (newline)
 		printf("\n");

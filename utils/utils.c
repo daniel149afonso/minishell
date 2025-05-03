@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:01 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:39:31 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_join_and_free(char *text, char *buffer)
 	free(text);
 	return (temp);
 }
+
 void	free_env(t_env **env)
 {
 	t_env	*tmp;
@@ -50,39 +51,40 @@ char	*extract_check_key(char *str)
 		return (NULL);
 	return (ft_substr(str, 0, ft_strlen(str)));
 }
-void	swap_env_content(t_env *a, t_env *b)
-{
-	char	*tmp_key;
-	char	*tmp_value;
 
-	tmp_key = a->key;
-	tmp_value = a->value;
-	a->key = b->key;
-	a->value = b->value;
-	b->key = tmp_key;
-	b->value = tmp_value;
-}
+// static void	swap_env_nodes(t_env *a, t_env *b)
+// {
+// 	char	*tmp_key;
+// 	char	*tmp_value;
 
-void	f_bubblesort(t_env *head)
-{
-	int		sorted;
-	t_env	*current;
+// 	tmp_key = a->key;
+// 	tmp_value = a->value;
+// 	a->key = b->key;
+// 	a->value = b->value;
+// 	b->key = tmp_key;
+// 	b->value = tmp_value;
+// }
 
-	if (!head)
-		return ;
-	sorted = 0;
-	while (!sorted)
-	{
-		sorted = 1;
-		current = head;
-		while (current && current->next)
-		{
-			if (ft_strcmp(current->key, current->next->key) > 0)
-			{
-				swap_env_content(current, current->next);
-				sorted = 0;
-			}
-			current = current->next;
-		}
-	}
-}
+// void	f_bubblesort(t_list *lst)
+// {
+// 	t_env	*ptr;
+// 	int		sorted;
+
+// 	if (!env)
+// 		return ;
+// 	sorted = 0;
+// 	while (!sorted)
+// 	{
+// 		sorted = 1;
+// 		ptr = env;
+// 		while (ptr && ptr->next)
+// 		{
+// 			if (ft_strcmp(ptr->key, ptr->next->key) > 0)
+// 			{
+// 				swap_env_nodes(ptr, ptr->next);
+// 				sorted = 0;
+// 			}
+// 			ptr = ptr->next;
+// 		}
+// 	}
+// }

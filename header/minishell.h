@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 20:52:56 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:39:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	update_or_add_var(t_env **env, char *arg);
 void	check_if_var(t_env **env);
 
 //HANDLE VARIABLES
-void	search_var(char **strs, t_env *env);
+char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
 
 //FT_INIT_LIST
