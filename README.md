@@ -6,10 +6,21 @@ pwd (très simple - Daniel): ✅
 echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
 
 exit (important pour gérer la fin de minishell - Alessio) ✅
+gestion de Ctl+D ✅
+gestion de input "exit" ✅
+0 leaks (sauf readline) ✅
 
 env (juste afficher l’environnement - Alessio) ✅
+mise a jour de l'env ✅
+tests finaux ✅
 
-export / unset (un peu plus complexes : manipuler envp)  ✅
+export / unset (un peu plus complexes : manipuler envp)
+export ✅
+unset ✅
+export ARGS ✅
+export ARGS unindentified ✅
+export ARGS +=
+test finaux de export 
 
 # Ordre de travail:
 Termine les builtins simples
@@ -18,7 +29,7 @@ Implémente la redirection >
 
 Ensuite les pipes
 
-Enfin les cas mixtes + bonus (<<, gestion des quotes, etc.)
+Enfin les cas mixtes + bonus(oublie les bonus daniel) (<<, gestion des quotes, etc.)
 
 # Arguments pour chaque commande
 ✅ pwd
