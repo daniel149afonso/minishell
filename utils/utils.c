@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/01 19:22:39 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:27:01 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,63 @@ char	*ft_join_and_free(char *text, char *buffer)
 	temp = ft_strjoin(text, buffer);
 	free(text);
 	return (temp);
+}
+void	free_env(t_env **env)
+{
+	t_env	*tmp;
+	t_env	*next;
+
+	tmp = *env;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
+	}
+	*env = NULL;
+}
+
+char	*extract_check_key(char *str)
+{
+	if (!str)
+		return (NULL);
+	return (ft_substr(str, 0, ft_strlen(str)));
+}
+void	swap_env_content(t_env *a, t_env *b)
+{
+	char	*tmp_key;
+	char	*tmp_value;
+
+	tmp_key = a->key;
+	tmp_value = a->value;
+	a->key = b->key;
+	a->value = b->value;
+	b->key = tmp_key;
+	b->value = tmp_value;
+}
+
+void	f_bubblesort(t_env *head)
+{
+	int		sorted;
+	t_env	*current;
+
+	if (!head)
+		return ;
+	sorted = 0;
+	while (!sorted)
+	{
+		sorted = 1;
+		current = head;
+		while (current && current->next)
+		{
+			if (ft_strcmp(current->key, current->next->key) > 0)
+			{
+				swap_env_content(current, current->next);
+				sorted = 0;
+			}
+			current = current->next;
+		}
+	}
 }

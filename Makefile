@@ -6,12 +6,12 @@ LIBFT = libft/libft.a
 # Directories
 SRC_DIR = src/
 CMD_DIR = commands/
+UTLS_DIR = utils/
 
 SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_init_lst.c \
 		$(SRC_DIR)ft_splitou.c \
 		$(SRC_DIR)main.c \
-		$(SRC_DIR)utils.c \
 		$(SRC_DIR)init.c \
 		$(CMD_DIR)commands.c \
 		$(CMD_DIR)environnement.c \
@@ -19,7 +19,10 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)pwd.c \
 		$(CMD_DIR)cd.c \
 		$(CMD_DIR)export.c \
-		$(CMD_DIR)handle_var.c
+		$(CMD_DIR)export_2.c \
+		$(CMD_DIR)unset.c \
+		$(CMD_DIR)handle_var.c \
+		$(UTLS_DIR)utils.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

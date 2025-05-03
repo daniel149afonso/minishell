@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 17:43:24 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:53:42 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,6 @@ void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
-void	check_if_var(t_env **env)
-{
-	t_list	*arg;
-
-	arg = (*env)->lst->next;
-	while (arg)
-	{
-		update_or_add_var(env, (char *)arg->content);
-		arg = arg->next;
-	}
-}
-
 void	ft_exp(t_env *env)
 {
 	t_env	*tmp;
@@ -82,6 +70,7 @@ void	ft_exp(t_env *env)
 	lst = env->lst;
 	if (!lst || !lst->next)
 	{
+		f_bubblesort(tmp);
 		while (tmp)
 		{
 			printf("declare -x %s", tmp->key);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/01 19:22:55 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/02 20:52:56 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,12 @@ void	add_env_node(t_env **env, const char *str);
 void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
+void	update_or_add_var(t_env **env, char *arg);
+void	check_if_var(t_env **env);
 
 //HANDLE VARIABLES
 void	search_var(char **strs, t_env *env);
+void	f_unset(t_env *env);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
@@ -94,9 +97,14 @@ char	**ft_splitou(char const *s);
 void	ft_error(char *msg, t_list **lst);
 void	ft_free_lst(t_list **lst);
 void	print_path_error(char *path);
+void	free_n_exit(t_g *g);
 
 // UTILS
 int		is_space(int c);
 char	*ft_join_and_free(char *text, char *buffer);
+void	free_env(t_env **env);
+char	*extract_check_key(char *str);
+void	f_bubblesort(t_env *head);
+
 
 #endif
