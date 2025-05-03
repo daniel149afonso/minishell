@@ -1,11 +1,12 @@
 # Commandes status:
-cd (changement de dossier - Daniel): ✅
 
-pwd (très simple - Daniel): ✅
+# cd (changement de dossier - Daniel): ✅
 
-echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
+# pwd (très simple - Daniel): ✅
 
-exit (important pour gérer la fin de minishell - Alessio) ✅
+# echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
+
+# exit (important pour gérer la fin de minishell - Alessio) ✅
 
 gestion de Ctl+D ✅
 
@@ -13,13 +14,13 @@ gestion de input "exit" ✅
 
 0 leaks (sauf readline) ✅
 
-env (juste afficher l’environnement - Alessio) ✅
+# env (juste afficher l’environnement - Alessio) ✅
 
 mise a jour de l'env ✅
 
 tests finaux ✅
 
-export / unset (un peu plus complexes : manipuler envp)
+# export / unset (un peu plus complexes : manipuler envp)
 
 export ✅
 
