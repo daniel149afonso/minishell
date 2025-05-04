@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/04/22 20:29:39 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/03 18:09:09 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,40 @@ void	set_env_value(t_env **env, const char *key, const char *value)
 	}
 }
 
+// void	check_path()
+// {
+// 	if (!get_current_path(&oldpwd))
+// 	{
+// 		perror("cd");
+// 		return ;
+// 	}
+// 	printf("Old path:%s\n", oldpwd);
+// 	set_env_value(&g->env, "OLDPWD", oldpwd);
+// 	if (g->lst->next && g->lst->next->content)
+// 	{
+// 		if (!set_path(g->lst, &path))
+// 			return ;
+// 	}
+// 	else
+// 	{
+// 		if (!set_home_path(&path))
+// 			return ;
+// 	}
+// 	result = chdir(path);
+// 	if (result != 0)
+// 		print_path_error(path);
+// 	else
+// 	{
+// 		printf("Répertoire changé : %s\n", path);
+// 		if (!get_current_path(&newpwd))
+// 		{
+// 			perror("cd");
+// 			return ;
+// 		}
+// 		printf("New path:%s\n", newpwd);
+// 		set_env_value(&g->env, "PWD", newpwd);
+// 	}
+// }
 
 void	ft_cd(t_g *g)
 {
