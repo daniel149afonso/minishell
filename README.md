@@ -10,8 +10,7 @@ gestion de OLD_PWD et PWD✅
 
 ## echo (facile, bon exercice sur les arguments - Daniel) 
 
-gestion des variables faits mais seulement sans espaces entre variables (modification de splitou à voir)
-Correction: Splitou gère bien les espaces entre quotes
+gestion des quotes, variables ✅
 
 ## exit (important pour gérer la fin de minishell - Alessio) ✅
 
