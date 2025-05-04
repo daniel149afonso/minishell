@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/04 16:26:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/04 23:29:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_put_array(char **strs)
 	i = 0;
 	while (strs[i])
 	{
-		printf("Content split: %s\n", strs[i]);
+		printf("Token: %s\n", strs[i]);
 		i++;
 	}
 }
@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 		g->lst = NULL;
 		g->input = readline("minishell :");
 		if (g->input && *g->input)
-		{
+		{	
 			g->result = search_var(ft_splitou(g->input), g->env);
 			ft_init_lst(&g->lst, g->result);
 			if (!is_command(g))
