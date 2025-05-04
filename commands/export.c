@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/03 23:28:34 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/04 15:07:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,34 @@ void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
-void	check_if_var(t_env **env)
-{
-	t_list	*arg;
-	t_list	*tmp;
-	char	*value;
+// void	check_if_var(t_env **env)
+// {
+// 	t_list	*arg;
+// 	t_list	*tmp;
+// 	char	*value;
 
-	arg = (*env)->lst->next;
-	tmp = (*env)->lst->next;
-	while (tmp)
-	{
-		value = extract_check_key(tmp->content);
-		if (value[0] == '=')
-		{
-			printf("export: `%s': not a valid identifier\n", value);
-			tmp = tmp->next;
-			value = extract_check_key(tmp->content);
-			if (value)
-				printf("export: `%s': not a valid identifier\n", value);
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	while (arg)
-	{
-		update_or_add_var(env, (char *)arg->content);
-		arg = arg->next;
-	}
-}
+// 	arg = (*env)->lst->next;
+// 	tmp = (*env)->lst->next;
+// 	while (tmp)
+// 	{
+// 		value = extract_check_key(tmp->content);
+// 		if (value[0] == '=')
+// 		{
+// 			printf("export: `%s': not a valid identifier\n", value);
+// 			tmp = tmp->next;
+// 			value = extract_check_key(tmp->content);
+// 			if (value)
+// 				printf("export: `%s': not a valid identifier\n", value);
+// 			return ;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	while (arg)
+// 	{
+// 		update_or_add_var(env, (char *)arg->content);
+// 		arg = arg->next;
+// 	}
+// }
 
 void	ft_exp(t_env *env)
 {
@@ -100,7 +100,7 @@ void	ft_exp(t_env *env)
 	//f_bubblesort(lst);
 	if (!lst || !lst->next)
 	{
-		f_bubblesort(tmp);
+		//f_bubblesort(tmp);
 		while (tmp)
 		{
 			printf("declare -x %s", tmp->key);
