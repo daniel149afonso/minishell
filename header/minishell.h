@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/03 23:39:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/04 15:53:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ char	*ft_join_and_free(char *text, char *buffer);
 void	free_env(t_env **env);
 char	*extract_check_key(char *str);
 void	f_bubblesort(t_env *head);
-
+int		is_var_char(char c);
 
 #endif

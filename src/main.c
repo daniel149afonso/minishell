@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 16:50:50 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:26:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ void	free_n_exit(t_g *g)
 	free(g);
 	printf("exit\n");
 	exit (0);
+}
+
+void	ft_put_array(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		printf("Content split: %s\n", strs[i]);
+		i++;
+	}
 }
 
 int	main(int ac, char **av, char **envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/02 16:53:10 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:42:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,21 +109,17 @@ char	*expand_variables(char *str, t_env *env)
 	return (res);
 }
 
-char	**search_var(char **strs, t_env *env)
+char **search_var(char **strs, t_env *env)
 {
 	int		i;
 	char	*var;
 
 	i = 0;
-	var = NULL;
 	while (strs[i])
 	{
-		if (ft_strchr(strs[i], '$'))
-		{
-			var = expand_variables(strs[i], env);
-			free(strs[i]);
-			strs[i] = var;
-		}
+		var = expand_variables(strs[i], env);
+		free(strs[i]);
+		strs[i] = var;
 		i++;
 	}
 	return (strs);
