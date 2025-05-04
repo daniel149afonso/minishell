@@ -2,9 +2,16 @@
 
 ## cd (changement de dossier - Daniel): ✅
 
+gestion de dossier✅
+
+gestion de OLD_PWD et PWD✅
+
 ## pwd (très simple - Daniel): ✅
 
-## echo (facile, bon exercice sur les arguments - Daniel) manque gesttion de variables avec "$variable"
+## echo (facile, bon exercice sur les arguments - Daniel) 
+
+gestion des variables faits mais seulement sans espaces entre variables (modification de splitou à voir)
+Correction: Splitou gère bien les espaces entre quotes
 
 ## exit (important pour gérer la fin de minishell - Alessio) ✅
 
