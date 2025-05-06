@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/06 18:45:29 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:21:01 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	is_redirection(t_list *lst)
 {
 	t_list	*file;
 	int		fd;
+	int		newfd;
 
 	file = NULL;
 	while (lst)
@@ -29,7 +30,7 @@ int	is_redirection(t_list *lst)
 				perror("Error");
 				return (0);
 			}
-			
+			newfd = dup2(fd, STDOUT_FILENO);
 		}
 		lst = lst->next;
 	}
