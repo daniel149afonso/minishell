@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 16:50:50 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:47:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 void	free_n_exit(t_g *g)
 {
-	if (g->input)
-		free(g->input);
-	if (g->result)
-		free(g->result);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
@@ -43,6 +39,20 @@ void	free_n_exit(t_g *g)
 	if (g->envbuilt)
 		free(g->envbuilt);
 	free(g);
+	printf("exit\n");
+	exit (0);
+}
+
+void	ft_put_array(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		printf("Token: %s\n", strs[i]);
+		i++;
+	}
 }
 
 int	main(int ac, char **av, char **envp)
@@ -60,14 +70,15 @@ int	main(int ac, char **av, char **envp)
 		g->lst = NULL;
 		g->input = readline("minishell :");
 		if (g->input && *g->input)
-		{
+		{	
 			g->result = search_var(ft_splitou(g->input), g->env);
 			ft_init_lst(&g->lst, g->result);
+			is_redirection(g->lst);
 			if (!is_command(g))
 				printf("Unknown: command not found\n");
 		}
 		if (!g->input)
-			return (free_n_exit(g), printf("exit\n"), 0);
+			return (free_n_exit(g), 0);
 		free_for_nextl(g->input, g->lst);
 	}
 	return (0);

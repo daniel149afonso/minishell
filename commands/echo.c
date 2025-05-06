@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/02 18:15:03 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/04 21:24:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../header/minishell.h"
 
-void	display_inside_quotes(char *str)
+void	display_content(char *str)
 {
 	int		i;
 
 	i = 0;
-	printf("DEBUG: [%s]\n", str);
 	while (str[i])
 	{
 		write(1, &str[i], 1);
@@ -39,9 +36,9 @@ void	display_with_args(t_list *arg)
 	}
 	while (arg && arg->content)
 	{
-		display_inside_quotes((char *)arg->content);
+		display_content((char *)arg->content);
 		if (arg->next && arg->next->content)
-			printf(" ");
+		write(1, " ", 1);
 		arg = arg->next;
 	}
 	if (newline)

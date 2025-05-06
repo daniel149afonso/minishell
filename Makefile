@@ -19,9 +19,12 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)pwd.c \
 		$(CMD_DIR)cd.c \
 		$(CMD_DIR)export.c \
+		$(CMD_DIR)export_2.c \
 		$(CMD_DIR)unset.c \
 		$(CMD_DIR)handle_var.c \
-		$(UTLS_DIR)utils.c
+		$(CMD_DIR)redirection.c \
+		$(UTLS_DIR)utils.c \
+		$(UTLS_DIR)utils_2.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
