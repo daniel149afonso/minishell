@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/04 15:53:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/06 17:46:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <signal.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 //PREVIOUS DEFINITION OF GLOBAL
@@ -84,6 +85,9 @@ void	check_if_var(t_env **env);
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
+
+//REDIRECTIONS
+int	is_redirection(t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
