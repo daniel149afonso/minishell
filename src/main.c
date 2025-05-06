@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/06 17:47:43 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/06 18:44:15 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,6 @@ void	free_n_exit(t_g *g)
 	exit (0);
 }
 
-void	ft_put_array(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		printf("Token: %s\n", strs[i]);
-		i++;
-	}
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	t_g	*g;
@@ -70,11 +58,11 @@ int	main(int ac, char **av, char **envp)
 		g->lst = NULL;
 		g->input = readline("minishell :");
 		if (g->input && *g->input)
-		{	
+		{
 			g->result = search_var(ft_splitou(g->input), g->env);
 			ft_init_lst(&g->lst, g->result);
 			is_redirection(g->lst);
-			if (!is_command(g))
+			if (!is_command(g)) //a refaire ne marche pas
 				printf("Unknown: command not found\n");
 		}
 		if (!g->input)

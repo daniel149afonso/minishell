@@ -8,7 +8,7 @@ gestion de OLD_PWD et PWD✅
 
 ## pwd (très simple - Daniel): ✅
 
-## echo (facile, bon exercice sur les arguments - Daniel) 
+## echo (facile, bon exercice sur les arguments - Daniel)
 
 gestion des quotes, variables ✅
 
@@ -38,12 +38,16 @@ export ARGS unindentified ✅
 
 export ARGS +=
 
-test finaux de export 
+test finaux de export
 
 # Ordre de travail:
 Termine les builtins simples
 
-Implémente la redirection >
+Implémente la redirection > : echo salut > test.txt, echo salut>test.txt
+si le fichier n'existe pas le creer
+commande > fichier        # redirige la sortie
+commande >> fichier       # append à un fichier
+commande < fichier        # lit depuis un fichier
 
 Ensuite les pipes
 
