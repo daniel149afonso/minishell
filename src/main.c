@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/08 16:06:14 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/09 15:09:10 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,14 @@ int	main(int ac, char **av, char **envp)
 		if (g->input && *g->input)
 		{
 			g->result = search_var(ft_splitou(g->input), g->env);
+			if (!g->result)
+				return (1);
 			ft_init_lst(&g->lst, g->result);
-			if (!g->lst)
-				printf("DEBUG | g->lst est NULL juste après ft_init_lst\n");
-			else
-				printf("DEBUG | Première commande : [%s]\n", (char *)g->lst->content);
 			//is_redirection(g->lst);
 			if (!is_command(g))
 			{
 				if (g->lst && g->lst->content)
 					printf("%s: command not found\n", (char *)g->lst->content);
-				else
-					printf("Unknown: command not found\n");
 			}
 		}
 		if (!g->input)
