@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/06 17:46:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/09 16:56:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
 void	check_if_var(t_env **env);
+void	update_or_add_var_concat(t_env **env, char *arg);
+char	*extract_key_concat(char *str);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/09 16:37:21 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/09 16:58:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	display_with_args(t_list *arg)
 	int		newline;
 
 	newline = 1;
-	// ft_strcmp((char *)arg->content, "-n");
-	//ft_strnstr((char *)arg->content, "-n", 2)
 	while (arg && arg->content && ft_strnstr((char *)arg->content, "-n", 2))
 	{
 		if (!is_valid_option((char *)arg->content))
