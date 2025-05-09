@@ -1,3 +1,0 @@
-salut > test.txt
-[?2004hminishell :[Kminishell :[?2004l
-exit
