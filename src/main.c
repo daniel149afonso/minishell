@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/06 18:44:15 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:06:14 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,18 @@ int	main(int ac, char **av, char **envp)
 		{
 			g->result = search_var(ft_splitou(g->input), g->env);
 			ft_init_lst(&g->lst, g->result);
-			is_redirection(g->lst);
-			if (!is_command(g)) //a refaire ne marche pas
-				printf("Unknown: command not found\n");
+			if (!g->lst)
+				printf("DEBUG | g->lst est NULL juste après ft_init_lst\n");
+			else
+				printf("DEBUG | Première commande : [%s]\n", (char *)g->lst->content);
+			//is_redirection(g->lst);
+			if (!is_command(g))
+			{
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+				else
+					printf("Unknown: command not found\n");
+			}
 		}
 		if (!g->input)
 			return (free_n_exit(g), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 16:34:50 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:16:59 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,22 @@ int	is_command(t_g *g)
 	int		i;
 
 	g->env->lst = g->lst;
-	while (g->lst)
+	tmp = g->lst;
+	while (tmp)
 	{
-		tmp = g->lst->next;
 		i = 0;
 		while (i < 4)
 		{
-			if (is_command_2(g->env, g->lst, g->envbuilt))
+			if (is_command_2(g->env, tmp, g->envbuilt))
 				return (1);
-			if ((ft_strcmp((char *)g->lst->content, g->builtin[i].name)) == 0)
+			if ((ft_strcmp((char *)tmp->content, g->builtin[i].name)) == 0)
 			{
 				g->builtin[i].f(g);
 				return (1);
 			}
 			i++;
 		}
-		g->lst = tmp;
+		tmp = tmp->next;
 	}
 	return (0);
 }
