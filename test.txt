@@ -1,18 +1,0 @@
-hello
-Gaara > test.txt
-[?2004hminishell :saluttt bonjour
-[?2004lDEBUG | Content: saluttt
-DEBUG | Content: bonjour
-Unknown: command not found
-[?2004hminishell :echo salut les amis
-[?2004lDEBUG | Content: echo
-DEBUG | Content: salut
-DEBUG | Content: les
-DEBUG | Content: amis
-salut les amis
-[?2004hminishell :salir[K[K[K[K^C[?2004l
-minishell :[?2004hbonjour
-[?2004lDEBUG | Content: bonjour
-Unknown: command not found
-[?2004hminishell :[?2004l
-exit

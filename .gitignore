@@ -1,4 +1,5 @@
 *.vscode
+*.txt
 *.o
 *src/.o
 *libft/.o
