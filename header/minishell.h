@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/02 20:52:56 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:36:10 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
 void	check_if_var(t_env **env);
+void	update_or_add_var_concat(t_env **env, char *arg);
+char	*extract_key_concat(char *str);
 
 //HANDLE VARIABLES
 void	search_var(char **strs, t_env *env);
