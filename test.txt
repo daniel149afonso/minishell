@@ -1,0 +1,4 @@
+salut > test.txt 
+[?2004hminishell :echosalut^C[?2004l
+minishell :[?2004h[?2004l
+exit

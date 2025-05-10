@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/09 17:08:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/09 21:05:48 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char **av, char **envp)
 			if (!g->result)
 				return (1);
 			ft_init_lst(&g->lst, g->result);
-			//is_redirection(g->lst);
+			is_redirection(g->lst);
 			if (!is_command(g))
 			{
 				if (g->lst && g->lst->content)
