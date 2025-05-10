@@ -1,8 +1,9 @@
-*.vscode
+.vscode
 *.txt
 *.o
 *src/.o
 *libft/.o
+*utils/.o
 *commands/.o
 *.a
 *.DStore
