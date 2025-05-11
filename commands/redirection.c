@@ -6,17 +6,16 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/09 20:45:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/11 16:05:18 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	is_redirection(t_list *lst)
+int	is_redirection(t_g *g, t_list *lst)
 {
 	t_list	*file;
 	int		fd;
-	int		original_stdout;
 	int		res;
 	
 	res = 0;
@@ -34,7 +33,7 @@ int	is_redirection(t_list *lst)
 				return (0);
 			}
 			// 💾 sauvegarder stdout
-			original_stdout = dup(STDOUT_FILENO);
+			g->s_stdout = dup(STDOUT_FILENO);
 
 			// 🔁 rediriger stdout vers le fichier
 			dup2(fd, STDOUT_FILENO);
@@ -42,7 +41,7 @@ int	is_redirection(t_list *lst)
 
 			// 🔁 restaurer stdout
 			// dup2(original_stdout, STDOUT_FILENO);
-			close(original_stdout);
+			// close(original_stdout);
 		}
 		lst = lst->next;
 	}
