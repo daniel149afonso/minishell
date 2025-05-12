@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/09 16:56:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/12 01:05:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
+	int			s_stdout;
+	int			s_fd;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
@@ -89,7 +91,7 @@ char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
 
 //REDIRECTIONS
-int	is_redirection(t_list *lst);
+int	is_redirection(t_g *g);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
