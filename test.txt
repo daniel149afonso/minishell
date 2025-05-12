@@ -1,1 +1,3 @@
-toujours > test.txt 
+AFTER
+DEBUG | Content: salut
+salut: command not found

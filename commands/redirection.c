@@ -6,11 +6,24 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/12 01:11:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/12 16:35:18 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+t_list	*remove_redir_token(t_list *lst)
+{
+	while (lst) 
+	{
+		//printf("%s\n", (char *)lst->content);
+		if (lst->next && !ft_strcmp((char *)lst->next->content, ">"))
+			break ;
+		lst = lst->next;
+	}
+	lst->next = NULL;
+	return (lst);
+}
 
 int	one_redirection(t_g *g, t_list *redir)
 {
