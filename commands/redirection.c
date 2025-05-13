@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/13 15:31:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/13 16:38:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@ void	remove_redir_token(t_list **lst)
 {
 	t_list	*curr;
 	t_list	*prev;
-	t_list	*tmp;
+	t_list	*after;
+	t_list	*file;
 	
 	curr = *lst;
 	prev = NULL;
-	while (curr)
+	while (curr && curr->next)
 	{
-		if ((curr)->next && !ft_strcmp((char *)(curr)->next->content, ">"))
+		if (curr && !ft_strcmp((char *)curr->content, ">"))
 		{
-			tmp = curr->next;
+			after = curr->next;
+			file = curr->next;
+			free(curr->content);
 			free(curr);
-			prev->next = tmp;
+			if (prev)
+				prev->next = after;
 			break ;
 		}
 		prev = curr;

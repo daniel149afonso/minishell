@@ -1,0 +1,5 @@
+AFTER
+DEBUG | Content: echo
+DEBUG | Content: test.txt
+DEBUG | Content: 
+test.txt 
