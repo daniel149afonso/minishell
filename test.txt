@@ -1,3 +1,0 @@
-AFTER
-DEBUG | Content: salut
-salut: command not found

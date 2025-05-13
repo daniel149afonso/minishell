@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/12 16:13:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/12 19:05:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	f_unset(t_env *env);
 
 //REDIRECTIONS
 int		is_redirection(t_g *g);
-t_list	*remove_redir_token(t_list *lst);
+void	remove_redir_token(t_g *g, t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

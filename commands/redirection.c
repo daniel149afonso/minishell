@@ -6,23 +6,32 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/12 16:35:18 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/13 15:31:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-t_list	*remove_redir_token(t_list *lst)
+void	remove_redir_token(t_list **lst)
 {
-	while (lst) 
+	t_list	*curr;
+	t_list	*prev;
+	t_list	*tmp;
+	
+	curr = *lst;
+	prev = NULL;
+	while (curr)
 	{
-		//printf("%s\n", (char *)lst->content);
-		if (lst->next && !ft_strcmp((char *)lst->next->content, ">"))
+		if ((curr)->next && !ft_strcmp((char *)(curr)->next->content, ">"))
+		{
+			tmp = curr->next;
+			free(curr);
+			prev->next = tmp;
 			break ;
-		lst = lst->next;
-	}
-	lst->next = NULL;
-	return (lst);
+		}
+		prev = curr;
+		curr = curr->next;
+	}	
 }
 
 int	one_redirection(t_g *g, t_list *redir)
