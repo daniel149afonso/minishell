@@ -1,4 +1,5 @@
-AFTER
+DEBUG: Redirection supprimée. Nouvelle tête: echo
 DEBUG | Content: echo
-DEBUG | Content: salut
-[?2004hminishell :[?2004l
+DEBUG | Content: test
+DEBUG | Content: 
+test 
