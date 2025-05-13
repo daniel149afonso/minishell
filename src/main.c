@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/13 16:30:55 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/13 17:06:38 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ int	main(int ac, char **av, char **envp)
 			remove_redir_token(&g->lst);
 			printf("AFTER\n");
 			ft_put_lst(g->lst);
-			// if (!is_command(g))
-			// {
-			// 	if (g->lst && g->lst->content)
-			// 		printf("%s: command not found\n", (char *)g->lst->content);
-			// }
-			// if (g->s_stdout != -1)
-			// {
-			// 	dup2(g->s_stdout, STDOUT_FILENO);
-			// 	close(g->s_stdout);
-			// }
-			// else
-			// 	printf("Error: fd not found %d", g->s_stdout);
+			if (!is_command(g))
+			{
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+			}
+			if (g->s_stdout != -1)
+			{
+				dup2(g->s_stdout, STDOUT_FILENO);
+				close(g->s_stdout);
+			}
+			else
+				printf("Error: fd not found %d", g->s_stdout);
 		}
 		if (!g->input)
 			return (free_n_exit(g), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/13 16:38:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/13 17:05:09 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,26 @@ void	remove_redir_token(t_list **lst)
 	t_list	*prev;
 	t_list	*after;
 	t_list	*file;
-	
+
 	curr = *lst;
 	prev = NULL;
 	while (curr && curr->next)
 	{
 		if (curr && !ft_strcmp((char *)curr->content, ">"))
 		{
-			after = curr->next;
 			file = curr->next;
+			after = file->next;
 			free(curr->content);
 			free(curr);
+			free(file->content);
+			free(file);
 			if (prev)
 				prev->next = after;
 			break ;
 		}
 		prev = curr;
 		curr = curr->next;
-	}	
+	}
 }
 
 int	one_redirection(t_g *g, t_list *redir)
