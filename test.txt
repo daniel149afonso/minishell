@@ -1,4 +1,4 @@
 AFTER
 DEBUG | Content: echo
-DEBUG | Content: caca
+DEBUG | Content: salut
 [?2004hminishell :[?2004l
