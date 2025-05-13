@@ -10,3 +10,4 @@
 *.out
 *.identifiers
 minishell
+*.o
