@@ -1,5 +1,0 @@
-DEBUG: Redirection supprimée. Nouvelle tête: echo
-DEBUG | Content: echo
-DEBUG | Content: test
-DEBUG | Content: 
-test 
