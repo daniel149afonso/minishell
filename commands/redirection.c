@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/14 18:11:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 20:16:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,20 @@ void	remove_redir_token(t_list **lst)
 			free(curr);
 			free(file->content);
 			free(file);
-			printf("DEBUG: Redirection supprimée. Nouvelle tête: %s\n",
-				*lst ? (char *)(*lst)->content : "NULL");
+			break ;
+		}
+		if (!ft_strcmp((char *)curr->content, ">>"))
+		{
+			file = curr->next;
+			after = file->next;
+			if (prev)
+				prev->next = after;
+			else
+				*lst = after;
+			free(curr->content);
+			free(curr);
+			free(file->content);
+			free(file);
 			break ;
 		}
 		prev = curr;
@@ -92,16 +104,32 @@ int	double_redirection(t_g *g, t_list *redir)
 	return (0);
 }
 
+int	parsing_redir(t_list *lst)
+{
+	while (lst)
+	{
+		if (ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
+		{
+			printf("-bash: syntax error near unexpected token `newline'\n");
+			return (1);
+		}
+		lst = lst->next;
+	}
+	return (0);
+}
+
 int	is_redirection(t_g *g)
 {
 	t_list	*tmp;
 
 	tmp = g->lst;
+	if (parsing_redir(g->lst))
+		return (1);
 	while (tmp)
 	{
 		if (ft_strcmp((char *)tmp->content, ">") == 0)
 			one_redirection(g, tmp);
-		if (ft_strcmp((char *)tmp->content, ">>") == 0)
+		else if (ft_strcmp((char *)tmp->content, ">>") == 0)
 			double_redirection(g, tmp);
 		tmp = tmp->next;
 	}

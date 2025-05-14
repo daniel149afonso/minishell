@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/04 15:54:28 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 19:11:28 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	isstring(const char *s)
 	return (i + 1);
 }
 
-static int	is_lococo(const char *s)
+int	is_lococo(const char *s)
 {
 	int	len;
 

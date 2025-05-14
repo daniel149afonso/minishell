@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 15:45:09 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 22:09:25 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ int	main(int ac, char **av, char **envp)
 			if (!g->result)
 				return (1);
 			ft_init_lst(&g->lst, g->result);
-			is_redirection(g);
-			remove_redir_token(&g->lst);
-			ft_put_lst(g->lst);
-			if (!is_command(g))
+			if (!is_redirection(g))
 			{
-				if (g->lst && g->lst->content)
-					printf("%s: command not found\n", (char *)g->lst->content);
-			}
-			if (g->s_stdout != -1)
-			{
-				// 🔁 restaurer stdout
-				printf("%d stdout restauré\n", g->s_stdout);
-				dup2(g->s_stdout, STDOUT_FILENO);
-				close(g->s_stdout);
+				remove_redir_token(&g->lst);
+				if (!is_command(g))
+				{
+					if (g->lst && g->lst->content)
+						printf("%s: command not found\n", (char *)g->lst->content);
+				}
+				if (g->s_stdout != -1)
+				{
+					// 🔁 restaurer stdout
+					dup2(g->s_stdout, STDOUT_FILENO);
+					close(g->s_stdout);
+				}
 			}
 		}
 		if (!g->input)
