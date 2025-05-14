@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/13 17:42:34 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:20:19 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	remove_redir_token(t_list **lst)
 			free(curr);
 			free(file->content);
 			free(file);
+			printf("DEBUG: Redirection supprimée. Nouvelle tête: %s\n",
+				*lst ? (char *)(*lst)->content : "NULL");
 			break ;
 		}
 		prev = curr;

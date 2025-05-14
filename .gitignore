@@ -1,4 +1,4 @@
-.vscode
+*.vscode
 *.txt
 *.o
 *src/.o
@@ -9,4 +9,5 @@
 *.DStore
 *.out
 *.identifiers
-minishell
+*minishell
+*.o

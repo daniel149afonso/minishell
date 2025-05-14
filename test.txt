@@ -1,4 +1,0 @@
-AFTER
-DEBUG | Content: echo
-DEBUG | Content: salut
-[?2004hminishell :[?2004l

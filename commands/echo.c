@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/09 16:58:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 14:54:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	ft_echo(t_g *g)
 
 	arg = g->lst->next;
 	if (arg && arg->content)
-	{
 		display_with_args(arg);
-	}
 	else
 		printf("\n");
 	return ;
