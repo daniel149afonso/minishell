@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/13 16:11:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 19:12:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	ft_put_lst(t_list *lst);
 //FT_SPLIT
 void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
+int		is_lococo(const char *s);
 
 //FREE AND ERROR
 void	ft_error(char *msg, t_list **lst);
