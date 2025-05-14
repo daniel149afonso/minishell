@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/21 23:27:29 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/14 15:26:12 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	init_global_struct(t_g **g, char **envp)
 	ft_memset(*g, 0, sizeof(t_g));
 	init_env(&((*g)->env), envp);
 	ft_init_commands((&(*g)->envbuilt), (&(*g)->builtin));
+	(*g)->s_stdout = -1;
 }
