@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/14 20:16:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/16 15:54:30 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int	one_redirection(t_g *g, t_list *redir)
 {
 	int		fd;
 
-	fd = open((char *)redir->next->content,
-		O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open((char *)redir->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		perror("open failed");
@@ -84,8 +83,8 @@ int	double_redirection(t_g *g, t_list *redir)
 {
 	int		fd;
 
-	fd = open((char *)redir->next->content,
-		O_WRONLY | O_CREAT, 0644);
+	fd = open((char *)redir->next->content, \
+		O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		perror("open failed");
