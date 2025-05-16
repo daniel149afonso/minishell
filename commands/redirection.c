@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/16 19:35:22 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/16 22:12:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,6 @@ void	remove_token(t_list **lst, t_list **cur, t_list **prev)
 	free(file->content);
 	free(file);
 }
-// void	remove_redir_token(t_list **lst)
-// {
-// 	t_list	*curr;
-// 	t_list	*prev;
-// 	t_list	*after;
-// 	t_list	*file;
-
-// 	curr = *lst;
-// 	prev = NULL;
-// 	while (curr && curr->next)
-// 	{
-// 		if (!ft_strcmp((char *)curr->content, ">"))
-// 		{
-// 			file = curr->next;
-// 			after = file->next;
-// 			if (prev)
-// 				prev->next = after;
-// 			else
-// 				*lst = after;
-// 			free(curr->content);
-// 			free(curr);
-// 			free(file->content);
-// 			free(file);
-// 			break ;
-// 		}
-// 		if (!ft_strcmp((char *)curr->content, ">>"))
-// 		{
-// 			file = curr->next;
-// 			after = file->next;
-// 			if (prev)
-// 				prev->next = after;
-// 			else
-// 				*lst = after;
-// 			free(curr->content);
-// 			free(curr);
-// 			free(file->content);
-// 			free(file);
-// 			break ;
-// 		}
-// 		prev = curr;
-// 		curr = curr->next;
-// 	}
-// }
 
 void	remove_redir_token(t_list **lst)
 {
@@ -81,7 +38,7 @@ void	remove_redir_token(t_list **lst)
 	prev = NULL;
 	while (curr && curr->next)
 	{
-		if (!ft_strcmp((char *)curr->content, ">"))
+		if (!ft_strcmp((char *)curr->content, ">") || !ft_strcmp((char *)curr->content, ">>"))
 		{
 			remove_token(lst, &curr, &prev);
 			break ;
@@ -137,7 +94,7 @@ int	parsing_redir(t_list *lst)
 	{
 		if (ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
 		{
-			printf("-bash: syntax error near unexpected token `newline'\n");
+			printf("minishell: syntax error near unexpected token `newline'\n");
 			return (1);
 		}
 		lst = lst->next;
