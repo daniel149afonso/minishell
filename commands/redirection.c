@@ -6,49 +6,41 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/14 20:16:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/16 22:12:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+void	remove_token(t_list **lst, t_list **cur, t_list **prev)
+{
+	t_list	*file;
+	t_list	*after;
+
+	file = (*cur)->next;
+	after = file->next;
+	if (*prev)
+		(*prev)->next = after;
+	else
+		*lst = after;
+	free((*cur)->content);
+	free(*cur);
+	free(file->content);
+	free(file);
+}
+
 void	remove_redir_token(t_list **lst)
 {
 	t_list	*curr;
 	t_list	*prev;
-	t_list	*after;
-	t_list	*file;
 
 	curr = *lst;
 	prev = NULL;
 	while (curr && curr->next)
 	{
-		if (!ft_strcmp((char *)curr->content, ">"))
+		if (!ft_strcmp((char *)curr->content, ">") || !ft_strcmp((char *)curr->content, ">>"))
 		{
-			file = curr->next;
-			after = file->next;
-			if (prev)
-				prev->next = after;
-			else
-				*lst = after;
-			free(curr->content);
-			free(curr);
-			free(file->content);
-			free(file);
-			break ;
-		}
-		if (!ft_strcmp((char *)curr->content, ">>"))
-		{
-			file = curr->next;
-			after = file->next;
-			if (prev)
-				prev->next = after;
-			else
-				*lst = after;
-			free(curr->content);
-			free(curr);
-			free(file->content);
-			free(file);
+			remove_token(lst, &curr, &prev);
 			break ;
 		}
 		prev = curr;
@@ -60,8 +52,7 @@ int	one_redirection(t_g *g, t_list *redir)
 {
 	int		fd;
 
-	fd = open((char *)redir->next->content,
-		O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open((char *)redir->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		perror("open failed");
@@ -84,23 +75,16 @@ int	double_redirection(t_g *g, t_list *redir)
 {
 	int		fd;
 
-	fd = open((char *)redir->next->content,
-		O_WRONLY | O_CREAT, 0644);
+	fd = open((char *)redir->next->content, \
+		O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		perror("open failed");
 		return (1);
 	}
-	// 💾 sauvegarder stdout
 	g->s_stdout = dup(STDOUT_FILENO);
-
-	// 🔁 rediriger stdout vers le fichier
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-
-	// 🔁 restaurer stdout
-	// dup2(original_stdout, STDOUT_FILENO);
-	// close(original_stdout);
 	return (0);
 }
 
@@ -110,7 +94,7 @@ int	parsing_redir(t_list *lst)
 	{
 		if (ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
 		{
-			printf("-bash: syntax error near unexpected token `newline'\n");
+			printf("minishell: syntax error near unexpected token `newline'\n");
 			return (1);
 		}
 		lst = lst->next;
