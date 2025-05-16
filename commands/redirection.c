@@ -6,18 +6,76 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/16 15:54:30 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:35:22 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+void	remove_token(t_list **lst, t_list **cur, t_list **prev)
+{
+	t_list	*file;
+	t_list	*after;
+
+	file = (*cur)->next;
+	after = file->next;
+	if (*prev)
+		(*prev)->next = after;
+	else
+		*lst = after;
+	free((*cur)->content);
+	free(*cur);
+	free(file->content);
+	free(file);
+}
+// void	remove_redir_token(t_list **lst)
+// {
+// 	t_list	*curr;
+// 	t_list	*prev;
+// 	t_list	*after;
+// 	t_list	*file;
+
+// 	curr = *lst;
+// 	prev = NULL;
+// 	while (curr && curr->next)
+// 	{
+// 		if (!ft_strcmp((char *)curr->content, ">"))
+// 		{
+// 			file = curr->next;
+// 			after = file->next;
+// 			if (prev)
+// 				prev->next = after;
+// 			else
+// 				*lst = after;
+// 			free(curr->content);
+// 			free(curr);
+// 			free(file->content);
+// 			free(file);
+// 			break ;
+// 		}
+// 		if (!ft_strcmp((char *)curr->content, ">>"))
+// 		{
+// 			file = curr->next;
+// 			after = file->next;
+// 			if (prev)
+// 				prev->next = after;
+// 			else
+// 				*lst = after;
+// 			free(curr->content);
+// 			free(curr);
+// 			free(file->content);
+// 			free(file);
+// 			break ;
+// 		}
+// 		prev = curr;
+// 		curr = curr->next;
+// 	}
+// }
+
 void	remove_redir_token(t_list **lst)
 {
 	t_list	*curr;
 	t_list	*prev;
-	t_list	*after;
-	t_list	*file;
 
 	curr = *lst;
 	prev = NULL;
@@ -25,30 +83,7 @@ void	remove_redir_token(t_list **lst)
 	{
 		if (!ft_strcmp((char *)curr->content, ">"))
 		{
-			file = curr->next;
-			after = file->next;
-			if (prev)
-				prev->next = after;
-			else
-				*lst = after;
-			free(curr->content);
-			free(curr);
-			free(file->content);
-			free(file);
-			break ;
-		}
-		if (!ft_strcmp((char *)curr->content, ">>"))
-		{
-			file = curr->next;
-			after = file->next;
-			if (prev)
-				prev->next = after;
-			else
-				*lst = after;
-			free(curr->content);
-			free(curr);
-			free(file->content);
-			free(file);
+			remove_token(lst, &curr, &prev);
 			break ;
 		}
 		prev = curr;
@@ -90,16 +125,9 @@ int	double_redirection(t_g *g, t_list *redir)
 		perror("open failed");
 		return (1);
 	}
-	// 💾 sauvegarder stdout
 	g->s_stdout = dup(STDOUT_FILENO);
-
-	// 🔁 rediriger stdout vers le fichier
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-
-	// 🔁 restaurer stdout
-	// dup2(original_stdout, STDOUT_FILENO);
-	// close(original_stdout);
 	return (0);
 }
 
