@@ -6,10 +6,9 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 19:12:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/19 00:57:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -57,6 +56,7 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
+	int			s_stdin;
 	int			s_stdout;
 	int			s_fd;
 	t_env		*env;
@@ -93,6 +93,7 @@ void	f_unset(t_env *env);
 //REDIRECTIONS
 int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
+void	restore_std(t_g *g);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
