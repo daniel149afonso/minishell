@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/19 01:45:41 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/19 17:48:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,6 @@ int	one_stdout(t_g *g, t_list *redir)
 	// 🔁 rediriger stdout vers le fichier
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-
-	// 🔁 restaurer stdout
-	// dup2(original_stdout, STDOUT_FILENO);
-	// close(original_stdout);
 	return (0);
 }
 
@@ -103,6 +99,7 @@ int	double_stdout(t_g *g, t_list *redir)
 	close(fd);
 	return (0);
 }
+
 int	one_stdin(t_g *g, t_list *redir)
 {
 	int		fd;
