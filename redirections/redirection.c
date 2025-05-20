@@ -6,63 +6,11 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/20 17:14:33 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:48:40 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	parsing_redir(t_list *lst)
-{
-	while (lst)
-	{
-		if (ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
-		{
-			printf("minishell: syntax error near unexpected token `newline'\n");
-			return (1);
-		}
-		lst = lst->next;
-	}
-	return (0);
-}
-
-void	remove_token(t_list **lst, t_list **cur, t_list **prev)
-{
-	t_list	*file;
-	t_list	*after;
-
-	file = (*cur)->next;
-	after = file->next;
-	if (*prev)
-		(*prev)->next = after;
-	else
-		*lst = after;
-	free((*cur)->content);
-	free(*cur);
-	free(file->content);
-	free(file);
-}
-
-void	remove_redir_token(t_list **lst)
-{
-	t_list	*curr;
-	t_list	*prev;
-
-	curr = *lst;
-	prev = NULL;
-	while (curr && curr->next)
-	{
-		if (!ft_strcmp((char *)curr->content, ">") \
-		|| !ft_strcmp((char *)curr->content, ">>") \
-		|| !ft_strcmp((char *)curr->content, "<"))
-		{
-			remove_token(lst, &curr, &prev);
-			break ;
-		}
-		prev = curr;
-		curr = curr->next;
-	}
-}
 
 int	one_stdout(t_g *g, t_list *redir)
 {
@@ -71,7 +19,7 @@ int	one_stdout(t_g *g, t_list *redir)
 	fd = open((char *)redir->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		perror("open failed");
+		printf("%s: No such file or directory", (char *)redir->next->content);
 		return (1);
 	}
 	// 💾 sauvegarder stdout
@@ -91,7 +39,7 @@ int	double_stdout(t_g *g, t_list *redir)
 		O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
-		perror("open failed");
+		printf("%s: No such file or directory", (char *)redir->next->content);
 		return (1);
 	}
 	g->s_stdout = dup(STDOUT_FILENO);
@@ -126,15 +74,14 @@ int	double_stdin(t_list *redir)
 	buffer = ft_calloc(1, 1);
 	if (!buffer)
 		return (1);
-	occur = ((char *)redir->next->content);
+
 	turn = 1;
-	if (!occur)
+	if (!redir->next || !redir->next->content)
 	{
 		printf("minishell: syntax error near unexpected token `newline'");
 		return (1);
 	}
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	occur = ((char *)redir->next->content);
 	while (1)
 	{
 		buffer = readline("> ");
@@ -149,26 +96,35 @@ int	double_stdin(t_list *redir)
 				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(buffer)));
 			turn = 0;
 		}
+		free(buffer);
 	}
-	printf("jai fini\n");
 	//ft_put_lst(lst);
 	return (0);
 }
 
-void	restore_std(t_g *g)
+int	check_redirection(t_g *g, t_list *tmp)
 {
-	if (g->s_stdout != -1)
+	if (ft_strcmp((char *)tmp->content, ">") == 0)
 	{
-		// 🔁 restaurer stdout
-		dup2(g->s_stdout, STDOUT_FILENO);
-		close(g->s_stdout);
+		if (one_stdout(g, tmp))
+			return (1);
 	}
-	if (g->s_stdin != -1)
+	else if (ft_strcmp((char *)tmp->content, ">>") == 0)
 	{
-		// 🔁 restaurer stdin
-		dup2(g->s_stdin, STDIN_FILENO);
-		close(g->s_stdin);
+		if (double_stdout(g, tmp))
+			return (1);
 	}
+	else if (ft_strcmp((char *)tmp->content, "<") == 0)
+	{
+		if (one_stdin(g, tmp))
+			return (1);
+	}
+	else if (ft_strcmp((char *)tmp->content, "<<") == 0)
+	{
+		if (double_stdin(tmp))
+			return (1);
+	}
+	return (0);
 }
 
 int	is_redirection(t_g *g)
@@ -177,18 +133,12 @@ int	is_redirection(t_g *g)
 
 	tmp = g->lst;
 	if (parsing_redir(g->lst))
-		return (1);
+		return (0);
 	while (tmp)
 	{
-		if (ft_strcmp((char *)tmp->content, ">") == 0)
-			one_stdout(g, tmp);
-		else if (ft_strcmp((char *)tmp->content, ">>") == 0)
-			double_stdout(g, tmp);
-		else if (ft_strcmp((char *)tmp->content, "<") == 0)
-			one_stdin(g, tmp);
-		else if (ft_strcmp((char *)tmp->content, "<<") == 0)
-			double_stdin(tmp);
+		if (check_redirection(g, tmp))
+			return (0);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (1);
 }

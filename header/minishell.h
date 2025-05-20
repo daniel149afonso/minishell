@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/20 17:16:37 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:54:25 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	f_unset(t_env *env);
 int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
+int		parsing_redir(t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

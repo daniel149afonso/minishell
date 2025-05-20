@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/20 17:10:55 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:50:24 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char **av, char **envp)
 			if (!g->result)
 				return (1);
 			ft_init_lst(&g->lst, g->result);
-			if (!is_redirection(g))
+			if (is_redirection(g))
 			{
 				remove_redir_token(&g->lst);
 				if (!is_command(g))
