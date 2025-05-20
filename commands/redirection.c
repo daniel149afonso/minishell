@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/20 16:00:21 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/20 17:14:33 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ int	double_stdout(t_g *g, t_list *redir)
 int	one_stdin(t_g *g, t_list *redir)
 {
 	int		fd;
-	
+
 	fd = open((char *)redir->next->content, O_RDONLY, 0644);
 	if (fd < 0)
 	{
-		printf("%s: No such file or directory",(char *)redir->next->content);
+		printf("%s: No such file or directory", (char *)redir->next->content);
 		return (1);
 	}
 	g->s_stdin = dup(STDIN_FILENO);
@@ -116,19 +116,42 @@ int	one_stdin(t_g *g, t_list *redir)
 	return (0);
 }
 
-int	double_stdin(t_g *g, t_list *redir)
+int	double_stdin(t_list *redir)
 {
-	int		fd;
+	char	*occur;
+	char	*buffer;
+	t_list	*lst;
+	int		turn;
 
-	fd = open((char *)redir->next->content, O_RDONLY, 0644);
-	if (fd < 0)
+	buffer = ft_calloc(1, 1);
+	if (!buffer)
+		return (1);
+	occur = ((char *)redir->next->content);
+	turn = 1;
+	if (!occur)
 	{
-		perror("open failed");
+		printf("minishell: syntax error near unexpected token `newline'");
 		return (1);
 	}
-	g->s_stdin = dup(STDIN_FILENO);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+	while (1)
+	{
+		buffer = readline("> ");
+		if (buffer)
+		{
+			printf("Debug: %s\n", buffer);
+			if (ft_strcmp(buffer, occur))
+				break ;
+			if (turn)
+				lst = ft_lstnew(ft_strdup(buffer));
+			else
+				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(buffer)));
+			turn = 0;
+		}
+	}
+	printf("jai fini\n");
+	//ft_put_lst(lst);
 	return (0);
 }
 
@@ -163,6 +186,8 @@ int	is_redirection(t_g *g)
 			double_stdout(g, tmp);
 		else if (ft_strcmp((char *)tmp->content, "<") == 0)
 			one_stdin(g, tmp);
+		else if (ft_strcmp((char *)tmp->content, "<<") == 0)
+			double_stdin(tmp);
 		tmp = tmp->next;
 	}
 	return (0);

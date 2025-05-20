@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/19 00:57:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/20 17:11:13 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ typedef struct s_g
 	t_list		*lst;
 
 }	t_g;
+
+//MAIN
+void	sigint_handler(int sig);
 
 //FT_INIT_COMMANDS
 void	init_global_struct(t_g **g, char **envp);
