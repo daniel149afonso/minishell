@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/19 17:48:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/20 16:00:21 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,22 @@ int	double_stdout(t_g *g, t_list *redir)
 }
 
 int	one_stdin(t_g *g, t_list *redir)
+{
+	int		fd;
+	
+	fd = open((char *)redir->next->content, O_RDONLY, 0644);
+	if (fd < 0)
+	{
+		printf("%s: No such file or directory",(char *)redir->next->content);
+		return (1);
+	}
+	g->s_stdin = dup(STDIN_FILENO);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (0);
+}
+
+int	double_stdin(t_g *g, t_list *redir)
 {
 	int		fd;
 
