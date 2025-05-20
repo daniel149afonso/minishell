@@ -36,9 +36,9 @@ export ARGS ✅
 
 export ARGS unindentified ✅
 
-export ARGS +=
+export ARGS += ✅
 
-test finaux de export
+test finaux de export ✅
 
 # Ordre de travail:
 Termine les builtins simples
