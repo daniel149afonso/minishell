@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 22:09:25 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/20 17:10:55 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../header/minishell.h"
 
-static void	sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell :");
+		g->input = readline("minishell: ");
 		if (g->input && *g->input)
 		{
 			g->result = search_var(ft_splitou(g->input), g->env);
@@ -68,15 +68,11 @@ int	main(int ac, char **av, char **envp)
 				remove_redir_token(&g->lst);
 				if (!is_command(g))
 				{
+					restore_std(g);
 					if (g->lst && g->lst->content)
 						printf("%s: command not found\n", (char *)g->lst->content);
 				}
-				if (g->s_stdout != -1)
-				{
-					// 🔁 restaurer stdout
-					dup2(g->s_stdout, STDOUT_FILENO);
-					close(g->s_stdout);
-				}
+				restore_std(g);
 			}
 		}
 		if (!g->input)

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 19:12:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/20 17:16:37 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -57,6 +56,7 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
+	int			s_stdin;
 	int			s_stdout;
 	int			s_fd;
 	t_env		*env;
@@ -65,6 +65,9 @@ typedef struct s_g
 	t_list		*lst;
 
 }	t_g;
+
+//MAIN
+void	sigint_handler(int sig);
 
 //FT_INIT_COMMANDS
 void	init_global_struct(t_g **g, char **envp);
@@ -93,6 +96,7 @@ void	f_unset(t_env *env);
 //REDIRECTIONS
 int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
+void	restore_std(t_g *g);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
