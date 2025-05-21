@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/20 18:48:40 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:04:29 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	one_stdout(t_g *g, t_list *redir)
 	fd = open((char *)redir->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		printf("%s: No such file or directory", (char *)redir->next->content);
+		printf("%s: No such file or directory\n", (char *)redir->next->content);
 		return (1);
 	}
 	// 💾 sauvegarder stdout
@@ -39,7 +39,7 @@ int	double_stdout(t_g *g, t_list *redir)
 		O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
-		printf("%s: No such file or directory", (char *)redir->next->content);
+		printf("%s: No such file or directory\n", (char *)redir->next->content);
 		return (1);
 	}
 	g->s_stdout = dup(STDOUT_FILENO);
@@ -55,7 +55,7 @@ int	one_stdin(t_g *g, t_list *redir)
 	fd = open((char *)redir->next->content, O_RDONLY, 0644);
 	if (fd < 0)
 	{
-		printf("%s: No such file or directory", (char *)redir->next->content);
+		printf("%s: No such file or directory\n", (char *)redir->next->content);
 		return (1);
 	}
 	g->s_stdin = dup(STDIN_FILENO);
@@ -76,11 +76,6 @@ int	double_stdin(t_list *redir)
 		return (1);
 
 	turn = 1;
-	if (!redir->next || !redir->next->content)
-	{
-		printf("minishell: syntax error near unexpected token `newline'");
-		return (1);
-	}
 	occur = ((char *)redir->next->content);
 	while (1)
 	{
