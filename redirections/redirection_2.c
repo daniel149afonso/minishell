@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection2.c                                     :+:      :+:    :+:   */
+/*   redirection_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/20 18:48:14 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:02:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	parsing_redir(t_list *lst)
-{
-	while (lst)
-	{
-		if (ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
-		{
-			printf("minishell: syntax error near unexpected token `newline'\n");
-			return (1);
-		}
-		lst = lst->next;
-	}
-	return (0);
-}
 
 void	restore_std(t_g *g)
 {

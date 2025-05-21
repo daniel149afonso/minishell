@@ -25,6 +25,7 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)handle_var.c \
 		$(REDIR_DIR)redirection.c \
 		$(REDIR_DIR)redirection_2.c \
+		$(REDIR_DIR)redir_parsing.c \
 		$(UTLS_DIR)utils.c \
 		$(UTLS_DIR)utils_2.c \
 		$(CMD_DIR)export_concat.c
