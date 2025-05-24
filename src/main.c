@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 17:05:01 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:06:48 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,41 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
+int	check_exit_code(t_g *g)
+{
+	int 	return_code;
+	int		i;
+	char	*key;
+
+	return_code = 0;
+	i = 0;
+	key = NULL;
+	if ((g->lst = g->lst->next))
+	{
+		key = extract_check_key((char *)g->lst->content);
+		if (!key)
+			return 0;
+		while (key[i])
+		{
+			if (ft_isalpha(key[i]))
+				return (printf("Invalid exit option: %s\n", key), -1);
+			i++;
+		}
+		if (g->lst->next)
+			return (printf("Too much ARGS in exit option\n"), -1);
+		return_code = ft_atoi(key);
+		return (return_code);
+	}
+	return (0);
+}
+
 void	free_n_exit(t_g *g)
 {
+	int return_code;
+
+	return_code = check_exit_code(g);
+	if (return_code < 0)
+		return ;
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
@@ -40,9 +73,8 @@ void	free_n_exit(t_g *g)
 		free(g->envbuilt);
 	free(g);
 	printf("exit\n");
-	exit (0);
+	exit (return_code);
 }
-
 
 int	msh_while(t_g *g)
 {
