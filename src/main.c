@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/20 17:50:24 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/25 01:28:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header/minishell.h"
 
@@ -28,8 +27,41 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
+int	check_exit_code(t_g *g)
+{
+	int		return_code;
+	int		i;
+	char	*key;
+
+	return_code = 0;
+	i = 0;
+	key = NULL;
+	if ((g->lst = g->lst->next))
+	{
+		key = extract_check_key((char *)g->lst->content);
+		if (!key)
+			return (0);
+		while (key[i])
+		{
+			if (ft_isalpha(key[i]))
+				return (printf("Invalid exit option: %s\n", key), -1);
+			i++;
+		}
+		if (g->lst->next)
+			return (printf("Too much ARGS in exit option\n"), -1);
+		return_code = ft_atoi(key);
+		return (return_code);
+	}
+	return (0);
+}
+
 void	free_n_exit(t_g *g)
 {
+	int	return_code;
+
+	return_code = check_exit_code(g);
+	if (return_code < 0)
+		return ;
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
@@ -40,7 +72,30 @@ void	free_n_exit(t_g *g)
 		free(g->envbuilt);
 	free(g);
 	printf("exit\n");
-	exit (0);
+	exit (return_code);
+}
+
+int	msh_while(t_g *g)
+{
+	if (g->input && *g->input)
+	{
+		g->result = search_var(ft_splitou(g->input), g->env);
+		if (!g->result)
+			return (1);
+		ft_init_lst(&g->lst, g->result);
+		if (is_redirection(g))
+		{
+			remove_redir_token(&g->lst);
+			if (!is_command(g))
+			{
+				restore_std(g);
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+			}
+			restore_std(g);
+		}
+	}
+	return (0);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -56,25 +111,9 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell: ");
-		if (g->input && *g->input)
-		{
-			g->result = search_var(ft_splitou(g->input), g->env);
-			if (!g->result)
-				return (1);
-			ft_init_lst(&g->lst, g->result);
-			if (is_redirection(g))
-			{
-				remove_redir_token(&g->lst);
-				if (!is_command(g))
-				{
-					restore_std(g);
-					if (g->lst && g->lst->content)
-						printf("%s: command not found\n", (char *)g->lst->content);
-				}
-				restore_std(g);
-			}
-		}
+		g->input = readline("minishell $");
+		if (msh_while(g))
+			return (1);
 		if (!g->input)
 			return (free_n_exit(g), 0);
 		free_for_nextl(g->input, g->lst);
