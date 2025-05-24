@@ -6,20 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/04 16:42:04 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/24 19:16:14 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	is_var_char(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	if ((c >= '0' && c <= '9') || c == '_')
-		return (1);
-	return (0);
-}
 
 char	*extract_var_name(char *str, int *i)
 {
@@ -72,7 +63,6 @@ char	*expand_variables(char *str, t_env *env)
 	char	*res = ft_calloc(1, 1);
 	if (!res)
 		return (NULL);
-
 	while (str[i])
 	{
 		// Gérer les quotes
@@ -109,7 +99,7 @@ char	*expand_variables(char *str, t_env *env)
 	return (res);
 }
 
-char **search_var(char **strs, t_env *env)
+char	**search_var(char **strs, t_env *env)
 {
 	int		i;
 	char	*var;

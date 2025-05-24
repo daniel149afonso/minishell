@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/23 17:59:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/24 18:19:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int	one_stdin(t_g *g, t_list *redir)
 	return (0);
 }
 
-int	double_stdin(t_list *redir)
+int	double_stdin(t_list *redir, t_list **herdoc)
 {
 	char	*occur;
 	char	*buffer;
-	t_list	*lst;
 	int		turn;
 
 	buffer = ft_calloc(1, 1);
@@ -83,14 +82,13 @@ int	double_stdin(t_list *redir)
 			if (!ft_strcmp(buffer, occur))
 				break ;
 			if (turn)
-				lst = ft_lstnew(ft_strdup(buffer));
+				*herdoc = ft_lstnew(ft_strdup(buffer));
 			else
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(buffer)));
+				ft_lstadd_back(herdoc, ft_lstnew(ft_strdup(buffer)));
 			turn = 0;
 		}
 		free(buffer);
 	}
-	//ft_put_lst(lst);
 	return (0);
 }
 
@@ -113,7 +111,7 @@ int	check_redirection(t_g *g, t_list *tmp)
 	}
 	else if (ft_strcmp((char *)tmp->content, "<<") == 0)
 	{
-		if (double_stdin(tmp))
+		if (double_stdin(tmp, &g->herdoc))
 			return (1);
 	}
 	return (0);
