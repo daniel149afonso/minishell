@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/21 17:04:29 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/23 17:59:52 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	one_stdout(t_g *g, t_list *redir)
 	}
 	// 💾 sauvegarder stdout
 	g->s_stdout = dup(STDOUT_FILENO);
-
 	// 🔁 rediriger stdout vers le fichier
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
@@ -74,7 +73,6 @@ int	double_stdin(t_list *redir)
 	buffer = ft_calloc(1, 1);
 	if (!buffer)
 		return (1);
-
 	turn = 1;
 	occur = ((char *)redir->next->content);
 	while (1)
@@ -82,8 +80,7 @@ int	double_stdin(t_list *redir)
 		buffer = readline("> ");
 		if (buffer)
 		{
-			printf("Debug: %s\n", buffer);
-			if (ft_strcmp(buffer, occur))
+			if (!ft_strcmp(buffer, occur))
 				break ;
 			if (turn)
 				lst = ft_lstnew(ft_strdup(buffer));
