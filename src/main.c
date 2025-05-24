@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/20 17:50:24 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:05:01 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,30 @@ void	free_n_exit(t_g *g)
 	exit (0);
 }
 
+
+int	msh_while(t_g *g)
+{
+	if (g->input && *g->input)
+	{
+		g->result = search_var(ft_splitou(g->input), g->env);
+		if (!g->result)
+			return (1);
+		ft_init_lst(&g->lst, g->result);
+		if (is_redirection(g))
+		{
+			remove_redir_token(&g->lst);
+			if (!is_command(g))
+			{
+				restore_std(g);
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+			}
+			restore_std(g);
+		}
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_g	*g;
@@ -56,25 +80,9 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell: ");
-		if (g->input && *g->input)
-		{
-			g->result = search_var(ft_splitou(g->input), g->env);
-			if (!g->result)
-				return (1);
-			ft_init_lst(&g->lst, g->result);
-			if (is_redirection(g))
-			{
-				remove_redir_token(&g->lst);
-				if (!is_command(g))
-				{
-					restore_std(g);
-					if (g->lst && g->lst->content)
-						printf("%s: command not found\n", (char *)g->lst->content);
-				}
-				restore_std(g);
-			}
-		}
+		g->input = readline("minishell $");
+		if (msh_while(g))
+			return (1);
 		if (!g->input)
 			return (free_n_exit(g), 0);
 		free_for_nextl(g->input, g->lst);
