@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 18:06:48 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/25 01:28:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header/minishell.h"
 
@@ -30,7 +29,7 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 int	check_exit_code(t_g *g)
 {
-	int 	return_code;
+	int		return_code;
 	int		i;
 	char	*key;
 
@@ -41,7 +40,7 @@ int	check_exit_code(t_g *g)
 	{
 		key = extract_check_key((char *)g->lst->content);
 		if (!key)
-			return 0;
+			return (0);
 		while (key[i])
 		{
 			if (ft_isalpha(key[i]))
@@ -58,7 +57,7 @@ int	check_exit_code(t_g *g)
 
 void	free_n_exit(t_g *g)
 {
-	int return_code;
+	int	return_code;
 
 	return_code = check_exit_code(g);
 	if (return_code < 0)

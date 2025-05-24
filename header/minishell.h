@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 17:51:33 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/25 01:29:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -64,7 +65,7 @@ typedef struct s_g
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
-
+	t_list		*herdoc;
 }	t_g;
 
 //MAIN
