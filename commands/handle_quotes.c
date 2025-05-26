@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/26 03:08:49 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 17:06:09 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	replace_string(char *str, char **res, int *i)
 	int		in_single;
 	int		in_double;
 
+	in_single = 0;
+	in_double = 0;
 	if (str[*i] == '\'' && !in_double)
 	{
 		in_single = !in_single;
@@ -32,12 +34,12 @@ void	replace_string(char *str, char **res, int *i)
 	{
 		c[0] = str[*i];
 		c[1] = 0;
-		*res = ft_join_and_free(res, c);
+		*res = ft_join_and_free(*res, c);
 		i++;
 	}
 }
 
-char	*remove_quotes(const char *str)
+char	*remove_quotes_2(char *str)
 {
 	int		i;
 	char	*res;
@@ -51,4 +53,20 @@ char	*remove_quotes(const char *str)
 		replace_string(str, &res, &i);
 	}
 	return (res);
+}
+
+char	**remove_quotes(char **strs)
+{
+	int		i;
+	char	*tmp;
+
+	tmp = NULL;
+	while (strs[i])
+	{
+		tmp = strs[i];
+		strs[i] = remove_quotes_2(ft_strdup(strs[i]));
+		free(tmp);
+		i++;
+	}
+	return (strs);
 }

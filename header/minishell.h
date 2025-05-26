@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 03:07:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 17:03:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
 
 //HANDLE QUOTES
-char	*remove_quotes(const char *str);
+char	**remove_quotes(char **str);
 
 //REDIRECTIONS
 int		is_redirection(t_g *g);
