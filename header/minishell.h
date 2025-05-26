@@ -6,13 +6,17 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 17:51:33 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:49:43 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define RED	"\033[0;31m"
+# define GREEN	"\033[0;32m"
+# define BLUE	"\033[0;34m"
+# define RE		"\033[0m"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

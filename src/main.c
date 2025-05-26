@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 18:06:48 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:03:31 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	check_exit_code(t_g *g)
 			return 0;
 		while (key[i])
 		{
-			if (ft_isalpha(key[i]))
-				return (printf("Invalid exit option: %s\n", key), -1);
+			if (!ft_isdigit(key[i]) && key[i] != '-')
+				return (printf("Invalid exit option: '%s'\n", key), -20);
 			i++;
 		}
 		if (g->lst->next)
-			return (printf("Too much ARGS in exit option\n"), -1);
+			return (printf("Too much ARGS in exit option\n"), -20);
 		return_code = ft_atoi(key);
-		return (return_code);
+		return (free(key), return_code);
 	}
 	return (0);
 }
@@ -60,8 +60,9 @@ void	free_n_exit(t_g *g)
 {
 	int return_code;
 
-	return_code = check_exit_code(g);
-	if (return_code < 0)
+	if (g->lst)
+		return_code = check_exit_code(g);
+	if (return_code == -20)
 		return ;
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
@@ -72,7 +73,7 @@ void	free_n_exit(t_g *g)
 	if (g->envbuilt)
 		free(g->envbuilt);
 	free(g);
-	printf("exit\n");
+	printf(RED "exit\n" RE);
 	exit (return_code);
 }
 
@@ -107,12 +108,14 @@ int	main(int ac, char **av, char **envp)
 	(void)**av;
 	g = NULL;
 	init_global_struct(&g, envp);
+	if (!g->env)
+		return (free_n_exit(g), 0);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell $");
+		g->input = readline(GREEN "minishell $" RE);
 		if (msh_while(g))
 			return (1);
 		if (!g->input)
