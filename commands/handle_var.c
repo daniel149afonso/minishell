@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/24 19:16:14 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 03:05:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,18 @@ char	*expand_variables(char *str, t_env *env)
 {
 	int		i = 0;
 	int		in_single = 0;
-	int		in_double = 0;
 	char	*res = ft_calloc(1, 1);
 	if (!res)
 		return (NULL);
 	while (str[i])
 	{
 		// Gérer les quotes
-		if (str[i] == '\'' && !in_double)
+		if (str[i] == '\'')
 		{
 			in_single = !in_single;
 			i++;
-			continue;
+			continue ;
 		}
-		else if (str[i] == '"' && !in_single)
-		{
-			in_double = !in_double;
-			i++;
-			continue;
-		}
-
 		// Gérer $ seulement si on est HORS de quotes simples
 		if (str[i] == '$' && !in_single)
 		{
@@ -88,9 +80,8 @@ char	*expand_variables(char *str, t_env *env)
 			if (val)
 				res = ft_join_and_free(res, val);
 			free(var);
-			continue;
+			continue ;
 		}
-
 		// Ajouter le caractère normalement
 		char c[2] = {str[i], 0};
 		res = ft_join_and_free(res, c);
