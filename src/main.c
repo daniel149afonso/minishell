@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 17:04:36 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 21:05:47 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	msh_while(t_g *g)
 		ft_init_lst(&g->lst, g->result);
 		if (is_redirection(g))
 		{
-			remove_redir_token(&g->lst);
+			//remove_redir_token(&g->lst);
+			//remove_quotes(strs) a verifier quand l'utiliser
 			if (!is_command(g))
 			{
 				restore_std(g);

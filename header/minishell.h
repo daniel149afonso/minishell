@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 19:52:30 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:57:13 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ void	update_or_add_var(t_env **env, char *arg);
 void	check_if_var(t_env **env);
 void	update_or_add_var_concat(t_env **env, char *arg);
 char	*extract_key_concat(char *str);
+void	f_unset(t_env *env);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
-void	f_unset(t_env *env);
+char	*extract_var_name(char *str, int *i);
+char	*get_env_value(t_env *env, char *var_name);
 
 //HANDLE QUOTES
 int		check_quotes(char *token);

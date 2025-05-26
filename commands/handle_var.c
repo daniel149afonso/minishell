@@ -3,92 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/26 03:05:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 20:55:33 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-char	*extract_var_name(char *str, int *i)
+void	handle_single_quote(char *str, char **res, int *i, int *in_single)
 {
-	int		len;
-	int		j;
-	char	*name;
+	char	c[2];
 
-	len = 0;
-	while (str[*i + len] && is_var_char(str[*i + len]))
-		len++;
-	name = malloc(len + 1);
-	if (!name)
-		return (0);
-	j = 0;
-	while (j < len)
-	{
-		name[j] = str[*i + j];
-		j++;
-	}
-	name[j] = '\0';
-	*i += len;
-	return (name);
+	*in_single = !(*in_single);
+	c[0] = str[*i];
+	c[1] = '\0';
+	*res = ft_join_and_free(*res, c);
+	(*i)++;
 }
 
-char	*get_env_value(t_env *env, char *var_name)
+void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 {
-	t_env	*tmp;
-	char	*value;
+	char	*var;
+	char	*val;
 
-	value = NULL;
-	while (env)
-	{
-		tmp = env->next;
-		if (ft_strcmp(env->key, var_name) == 0)
-		{
-			value = ft_strdup(env->value);
-			if (!value)
-				return (NULL);
-		}
-		env = tmp;
-	}
-	return (value);
+	(*i)++;
+	var = extract_var_name(str, i);
+	val = get_env_value(env, var);
+	if (val)
+		*res = ft_join_and_free(*res, val);
+	free(var);
 }
 
 char	*expand_variables(char *str, t_env *env)
 {
-	int		i = 0;
-	int		in_single = 0;
-	char	*res = ft_calloc(1, 1);
+	int		i;
+	int		in_single;
+	char	*res;
+	char	c[2];
+
+	i = 0;
+	in_single = 0;
+	res = ft_calloc(1, 1);
 	if (!res)
 		return (NULL);
 	while (str[i])
 	{
-		// Gérer les quotes
 		if (str[i] == '\'')
+			handle_single_quote(str, &res, &i, &in_single);
+		else if (str[i] == '$' && !in_single)
+			handle_variable_expansion(str, &res, &i, env);
+		else
 		{
-			in_single = !in_single;
+			c[0] = str[i];
+			c[1] = '\0';
+			res = ft_join_and_free(res, c);
 			i++;
-			continue ;
 		}
-		// Gérer $ seulement si on est HORS de quotes simples
-		if (str[i] == '$' && !in_single)
-		{
-			i++;
-			char *var = extract_var_name(str, &i);
-			char *val = get_env_value(env, var);
-			if (val)
-				res = ft_join_and_free(res, val);
-			free(var);
-			continue ;
-		}
-		// Ajouter le caractère normalement
-		char c[2] = {str[i], 0};
-		res = ft_join_and_free(res, c);
-		i++;
 	}
 	return (res);
 }
+
 
 char	**search_var(char **strs, t_env *env)
 {
