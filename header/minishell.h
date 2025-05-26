@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 17:03:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 19:52:30 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@
 
 //PREVIOUS DEFINITION OF GLOBAL
 typedef struct s_g	t_g;
+
+//QUOTES STATE
+typedef struct s_token
+{
+	char	*str;
+	int		quoted; // 0 = pas de quotes, 1 = simple, 2 = double
+}	t_token;
+
+typedef struct s_quote_state {
+	int		in_single;
+	int		in_double;
+	char	*res;
+}	t_quote_state;
 
 //ENVIRONNEMENT
 typedef struct s_env
@@ -96,6 +109,7 @@ char	**search_var(char **strs, t_env *env);
 void	f_unset(t_env *env);
 
 //HANDLE QUOTES
+int		check_quotes(char *token);
 char	**remove_quotes(char **str);
 
 //REDIRECTIONS

@@ -3,56 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/26 17:06:09 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 19:52:09 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	replace_string(char *str, char **res, int *i)
+int	is_quoted(char *s)
 {
-	char	c[2];
-	int		in_single;
-	int		in_double;
+	int	len;
 
-	in_single = 0;
-	in_double = 0;
-	if (str[*i] == '\'' && !in_double)
+	len = ft_strlen(s);
+	if (len >= 2)
 	{
-		in_single = !in_single;
-		i++;
+		if ((s[0] == '\'' && s[len - 1] == '\''))
+			return (1);
+		else if ((s[0] == '"' && s[len - 1] == '"'))
+			return (2);
 	}
-	else if (str[*i] == '"' && !in_single)
-	{
-		in_double = !in_double;
-		i++;
-	}
+	return (0);
+}
+
+int	check_quotes(char *token)
+{
+	if (is_quoted(token))
+		return (1);
+	return (0);
+}
+
+void	replace_string(char c, t_quote_state *q)
+{
+	char	str[2];
+
+	if (c == '\'' && !q->in_double)
+		q->in_single = !q->in_single;
+	else if (c == '"' && !q->in_single)
+		q->in_double = !q->in_double;
 	else
 	{
-		c[0] = str[*i];
-		c[1] = 0;
-		*res = ft_join_and_free(*res, c);
-		i++;
+		str[0] = c;
+		str[1] = '\0';
+		q->res = ft_join_and_free(q->res, str);
 	}
 }
 
+
 char	*remove_quotes_2(char *str)
 {
-	int		i;
-	char	*res;
+	int				i;
+	t_quote_state	q;
 
 	i = 0;
-	res = ft_calloc(1, 1);
-	if (!res)
+	q.in_single = 0;
+	q.in_double = 0;
+	q.res = ft_calloc(1, 1);
+	if (!q.res)
 		return (NULL);
 	while (str[i])
 	{
-		replace_string(str, &res, &i);
+		replace_string(str[i], &q);
+		i++;
 	}
-	return (res);
+	return (q.res);
 }
 
 char	**remove_quotes(char **strs)
@@ -64,7 +79,7 @@ char	**remove_quotes(char **strs)
 	while (strs[i])
 	{
 		tmp = strs[i];
-		strs[i] = remove_quotes_2(ft_strdup(strs[i]));
+		strs[i] = remove_quotes_2(strs[i]); // a verifier avec chat
 		free(tmp);
 		i++;
 	}
