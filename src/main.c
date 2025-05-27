@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 17:04:36 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/27 14:37:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell $ ");
+		g->input = readline("minishell$ ");
 		if (msh_while(g))
 			return (1);
 		if (!g->input)
