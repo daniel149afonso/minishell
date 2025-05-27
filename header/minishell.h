@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/26 20:57:13 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:15:51 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*get_env_value(t_env *env, char *var_name);
 
 //HANDLE QUOTES
 int		check_quotes(char *token);
-char	**remove_quotes(char **str);
+void	remove_quotes(t_list **lst);
 
 //REDIRECTIONS
 int		is_redirection(t_g *g);

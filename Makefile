@@ -8,6 +8,7 @@ SRC_DIR = src/
 CMD_DIR = commands/
 UTLS_DIR = utils/
 REDIR_DIR = redirections/
+PARSING_DIR = parsing/
 
 SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_init_lst.c \
@@ -22,9 +23,9 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)export.c \
 		$(CMD_DIR)export_2.c \
 		$(CMD_DIR)unset.c \
-		$(CMD_DIR)handle_var.c \
-		$(CMD_DIR)handle_var_2.c \
-		$(CMD_DIR)handle_quotes.c \
+		$(PARSING_DIR)handle_var.c \
+		$(PARSING_DIR)handle_var_2.c \
+		$(PARSING_DIR)handle_quotes.c \
 		$(REDIR_DIR)redirection.c \
 		$(REDIR_DIR)redirection_2.c \
 		$(REDIR_DIR)redir_parsing.c \

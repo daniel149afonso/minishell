@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/26 19:52:09 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:22:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,18 @@ char	*remove_quotes_2(char *str)
 	return (q.res);
 }
 
-char	**remove_quotes(char **strs)
+void	remove_quotes(t_list **lst)
 {
-	int		i;
 	char	*tmp;
+	t_list	*temp;
 
 	tmp = NULL;
-	while (strs[i])
+	temp = *lst;
+	while (temp)
 	{
-		tmp = strs[i];
-		strs[i] = remove_quotes_2(strs[i]); // a verifier avec chat
+		tmp = (char *)(temp)->content;
+		temp->content = (void *)remove_quotes_2((char *)(temp)->content);
 		free(tmp);
-		i++;
+		temp = temp->next;
 	}
-	return (strs);
 }
