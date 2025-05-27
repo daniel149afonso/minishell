@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/24 18:19:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/26 19:53:14 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	double_stdin(t_list *redir, t_list **herdoc)
 
 int	check_redirection(t_g *g, t_list *tmp)
 {
+	if (check_quotes((char *)tmp->content))
+		return (0);
 	if (ft_strcmp((char *)tmp->content, ">") == 0)
 	{
 		if (one_stdout(g, tmp))

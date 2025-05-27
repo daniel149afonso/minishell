@@ -23,6 +23,7 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)export_2.c \
 		$(CMD_DIR)unset.c \
 		$(CMD_DIR)handle_var.c \
+		$(CMD_DIR)handle_var_2.c \
 		$(CMD_DIR)handle_quotes.c \
 		$(REDIR_DIR)redirection.c \
 		$(REDIR_DIR)redirection_2.c \

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/27 14:37:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/27 14:38:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	msh_while(t_g *g)
 		ft_init_lst(&g->lst, g->result);
 		if (is_redirection(g))
 		{
-			remove_redir_token(&g->lst);
+			//remove_redir_token(&g->lst);
+			//remove_quotes(strs) a verifier quand l'utiliser
 			if (!is_command(g))
 			{
 				restore_std(g);
