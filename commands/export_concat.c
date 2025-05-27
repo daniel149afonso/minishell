@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_concat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:11:52 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/06 21:41:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:50:31 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	update_or_add_var_concat(t_env **env, char *arg)
 	int		found;
 
 	key = extract_key_concat(arg);
-    printf("AAAAAAAAAA %s\n", key);
 	value = extract_value(arg);
 	tmp = *env;
 	found = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:08:41 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/04/30 16:40:30 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:50:43 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	del_var(t_env *env, char *arg)
 			free(curr->key);
 			free(curr->value);
 			free(curr);
-			printf("DELETING: %s\n", key);
 			return ;
 		}
 		prev = curr;

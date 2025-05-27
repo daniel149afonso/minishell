@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/27 17:15:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/27 18:21:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define RED	"\033[0;31m"
+# define GREEN	"\033[0;32m"
+# define BLUE	"\033[0;34m"
+# define RE		"\033[0m"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
