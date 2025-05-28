@@ -20,6 +20,7 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(CMD_DIR)echo.c \
 		$(CMD_DIR)pwd.c \
 		$(CMD_DIR)cd.c \
+		$(CMD_DIR)cd_2.c \
 		$(CMD_DIR)export.c \
 		$(CMD_DIR)export_2.c \
 		$(CMD_DIR)unset.c \

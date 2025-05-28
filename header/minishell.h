@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/27 18:21:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/28 16:33:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct s_token
 	int		quoted; // 0 = pas de quotes, 1 = simple, 2 = double
 }	t_token;
 
-typedef struct s_quote_state {
+typedef struct s_quote_state
+{
 	int		in_single;
 	int		in_double;
 	char	*res;
@@ -96,6 +97,11 @@ void	ft_cd(t_g *g);
 void	ft_pwd(t_g *g);
 void	ft_echo(t_g *g);
 void	ft_env(t_env *env);
+
+//CD
+int		get_current_path(char **path);
+int		set_path(t_list *lst, char **path);
+int		set_home_path(char **path);
 
 //ENVIRONNEMENT
 void	init_env(t_env **env, char **envp);
