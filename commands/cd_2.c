@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:03:06 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/28 16:25:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/28 17:22:48 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,19 @@ int	set_path(t_list *lst, char **path)
 		return (0);
 	}
 	return (1);
+}
+
+int	update_env_if_exists(t_env *env, const char *key, const char *value)
+{
+	while (env)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+		{
+			free(env->value);
+			env->value = ft_strdup(value);
+			return (1);
+		}
+		env = env->next;
+	}
+	return (0);
 }

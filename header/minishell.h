@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/28 16:33:47 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/28 17:23:07 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	ft_env(t_env *env);
 int		get_current_path(char **path);
 int		set_path(t_list *lst, char **path);
 int		set_home_path(char **path);
+int		update_env_if_exists(t_env *env, const char *key, const char *value);
 
 //ENVIRONNEMENT
 void	init_env(t_env **env, char **envp);

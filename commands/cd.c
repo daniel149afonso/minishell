@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/28 16:32:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/28 17:27:47 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-int	update_env_if_exists(t_env *env, const char *key, const char *value)
-{
-	while (env)
-	{
-		if (ft_strcmp(env->key, key) == 0)
-		{
-			free(env->value);
-			env->value = ft_strdup(value);
-			return (1);
-		}
-		env = env->next;
-	}
-	return (0);
-}
 
 void	add_env_var(t_env **env, const char *key, const char *value)
 {
@@ -103,44 +88,3 @@ void	ft_cd(t_g *g)
 	}
 }
 
-// void	ft_cd(t_g *g)
-// {
-// 	int		result;
-// 	char	*path;
-// 	char	*oldpwd;
-// 	char	*newpwd;
-
-// 	oldpwd = NULL;
-// 	newpwd = NULL;
-// 	if (!get_current_path(&oldpwd))
-// 	{
-// 		perror("cd");
-// 		return ;
-// 	}
-// 	printf("Old path:%s\n", oldpwd);
-// 	set_env_value(&g->env, "OLDPWD", oldpwd);
-// 	if (g->lst->next && g->lst->next->content)
-// 	{
-// 		if (!set_path(g->lst, &path))
-// 			return ;
-// 	}
-// 	else
-// 	{
-// 		if (!set_home_path(&path))
-// 			return ;
-// 	}
-// 	result = chdir(path);
-// 	if (result != 0)
-// 		print_path_error(path);
-// 	else
-// 	{
-// 		printf("Répertoire changé : %s\n", path);
-// 		if (!get_current_path(&newpwd))
-// 		{
-// 			perror("cd");
-// 			return ;
-// 		}
-// 		printf("New path:%s\n", newpwd);
-// 		set_env_value(&g->env, "PWD", newpwd);
-// 	}
-// }
