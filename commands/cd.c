@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/28 20:39:40 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:12:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ void	ft_cd(t_g *g)
 		set_env_value(&g->env, "PWD", newpwd);
 	}
 }
-

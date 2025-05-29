@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/27 17:22:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/29 15:19:01 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	replace_string(char c, t_quote_state *q)
 		q->res = ft_join_and_free(q->res, str);
 	}
 }
-
 
 char	*remove_quotes_2(char *str)
 {
