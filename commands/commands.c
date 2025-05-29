@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/13 20:13:00 by daafonso         ###   ########.fr       */
+/*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/05/29 17:10:28 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int	is_command(t_g *g)
 //FT_INIT_COMMANDS:
 //init chaque commande avec sa fonction correspondante
 //---------------------
-//IS_command: check si il y a une commande dans l'input
+//Is_command: check si il y a une commande dans l'input
 //et appel la fonction correspondante
