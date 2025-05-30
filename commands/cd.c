@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/29 15:12:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/30 18:34:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_cd(t_g *g)
 		return ;
 	result = chdir(path);
 	if (result != 0)
-		print_path_error(path);
+		perror("minishell: cd");
 	else
 	{
 		if (!get_current_path(&newpwd))
