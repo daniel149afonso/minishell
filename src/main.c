@@ -43,6 +43,30 @@ void	free_n_exit(t_g *g)
 	exit (0);
 }
 
+int	while_ms(t_g *g)
+{
+	if (g->input && *g->input)
+	{
+		g->result = search_var(ft_splitou(g->input), g->env);
+		if (!g->result)
+			return (1);
+		ft_init_lst(&g->lst, g->result);
+		if (!is_redirection(g))
+		{
+			remove_redir_token(&g->lst);
+			if (!is_command(g))
+			{
+				restore_std(g);
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+			}
+			restore_std(g);
+		}
+		//EXEC
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_g	*g;
@@ -56,25 +80,9 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell: ");
-		if (g->input && *g->input)
-		{
-			g->result = search_var(ft_splitou(g->input), g->env);
-			if (!g->result)
-				return (1);
-			ft_init_lst(&g->lst, g->result);
-			if (!is_redirection(g))
-			{
-				remove_redir_token(&g->lst);
-				if (!is_command(g))
-				{
-					restore_std(g);
-					if (g->lst && g->lst->content)
-						printf("%s: command not found\n", (char *)g->lst->content);
-				}
-				restore_std(g);
-			}
-		}
+		g->input = readline("minishell $");
+		if (while_ms(g))
+			return (1);
 		if (!g->input)
 			return (free_n_exit(g), 0);
 		free_for_nextl(g->input, g->lst);

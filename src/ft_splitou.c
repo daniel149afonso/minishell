@@ -160,11 +160,12 @@ char	**ft_splitou(char const *s)
              | | |
             /| | |\
           .'_| | |_`.
-LGB       `. | | | .'
+          `. | | | .'
        .    /  |  \    .
       /o`.-'  / \  `-.`o\
      /o  o\ .'   `. /o  o\
      `.___.'       `.___.'
+	 APISCOPO
 
 Fonction qui sers a split les commande plus le meta char ex:
 "echo hahaha>output.txt"
