@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/20 17:16:37 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:24:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define RED	"\033[0;31m"
+# define GREEN	"\033[0;32m"
+# define BLUE	"\033[0;34m"
+# define RE		"\033[0m"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,6 +31,20 @@
 
 //PREVIOUS DEFINITION OF GLOBAL
 typedef struct s_g	t_g;
+
+//QUOTES STATE
+typedef struct s_token
+{
+	char	*str;
+	int		quoted; // 0 = pas de quotes, 1 = simple, 2 = double
+}	t_token;
+
+typedef struct s_quote_state
+{
+	int		in_single;
+	int		in_double;
+	char	*res;
+}	t_quote_state;
 
 //ENVIRONNEMENT
 typedef struct s_env
@@ -63,7 +82,7 @@ typedef struct s_g
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
-
+	t_list		*herdoc;
 }	t_g;
 
 //MAIN
@@ -78,6 +97,12 @@ void	ft_pwd(t_g *g);
 void	ft_echo(t_g *g);
 void	ft_env(t_env *env);
 
+//CD
+int		get_current_path(char **path);
+int		set_path(t_list *lst, char **path);
+int		set_home_path(char **path);
+int		update_env_if_exists(t_env *env, const char *key, const char *value);
+
 //ENVIRONNEMENT
 void	init_env(t_env **env, char **envp);
 void	add_env_node(t_env **env, const char *str);
@@ -88,15 +113,22 @@ void	update_or_add_var(t_env **env, char *arg);
 void	check_if_var(t_env **env);
 void	update_or_add_var_concat(t_env **env, char *arg);
 char	*extract_key_concat(char *str);
+void	f_unset(t_env *env);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
-void	f_unset(t_env *env);
+char	*extract_var_name(char *str, int *i);
+char	*get_env_value(t_env *env, char *var_name);
+
+//HANDLE QUOTES
+int		check_quotes(char *token);
+void	remove_quotes(t_list **lst);
 
 //REDIRECTIONS
 int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
+int		parsing_redir(t_list *lst);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/14 14:54:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/25 17:22:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	display_with_args(t_list *arg)
 	{
 		display_content((char *)arg->content);
 		if (arg->next && arg->next->content)
-		write(1, " ", 1);
+			write(1, " ", 1);
 		arg = arg->next;
 	}
 	if (newline)

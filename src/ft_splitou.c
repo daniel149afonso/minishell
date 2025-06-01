@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/14 19:11:28 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/29 15:23:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 //COMPLetement merdik
 int	isstring(const char *s)
 {
-	int i;
-	int trigger;
+	int	i;
+	int	trigger;
 
 	trigger = 0;
 	i = 1;
@@ -49,9 +49,9 @@ int	is_lococo(const char *s)
 	int	len;
 
 	len = 1;
-	if ((s[0] == '<' && s[1] == '<') ||
-		(s[0] == '>' && s[1] == '>') ||
-		(s[0] == '<' && s[1] == '>'))
+	if ((s[0] == '<' && s[1] == '<') \
+	|| (s[0] == '>' && s[1] == '>') \
+	|| (s[0] == '<' && s[1] == '>'))
 		len = 2;
 	return (len);
 }
@@ -85,8 +85,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	return (i);
 }
 
-//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX
- //faut que je norm ptn
+//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;
@@ -192,4 +191,4 @@ int main() {
 	return 0;
 }*/
 
-//mange moi la queue Didi ptn
+//mange moi la queue Didi ptn avec des baguettes chinoises
