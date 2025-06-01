@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/01 18:44:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/02 00:40:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ int	while_ms(t_g *g)
 		if (!g->result)
 			return (1);
 		ft_init_lst(&g->lst, g->result);
-		if (!is_redirection(g))
+		if (is_redirection(g))//mise à jour
 		{
 			remove_redir_token(&g->lst);
+			remove_quotes(&g->lst);//il manquait ça bg
 			if (!is_command(g))
 			{
 				restore_std(g);
