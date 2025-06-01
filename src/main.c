@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:23:45 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/29 15:23:48 by daniel149af      ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/01 18:44:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,30 @@ int	msh_while(t_g *g)
 	return (0);
 }
 
+int	while_ms(t_g *g)
+{
+	if (g->input && *g->input)
+	{
+		g->result = search_var(ft_splitou(g->input), g->env);
+		if (!g->result)
+			return (1);
+		ft_init_lst(&g->lst, g->result);
+		if (!is_redirection(g))
+		{
+			remove_redir_token(&g->lst);
+			if (!is_command(g))
+			{
+				restore_std(g);
+				if (g->lst && g->lst->content)
+					printf("%s: command not found\n", (char *)g->lst->content);
+			}
+			restore_std(g);
+		}
+		//EXEC
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_g	*g;
@@ -108,15 +132,13 @@ int	main(int ac, char **av, char **envp)
 	(void)**av;
 	g = NULL;
 	init_global_struct(&g, envp);
-	if (!g->env)
-		return (free_n_exit(g), 0);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline(GREEN "minishell$ " RE);
-		if (msh_while(g))
+		g->input = readline("minishell$ ");
+		if (while_ms(g))
 			return (1);
 		if (!g->input)
 			return (free_n_exit(g), 0);
