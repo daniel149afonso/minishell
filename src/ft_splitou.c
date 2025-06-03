@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/29 15:23:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/03 18:03:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 */
 
 //COMPLetement merdik
+
 int	isstring(const char *s)
 {
 	int	i;
@@ -99,15 +100,26 @@ char	**tokenize(const char *s, char **tokens)
 	{
 		while (is_space(s[i]))
 			i++;
+		if (!s[i]) // ← CORRECTION IMPORTANTE
+			break ;
 		if (s[i] == '"')
 		{
 			len = isstring(&s[i]);
 			if (len > 0)
+			{
 				tokens[j] = ft_strndup(&s[i], len);
-			j++;
+				if (!tokens[j])
+					return (free_tokens(tokens), NULL);
+				j++;
+			}
 		}
 		else
-			len = tokenize_2(&s[i], &tokens[j++]);
+		{
+			len = tokenize_2(&s[i], &tokens[j]);
+			if (len <= 0)
+				return (free_tokens(tokens), NULL);
+			j++;
+		}
 		i += len;
 	}
 	return (tokens[j] = NULL, tokens);
