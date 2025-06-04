@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/06 21:42:42 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:55 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 static int	check_arg(char *value)
 {
@@ -21,12 +21,8 @@ static int	check_arg(char *value)
 
 static void    print_error_env(char *value, t_list *tmp)
 {
-	while (tmp)
-	{
-		value = extract_check_key(tmp->content);
-		printf("export: `%s': not a valid identifier\n", value);
-		tmp = tmp->next;
-	}
+	value = extract_check_key(tmp->content);
+	printf("export: `%s': not a valid identifier\n", value);
 	free(value);
 	return ;
 }

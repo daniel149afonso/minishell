@@ -6,11 +6,11 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:11:52 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/26 17:50:31 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:58 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 char	*extract_key_concat(char *str)
 {

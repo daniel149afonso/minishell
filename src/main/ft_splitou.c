@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/14 19:11:28 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 22:13:51 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
-
+#include "../../header/minishell.h"
 /*
 			 /\_/\
 			( o.o )
 			 > ^ <
 */
-
-//COMPLetement merdik
 int	isstring(const char *s)
 {
-	int i;
-	int trigger;
+	int	i;
+	int	trigger;
 
 	trigger = 0;
 	i = 1;
@@ -44,14 +41,14 @@ int	isstring(const char *s)
 	return (i + 1);
 }
 
-int	is_lococo(const char *s)
+int	redir_len(const char *s)
 {
 	int	len;
 
 	len = 1;
-	if ((s[0] == '<' && s[1] == '<') ||
-		(s[0] == '>' && s[1] == '>') ||
-		(s[0] == '<' && s[1] == '>'))
+	if ((s[0] == '<' && s[1] == '<') \
+	|| (s[0] == '>' && s[1] == '>') \
+	|| (s[0] == '<' && s[1] == '>'))
 		len = 2;
 	return (len);
 }
@@ -67,7 +64,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	len = 0;
 	if (ft_strchr("|;()<>", s[i]))
 	{
-		len = is_lococo(&s[i]);
+		len = redir_len(&s[i]);
 		*(tokens) = ft_strndup(&s[i], len);
 		if (!tokens)
 			return (free_tokens(tokens), 0);
@@ -85,8 +82,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	return (i);
 }
 
-//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX
- //faut que je norm ptn
+//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;
@@ -100,15 +96,26 @@ char	**tokenize(const char *s, char **tokens)
 	{
 		while (is_space(s[i]))
 			i++;
+		if (!s[i]) // ← CORRECTION IMPORTANTE
+			break ;
 		if (s[i] == '"')
 		{
 			len = isstring(&s[i]);
 			if (len > 0)
+			{
 				tokens[j] = ft_strndup(&s[i], len);
-			j++;
+				if (!tokens[j])
+					return (free_tokens(tokens), NULL);
+				j++;
+			}
 		}
 		else
-			len = tokenize_2(&s[i], &tokens[j++]);
+		{
+			len = tokenize_2(&s[i], &tokens[j]);
+			if (len <= 0)
+				return (free_tokens(tokens), NULL);
+			j++;
+		}
 		i += len;
 	}
 	return (tokens[j] = NULL, tokens);
@@ -127,45 +134,7 @@ char	**ft_splitou(char const *s)
 	add_history(s);
 	return (tokens);
 }
-/*        .--'''''''''--.
-     .'      .---.      '.
-    /    .-----------.    \
-   /        .-----.        \
-   |       .-.   .-.       |
-   |      /   \ /   \      |
-    \    | .-. | .-. |    /
-     '-._| | | | | | |_.-'
-         | '-' | '-' |
-          \___/ \___/
-       _.-'  /   \  `-._
-     .' _.--|     |--._ '.
-     ' _...-|     |-..._ '
-            |     |
-            '.___.'
-              | |
-             _| |_
-            /\( )/\
-           /  ` '  \
-          | |     | |
-          '-'     '-'
-          | |     | |
-          | |     | |
-          | |-----| |
-       .`/  |     | |/`.
-       |    |     |    |
-       '._.'| .-. |'._.'
-             \ | /
-             | | |
-             | | |
-             | | |
-            /| | |\
-          .'_| | |_`.
-LGB       `. | | | .'
-       .    /  |  \    .
-      /o`.-'  / \  `-.`o\
-     /o  o\ .'   `. /o  o\
-     `.___.'       `.___.'
-
+/*
 Fonction qui sers a split les commande plus le meta char ex:
 "echo hahaha>output.txt"
 result:
@@ -173,7 +142,6 @@ echo
 hahaha
 >
 output.txt
-/!\ MANQUE GESTION DE ""
 #include <stdio.h>
 
 int main() {
@@ -184,11 +152,9 @@ int main() {
 	if (result) {
 		for (i = 0; result[i] != NULL; i++) {
 			printf("%s\n", result[i]);
-			free(result[i]); // Libération de chaque chaîne
+			free(result[i]);
 		}
-		free(result); // Libération du tableau de pointeurs
+		free(result);
 	}
 	return 0;
 }*/
-
-//mange moi la queue Didi ptn

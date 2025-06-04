@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/28 20:39:40 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:39 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 void	add_env_var(t_env **env, const char *key, const char *value)
 {
@@ -76,7 +76,7 @@ void	ft_cd(t_g *g)
 		return ;
 	result = chdir(path);
 	if (result != 0)
-		print_path_error(path);
+		perror("minishell: cd");
 	else
 	{
 		if (!get_current_path(&newpwd))
@@ -87,4 +87,3 @@ void	ft_cd(t_g *g)
 		set_env_value(&g->env, "PWD", newpwd);
 	}
 }
-
