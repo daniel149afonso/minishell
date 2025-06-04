@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/28 00:25:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/05/29 15:40:43 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ void	free_n_exit(t_g *g)
 
 int	msh_while(t_g *g)
 {
+	t_list *original;
 	if (g->input && *g->input)
 	{
 		g->result = search_var(ft_splitou(g->input), g->env);
 		if (!g->result)
 			return (1);
 		ft_init_lst(&g->lst, g->result);
+		original = g->lst;
 		if (is_redirection(g))
 		{
 			remove_redir_token(&g->lst);
@@ -91,8 +93,11 @@ int	msh_while(t_g *g)
 			if (!is_command(g))
 			{
 				restore_std(g);
-				if (g->lst && g->lst->content)
+				g->lst = original;
+				g->cmds = parse_commands(g->lst);
+    			if (!exec_pipeline(g->cmds, get_envp_array(g->env)))
 					printf("%s: command not found\n", (char *)g->lst->content);
+    			free_cmds(g->cmds);
 			}
 			restore_std(g);
 		}
