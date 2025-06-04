@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/29 15:40:43 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:25:19 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ int	main(int ac, char **av, char **envp)
 	(void)**av;
 	g = NULL;
 	init_global_struct(&g, envp);
-	if (!g->env)
-		return (free_n_exit(g), 0);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
+	if (!g->env)
+		return (printf(RED "No ENV for the shell detected\nEXIT\n" RE), 1);
 	while (1)
 	{
 		g->lst = NULL;

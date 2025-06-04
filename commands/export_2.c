@@ -21,12 +21,8 @@ static int	check_arg(char *value)
 
 static void    print_error_env(char *value, t_list *tmp)
 {
-	while (tmp)
-	{
-		value = extract_check_key(tmp->content);
-		printf("export: `%s': not a valid identifier\n", value);
-		tmp = tmp->next;
-	}
+	value = extract_check_key(tmp->content);
+	printf("export: `%s': not a valid identifier\n", value);
 	free(value);
 	return ;
 }

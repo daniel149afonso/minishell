@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:33 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:15:01 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 */
 int	isstring(const char *s)
 {
-	int i;
-	int trigger;
+	int	i;
+	int	trigger;
 
 	trigger = 0;
 	i = 1;
@@ -46,9 +46,9 @@ int	redir_len(const char *s)
 	int	len;
 
 	len = 1;
-	if ((s[0] == '<' && s[1] == '<') ||
-		(s[0] == '>' && s[1] == '>') ||
-		(s[0] == '<' && s[1] == '>'))
+	if ((s[0] == '<' && s[1] == '<') \
+	|| (s[0] == '>' && s[1] == '>') \
+	|| (s[0] == '<' && s[1] == '>'))
 		len = 2;
 	return (len);
 }
@@ -82,6 +82,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	return (i);
 }
 
+//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;
@@ -95,15 +96,26 @@ char	**tokenize(const char *s, char **tokens)
 	{
 		while (is_space(s[i]))
 			i++;
+		if (!s[i]) // ← CORRECTION IMPORTANTE
+			break ;
 		if (s[i] == '"')
 		{
 			len = isstring(&s[i]);
 			if (len > 0)
+			{
 				tokens[j] = ft_strndup(&s[i], len);
-			j++;
+				if (!tokens[j])
+					return (free_tokens(tokens), NULL);
+				j++;
+			}
 		}
 		else
-			len = tokenize_2(&s[i], &tokens[j++]);
+		{
+			len = tokenize_2(&s[i], &tokens[j]);
+			if (len <= 0)
+				return (free_tokens(tokens), NULL);
+			j++;
+		}
 		i += len;
 	}
 	return (tokens[j] = NULL, tokens);
