@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/03 18:03:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 20:49:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 			 > ^ <
 */
 
-//COMPLetement merdik
+//COMPLetement merdik, mais non mon choux cest juste..comment dire...pas si mal
 
 int	isstring(const char *s)
 {
@@ -87,6 +87,7 @@ static int	tokenize_2(const char *s, char **tokens)
 }
 
 //JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
+//CALME toi vieux prends un doliprane et respire profondémment
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;
