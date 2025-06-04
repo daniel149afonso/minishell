@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/05/29 15:40:24 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 22:12:42 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 int	is_missing_arg(t_list *lst)
 {

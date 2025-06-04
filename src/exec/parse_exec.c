@@ -6,11 +6,11 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/29 15:35:20 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:25 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 {
