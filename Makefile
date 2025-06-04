@@ -1,5 +1,3 @@
-
-
 NAME = minishell
 LIBFT = libft/libft.a
 
@@ -9,6 +7,7 @@ CMD_DIR = commands/
 UTLS_DIR = utils/
 REDIR_DIR = redirections/
 PARSING_DIR = parsing/
+EXEC_DIR = exec/
 
 SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(SRC_DIR)ft_init_lst.c \
@@ -32,7 +31,9 @@ SRCS =	$(SRC_DIR)ft_free_error.c \
 		$(REDIR_DIR)redir_parsing.c \
 		$(UTLS_DIR)utils.c \
 		$(UTLS_DIR)utils_2.c \
-		$(CMD_DIR)export_concat.c
+		$(CMD_DIR)export_concat.c \
+		$(EXEC_DIR)exec_pipeline.c \
+		$(EXEC_DIR)parse_exec.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
