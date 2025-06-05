@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:15:02 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:57:13 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,9 @@ void	ft_exp(t_env *env)
 		}
 	}
 	else
+	{
 		check_if_var(&env);
+		return ;
+	}
+	return (return_code(env, 0));
 }
