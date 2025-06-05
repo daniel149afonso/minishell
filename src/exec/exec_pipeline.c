@@ -6,11 +6,11 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/29 15:39:55 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:26 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 void free_cmds(t_cmd *cmds)
 {

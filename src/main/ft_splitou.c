@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/05 02:40:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 /*
 			 /\_/\
 			( o.o )
@@ -82,6 +82,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	return (i);
 }
 
+//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;

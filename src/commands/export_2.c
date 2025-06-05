@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 20:51:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/05 02:50:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 static int	check_arg(char *value)
 {

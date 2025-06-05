@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 21:42:24 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/05 02:37:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 /*Détecter si une chaîne commence et finit par des guillemets.*/
 int	is_quoted(char *s)

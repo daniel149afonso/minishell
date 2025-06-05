@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/04 21:56:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/05 02:40:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 void	sigint_handler(int sig)
 {
@@ -115,10 +115,12 @@ int	main(int ac, char **av, char **envp)
 	init_global_struct(&g, envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
+	if (!g->env)
+		return (printf(RED "No ENV for the shell detected\nEXIT\n" RE), 1);
 	while (1)
 	{
 		g->lst = NULL;
-		g->input = readline("minishell$ ");
+		g->input = readline(GREEN "minishell$ " RE);
 		if (msh_while(g))
 			return (1);
 		if (!g->input)
