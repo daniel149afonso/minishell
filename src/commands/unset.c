@@ -6,11 +6,11 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:08:41 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/26 17:50:43 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:15:11 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 static void	del_var(t_env *env, char *arg)
 {

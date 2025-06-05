@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/21 22:16:43 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/04 22:13:27 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 void	ft_error(char *msg, t_list **lst)
 {

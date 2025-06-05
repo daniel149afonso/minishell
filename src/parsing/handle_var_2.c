@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:55:58 by daafonso          #+#    #+#             */
-/*   Updated: 2025/05/26 20:56:12 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:13:29 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 char	*extract_var_name(char *str, int *i)
 {

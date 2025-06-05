@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/06 21:42:42 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:58:33 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 static int	check_arg(char *value)
 {
@@ -21,12 +21,8 @@ static int	check_arg(char *value)
 
 static void    print_error_env(char *value, t_list *tmp)
 {
-	while (tmp)
-	{
-		value = extract_check_key(tmp->content);
-		printf("export: `%s': not a valid identifier\n", value);
-		tmp = tmp->next;
-	}
+	value = extract_check_key(tmp->content);
+	printf("export: `%s': not a valid identifier\n", value);
 	free(value);
 	return ;
 }
@@ -66,11 +62,14 @@ void	check_if_var(t_env **env)
 	{
 		value = extract_check_key(tmp->content);
 		if (value[0] == '=' || check_arg(value))
+		{
 			print_error_env(value, tmp);
+			return (return_code((*env), 1));
+		}
 		tmp = tmp->next;
 	}
 	if (!(arg->content = check_concat(*env, arg)))
-		return ;
+		return (return_code((*env), 1));
 	while (arg)
 	{
 		update_or_add_var(env, (char *)arg->content);

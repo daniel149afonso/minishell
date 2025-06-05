@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/05/09 16:58:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/05 14:57:13 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 char	*extract_key(char *str)
 {
@@ -81,5 +81,9 @@ void	ft_exp(t_env *env)
 		}
 	}
 	else
+	{
 		check_if_var(&env);
+		return ;
+	}
+	return (return_code(env, 0));
 }

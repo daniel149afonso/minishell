@@ -1,8 +1,8 @@
-*.vscode
+.vscode
 *.txt
 *.o
 *.a
 *.DStore
 *.out
 *.identifiers
-*minishell
+minishell

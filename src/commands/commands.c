@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/13 20:13:00 by daafonso         ###   ########.fr       */
+/*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/04 22:14:44 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../../header/minishell.h"
 
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 {
@@ -103,5 +103,5 @@ int	is_command(t_g *g)
 //FT_INIT_COMMANDS:
 //init chaque commande avec sa fonction correspondante
 //---------------------
-//IS_command: check si il y a une commande dans l'input
+//Is_command: check si il y a une commande dans l'input
 //et appel la fonction correspondante
