@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/03 18:14:48 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 21:56:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ void	free_n_exit(t_g *g)
 
 int	msh_while(t_g *g)
 {
+	t_list *original;
 	if (g->input && *g->input)
 	{
 		g->result = search_var(ft_splitou(g->input), g->env);
 		if (!g->result)
 			return (1);
 		ft_init_lst(&g->lst, g->result);
+		original = g->lst;
 		if (is_redirection(g))
 		{
 			remove_redir_token(&g->lst);
@@ -91,36 +93,14 @@ int	msh_while(t_g *g)
 			if (!is_command(g))
 			{
 				restore_std(g);
-				if (g->lst && g->lst->content)
+				g->lst = original;
+				g->cmds = parse_commands(g->lst);
+				if (!exec_pipeline(g->cmds, get_envp_array(g->env)))
 					printf("%s: command not found\n", (char *)g->lst->content);
+				free_cmds(g->cmds);
 			}
 			restore_std(g);
 		}
-	}
-	return (0);
-}
-
-int	while_ms(t_g *g)
-{
-	if (g->input && *g->input)
-	{
-		g->result = search_var(ft_splitou(g->input), g->env);
-		if (!g->result)
-			return (1);
-		ft_init_lst(&g->lst, g->result);
-		if (is_redirection(g))//mise à jour
-		{
-			remove_redir_token(&g->lst);
-			remove_quotes(&g->lst);//il manquait ça bg
-			if (!is_command(g))
-			{
-				restore_std(g);
-				if (g->lst && g->lst->content)
-					printf("%s: command not found\n", (char *)g->lst->content);
-			}
-			restore_std(g);
-		}
-		//EXEC
 	}
 	return (0);
 }
@@ -139,7 +119,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		g->lst = NULL;
 		g->input = readline("minishell$ ");
-		if (while_ms(g))
+		if (msh_while(g))
 			return (1);
 		if (!g->input)
 			return (free_n_exit(g), 0);

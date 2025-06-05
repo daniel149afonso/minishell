@@ -6,20 +6,16 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 20:49:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
 /*
 			 /\_/\
 			( o.o )
 			 > ^ <
 */
-
-//COMPLetement merdik, mais non mon choux cest juste..comment dire...pas si mal
-
 int	isstring(const char *s)
 {
 	int	i;
@@ -45,7 +41,7 @@ int	isstring(const char *s)
 	return (i + 1);
 }
 
-int	is_lococo(const char *s)
+int	redir_len(const char *s)
 {
 	int	len;
 
@@ -68,7 +64,7 @@ static int	tokenize_2(const char *s, char **tokens)
 	len = 0;
 	if (ft_strchr("|;()<>", s[i]))
 	{
-		len = is_lococo(&s[i]);
+		len = redir_len(&s[i]);
 		*(tokens) = ft_strndup(&s[i], len);
 		if (!tokens)
 			return (free_tokens(tokens), 0);
@@ -86,8 +82,6 @@ static int	tokenize_2(const char *s, char **tokens)
 	return (i);
 }
 
-//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
-//CALME toi vieux prends un doliprane et respire profondémment
 char	**tokenize(const char *s, char **tokens)
 {
 	int	i;
@@ -139,46 +133,7 @@ char	**ft_splitou(char const *s)
 	add_history(s);
 	return (tokens);
 }
-/*        .--'''''''''--.
-     .'      .---.      '.
-    /    .-----------.    \
-   /        .-----.        \
-   |       .-.   .-.       |
-   |      /   \ /   \      |
-    \    | .-. | .-. |    /
-     '-._| | | | | | |_.-'
-         | '-' | '-' |
-          \___/ \___/
-       _.-'  /   \  `-._
-     .' _.--|     |--._ '.
-     ' _...-|     |-..._ '
-            |     |
-            '.___.'
-              | |
-             _| |_
-            /\( )/\
-           /  ` '  \
-          | |     | |
-          '-'     '-'
-          | |     | |
-          | |     | |
-          | |-----| |
-       .`/  |     | |/`.
-       |    |     |    |
-       '._.'| .-. |'._.'
-             \ | /
-             | | |
-             | | |
-             | | |
-            /| | |\
-          .'_| | |_`.
-          `. | | | .'
-       .    /  |  \    .
-      /o`.-'  / \  `-.`o\
-     /o  o\ .'   `. /o  o\
-     `.___.'       `.___.'
-	 APISCOPO
-
+/*
 Fonction qui sers a split les commande plus le meta char ex:
 "echo hahaha>output.txt"
 result:
@@ -186,7 +141,6 @@ echo
 hahaha
 >
 output.txt
-/!\ MANQUE GESTION DE ""
 #include <stdio.h>
 
 int main() {
@@ -197,11 +151,9 @@ int main() {
 	if (result) {
 		for (i = 0; result[i] != NULL; i++) {
 			printf("%s\n", result[i]);
-			free(result[i]); // Libération de chaque chaîne
+			free(result[i]);
 		}
-		free(result); // Libération du tableau de pointeurs
+		free(result);
 	}
 	return 0;
 }*/
-
-//mange moi la queue Didi ptn avec des baguettes chinoises

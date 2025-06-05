@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/29 15:24:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/04 21:54:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 
 //PREVIOUS DEFINITION OF GLOBAL
 typedef struct s_g	t_g;
+
+typedef struct s_cmd
+{
+	char			**argv;   // Arguments de la commande
+	struct s_cmd	*next;    // Commande suivante dans le pipeline
+}	t_cmd;
 
 //QUOTES STATE
 typedef struct s_token
@@ -83,6 +89,7 @@ typedef struct s_g
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
 	t_list		*herdoc;
+	t_cmd		*cmds;
 }	t_g;
 
 //MAIN
@@ -129,6 +136,15 @@ int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
+
+//EXECUTION
+char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
+void	free_split(char **arr);
+char	**get_envp_array(t_env *env);
+void	free_cmds(t_cmd *cmds);
+t_cmd	*parse_commands(t_list *lst);
+int		exec_pipeline(t_cmd *cmds, char **envp);
+char	*get_path(char *cmd, char **envp);
 
 //FT_INIT_LIST
 void	ft_init_lst(t_list **lst, char **tokens);
