@@ -95,7 +95,7 @@ int	msh_while(t_g *g)
 				restore_std(g);
 				g->lst = original;
 				g->cmds = parse_commands(g->lst);
-    			if (!exec_pipeline(g->cmds, get_envp_array(g->env)))
+    			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 					printf("%s: command not found\n", (char *)g->lst->content);
     			free_cmds(g->cmds);
 			}

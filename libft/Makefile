@@ -58,7 +58,7 @@ OBJS		=		$(SRC:.c=.o)
 
 OBJSALL		=		${SRCSALL:.c=.o}
 
-CC			= 		gcc
+CC			= 		cc
 RM			= 		rm -f
 CFLAGS		= 		-Wall -Wextra -Werror
 

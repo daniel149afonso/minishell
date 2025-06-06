@@ -64,7 +64,7 @@ void	free_split(char **arr);
 char	**get_envp_array(t_env *env);
 void	free_cmds(t_cmd *cmds);
 t_cmd	*parse_commands(t_list *lst);
-int		exec_pipeline(t_cmd *cmds, char **envp);
+int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
 
 //FT_INIT_LIST | INIT LIST COMMANDS PARSED
