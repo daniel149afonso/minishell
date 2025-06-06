@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/05 02:50:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/06 15:04:52 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ void	check_if_var(t_env **env)
 	{
 		value = extract_check_key(tmp->content);
 		if (value[0] == '=' || check_arg(value))
+		{
 			print_error_env(value, tmp);
+			return (return_code((*env), 1));
+		}
 		tmp = tmp->next;
 	}
 	if (!(arg->content = check_concat(*env, arg)))
-		return ;
+		return (return_code((*env), 1));
 	while (arg)
 	{
 		update_or_add_var(env, (char *)arg->content);

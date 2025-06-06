@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:51 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:52:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_env(t_env **env, char **envp)
 		add_env_node(env, envp[i]);
 		i++;
 	}
+	add_env_node(env, "?=0");
 }
 
 void	ft_env(t_env *env)
@@ -63,4 +64,5 @@ void	ft_env(t_env *env)
 			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
+	return (return_code(env, 0));
 }
