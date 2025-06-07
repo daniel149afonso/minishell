@@ -98,12 +98,13 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
-int exec_pipeline(t_cmd *cmds, char **envp)
+int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
 	int pipefd[2];
 	int prev_fd = -1;
 	pid_t pid;
 
+	(void)g;
 	while (cmds)
 	{
 		if (cmds->next)

@@ -35,7 +35,10 @@ void	return_code(t_env *env, int error_code)
 	while (env)
 	{
 		if ((ft_strncmp(env->key, "?", 1) == 0))
+		{
 			env->value = ft_itoa(error_code);
+			break ;
+		}
 		env = env->next;
 	}
 }

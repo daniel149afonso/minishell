@@ -71,5 +71,5 @@ void	ft_echo(t_g *g)
 		display_with_args(arg);
 	else
 		printf("\n");
-	return ;
+	return (return_code(g->env, 0));
 }

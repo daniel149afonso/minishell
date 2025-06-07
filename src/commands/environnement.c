@@ -50,7 +50,7 @@ void	init_env(t_env **env, char **envp)
 		add_env_node(env, envp[i]);
 		i++;
 	}
-	add_env_node(env, "?=0");
+	//add_env_node(env, "?=0"); a corr a cause de environnement vide
 }
 
 void	ft_env(t_env *env)
