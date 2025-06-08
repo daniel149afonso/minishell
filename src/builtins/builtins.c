@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:44 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:58:03 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,6 @@ int	is_command(t_g *g)
 	}
 	return (0);
 }
-
-// Function
-// {
-// 	fd = fork
-
-// 	if pid == 0
-// 		while(caca)
-// 		{
-// 			printf
-// 			execve
-// 		}
-
-// }
 
 //FT_INIT_COMMANDS:
 //init chaque commande avec sa fonction correspondante
