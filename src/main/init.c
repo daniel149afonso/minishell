@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:07 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:57:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void	init_global_struct(t_g **g, char **envp)
 	ft_init_commands((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;
 	(*g)->s_stdout = -1;
+	(*g)->fd_stdout = -1;
+	(*g)->fd_stdin = -1;
 }

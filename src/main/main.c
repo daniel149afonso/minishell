@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/07 16:19:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/08 02:40:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	free_n_exit(t_g *g)
 
 int	msh_while(t_g *g)
 {
-	t_list *original;
+	t_list	*original;
+
 	if (g->input && *g->input)
 	{
 		g->result = search_var(ft_splitou(g->input), g->env);
@@ -88,8 +89,6 @@ int	msh_while(t_g *g)
 		original = g->lst;
 		if (is_redirection(g))
 		{
-			remove_redir_token(&g->lst);
-			remove_quotes(&g->lst);
 			if (!is_command(g))
 			{
 				restore_std(g);

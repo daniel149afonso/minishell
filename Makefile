@@ -5,7 +5,7 @@
 NAME       := minishell
 LIBFT      := libft/libft.a
 SRC_DIR    := src/main
-CMD_DIR    := src/commands
+CMD_DIR    := src/builtins
 UTLS_DIR   := src/utils
 REDIR_DIR  := src/redirections
 PARSING_DIR:= src/parsing
@@ -18,7 +18,7 @@ SRCS := \
   $(SRC_DIR)/ft_splitou.c     \
   $(SRC_DIR)/main.c           \
   $(SRC_DIR)/init.c           \
-  $(CMD_DIR)/commands.c       \
+  $(CMD_DIR)/builtins.c       \
   $(CMD_DIR)/environnement.c  \
   $(CMD_DIR)/echo.c           \
   $(CMD_DIR)/pwd.c            \

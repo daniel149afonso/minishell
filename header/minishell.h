@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/05 02:37:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/07 21:28:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef struct s_g
 	char		**result;
 	int			s_stdin;
 	int			s_stdout;
-	int			s_fd;
+	int			fd_stdout;
+	int			fd_stdin;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
@@ -93,5 +94,4 @@ typedef struct s_g
 }	t_g;
 
 # include "minishell_fun.h"
-
 #endif
