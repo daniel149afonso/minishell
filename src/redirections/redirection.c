@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/08 02:40:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/08 20:50:20 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	is_redirection(t_g *g)
 			return (0);
 		tmp = tmp->next;
 	}
-	redirect_in_and__out(g);
+	redirect_std_to_file(g);
 	remove_redir_token(&g->lst);
 	remove_quotes(&g->lst);
 	return (1);

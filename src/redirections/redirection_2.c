@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/08 00:25:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/08 20:50:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	double_stdin(t_list *redir, t_list **herdoc)
 	return (0);
 }
 
-void	redirect_in_and__out(t_g *g)
+void	redirect_std_to_file(t_g *g)
 {
 	if (g->fd_stdout != -1)
 	{

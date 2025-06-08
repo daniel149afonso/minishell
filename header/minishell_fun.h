@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/08 02:41:24 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/08 20:54:31 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		is_redirection(t_g *g);
 void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
-void	redirect_in_and__out(t_g *g);
+void	redirect_std_to_file(t_g *g);
 int		double_stdin(t_list *redir, t_list **herdoc);
 
 //EXECUTION NO BUILTS
