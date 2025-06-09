@@ -4,17 +4,17 @@
 
 NAME       := minishell
 LIBFT      := libft/libft.a
-SRC_DIR    := src/main
-CMD_DIR    := src/builtins
-CMD_DIR_ENV := src/builtins/env
-CMD_DIR_CD := src/builtins/cd
-CMD_DIR_PWD := src/builtins/pwd
-CMD_DIR_ECHO := src/builtins/echo
-EXIT_DIR   := src/exit
-UTLS_DIR   := src/utils
-REDIR_DIR  := src/redirections
-PARSING_DIR:= src/parse_var_quotes
-EXEC_DIR   := src/exec
+SRC_DIR    := sources/main
+CMD_DIR    := sources/builtins
+CMD_DIR_ENV := sources/builtins/env
+CMD_DIR_CD := sources/builtins/cd
+CMD_DIR_PWD := sources/builtins/pwd
+CMD_DIR_ECHO := sources/builtins/echo
+EXIT_DIR   := sources/exit
+UTLS_DIR   := sources/utils
+REDIR_DIR  := sources/redirections
+PARSING_DIR:= sources/parse_var_quotes
+EXEC_DIR   := sources/exec
 
 # FILES
 SRCS := \
