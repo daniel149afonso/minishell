@@ -10,19 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*						UTILS						 */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Permet de extraire la clé de la variable sans le +=*/
 char	*extract_key_concat(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while ((str[i] && str[i] != '=') && (str[i] != '+' && str[i + 1] != '='))
 		i++;
 	return (ft_substr(str, 0, i));
 }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-static void add_env_node_concat(t_env **env, const char *str)
+
+/*---------------------------
+Va rajouter une variable uniquement pour le cas +=
+---------------------------*/
+void	add_env_node_concat(t_env **env, const char *str)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -49,33 +58,4 @@ static void add_env_node_concat(t_env **env, const char *str)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-}
-
-void	update_or_add_var_concat(t_env **env, char *arg)
-{
-	t_env	*tmp;
-	char	*key;
-	char	*value;
-	int		found;
-
-	key = extract_key_concat(arg);
-	value = extract_value(arg);
-	tmp = *env;
-	found = 0;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0)
-		{
-			free(tmp->value);
-			tmp->value = value;
-			found = 1;
-			break ;
-		}
-		tmp = tmp->next;
-	}
-	if (!found)
-		add_env_node_concat(env, arg);
-	free(key);
-	if (!found)
-		free(value);
 }

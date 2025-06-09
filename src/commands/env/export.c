@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*						UTILS						 */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 char	*extract_key(char *str)
 {
 	int		i;
@@ -32,6 +35,12 @@ char	*extract_value(char *str)
 	return (ft_strdup(equal + 1));
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*---------------------------
+Fonction qui sert a update une variable déja existante
+ou la créé sans la version +=
+---------------------------*/
 void	update_or_add_var(t_env **env, char *arg)
 {
 	t_env	*tmp;
@@ -61,6 +70,11 @@ void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
+/*---------------------------
+Fonction de base export qui va 
+écrire les variables existante si aucun argument
+ou va allez update les variables avec "check_if_var"
+---------------------------*/
 void	ft_exp(t_env *env)
 {
 	t_env	*tmp;
@@ -81,9 +95,6 @@ void	ft_exp(t_env *env)
 		}
 	}
 	else
-	{
-		check_if_var(&env);
-		return ;
-	}
+		return (check_if_var(env));
 	return (return_code(env, 0));
 }

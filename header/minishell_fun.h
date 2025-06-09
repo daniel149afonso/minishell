@@ -38,8 +38,8 @@ void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
-void	check_if_var(t_env **env);
-void	update_or_add_var_concat(t_env **env, char *arg);
+void	check_if_var(t_env *env);
+void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
 void	f_unset(t_env *env);
 
