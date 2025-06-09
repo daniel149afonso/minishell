@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/05 02:40:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/09 22:17:03 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,121 +16,90 @@
 			( o.o )
 			 > ^ <
 */
-int	isstring(const char *s)
-{
-	int	i;
-	int	trigger;
-
-	trigger = 0;
-	i = 1;
-	if (s[i] == 34)
-		return (2);
-	while (s[i])
-	{
-		if (s[i] == 34)
-		{
-			trigger = 1;
-			break ;
-		}
-		i++;
-	}
-	if (trigger == 0)
-		return (1);
-	if (i == 1)
-		return (0);
-	return (i + 1);
-}
-
 int	redir_len(const char *s)
 {
-	int	len;
-
-	len = 1;
-	if ((s[0] == '<' && s[1] == '<') \
-	|| (s[0] == '>' && s[1] == '>') \
-	|| (s[0] == '<' && s[1] == '>'))
-		len = 2;
-	return (len);
+	if ((s[0] == '<' && s[1] == '<')
+		|| (s[0] == '>' && s[1] == '>')
+		|| (s[0] == '<' && s[1] == '>'))
+		return (2);
+	return (1);
 }
 
-static int	tokenize_2(const char *s, char **tokens)
+int	read_word(const char *s, int *pos, char **out)
 {
-	int	start;
-	int	len;
-	int	i;
+	int		start;
+	int		i;
+	char	q;
 
-	i = 0;
-	start = 0;
-	len = 0;
-	if (ft_strchr("|;()<>", s[i]))
+	start = *pos;
+	i = start;
+	while (s[i])
 	{
-		len = redir_len(&s[i]);
-		*(tokens) = ft_strndup(&s[i], len);
-		if (!tokens)
-			return (free_tokens(tokens), 0);
+		if (is_space(s[i]) || ft_strchr("|;()<>", s[i]))
+			break ;
+		if (s[i] == '\'' || s[i] == '"')
+		{
+			q = s[i++];
+			while (s[i] && s[i] != q)
+				i++;
+			if (s[i] == q)
+				i++;
+		}
+		else
+			i++;
+	}
+	*out = ft_strndup(&s[start], i - start);
+	if (!*out)
+		return (0);
+	*pos = i;
+	return (1);
+}
+
+char	*get_next_token(const char *s, int *i)
+{
+	char *tok;
+	int len;
+
+	if (ft_strchr("|;()<>", s[*i]))
+	{
+		len = redir_len(&s[*i]);
+		tok = ft_strndup(&s[*i], len);
+		*i += len;
 	}
 	else
 	{
-		start = i;
-		while (s[i] && !is_space(s[i]) && !ft_strchr("|;()<>", s[i]))
-			i++;
-		*(tokens) = ft_strndup(&s[start], i - start);
-		if (!tokens)
-			return (free_tokens(tokens), 0);
+		if (!read_word(s, i, &tok))
+			return NULL;
 	}
-	i += len;
-	return (i);
+	return (tok);
 }
 
-//JFIGHT DES PTN DEMON  DAN MON CRANE FDP D INDEX Je vais normer un peu bb
-char	**tokenize(const char *s, char **tokens)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	j = 0;
-	len = 0;
-	while (s[i])
-	{
-		while (is_space(s[i]))
-			i++;
-		if (!s[i]) // ← CORRECTION IMPORTANTE
-			break ;
-		if (s[i] == '"')
-		{
-			len = isstring(&s[i]);
-			if (len > 0)
-			{
-				tokens[j] = ft_strndup(&s[i], len);
-				if (!tokens[j])
-					return (free_tokens(tokens), NULL);
-				j++;
-			}
-		}
-		else
-		{
-			len = tokenize_2(&s[i], &tokens[j]);
-			if (len <= 0)
-				return (free_tokens(tokens), NULL);
-			j++;
-		}
-		i += len;
-	}
-	return (tokens[j] = NULL, tokens);
-}
-
-char	**ft_splitou(char const *s)
+char	**ft_splitou(const char *s)
 {
 	char	**tokens;
+	int		i;
+	int		j;
+	char	*tok;
 
 	if (!s)
 		return (NULL);
 	tokens = malloc(1000 * sizeof(char *));
 	if (!tokens)
 		return (NULL);
-	tokens = tokenize(s, tokens);
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		while (is_space(s[i]))
+			i++;
+		if (!s[i])
+			break ;
+		tok = get_next_token(s, &i);
+		if (!tok)
+			return (free_tokens(tokens), NULL);
+		tokens[j++] = tok;
+	}
+	tokens[j] = NULL;
 	add_history(s);
 	return (tokens);
 }

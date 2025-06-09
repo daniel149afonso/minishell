@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/08 23:17:20 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/09 19:52:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,28 @@ char *get_path(char *cmd, char **envp)
 	free_split(paths);
 	return NULL;
 }
+// int	is_pipeline()
+// {
+// 	if (cmds->next)
+// 	{
+// 		if (pipe(pipefd) == -1)
+// 		{
+// 			perror("pipe");
+// 			return (0);
+// 		}
+// 	}
+// }
+// int	exec_cmds(t_g *g, t_cmd *cmds, char **envp)
+// {
+// 	if (is_pipeline())
+// 	{
+// 		exec_pipeline()
+// 	}
+// 	else
+// 	{
+		
+// 	}
+// }
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
@@ -115,14 +137,12 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				return (0);
 			}
 		}
-
 		pid = fork();
 		if (pid == -1)
 		{
 			perror("fork");
 			return (0);
 		}
-
 		if (pid == 0)
 		{
 			if (prev_fd != -1)
