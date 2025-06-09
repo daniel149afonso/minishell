@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/09 02:20:15 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/09 03:22:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../header/minishell.h"
 
@@ -37,15 +38,16 @@ int	msh_while(t_g *g)
 		ft_init_lst(&g->lst, g->result);
 		if (is_redirection(g))
 		{
-			remove_redir_token(&g->lst);
-			remove_quotes(&g->lst);
 			if (!is_command(g))
 			{
 				restore_std(g);
 				g->cmds = parse_commands(g->lst);
-    			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+				{
+					restore_std(g);
 					printf("%s: command not found\n", (char *)g->lst->content);
-    			free_cmds(g->cmds);
+				}
+				free_cmds(g->cmds);
 			}
 			restore_std(g);
 		}

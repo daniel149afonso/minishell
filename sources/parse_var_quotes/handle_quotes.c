@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:28:18 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:13:07 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/05 02:37:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Détecter si une chaîne commence et finit par des guillemets.*/
 int	is_quoted(char *s)
 {
 	int	len;
@@ -27,6 +28,7 @@ int	is_quoted(char *s)
 	return (0);
 }
 
+/*check si entouré de guillemets*/
 int	check_quotes(char *token)
 {
 	if (is_quoted(token))
@@ -34,6 +36,7 @@ int	check_quotes(char *token)
 	return (0);
 }
 
+/*construire une chaîne en enlevant les quotes autour*/
 void	replace_string(char c, t_quote_state *q)
 {
 	char	str[2];
@@ -50,6 +53,7 @@ void	replace_string(char c, t_quote_state *q)
 	}
 }
 
+/*retirer les quotes autour de la chaîne en laissant les quotes imbriqué*/
 char	*remove_quotes_2(char *str)
 {
 	int				i;
@@ -69,6 +73,7 @@ char	*remove_quotes_2(char *str)
 	return (q.res);
 }
 
+/*appliquer remove_quotes_2() à chaque élément de la liste de tokens*/
 void	remove_quotes(t_list **lst)
 {
 	char	*tmp;

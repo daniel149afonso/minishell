@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:26 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/08 23:17:20 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				dup2(pipefd[1], 1);
 				close(pipefd[1]);
 			}
+			redirect_std_to_file(g);
 			execve(get_path(cmds->argv[0], envp), cmds->argv, envp);
 			perror("execve");
 			return (0);
@@ -150,5 +151,5 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		cmds = cmds->next;
 	}
 	while (wait(NULL) > 0);
-    return (1);
+	return (1);
 }
