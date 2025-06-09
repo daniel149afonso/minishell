@@ -10,8 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
+/*---------------------------
+Fonction appelé au départ du prog 
+pour initier un environnement
+-----------------------------*/
+void	init_env(t_env **env, char **envp)
+{
+	int	i = 0;
+
+	while (envp[i])
+	{
+		add_env_node(env, envp[i]);
+		i++;
+	}
+	if (envp)
+		add_env_node(env, "?=0");
+}
+
+/*---------------------------
+Fonction appelé par l'init pour
+ajouter les nodes correspondante a la
+copie de l'env original
+---------------------------*/
 void	add_env_node(t_env **env, const char *str)
 {
 	t_env	*new;
@@ -41,18 +63,10 @@ void	add_env_node(t_env **env, const char *str)
 	}
 }
 
-void	init_env(t_env **env, char **envp)
-{
-	int	i = 0;
-
-	while (envp[i])
-	{
-		add_env_node(env, envp[i]);
-		i++;
-	}
-	//add_env_node(env, "?=0"); a corr a cause de environnement vide
-}
-
+/*---------------------------
+Builtin de la commande env pour
+afficher l'environnment comme dans bash
+---------------------------*/
 void	ft_env(t_env *env)
 {
 	t_env	*tmp;

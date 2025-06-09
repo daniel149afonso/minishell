@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
+/*Deux fonctions qui vont servir à supprimer la valeur 
+et la clé d'une variable d'environnment*/
 static void	del_var(t_env *env, char *arg)
 {
 	char	*key;

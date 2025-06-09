@@ -6,9 +6,14 @@ NAME       := minishell
 LIBFT      := libft/libft.a
 SRC_DIR    := src/main
 CMD_DIR    := src/builtins
+CMD_DIR_ENV := src/builtins/env
+CMD_DIR_CD := src/builtins/cd
+CMD_DIR_PWD := src/builtins/pwd
+CMD_DIR_ECHO := src/builtins/echo
+EXIT_DIR   := src/exit
 UTLS_DIR   := src/utils
 REDIR_DIR  := src/redirections
-PARSING_DIR:= src/parsing
+PARSING_DIR:= src/parse_var_quotes
 EXEC_DIR   := src/exec
 
 # FILES
@@ -18,24 +23,25 @@ SRCS := \
   $(SRC_DIR)/ft_splitou.c     \
   $(SRC_DIR)/main.c           \
   $(SRC_DIR)/init.c           \
-  $(CMD_DIR)/builtins.c       \
-  $(CMD_DIR)/environnement.c  \
-  $(CMD_DIR)/echo.c           \
-  $(CMD_DIR)/pwd.c            \
-  $(CMD_DIR)/cd.c             \
-  $(CMD_DIR)/cd_2.c           \
-  $(CMD_DIR)/export.c         \
-  $(CMD_DIR)/export_2.c       \
-  $(CMD_DIR)/unset.c          \
+  $(CMD_DIR)/parse_builtins.c       \
+  $(CMD_DIR_ECHO)/echo.c           \
+  $(CMD_DIR_PWD)/pwd.c            \
+  $(CMD_DIR_CD)/cd.c             \
+  $(CMD_DIR_CD)/cd_2.c           \
+  $(CMD_DIR_ENV)/environnement.c  \
+  $(CMD_DIR_ENV)/export.c         \
+  $(CMD_DIR_ENV)/export_parsing.c       \
+  $(CMD_DIR_ENV)/export_concat.c  \
+  $(CMD_DIR_ENV)/unset.c          \
   $(PARSING_DIR)/handle_var.c \
   $(PARSING_DIR)/handle_var_2.c \
   $(PARSING_DIR)/handle_quotes.c \
   $(REDIR_DIR)/redirection.c  \
   $(REDIR_DIR)/redirection_2.c \
   $(REDIR_DIR)/redir_parsing.c \
+  $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \
   $(UTLS_DIR)/utils_2.c       \
-  $(CMD_DIR)/export_concat.c  \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c
 

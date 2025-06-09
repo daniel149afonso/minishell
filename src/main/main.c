@@ -6,9 +6,10 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/08 21:28:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/09 03:22:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../header/minishell.h"
 
@@ -27,71 +28,19 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
-int	check_exit_code(t_g *g)
-{
-	int		return_code;
-	int		i;
-	char	*key;
-
-	return_code = 0;
-	i = 0;
-	key = NULL;
-	if ((g->lst = g->lst->next))
-	{
-		key = extract_check_key((char *)g->lst->content);
-		if (!key)
-			return (0);
-		while (key[i])
-		{
-			if (!ft_isdigit(key[i]) && key[i] != '-')
-				return (printf("Invalid exit option: '%s'\n", key), -20);
-			i++;
-		}
-		if (g->lst->next)
-			return (printf("Too much ARGS in exit option\n"), -20);
-		return_code = ft_atoi(key);
-		return (free(key), return_code);
-	}
-	return (0);
-}
-
-void	free_n_exit(t_g *g)
-{
-	int	return_code;
-
-	if (g->lst)
-		return_code = check_exit_code(g);
-	if (return_code == -20)
-		return ;
-	if (g->lst)
-		ft_lstclear(&g->lst, free);
-	if (g->env)
-		free_env(&g->env);
-	if (g->builtin)
-		free(g->builtin);
-	if (g->envbuilt)
-		free(g->envbuilt);
-	free(g);
-	printf(RED "exit\n" RE);
-	exit (return_code);
-}
-
 int	msh_while(t_g *g)
 {
-	t_list	*original;
-
 	if (g->input && *g->input)
 	{
 		g->result = search_var(ft_splitou(g->input), g->env);
 		if (!g->result)
 			return (1);
 		ft_init_lst(&g->lst, g->result);
-		original = g->lst;
 		if (is_redirection(g))
 		{
 			if (!is_command(g))
 			{
-				g->lst = original;
+				restore_std(g);
 				g->cmds = parse_commands(g->lst);
 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 				{
