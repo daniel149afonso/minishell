@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fun.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/08 20:54:31 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/09 19:29:33 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	free_cmds(t_cmd *cmds);
 t_cmd	*parse_commands(t_list *lst);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
+int     is_pipe(t_g *g);
 
 //FT_INIT_LIST | INIT LIST COMMANDS PARSED
 void	ft_init_lst(t_list **lst, char **tokens);

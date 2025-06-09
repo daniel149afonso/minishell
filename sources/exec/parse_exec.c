@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:25 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:38:28 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+int	is_pipe(t_g *g)
+{
+	while(g->lst)
+	{
+		if ((ft_strncmp((char *)g->lst->content, "|", 1)) == 0)
+		{
+			printf("----PIPE_FOUND----\n");
+			return (1);
+		}
+		g->lst = g->lst->next;
+	}
+	return (0);
+}
 
 int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 {
@@ -34,9 +48,7 @@ int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 		return 0; // reset index i
 	}
 	else
-	{
 		(*args)[i++] = ft_strdup(tmp->content);
-	}
 	return i;
 }
 
