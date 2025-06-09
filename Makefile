@@ -10,9 +10,10 @@ CMD_DIR_ENV := src/commands/env
 CMD_DIR_CD := src/commands/cd
 CMD_DIR_PWD := src/commands/pwd
 CMD_DIR_ECHO := src/commands/echo
+EXIT_DIR   := src/exit
 UTLS_DIR   := src/utils
 REDIR_DIR  := src/redirections
-PARSING_DIR:= src/parsing
+PARSING_DIR:= src/parse_var_quotes
 EXEC_DIR   := src/exec
 
 # FILES
@@ -38,6 +39,7 @@ SRCS := \
   $(REDIR_DIR)/redirection.c  \
   $(REDIR_DIR)/redirection_2.c \
   $(REDIR_DIR)/redir_parsing.c \
+  $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \
   $(UTLS_DIR)/utils_2.c       \
   $(EXEC_DIR)/exec_pipeline.c \
