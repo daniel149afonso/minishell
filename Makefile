@@ -1,31 +1,49 @@
+#############################################################################
+#                                   VARIABLES                               
+#############################################################################
 
+NAME       := minishell
+LIBFT      := libft/libft.a
+SRC_DIR    := sources/main
+CMD_DIR    := sources/builtins
+CMD_DIR_ENV := sources/builtins/env
+CMD_DIR_CD := sources/builtins/cd
+CMD_DIR_PWD := sources/builtins/pwd
+CMD_DIR_ECHO := sources/builtins/echo
+EXIT_DIR   := sources/exit
+UTLS_DIR   := sources/utils
+REDIR_DIR  := sources/redirections
+PARSING_DIR:= sources/parse_var_quotes
+EXEC_DIR   := sources/exec
 
-NAME = minishell
-LIBFT = libft/libft.a
-
-# Directories
-SRC_DIR = src/
-CMD_DIR = commands/
-UTLS_DIR = utils/
-
-SRCS =	$(SRC_DIR)ft_free_error.c \
-		$(SRC_DIR)ft_init_lst.c \
-		$(SRC_DIR)ft_splitou.c \
-		$(SRC_DIR)main.c \
-		$(SRC_DIR)init.c \
-		$(CMD_DIR)commands.c \
-		$(CMD_DIR)environnement.c \
-		$(CMD_DIR)echo.c \
-		$(CMD_DIR)pwd.c \
-		$(CMD_DIR)cd.c \
-		$(CMD_DIR)export.c \
-		$(CMD_DIR)export_2.c \
-		$(CMD_DIR)unset.c \
-		$(CMD_DIR)handle_var.c \
-		$(CMD_DIR)redirection.c \
-		$(UTLS_DIR)utils.c \
-		$(UTLS_DIR)utils_2.c \
-		$(CMD_DIR)export_concat.c
+# FILES
+SRCS := \
+  $(SRC_DIR)/ft_free_error.c \
+  $(SRC_DIR)/ft_init_lst.c    \
+  $(SRC_DIR)/ft_splitou.c     \
+  $(SRC_DIR)/main.c           \
+  $(SRC_DIR)/init.c           \
+  $(CMD_DIR)/parse_builtins.c       \
+  $(CMD_DIR_ECHO)/echo.c           \
+  $(CMD_DIR_PWD)/pwd.c            \
+  $(CMD_DIR_CD)/cd.c             \
+  $(CMD_DIR_CD)/cd_2.c           \
+  $(CMD_DIR_ENV)/environnement.c  \
+  $(CMD_DIR_ENV)/export.c         \
+  $(CMD_DIR_ENV)/export_parsing.c       \
+  $(CMD_DIR_ENV)/export_concat.c  \
+  $(CMD_DIR_ENV)/unset.c          \
+  $(PARSING_DIR)/handle_var.c \
+  $(PARSING_DIR)/handle_var_2.c \
+  $(PARSING_DIR)/handle_quotes.c \
+  $(REDIR_DIR)/redirection.c  \
+  $(REDIR_DIR)/redirection_2.c \
+  $(REDIR_DIR)/redir_parsing.c \
+  $(EXIT_DIR)/exit.c \
+  $(UTLS_DIR)/utils.c         \
+  $(UTLS_DIR)/utils_2.c       \
+  $(EXEC_DIR)/exec_pipeline.c \
+  $(EXEC_DIR)/parse_exec.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
