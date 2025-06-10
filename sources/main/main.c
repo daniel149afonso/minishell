@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/10 15:43:12 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/10 18:52:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,16 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 int	msh_while(t_g *g)
 {
-	t_list *original;
 	if (g->input && *g->input)
 	{
 		g->result = search_var(ft_splitou(g->input), g->env);
 		if (!g->result)
 			return (1);
 		ft_init_lst(&g->lst, g->result);
-		original = g->lst;
 		if (is_redirection(g))
 		{
-			if (is_pipe(g))
+			if (is_pipe(g->lst))
 			{
-				g->lst = original;
 				g->cmds = parse_commands(g->lst);
 				print_cmds(g->cmds);
 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
@@ -65,12 +62,11 @@ int	msh_while(t_g *g)
 			}
 			else if (!is_command(g))
 			{
-				printf("Is_command ne fonctionne pas\n");
+				//printf("Builtins not found !\n");
 				restore_std(g);
-				g->lst = original;
 				g->cmds = parse_commands(g->lst);
-				// if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-				// 	printf("%s: command not found\n", (char *)g->lst->content);
+				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+					printf("%s: command not found\n", (char *)g->lst->content);
 				free_cmds(g->cmds);
 			}
 			restore_std(g);

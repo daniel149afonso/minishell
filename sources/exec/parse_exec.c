@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/09 19:38:28 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:40:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int	is_pipe(t_g *g)
+int	is_pipe(t_list *lst)
 {
-	while(g->lst)
+	while (lst)
 	{
-		if ((ft_strncmp((char *)g->lst->content, "|", 1)) == 0)
+		if ((ft_strncmp((char *)lst->content, "|", 1)) == 0)
 		{
 			printf("----PIPE_FOUND----\n");
 			return (1);
 		}
-		g->lst = g->lst->next;
+		lst = lst->next;
 	}
 	return (0);
 }
 
-int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
+int	new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 {
 	if (ft_strcmp(tmp->content, "|") == 0)
 	{
@@ -34,7 +34,7 @@ int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 
 		t_cmd *new = malloc(sizeof(t_cmd));
 		if (!new)
-			return -1;
+			return (-1);
 		new->argv = *args;
 		new->next = NULL;
 
@@ -45,15 +45,15 @@ int new_commmand(t_cmd **head, t_cmd **curr, t_list *tmp, char ***args, int i)
 		*curr = new;
 
 		*args = malloc(sizeof(char *) * 100);
-		return 0; // reset index i
+		return (0); // reset index i
 	}
 	else
 		(*args)[i++] = ft_strdup(tmp->content);
-	return i;
+	return (i);
 }
 
 
-void last_command(t_cmd **head, t_cmd **curr, char **args, int i)
+void	last_command(t_cmd **head, t_cmd **curr, char **args, int i)
 {
 	args[i] = NULL;
 
