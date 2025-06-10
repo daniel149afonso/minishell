@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/09 22:28:24 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:43:12 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ int	msh_while(t_g *g)
 			}
 			else if (!is_command(g))
 			{
+				printf("Is_command ne fonctionne pas\n");
 				restore_std(g);
 				g->lst = original;
 				g->cmds = parse_commands(g->lst);
-				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-					printf("%s: command not found\n", (char *)g->lst->content);
+				// if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+				// 	printf("%s: command not found\n", (char *)g->lst->content);
 				free_cmds(g->cmds);
 			}
 			restore_std(g);
