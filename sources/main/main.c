@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/10 19:20:01 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/11 01:35:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	msh_while(t_g *g)
 			}
 			else if (!is_command(g))
 			{
-				//printf("Builtins not found !\n");
 				restore_std(g);
 				g->cmds = parse_commands(g->lst);
 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
