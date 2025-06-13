@@ -6,12 +6,13 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/13 16:51:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:24:27 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Resaure la sortie standard dans le terminal*/
 void	restore_std(t_g *g)
 {
 	if (g->s_stdout != -1)
@@ -25,7 +26,8 @@ void	restore_std(t_g *g)
 		close(g->s_stdin);
 	}
 }
-
+/*Traite << stdin, ouvre un herdoc qui recoit les entrees de l'utilisateur
+jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
 int	double_stdin(t_list *redir, t_list **herdoc)
 {
 	char	*occur;
