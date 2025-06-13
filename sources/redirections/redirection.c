@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/10 18:52:25 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/12 15:45:38 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	one_stdout(t_g *g, t_list *redir)
 	return (0);
 }
 
-
+/*Traite << si une erreur return 1*/
 int	double_stdout(t_g *g, t_list *redir)
 {
 	int	fd;
@@ -46,7 +46,7 @@ int	double_stdout(t_g *g, t_list *redir)
 	return (0);
 }
 
-
+/*Traite < en remplacant l'ancien file s'il a ete ouvert, si erreur return 1*/
 int	one_stdin(t_g *g, t_list *redir)
 {
 	int		fd;
@@ -63,6 +63,7 @@ int	one_stdin(t_g *g, t_list *redir)
 	return (0);
 }
 
+/*Cherche le type de redirection si une erreur return 1*/
 int	check_redirection(t_g *g, t_list *tmp)
 {
 	if (check_quotes((char *)tmp->content))
@@ -90,6 +91,7 @@ int	check_redirection(t_g *g, t_list *tmp)
 	return (0);
 }
 
+/*Cherche une redirection si une erreur return 0*/
 int	is_redirection(t_g *g)
 {
 	t_list	*tmp;
@@ -103,10 +105,7 @@ int	is_redirection(t_g *g)
 			return (0);
 		tmp = tmp->next;
 	}
-	redirect_std_to_file(g);
 	remove_redir_token(&g->lst);
 	remove_quotes(&g->lst);
-	// printf("Apres remove redir\n");
-	// ft_put_lst(g->lst);
 	return (1);
 }

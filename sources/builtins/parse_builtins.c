@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/13 16:46:59 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:50:51 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	is_command(t_g *g)
 
 	g->env->lst = g->lst;
 	tmp = g->lst;
+	apply_redirections(g);
 	while (tmp)
 	{
 		i = 0;

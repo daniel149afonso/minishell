@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/09 22:39:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:28:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 
         if (pid == 0)  /* === CHILD === */
         {
+            //redirect stdin or stdout
+            redirect_std_to_file(g);
             /* 1) Si on lit dans un pipe précédent, redirige stdin */
             if (prev_fd != -1)
             {

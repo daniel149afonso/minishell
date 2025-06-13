@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/11 01:35:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/13 16:51:15 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
+
 int	msh_while(t_g *g)
 {
 	if (g->input && *g->input)
@@ -62,7 +63,7 @@ int	msh_while(t_g *g)
 			}
 			else if (!is_command(g))
 			{
-				restore_std(g);
+				//restore_std(g);
 				g->cmds = parse_commands(g->lst);
 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 					printf("%s: command not found\n", (char *)g->lst->content);

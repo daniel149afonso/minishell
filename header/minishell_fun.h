@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/10 18:41:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/13 15:27:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
 void	redirect_std_to_file(t_g *g);
 int		double_stdin(t_list *redir, t_list **herdoc);
+void	apply_redirections(t_g *g);
 
 //EXECUTION NO BUILTS
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
