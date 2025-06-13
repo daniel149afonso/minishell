@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/10 18:45:31 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/13 16:46:59 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	is_command(t_g *g)
 				return (1);
 			if ((ft_strcmp((char *)tmp->content, g->builtin[i].name)) == 0)
 			{
-				printf("Builtin trouvé\n");
 				g->builtin[i].f(g);
 				return (1);
 			}
