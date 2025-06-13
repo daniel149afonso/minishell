@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/11 01:35:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/13 15:58:14 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,59 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
+// int	msh_while(t_g *g)
+// {
+// 	if (g->input && *g->input)
+// 	{
+// 		g->result = search_var(ft_splitou(g->input), g->env);
+// 		if (!g->result)
+// 			return (1);
+// 		ft_init_lst(&g->lst, g->result);
+// 		if (is_pipe(g->lst))
+// 		{
+// 			is_redirection(g);
+// 			g->cmds = parse_commands(g->lst);
+// 			print_cmds(g->cmds);
+// 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+// 				printf("%s: command not found\n", (char *)g->lst->content);
+// 			free_cmds(g->cmds);
+// 		}
+// 		else
+// 		{
+// 			is_redirection(g);
+// 			redirect_std_to_file(g);
+// 			if (!is_command(g))
+// 			{
+// 				restore_std(g);
+// 				g->cmds = parse_commands(g->lst);
+// 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+// 					printf("%s: command not found\n", (char *)g->lst->content);
+// 				free_cmds(g->cmds);
+// 			}
+// 		}
+// 		restore_std(g);
+// 	}
+// 	return (0);
+// }
+
+// void	redirect_std_to_file(t_g *g)
+// {
+// 	if (g->fd_stdout != -1)
+// 	{
+// 		g->s_stdout = dup(STDOUT_FILENO);
+// 		dup2(g->fd_stdout, STDOUT_FILENO);
+// 		close(g->fd_stdout);
+// 		g->fd_stdout = -1;
+// 	}
+// 	if (g->fd_stdin != -1)
+// 	{
+// 		g->s_stdin = dup(STDIN_FILENO);
+// 		dup2(g->fd_stdin, STDIN_FILENO);
+// 		close(g->fd_stdin);
+// 		g->fd_stdin = -1;
+// 	}
+// }
+
 int	msh_while(t_g *g)
 {
 	if (g->input && *g->input)
@@ -62,7 +115,7 @@ int	msh_while(t_g *g)
 			}
 			else if (!is_command(g))
 			{
-				restore_std(g);
+				//restore_std(g);
 				g->cmds = parse_commands(g->lst);
 				if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 					printf("%s: command not found\n", (char *)g->lst->content);
