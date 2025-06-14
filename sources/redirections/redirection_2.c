@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/13 16:51:42 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:15:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-void	restore_std(t_g *g)
-{
-	if (g->s_stdout != -1)
-	{
-		dup2(g->s_stdout, STDOUT_FILENO);
-		close(g->s_stdout);
-	}
-	if (g->s_stdin != -1)
-	{
-		dup2(g->s_stdin, STDIN_FILENO);
-		close(g->s_stdin);
-	}
-}
-
+/*Traite << stdin, ouvre un herdoc qui recoit les entrees de l'utilisateur
+jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
 int	double_stdin(t_list *redir, t_list **herdoc)
 {
 	char	*occur;
