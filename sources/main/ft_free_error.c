@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:13:27 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:55:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	ft_error(char *msg, t_list **lst)
-{
-	ft_free_lst(lst);
-	printf("%s\n", msg);
-	exit(EXIT_FAILURE);
-}
 
 void	ft_free_lst(t_list **lst)
 {
@@ -47,10 +40,3 @@ void	free_tokens(char **tokens)
 	tokens = NULL;
 }
 
-void	print_path_error(char *path)
-{
-	write(2, "minishell: cd: ", 16);
-	write(2, path, ft_strlen(path));
-	write(2, ": No such file or directory", 28);
-	write(2, "\n", 1);
-}

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:39 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:33:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
+/*Ajoute le chemin de pwd à la variable d'environnement*/
 void	add_env_var(t_env **env, const char *key, const char *value)
 {
 	t_env	*new;
@@ -34,6 +35,8 @@ void	add_env_var(t_env **env, const char *key, const char *value)
 	}
 }
 
+/*Check PWD et OLD_PWD met à jour si existe ou
+ajoute sinon*/
 void	set_env_value(t_env **env, const char *key, const char *value)
 {
 	if (update_env_if_exists(*env, key, value))
@@ -41,6 +44,7 @@ void	set_env_value(t_env **env, const char *key, const char *value)
 	add_env_var(env, key, value);
 }
 
+/*Met à jour OLD_PWD*/
 int	save_oldpwd(t_env **env, char **oldpwd)
 {
 	if (!get_current_path(oldpwd))
@@ -52,6 +56,8 @@ int	save_oldpwd(t_env **env, char **oldpwd)
 	return (1);
 }
 
+/*Check CD avec arguments = change de dossier,
+CD sans argument = HOME*/
 int	resolve_path(t_list *lst, char **path)
 {
 	if (lst->next && lst->next->content)
@@ -60,6 +66,8 @@ int	resolve_path(t_list *lst, char **path)
 		return (set_home_path(path));
 }
 
+/*Appel echo qui chande de repertoire tout en modifiant les variables:
+OLD_PWD et PWD*/
 void	ft_cd(t_g *g)
 {
 	char	*path;
@@ -71,19 +79,20 @@ void	ft_cd(t_g *g)
 	oldpwd = NULL;
 	newpwd = NULL;
 	if (!save_oldpwd(&g->env, &oldpwd))
-		return ;
+		return (return_code(g->env, 1));
 	if (!resolve_path(g->lst, &path))
-		return ;
+		return (return_code(g->env, 1));
 	result = chdir(path);
 	if (result != 0)
-		perror("minishell: cd");
+		return (perror("minishell: cd"), return_code(g->env, 1));
 	else
 	{
 		if (!get_current_path(&newpwd))
 		{
 			perror("cd");
-			return ;
+			return (return_code(g->env, 1));
 		}
 		set_env_value(&g->env, "PWD", newpwd);
 	}
+	return (return_code(g->env, 0));
 }

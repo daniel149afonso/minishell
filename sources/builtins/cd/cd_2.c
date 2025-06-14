@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:03:06 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:35 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:12:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
+/*Recupere le chemin actuel*/
 int	get_current_path(char **path)
 {
 	char	buffer[1024];
@@ -24,6 +25,7 @@ int	get_current_path(char **path)
 	return (1);
 }
 
+/*Met à jour le chemin vers HOME*/
 int	set_home_path(char **path)
 {
 	*path = getenv("HOME");
@@ -36,6 +38,8 @@ int	set_home_path(char **path)
 	return (1);
 }
 
+/*Met à jour le chemin et check s'il y a trop d'argument
+après la commande CD*/
 int	set_path(t_list *lst, char **path)
 {
 	*path = (char *)lst->next->content;
@@ -47,6 +51,7 @@ int	set_path(t_list *lst, char **path)
 	return (1);
 }
 
+/*Met à jour PWD ou OLD_PWD*/
 int	update_env_if_exists(t_env *env, const char *key, const char *value)
 {
 	while (env)

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/13 16:50:51 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:51:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*init chaque builtin avec sa fonction correspondante*/
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 {
 	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
@@ -61,6 +62,9 @@ static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 	return (0);
 }
 
+/*Check s'il y a une builtin dans la commande
+puis appelle sa fonction correspondante
+et applique les redirections si besoin*/
 int	is_command(t_g *g)
 {
 	t_list	*tmp;
@@ -87,9 +91,3 @@ int	is_command(t_g *g)
 	}
 	return (0);
 }
-
-//FT_INIT_COMMANDS:
-//init chaque commande avec sa fonction correspondante
-//---------------------
-//Is_command: check si il y a une commande dans l'input
-//et appel la fonction correspondante

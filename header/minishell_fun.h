@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/13 15:27:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/14 21:07:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ char	**ft_splitou(char const *s);
 int		is_lococo(const char *s);
 
 //FREE ERROR AND EXIT
-void	ft_error(char *msg, t_list **lst);
 void	ft_free_lst(t_list **lst);
-void	print_path_error(char *path);
 void	free_n_exit(t_g *g);
 
 // UTILS

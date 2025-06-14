@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:47 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:46:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
+/*Verifie si l'option "-n" est valide*/
 int	is_valid_option(char *option)
 {
 	int	i;
@@ -27,6 +28,7 @@ int	is_valid_option(char *option)
 	return (1);
 }
 
+/*Affiche l'argument*/
 void	display_content(char *str)
 {
 	int		i;
@@ -39,6 +41,7 @@ void	display_content(char *str)
 	}
 }
 
+/*Affiche l'argument et traite s'il y a l'option "-n"*/
 void	display_with_args(t_list *arg)
 {
 	int		newline;
@@ -62,6 +65,7 @@ void	display_with_args(t_list *arg)
 		printf("\n");
 }
 
+/*Appel la fonction echo*/
 void	ft_echo(t_g *g)
 {
 	t_list	*arg;
