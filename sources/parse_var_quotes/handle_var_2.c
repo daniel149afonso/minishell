@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:55:58 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/04 22:13:29 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 20:58:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Extrait le nom de la variable*/
 char	*extract_var_name(char *str, int *i)
 {
 	int		len;
@@ -35,6 +36,8 @@ char	*extract_var_name(char *str, int *i)
 	return (name);
 }
 
+/*Cherche le nom de la variable dans l'env,
+si trouvé on récupère sa valeur*/
 char	*get_env_value(t_env *env, char *var_name)
 {
 	t_env	*tmp;

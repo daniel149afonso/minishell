@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redir_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 19:35:31 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 21:37:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Check s'il y a un argument après la redirection,
+si non return une erreur*/
 int	is_missing_arg(t_list *lst)
 {
 	if ((ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
@@ -30,6 +32,7 @@ int	is_missing_arg(t_list *lst)
 	return (0);
 }
 
+/*Gère simplement les cas d'erreurs avec les redirections*/
 char	*right_redir(t_list *lst)
 {
 	int	right;
@@ -53,6 +56,7 @@ char	*right_redir(t_list *lst)
 	return (NULL);
 }
 
+/*Gère simplement les cas d'erreurs avec les redirections*/
 char	*left_redir(t_list *lst)
 {
 	int	left;
@@ -76,6 +80,8 @@ char	*left_redir(t_list *lst)
 	return (NULL);
 }
 
+/*Check si les redirections sont mélangés
+si oui return une erreur*/
 int	is_mixed_redir(t_list *lst)
 {
 	char	*right;
@@ -96,6 +102,7 @@ int	is_mixed_redir(t_list *lst)
 	return (0);
 }
 
+/*Parse les redirections mélangés et celles où l'argument est manquant*/
 int	parsing_redir(t_list *lst)
 {
 	while (lst)
