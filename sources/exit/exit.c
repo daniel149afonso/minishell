@@ -3,27 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/14 20:55:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 20:14:59 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-
 /*Verifie le code de sortie s'il existe*/
 int	check_exit_code(t_g *g)
 {
-	int		return_code;
 	int		i;
 	char	*key;
 
-	return_code = 0;
 	i = 0;
 	key = NULL;
-	if ((g->lst = g->lst->next))
+	g->lst = g->lst->next;
+	if (g->lst)
 	{
 		key = extract_check_key((char *)g->lst->content);
 		if (!key)
@@ -36,8 +34,8 @@ int	check_exit_code(t_g *g)
 		}
 		if (g->lst->next)
 			return (printf("Too much ARGS in exit option\n"), -20);
-		return_code = ft_atoi(key);
-		return (free(key), return_code);
+		i = ft_atoi(key);
+		return (free(key), i);
 	}
 	return (0);
 }

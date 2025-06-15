@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 17:57:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 19:30:23 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	double_stdout(t_g *g, t_list *redir)
 {
 	int	fd;
 
-	fd = open((char *)redir->next->content, \
-		O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open((char *)redir->next->content,
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		printf("%s: No such file or directory\n", (char *)redir->next->content);

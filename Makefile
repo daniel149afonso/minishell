@@ -67,13 +67,13 @@ $(NAME): $(OBJS) $(LIBFT)
 	@printf "\rCompiling $(NAME)..."
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline -lhistory -lncurses
 
-	@printf "\r$(NAME) compiled successfully.\n"
+	@printf "\r\033[0;32m$(NAME) compiled successfully.\n\033[0m"
 
 # Compile libft
 $(LIBFT):
 	@printf "\rCompiling libft..."
 	@make bonus -C libft/ --no-print-directory
-	@printf "\rLibft compiled successfully.\n"
+	@printf "\r\033[0;32mLibft compiled successfully.\n\033[0m"
 
 # Compilation des fichiers .o à partir des .c
 %.o: %.c $(HEAD)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_2.c                                         :+:      :+:    :+:   */
+/*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/05 14:58:33 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:53:18 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	check_if_var(t_env *env)
 
 	arg = env->lst->next;
 	tmp = env->lst->next;
-	while(tmp)
+	while (tmp)
 	{
 		value = extract_check_key(tmp->content);
 		if (value[0] == '=' || check_arg(value))

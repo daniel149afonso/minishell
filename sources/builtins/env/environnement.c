@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/05 14:52:54 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:55:22 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ pour initier un environnement
 -----------------------------*/
 void	init_env(t_env **env, char **envp)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (envp[i])
 	{
 		add_env_node(env, envp[i]);

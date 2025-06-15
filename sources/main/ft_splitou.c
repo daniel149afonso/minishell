@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/09 22:17:03 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 19:28:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ int	read_word(const char *s, int *pos, char **out)
 	*out = ft_strndup(&s[start], i - start);
 	if (!*out)
 		return (0);
-	*pos = i;
-	return (1);
+	return (*pos = i, 1);
 }
 
 char	*get_next_token(const char *s, int *i)
 {
-	char *tok;
-	int len;
+	char	*tok;
+	int		len;
 
 	if (ft_strchr("|;()<>", s[*i]))
 	{
@@ -69,7 +68,7 @@ char	*get_next_token(const char *s, int *i)
 	else
 	{
 		if (!read_word(s, i, &tok))
-			return NULL;
+			return (NULL);
 	}
 	return (tok);
 }
@@ -100,7 +99,6 @@ char	**ft_splitou(const char *s)
 		tokens[j++] = tok;
 	}
 	tokens[j] = NULL;
-	add_history(s);
 	return (tokens);
 }
 /*

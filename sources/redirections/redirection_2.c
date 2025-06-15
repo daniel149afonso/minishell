@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/15 18:55:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 19:32:36 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ void	remove_redir_token(t_list **lst)
 	prev = NULL;
 	while (curr && curr->next)
 	{
-		if (!ft_strcmp((char *)curr->content, ">") \
-		|| !ft_strcmp((char *)curr->content, ">>") \
-		|| !ft_strcmp((char *)curr->content, "<") \
-		|| !ft_strcmp((char *)curr->content, "<<"))
+		if (!ft_strcmp((char *)curr->content, ">")
+			|| !ft_strcmp((char *)curr->content, ">>")
+			|| !ft_strcmp((char *)curr->content, "<")
+			|| !ft_strcmp((char *)curr->content, "<<"))
 		{
 			remove_redir_token_2(lst, &curr, &prev);
 			continue ;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:15:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/14 21:15:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 19:30:39 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-/*Resaure la sortie standard dans le terminal*/
+/*Restaure la sortie standard dans le terminal*/
 void	restore_std(t_g *g)
 {
 	if (g->s_stdout != -1)

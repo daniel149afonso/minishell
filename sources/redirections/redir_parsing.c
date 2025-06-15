@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/04 22:12:42 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:35:31 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	is_missing_arg(t_list *lst)
 {
-	if ((ft_strcmp((char *)lst->content, ">") == 0 && !lst->next) \
-	|| (ft_strcmp((char *)lst->content, ">>") == 0 && !lst->next) \
-	|| (ft_strcmp((char *)lst->content, "<") == 0 && !lst->next) \
-	|| (ft_strcmp((char *)lst->content, "<<") == 0 && !lst->next))
+	if ((ft_strcmp((char *)lst->content, ">") == 0 && !lst->next)
+		|| (ft_strcmp((char *)lst->content, ">>") == 0 && !lst->next)
+		|| (ft_strcmp((char *)lst->content, "<") == 0 && !lst->next)
+		|| (ft_strcmp((char *)lst->content, "<<") == 0 && !lst->next))
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
 		return (1);
@@ -86,10 +86,10 @@ int	is_mixed_redir(t_list *lst)
 	if (right || left)
 	{
 		if (right)
-			printf("minishell: syntax error near unexpected token `%s'\n", \
+			printf("minishell: syntax error near unexpected token `%s'\n",
 				right);
 		else
-			printf("minishell: syntax error near unexpected token `%s'\n", \
+			printf("minishell: syntax error near unexpected token `%s'\n",
 				left);
 		return (1);
 	}
