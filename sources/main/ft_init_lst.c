@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/04 22:13:50 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:30:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*crée un nouvel element de type t_list pour chaque token
+puis assemble chaque element pour former une liste chainée*/
 void	ft_init_lst(t_list **lst, char **tokens)
 {
 	int		j;
@@ -29,6 +31,7 @@ void	ft_init_lst(t_list **lst, char **tokens)
 	ft_put_lst(*lst);
 }
 
+/*Affiche le contenu de chaque element de la liste*/
 void	ft_put_lst(t_list *lst)
 {
 	t_list	*tmp;
@@ -40,9 +43,3 @@ void	ft_put_lst(t_list *lst)
 		lst = tmp;
 	}
 }
-//FT_INIT_LST:
-//crée un nouvel element de type t_list pour chaque token
-//puis assemble chaque elem pour former une liste chainée
-//-------------------------------------------------------------
-//FT_PUT_LST
-//Affiche le contenu de chaque element de la liste

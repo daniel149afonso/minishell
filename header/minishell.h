@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/07 21:28:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 17:16:25 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_g
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
 	t_list		*lst;
-	t_list		*herdoc;
+	t_list		*heredoc;
 	t_cmd		*cmds;
 }	t_g;
 

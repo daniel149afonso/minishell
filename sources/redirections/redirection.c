@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/13 17:20:07 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:57:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	check_redirection(t_g *g, t_list *tmp)
 	}
 	else if (ft_strcmp((char *)tmp->content, "<<") == 0)
 	{
-		if (double_stdin(tmp, &g->herdoc))
+		if (double_stdin(tmp, &g->heredoc, g->env, 1))
 			return (1);
 	}
 	return (0);
