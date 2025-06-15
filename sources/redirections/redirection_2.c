@@ -6,24 +6,22 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/14 21:15:34 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 18:55:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-/*Traite << stdin, ouvre un herdoc qui recoit les entrees de l'utilisateur
+/*Traite << stdin, ouvre un heredoc qui recoit les entrees de l'utilisateur
 jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
-int	double_stdin(t_list *redir, t_list **herdoc)
+int	double_stdin(t_list *redir, t_list **heredoc, t_env *env, int turn)
 {
 	char	*occur;
 	char	*buffer;
-	int		turn;
 
 	buffer = ft_calloc(1, 1);
 	if (!buffer)
 		return (1);
-	turn = 1;
 	occur = ((char *)redir->next->content);
 	while (1)
 	{
@@ -33,9 +31,10 @@ int	double_stdin(t_list *redir, t_list **herdoc)
 			if (!ft_strcmp(buffer, occur))
 				break ;
 			if (turn)
-				*herdoc = ft_lstnew(ft_strdup(buffer));
+				*heredoc = ft_lstnew(expand_variables(ft_strdup(buffer), env));
 			else
-				ft_lstadd_back(herdoc, ft_lstnew(ft_strdup(buffer)));
+				ft_lstadd_back(heredoc,
+					ft_lstnew(expand_variables(ft_strdup(buffer), env)));
 			turn = 0;
 		}
 		free(buffer);

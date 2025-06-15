@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/14 21:07:39 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/15 17:57:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	f_unset(t_env *env);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
+char	*expand_variables(char *str, t_env *env);
 char	*extract_var_name(char *str, int *i);
 char	*get_env_value(t_env *env, char *var_name);
 
@@ -58,7 +59,7 @@ void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
 void	redirect_std_to_file(t_g *g);
-int		double_stdin(t_list *redir, t_list **herdoc);
+int		double_stdin(t_list *redir, t_list **herdoc, t_env *env, int turn);
 void	apply_redirections(t_g *g);
 
 //EXECUTION NO BUILTS
