@@ -54,7 +54,8 @@ HEAD = header/push_swap.h
 
 # Compiler and flags
 CC = cc -g
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I/opt/homebrew/opt/readline/include
+LDFLAGS = -L/opt/homebrew/opt/readline/lib -lncurses -lreadline -lhistory
 
 # Commands
 RM = rm -f
@@ -65,7 +66,7 @@ all: $(NAME)
 # Compilation
 $(NAME): $(OBJS) $(LIBFT)
 	@printf "\rCompiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline -lhistory -lncurses
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LDFLAGS)
 
 	@printf "\r\033[0;32m$(NAME) compiled successfully.\n\033[0m"
 

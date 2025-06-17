@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 20:14:59 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/17 11:41:25 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	free_n_exit(t_g *g)
 
 	if (g->lst)
 		return_code = check_exit_code(g);
+	else
+		return_code = 0;
 	if (return_code == -20)
 		return ;
 	if (g->lst)
