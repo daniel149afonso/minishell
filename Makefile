@@ -62,6 +62,7 @@ ifeq ($(UNAME), Darwin)
 else
     LDFLAGS += -lreadline -lhistory
 endif
+
 # Commands
 RM = rm -f
 

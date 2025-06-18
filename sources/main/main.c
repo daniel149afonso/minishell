@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/15 19:52:14 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/18 08:40:08 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,20 @@ static void	exec_parsing(t_g *g)
 		{
 			g->cmds = parse_commands(g->lst);
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+			{
 				printf("%s: command not found\n", (char *)g->lst->content);
+				return_code(g->env, 1);
+			}
 			free_cmds(g->cmds);
 		}
 		else if (!is_command(g))
 		{
 			g->cmds = parse_commands(g->lst);
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+			{
 				printf("%s: command not found\n", (char *)g->lst->content);
+				return_code(g->env, 1);
+			}
 			free_cmds(g->cmds);
 		}
 		restore_std(g);

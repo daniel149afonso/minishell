@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 19:51:10 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/18 09:21:49 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
     int    pipefd[2];
     int    prev_fd = -1;
+    int     status = 0;
+    int     last_status = 0;
     pid_t  pid;
 
     while (cmds)
@@ -154,7 +156,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
                     exit(0);
                 }
             }
-
             /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
             for (int i = 0; g->builtin[i].name; i++)
             {
@@ -164,12 +165,12 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
                     exit(0);
                 }
             }
-
             /* 5) Commande externe */
             char *path = get_path(cmds->argv[0], envp);
             if (!path)
             {
                 fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+                return_code(g->env, 1);
                 exit(127);
             }
             execve(path, cmds->argv, envp);
@@ -190,8 +191,10 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
         cmds = cmds->next;
     }
 
-    /* attendre tous les children */
-    while (wait(NULL) > 0)
-        ;
+   while (wait(&status) > 0)
+        last_status = status;
+
+    /* stocker dans $?: */
+    return_code(g->env, WEXITSTATUS(last_status));
     return 1;
 }
