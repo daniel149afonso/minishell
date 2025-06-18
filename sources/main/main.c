@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:56:20 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/16 19:56:23 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/17 17:51:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ static void	exec_parsing(t_g *g)
 		if (is_pipe(g->lst))
 		{
 			g->cmds = parse_commands(g->lst);
+			//DEBUT DEBUG CMDS
+			t_cmd *cmd = g->cmds;
+			int   idx = 0;
+
+			while (cmd)
+			{
+				printf("[parse] commande %d :", idx++);
+				for (int j = 0; cmd->argv[j]; j++)
+					printf(" '%s'", cmd->argv[j]);
+				printf("\n");
+				cmd = cmd->next;
+			}
+			//FIN DEBUG CMDS
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 				printf("%s: command not found\n", (char *)g->lst->content);
 			free_cmds(g->cmds);
