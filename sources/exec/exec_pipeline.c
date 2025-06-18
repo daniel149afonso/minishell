@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/18 17:44:00 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:25:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,23 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
-void	get_sub_lst(t_list *lst, t_list **sub_lst)
+void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
 {
 	char	pipe[2];
 	int		turn;
+	char	*arg;
+	t_list	*node;
 
 	turn = 1;
 	pipe[0] = '|';
 	pipe[1] = '\0';
+
+	for (size_t i = 0; argv[i]; i++)
+	{
+		arg = argv[i];
+		
+	}
+	
 	while (lst)
 	{
 		if (!ft_strcmp((char *)lst->content, pipe))
@@ -126,6 +135,7 @@ void	get_sub_lst(t_list *lst, t_list **sub_lst)
 			ft_lstadd_back(sub_lst, ft_lstnew(ft_strdup((char *)lst->content)));
 		lst = lst->next;
 	}
+	
 	ft_put_lst(*sub_lst);
 }
 
@@ -187,7 +197,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
 				{
 					old_lst = g->lst;
-					get_sub_lst(g->lst, &sub_lst);
+					get_sub_lst(g->lst, &sub_lst, cmds->argv);
 					g->lst = sub_lst;
 					g->builtin[i].f(g);
 					g->lst = old_lst;
