@@ -54,9 +54,14 @@ HEAD = header/push_swap.h
 
 # Compiler and flags
 CC = cc -g
-CFLAGS = -Wall -Werror -Wextra -I/opt/homebrew/opt/readline/include
-LDFLAGS = -L/opt/homebrew/opt/readline/lib -lncurses -lreadline -lhistory
+UNAME := $(shell uname)
 
+ifeq ($(UNAME), Darwin)
+    CFLAGS += -I/opt/homebrew/opt/readline/include
+    LDFLAGS += -L/opt/homebrew/opt/readline/lib -lreadline -lhistory
+else
+    LDFLAGS += -lreadline -lhistory
+endif
 # Commands
 RM = rm -f
 
