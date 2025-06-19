@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/17 11:41:25 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/19 03:22:44 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	check_exit_code(t_g *g)
 		while (key[i])
 		{
 			if (!ft_isdigit(key[i]) && key[i] != '-')
-				return (printf("Invalid exit option: '%s'\n", key), -20);
+				return (return_code(g->env, 2), printf("minishell: exit: "
+							"%s: numeric argument required\n", key), -20);
 			i++;
 		}
 		if (g->lst->next)
-			return (printf("Too much ARGS in exit option\n"), -20);
+			return (return_code(g->env, 2),
+				printf("minishell: exit: too much args\n"), -20);
 		i = ft_atoi(key);
 		return (free(key), i);
 	}
