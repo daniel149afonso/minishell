@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 19:41:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/20 19:57:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,33 +107,6 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
-void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
-{
-	char	pipe[2];
-	int		turn;
-	char	*arg;
-	t_list	*node;
-
-	turn = 1;
-	pipe[0] = '|';
-	pipe[1] = '\0';
-
-	while (lst)
-	{
-		if (!ft_strcmp((char *)lst->content, pipe))
-			break ;
-		if (turn)
-		{
-			*sub_lst = ft_lstnew(ft_strdup((char *)lst->content));
-			turn = 0;
-		}
-		else
-			ft_lstadd_back(sub_lst, ft_lstnew(ft_strdup((char *)lst->content)));
-		lst = lst->next;
-	}
-	
-	ft_put_lst(*sub_lst);
-}
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
@@ -190,7 +163,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
             for (int i = 0; g->envbuilt[i].name; i++)
             {
-                if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
+                if (ft_strncmp(cmds->argv[0], g->envbuilt[i].name, ft_strlen(g->envbuilt[i].name)) == 0)
                 {
                     g->envbuilt[i].e(g->env);
                     exit(0);
@@ -200,7 +173,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
             /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
             for (int i = 0; g->builtin[i].name; i++)
             {
-                if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+                if (ft_strncmp(cmds->argv[0], g->builtin[i].name, ft_strlen(g->builtin[i].name)) == 0)
                 {
 					/* E.1 Sauvegarde de l’ancienne liste et bascule */
 					old_lst = g->lst;
