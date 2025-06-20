@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/15 20:11:01 by apiscopo         ###   ########.fr       */
+/*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/16 19:55:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
