@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 15:11:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/20 19:41:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,6 @@ void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
 	pipe[0] = '|';
 	pipe[1] = '\0';
 
-	for (size_t i = 0; argv[i]; i++)
-	{
-		arg = argv[i];
-		
-	}
-	
 	while (lst)
 	{
 		if (!ft_strcmp((char *)lst->content, pipe))
@@ -148,6 +142,9 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
     int     status = 0;
     int     last_status = 0;
     pid_t  pid;
+	t_list *sub_lst = NULL;
+	t_list *old_lst = NULL;
+
 
 	while (cmds)
 	{
@@ -183,6 +180,13 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				close(pipefd[1]);
 			}
 
+			 /*  C. Construction de sub_lst à partir de cmds->argv */
+			for (int k = 0; cmds->argv[k] != NULL; k++)
+			{
+				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
+				ft_lstadd_back(&sub_lst, node);
+			}
+			
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
             for (int i = 0; g->envbuilt[i].name; i++)
             {
@@ -192,12 +196,20 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
                     exit(0);
                 }
             }
+			
             /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
             for (int i = 0; g->builtin[i].name; i++)
             {
                 if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
                 {
+					/* E.1 Sauvegarde de l’ancienne liste et bascule */
+					old_lst = g->lst;
+					g->lst = sub_lst;
+					/* E.2 Appel du builtin sur sub_lst */
                     g->builtin[i].f(g);
+					/* E.3 Restauration et libération */
+					g->lst = old_lst;
+					ft_lstclear(&sub_lst, free);
                     exit(0);
                 }
             }
