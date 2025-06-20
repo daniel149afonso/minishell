@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 16:27:49 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/20 19:57:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,39 +107,6 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
-void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
-{
-	char	pipe[2];
-	int		turn;
-	char	*arg;
-	t_list	*node;
-
-	turn = 1;
-	pipe[0] = '|';
-	pipe[1] = '\0';
-
-	for (size_t i = 0; argv[i]; i++)
-	{
-		arg = argv[i];
-		
-	}
-	
-	while (lst)
-	{
-		if (!ft_strcmp((char *)lst->content, pipe))
-			break ;
-		if (turn)
-		{
-			*sub_lst = ft_lstnew(ft_strdup((char *)lst->content));
-			turn = 0;
-		}
-		else
-			ft_lstadd_back(sub_lst, ft_lstnew(ft_strdup((char *)lst->content)));
-		lst = lst->next;
-	}
-	
-	ft_put_lst(*sub_lst);
-}
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
@@ -148,6 +115,9 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
     int     status = 0;
     int     last_status = 0;
     pid_t  pid;
+	t_list *sub_lst = NULL;
+	t_list *old_lst = NULL;
+
 
 	while (cmds)
 	{
@@ -183,8 +153,15 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				close(pipefd[1]);
 			}
 
+			 /*  C. Construction de sub_lst à partir de cmds->argv */
+			for (int k = 0; cmds->argv[k] != NULL; k++)
+			{
+				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
+				ft_lstadd_back(&sub_lst, node);
+			}
+			
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
-            /*for (int i = 0; g->envbuilt[i].name; i++)
+            for (int i = 0; g->envbuilt[i].name; i++)
             {
                 if (ft_strncmp(cmds->argv[0], g->envbuilt[i].name, ft_strlen(g->envbuilt[i].name)) == 0)
                 {
@@ -192,15 +169,23 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
                     exit(0);
                 }
             }
-             4) Builtins classiques (cd/pwd/echo/exit) dans un 
+			
+            /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
             for (int i = 0; g->builtin[i].name; i++)
             {
                 if (ft_strncmp(cmds->argv[0], g->builtin[i].name, ft_strlen(g->builtin[i].name)) == 0)
                 {
+					/* E.1 Sauvegarde de l’ancienne liste et bascule */
+					old_lst = g->lst;
+					g->lst = sub_lst;
+					/* E.2 Appel du builtin sur sub_lst */
                     g->builtin[i].f(g);
+					/* E.3 Restauration et libération */
+					g->lst = old_lst;
+					ft_lstclear(&sub_lst, free);
                     exit(0);
                 }
-            }*/
+            }
             /* 5) Commande externe */
             char *path = get_path(cmds->argv[0], envp);
             if (!path)
