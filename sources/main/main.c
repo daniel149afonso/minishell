@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:56:20 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/17 17:51:44 by daniel149af      ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/20 15:11:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,20 @@ static void	exec_parsing(t_g *g)
 			}
 			//FIN DEBUG CMDS
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+			{
 				printf("%s: command not found\n", (char *)g->lst->content);
+				return_code(g->env, 1);
+			}
 			free_cmds(g->cmds);
 		}
 		else if (!is_command(g))
 		{
 			g->cmds = parse_commands(g->lst);
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+			{
 				printf("%s: command not found\n", (char *)g->lst->content);
+				return_code(g->env, 1);
+			}
 			free_cmds(g->cmds);
 		}
 		restore_std(g);

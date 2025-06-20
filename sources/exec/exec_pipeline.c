@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/20 15:06:18 by daniel149af      ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/20 15:11:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../header/minishell.h"
 
@@ -141,11 +143,11 @@ void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-	int    pipefd[2];
-	int    prev_fd = -1;
-	pid_t  pid;
-	// t_list *old_lst;
-	// t_list *sub_lst;
+    int    pipefd[2];
+    int    prev_fd = -1;
+    int     status = 0;
+    int     last_status = 0;
+    pid_t  pid;
 
 	while (cmds)
 	{
@@ -181,38 +183,33 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				close(pipefd[1]);
 			}
 
-			/* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
-			for (int i = 0; g->envbuilt[i].name; i++)
-			{
-				if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
-				{
-					g->envbuilt[i].e(g->env);
-					exit(0);
-				}
-			}
-
-			/* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
-			for (int i = 0; g->builtin[i].name; i++)
-			{
-				if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
-				{
-					// old_lst = g->lst;
-					// get_sub_lst(g->lst, &sub_lst, cmds->argv);
-					// g->lst = sub_lst;
-					g->builtin[i].f(g);
-					//g->lst = old_lst;
-					exit(0);
-				}
-			}
-
-			/* 5) Commande externe */
-			char *path = get_path(cmds->argv[0], envp);
-			if (!path)
-			{
-				fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
-				exit(127);
-			}
-			execve(path, cmds->argv, envp);
+            /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
+            for (int i = 0; g->envbuilt[i].name; i++)
+            {
+                if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
+                {
+                    g->envbuilt[i].e(g->env);
+                    exit(0);
+                }
+            }
+            /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
+            for (int i = 0; g->builtin[i].name; i++)
+            {
+                if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+                {
+                    g->builtin[i].f(g);
+                    exit(0);
+                }
+            }
+            /* 5) Commande externe */
+            char *path = get_path(cmds->argv[0], envp);
+            if (!path)
+            {
+                fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+                return_code(g->env, 1);
+                exit(127);
+            }
+            execve(path, cmds->argv, envp);
 
 			/* si execve échoue */
 			perror("execve");
@@ -230,8 +227,10 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		cmds = cmds->next;
 	}
 
-	/* attendre tous les children */
-	while (wait(NULL) > 0)
-		;
-	return (1);
+   while (wait(&status) > 0)
+        last_status = status;
+
+    /* stocker dans $?: */
+    return_code(g->env, WEXITSTATUS(last_status));
+    return 1;
 }

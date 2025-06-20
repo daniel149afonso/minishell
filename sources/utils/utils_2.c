@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 19:29:41 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/18 09:01:52 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	return_code(t_env *env, int error_code)
 		if ((ft_strncmp(env->key, "?", 1) == 0))
 		{
 			env->value = ft_itoa(error_code);
+			printf("error_code %d\n", error_code);
 			break ;
 		}
 		env = env->next;
