@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/18 09:21:49 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/20 16:26:58 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,23 +148,23 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
             }
 
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
-            for (int i = 0; g->envbuilt[i].name; i++)
+            /*for (int i = 0; g->envbuilt[i].name; i++)
             {
-                if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
+                if (ft_strncmp(cmds->argv[0], g->envbuilt[i].name, ft_strlen(g->envbuilt[i].name)) == 0)
                 {
                     g->envbuilt[i].e(g->env);
                     exit(0);
                 }
             }
-            /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
+             4) Builtins classiques (cd/pwd/echo/exit) dans un 
             for (int i = 0; g->builtin[i].name; i++)
             {
-                if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+                if (ft_strncmp(cmds->argv[0], g->builtin[i].name, ft_strlen(g->builtin[i].name)) == 0)
                 {
                     g->builtin[i].f(g);
                     exit(0);
                 }
-            }
+            }*/
             /* 5) Commande externe */
             char *path = get_path(cmds->argv[0], envp);
             if (!path)
