@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/18 20:25:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/20 15:06:18 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	int    pipefd[2];
 	int    prev_fd = -1;
 	pid_t  pid;
-	t_list *old_lst;
-	t_list *sub_lst;
+	// t_list *old_lst;
+	// t_list *sub_lst;
 
 	while (cmds)
 	{
@@ -196,11 +196,11 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			{
 				if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
 				{
-					old_lst = g->lst;
-					get_sub_lst(g->lst, &sub_lst, cmds->argv);
-					g->lst = sub_lst;
+					// old_lst = g->lst;
+					// get_sub_lst(g->lst, &sub_lst, cmds->argv);
+					// g->lst = sub_lst;
 					g->builtin[i].f(g);
-					g->lst = old_lst;
+					//g->lst = old_lst;
 					exit(0);
 				}
 			}
