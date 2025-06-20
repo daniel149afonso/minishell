@@ -3,26 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/04 22:13:29 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/15 20:54:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-void	handle_single_quote(char *str, char **res, int *i, int *in_single)
-{
-	char	c[2];
-
-	*in_single = !(*in_single);
-	c[0] = str[*i];
-	c[1] = '\0';
-	*res = ft_join_and_free(*res, c);
-	(*i)++;
-}
-
+/*Check si la variable existe dans l'env, si oui elle l'expanse
+sinon elle est traitée comme une string normale*/
 void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 {
 	char	*var;
@@ -36,6 +27,7 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	free(var);
 }
 
+/*Reconstruis la string en ajoutant char par char*/
 void	add_char_to_result(char *str, char **res, int *i)
 {
 	char	c[2];
@@ -46,6 +38,8 @@ void	add_char_to_result(char *str, char **res, int *i)
 	(*i)++;
 }
 
+/*Cherche une variable qui commence par $ entre double quotes ou non
+mais ne fait rien si elle est entre single quote*/
 char	*expand_variables(char *str, t_env *env)
 {
 	int		i;
@@ -75,6 +69,7 @@ char	*expand_variables(char *str, t_env *env)
 	return (res);
 }
 
+/*Parcours chaque token pour chercher s'il y a une variable*/
 char	**search_var(char **strs, t_env *env)
 {
 	int		i;

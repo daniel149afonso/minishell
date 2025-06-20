@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:03:28 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/18 09:21:49 by bullestico       ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/20 15:11:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../header/minishell.h"
 
@@ -105,6 +107,40 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
+void	get_sub_lst(t_list *lst, t_list **sub_lst, char **argv)
+{
+	char	pipe[2];
+	int		turn;
+	char	*arg;
+	t_list	*node;
+
+	turn = 1;
+	pipe[0] = '|';
+	pipe[1] = '\0';
+
+	for (size_t i = 0; argv[i]; i++)
+	{
+		arg = argv[i];
+		
+	}
+	
+	while (lst)
+	{
+		if (!ft_strcmp((char *)lst->content, pipe))
+			break ;
+		if (turn)
+		{
+			*sub_lst = ft_lstnew(ft_strdup((char *)lst->content));
+			turn = 0;
+		}
+		else
+			ft_lstadd_back(sub_lst, ft_lstnew(ft_strdup((char *)lst->content)));
+		lst = lst->next;
+	}
+	
+	ft_put_lst(*sub_lst);
+}
+
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
     int    pipefd[2];
@@ -113,39 +149,39 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
     int     last_status = 0;
     pid_t  pid;
 
-    while (cmds)
-    {
-        if (cmds->next && pipe(pipefd) == -1)
-        {
-            perror("pipe");
-            return 0;
-        }
+	while (cmds)
+	{
+		if (cmds->next && pipe(pipefd) == -1)
+		{
+			perror("pipe");
+			return (0);
+		}
 
-        pid = fork();
-        if (pid == -1)
-        {
-            perror("fork");
-            return 0;
-        }
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			return (0);
+		}
 
-        if (pid == 0)  /* === CHILD === */
-        {
-            //redirect stdin or stdout
-            redirect_std_to_file(g);
-            /* 1) Si on lit dans un pipe précédent, redirige stdin */
-            if (prev_fd != -1)
-            {
-                dup2(prev_fd, STDIN_FILENO);
-                close(prev_fd);
-            }
+		if (pid == 0)  /* === CHILD === */
+		{
+			//redirect stdin or stdout
+			redirect_std_to_file(g);
+			/* 1) Si on lit dans un pipe précédent, redirige stdin */
+			if (prev_fd != -1)
+			{
+				dup2(prev_fd, STDIN_FILENO);
+				close(prev_fd);
+			}
 
-            /* 2) Si une commande suit, redirige stdout vers ce pipe */
-            if (cmds->next)
-            {
-                close(pipefd[0]);
-                dup2(pipefd[1], STDOUT_FILENO);
-                close(pipefd[1]);
-            }
+			/* 2) Si une commande suit, redirige stdout vers ce pipe */
+			if (cmds->next)
+			{
+				close(pipefd[0]);
+				dup2(pipefd[1], STDOUT_FILENO);
+				close(pipefd[1]);
+			}
 
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
             for (int i = 0; g->envbuilt[i].name; i++)
@@ -175,21 +211,21 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
             }
             execve(path, cmds->argv, envp);
 
-            /* si execve échoue */
-            perror("execve");
-            exit(1);
-        }
+			/* si execve échoue */
+			perror("execve");
+			exit(1);
+		}
 
-        /* === PARENT === */
-        if (prev_fd != -1)
-            close(prev_fd);
-        if (cmds->next)
-        {
-            close(pipefd[1]);
-            prev_fd = pipefd[0];
-        }
-        cmds = cmds->next;
-    }
+		/* === PARENT === */
+		if (prev_fd != -1)
+			close(prev_fd);
+		if (cmds->next)
+		{
+			close(pipefd[1]);
+			prev_fd = pipefd[0];
+		}
+		cmds = cmds->next;
+	}
 
    while (wait(&status) > 0)
         last_status = status;
