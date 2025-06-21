@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/05 14:57:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:31:37 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ Fonction de base export qui va
 écrire les variables existante si aucun argument
 ou va allez update les variables avec "check_if_var"
 ---------------------------*/
-void	ft_exp(t_env *env)
+int	ft_exp(t_env *env)
 {
 	t_env	*tmp;
 	t_list	*lst;
@@ -95,6 +95,10 @@ void	ft_exp(t_env *env)
 		}
 	}
 	else
-		return (check_if_var(env));
-	return (return_code(env, 0));
+	{
+		if (check_if_var(env))
+			return (1);
+		return (0);
+	}
+	return (0);
 }

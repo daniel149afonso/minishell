@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 19:57:30 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/21 20:52:30 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,42 +110,32 @@ char *get_path(char *cmd, char **envp)
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-    int    pipefd[2];
-    int    prev_fd = -1;
-    int     status = 0;
-    int     last_status = 0;
-    pid_t  pid;
+	int pipefd[2];
+	int prev_fd = -1;
+	pid_t pid;
+	int	code = 0;
+	int status;
+	int last_status = 0;
 	t_list *sub_lst = NULL;
 	t_list *old_lst = NULL;
-
 
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
-		{
-			perror("pipe");
-			return (0);
-		}
+			return (perror("pipe"), 0);
 
 		pid = fork();
 		if (pid == -1)
-		{
-			perror("fork");
-			return (0);
-		}
+			return (perror("fork"), 0);
 
-		if (pid == 0)  /* === CHILD === */
+		if (pid == 0) // CHILD
 		{
-			//redirect stdin or stdout
 			redirect_std_to_file(g);
-			/* 1) Si on lit dans un pipe précédent, redirige stdin */
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-
-			/* 2) Si une commande suit, redirige stdout vers ce pipe */
 			if (cmds->next)
 			{
 				close(pipefd[0]);
@@ -153,55 +143,48 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				close(pipefd[1]);
 			}
 
-			 /*  C. Construction de sub_lst à partir de cmds->argv */
-			for (int k = 0; cmds->argv[k] != NULL; k++)
+			// Sub list argv
+			for (int i = 0; cmds->argv[i]; i++)
+				ft_lstadd_back(&sub_lst, ft_lstnew(ft_strdup(cmds->argv[i])));
+
+			// Builtins with env (export/unset/env)
+			for (int i = 0; g->envbuilt[i].name; i++)
 			{
-				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
-				ft_lstadd_back(&sub_lst, node);
+				if (!ft_strncmp(cmds->argv[0], g->envbuilt[i].name,
+						ft_strlen(g->envbuilt[i].name) + 1))
+				{
+					code = g->envbuilt[i].e(g->env);
+					exit(code);
+				}
 			}
-			
-            /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
-            for (int i = 0; g->envbuilt[i].name; i++)
-            {
-                if (ft_strncmp(cmds->argv[0], g->envbuilt[i].name, ft_strlen(g->envbuilt[i].name)) == 0)
-                {
-                    g->envbuilt[i].e(g->env);
-                    exit(0);
-                }
-            }
-			
-            /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
-            for (int i = 0; g->builtin[i].name; i++)
-            {
-                if (ft_strncmp(cmds->argv[0], g->builtin[i].name, ft_strlen(g->builtin[i].name)) == 0)
-                {
-					/* E.1 Sauvegarde de l’ancienne liste et bascule */
+
+			// Builtins classiques (cd/echo/exit/pwd)
+			for (int i = 0; g->builtin[i].name; i++)
+			{
+				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
+						ft_strlen(g->builtin[i].name) + 1))
+				{
 					old_lst = g->lst;
 					g->lst = sub_lst;
-					/* E.2 Appel du builtin sur sub_lst */
-                    g->builtin[i].f(g);
-					/* E.3 Restauration et libération */
+					code = g->builtin[i].f(g);
 					g->lst = old_lst;
 					ft_lstclear(&sub_lst, free);
-                    exit(0);
-                }
-            }
-            /* 5) Commande externe */
-            char *path = get_path(cmds->argv[0], envp);
-            if (!path)
-            {
-                fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
-                return_code(g->env, 1);
-                exit(127);
-            }
-            execve(path, cmds->argv, envp);
-
-			/* si execve échoue */
+					exit(code);
+				}
+			}
+			// External command
+			char *path = get_path(cmds->argv[0], envp);
+			if (!path)
+			{
+				fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+				exit(127);
+			}
+			execve(path, cmds->argv, envp);
 			perror("execve");
 			exit(1);
 		}
 
-		/* === PARENT === */
+		// PARENT
 		if (prev_fd != -1)
 			close(prev_fd);
 		if (cmds->next)
@@ -212,10 +195,10 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		cmds = cmds->next;
 	}
 
-   while (wait(&status) > 0)
-        last_status = status;
-
-    /* stocker dans $?: */
-    return_code(g->env, WEXITSTATUS(last_status));
-    return 1;
+	// Wait and capture last_pid status
+	while ((wait(&status)) > 0)
+			last_status = status;
+	if (WIFEXITED(last_status))
+		return_code(g->env, WEXITSTATUS(last_status));
+	return (1);
 }

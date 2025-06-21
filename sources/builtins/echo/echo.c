@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/14 20:46:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/21 20:23:50 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	display_with_args(t_list *arg)
 }
 
 /*Appel la fonction echo*/
-void	ft_echo(t_g *g)
+int	ft_echo(t_g *g)
 {
 	t_list	*arg;
 
@@ -75,5 +75,5 @@ void	ft_echo(t_g *g)
 		display_with_args(arg);
 	else
 		printf("\n");
-	return (return_code(g->env, 0));
+	return (0);
 }

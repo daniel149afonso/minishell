@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 15:11:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/20 21:34:29 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static void	exec_parsing(t_g *g)
 		if (is_pipe(g->lst))
 		{
 			g->cmds = parse_commands(g->lst);
-			//DEBUT DEBUG CMDS
 			t_cmd *cmd = g->cmds;
 			int   idx = 0;
-
 			while (cmd)
 			{
 				printf("[parse] commande %d :", idx++);
@@ -46,7 +44,6 @@ static void	exec_parsing(t_g *g)
 				printf("\n");
 				cmd = cmd->next;
 			}
-			//FIN DEBUG CMDS
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 			{
 				printf("%s: command not found\n", (char *)g->lst->content);

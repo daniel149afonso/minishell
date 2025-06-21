@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 19:53:18 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:26:33 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ permet de check si un la commande
 est bien écrite et si il faut += ou juste
 ajouter ou update une variable
 ----------------------------------*/
-void	check_if_var(t_env *env)
+int	check_if_var(t_env *env)
 {
 	t_list	*arg;
 	t_list	*tmp;
@@ -99,7 +99,7 @@ void	check_if_var(t_env *env)
 		if (value[0] == '=' || check_arg(value))
 		{
 			print_error_env(value, tmp);
-			return (return_code(env, 1));
+			return (1);
 		}
 		tmp = tmp->next;
 	}
@@ -111,5 +111,5 @@ void	check_if_var(t_env *env)
 			update_or_add_var(&env, (char *)arg->content);
 		arg = arg->next;
 	}
-	return (return_code(env, 0));
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/19 21:43:11 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/21 20:25:18 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	add_env_node(t_env **env, const char *str)
 Builtin de la commande env pour
 afficher l'environnment comme dans bash
 ---------------------------*/
-void	ft_env(t_env *env)
+int	ft_env(t_env *env)
 {
 	t_env	*tmp;
 
@@ -79,5 +79,5 @@ void	ft_env(t_env *env)
 			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
-	return (return_code(env, 0));
+	return (0);
 }
