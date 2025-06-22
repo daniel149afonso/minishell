@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 19:30:23 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:33:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,21 +94,54 @@ int	check_redirection(t_g *g, t_list *tmp)
 	return (0);
 }
 
-/*Cherche une redirection si une erreur return 0*/
-int	is_redirection(t_g *g)
+int is_redirection(t_g *g)
 {
-	t_list	*tmp;
+    t_list *tmp = g->lst;
+    int      idx = 0;
 
-	tmp = g->lst;
-	if (parsing_redir(g->lst))
-		return (0);
-	while (tmp)
-	{
-		if (check_redirection(g, tmp))
-			return (0);
-		tmp = tmp->next;
-	}
-	remove_redir_token(&g->lst);
-	remove_quotes(&g->lst);
-	return (1);
+    // parcourir toute la ligne tant qu'on n'a pas trouvé > ou <
+    while (tmp)
+    {
+        if (check_redirection(g, tmp))  // ton test existant
+        {
+            g->redir_cmd_idx = idx;
+            break;
+        }
+        if (strcmp((char*)tmp->content, "|") == 0)
+            idx++;
+        tmp = tmp->next;
+    }
+
+    // ton code existant de parsing_redir / remove_redir_token...
+    if (parsing_redir(g->lst))
+        return (0);
+    tmp = g->lst;
+    while (tmp)
+    {
+        if (check_redirection(g, tmp))
+            return (0);
+        tmp = tmp->next;
+    }
+    remove_redir_token(&g->lst);
+    remove_quotes(&g->lst);
+    return (1);
 }
+
+/*Cherche une redirection si une erreur return 0*/
+// int	is_redirection(t_g *g)
+// {
+// 	t_list	*tmp;
+
+// 	tmp = g->lst;
+// 	if (parsing_redir(g->lst))
+// 		return (0);
+// 	while (tmp)
+// 	{
+// 		if (check_redirection(g, tmp))
+// 			return (0);
+// 		tmp = tmp->next;
+// 	}
+// 	remove_redir_token(&g->lst);
+// 	remove_quotes(&g->lst);
+// 	return (1);
+// }

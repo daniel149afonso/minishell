@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/16 19:55:43 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/20 22:15:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_g
 	int			s_stdout;
 	int			fd_stdout;
 	int			fd_stdin;
+	int			redir_cmd_idx;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;

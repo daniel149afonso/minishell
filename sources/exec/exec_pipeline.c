@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 19:57:30 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/21 17:35:20 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
     int     status = 0;
     int     last_status = 0;
     pid_t  pid;
-	t_list *sub_lst = NULL;
-	t_list *old_lst = NULL;
-
+	int cmd_idx = 0;
 
 	while (cmds)
 	{
@@ -136,8 +134,12 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 
 		if (pid == 0)  /* === CHILD === */
 		{
+			t_list *sub_lst = NULL;
+			t_list *old_lst = NULL;
 			//redirect stdin or stdout
-			redirect_std_to_file(g);
+			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
+			if (cmd_idx == g->redir_cmd_idx)
+				redirect_std_to_file(g);
 			/* 1) Si on lit dans un pipe précédent, redirige stdin */
 			if (prev_fd != -1)
 			{
@@ -157,9 +159,11 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			for (int k = 0; cmds->argv[k] != NULL; k++)
 			{
 				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
-				ft_lstadd_back(&sub_lst, node);
+				if (!sub_lst)
+					sub_lst = node;           // premier nœud → tête de liste
+				else
+					ft_lstadd_back(&sub_lst, node);
 			}
-			
             /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
             for (int i = 0; g->envbuilt[i].name; i++)
             {
@@ -210,6 +214,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			prev_fd = pipefd[0];
 		}
 		cmds = cmds->next;
+		cmd_idx++;
 	}
 
    while (wait(&status) > 0)
