@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/21 17:35:20 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/22 15:05:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,111 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
+
+int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
+{
+	int pipefd[2];
+	int prev_fd = -1;
+	pid_t pid;
+	int	code = 0;
+	int status;
+	int last_status = 0;
+	int cmd_idx = 0;
+
+	while (cmds)
+	{
+		if (cmds->next && pipe(pipefd) == -1)
+			return (perror("pipe"), 0);
+
+		pid = fork();
+		if (pid == -1)
+			return (perror("fork"), 0);
+
+		if (pid == 0) // CHILD
+		{
+			t_list *sub_lst = NULL;
+			t_list *old_lst = NULL;
+			//redirect stdin or stdout
+			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
+			if (cmd_idx == g->redir_cmd_idx)
+				redirect_std_to_file(g);
+			if (prev_fd != -1)
+			{
+				dup2(prev_fd, STDIN_FILENO);
+				close(prev_fd);
+			}
+			if (cmds->next)
+			{
+				close(pipefd[0]);
+				dup2(pipefd[1], STDOUT_FILENO);
+				close(pipefd[1]);
+			}
+
+			//Construction de sub_lst à partir de cmds->argv
+			for (int k = 0; cmds->argv[k] != NULL; k++)
+			{
+				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
+				if (!sub_lst)
+					sub_lst = node;           // premier nœud → tête de liste
+				else
+					ft_lstadd_back(&sub_lst, node);
+			}
+			// Builtins with env (export/unset/env)
+			for (int i = 0; g->envbuilt[i].name; i++)
+			{
+				if (!ft_strncmp(cmds->argv[0], g->envbuilt[i].name,
+						ft_strlen(g->envbuilt[i].name) + 1))
+				{
+					code = g->envbuilt[i].e(g->env);
+					exit(code);
+				}
+			}
+
+			// Builtins classiques (cd/echo/exit/pwd)
+			for (int i = 0; g->builtin[i].name; i++)
+			{
+				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
+						ft_strlen(g->builtin[i].name) + 1))
+				{
+					old_lst = g->lst;
+					g->lst = sub_lst;
+					code = g->builtin[i].f(g);
+					g->lst = old_lst;
+					ft_lstclear(&sub_lst, free);
+					exit(code);
+				}
+			}
+			// External command
+			char *path = get_path(cmds->argv[0], envp);
+			if (!path)
+			{
+				fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+				exit(127);
+			}
+			execve(path, cmds->argv, envp);
+			perror("execve");
+			exit(1);
+		}
+
+		// PARENT
+		if (prev_fd != -1)
+			close(prev_fd);
+		if (cmds->next)
+		{
+			close(pipefd[1]);
+			prev_fd = pipefd[0];
+		}
+		cmds = cmds->next;
+		cmd_idx++;
+	}
+
+	// Wait and capture last_pid status
+	while ((wait(&status)) > 0)
+			last_status = status;
+	if (WIFEXITED(last_status))
+		return_code(g->env, WEXITSTATUS(last_status));
+	return (1);
+}
 
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {

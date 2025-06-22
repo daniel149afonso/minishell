@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:08:41 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 19:52:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:31:51 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	del_var(t_env *env, char *arg)
 	}
 }
 
-void	f_unset(t_env *env)
+int	f_unset(t_env *env)
 {
 	t_list	*arg;
 
@@ -51,5 +51,5 @@ void	f_unset(t_env *env)
 		del_var(env, (char *)arg->content);
 		arg = arg->next;
 	}
-	return (return_code(env, 0));
+	return (0);
 }

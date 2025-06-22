@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 20:11:06 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:46:27 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	sigint_handler(int sig);
 void	init_global_struct(t_g **g, char **envp);
 void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins);
 int		is_command(t_g *g);
-void	ft_cd(t_g *g);
-void	ft_pwd(t_g *g);
-void	ft_echo(t_g *g);
-void	ft_env(t_env *env);
+int     ft_cd(t_g *g);
+int 	ft_pwd(t_g *g);
+int 	ft_echo(t_g *g);
+int 	ft_env(t_env *env);
 
 //CD BUILTINS
 int		get_current_path(char **path);
@@ -34,16 +34,16 @@ int		set_home_path(char **path);
 int		update_env_if_exists(t_env *env, const char *key, const char *value);
 
 //ENVIRONNEMENT BUILTINS
+int     ft_exp(t_env *env);
 void	init_env(t_env **env, char **envp);
 void	add_env_node(t_env **env, const char *str);
-void	ft_exp(t_env *env);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
-void	check_if_var(t_env *env);
+int     check_if_var(t_env *env);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
-void	f_unset(t_env *env);
+int 	f_unset(t_env *env);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
@@ -81,11 +81,10 @@ void	ft_put_lst(t_list *lst);
 //FT_SPLIT | PARSING
 void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
-int		is_lococo(const char *s);
 
 //FREE ERROR AND EXIT
 void	ft_free_lst(t_list **lst);
-void	free_n_exit(t_g *g);
+int 	free_n_exit(t_g *g);
 
 // UTILS
 int		is_space(int c);

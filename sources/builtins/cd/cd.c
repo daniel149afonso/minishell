@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/14 20:33:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/21 20:23:03 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	resolve_path(t_list *lst, char **path)
 
 /*Appel echo qui chande de repertoire tout en modifiant les variables:
 OLD_PWD et PWD*/
-void	ft_cd(t_g *g)
+int	ft_cd(t_g *g)
 {
 	char	*path;
 	char	*oldpwd;
@@ -79,20 +79,20 @@ void	ft_cd(t_g *g)
 	oldpwd = NULL;
 	newpwd = NULL;
 	if (!save_oldpwd(&g->env, &oldpwd))
-		return (return_code(g->env, 1));
+		return (1);
 	if (!resolve_path(g->lst, &path))
-		return (return_code(g->env, 1));
+		return (1);
 	result = chdir(path);
 	if (result != 0)
-		return (perror("minishell: cd"), return_code(g->env, 1));
+		return (perror("minishell: cd"), 1);
 	else
 	{
 		if (!get_current_path(&newpwd))
 		{
 			perror("cd");
-			return (return_code(g->env, 1));
+			return (1);
 		}
 		set_env_value(&g->env, "PWD", newpwd);
 	}
-	return (return_code(g->env, 0));
+	return (0);
 }

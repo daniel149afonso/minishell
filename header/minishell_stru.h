@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/20 22:15:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/22 14:59:52 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define GREEN	"\033[0;32m"
 # define BLUE	"\033[0;34m"
 # define RE		"\033[0m"
+# define EXIT_BUILTIN 3
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -57,6 +58,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	int				error_code;
 	t_list			*lst;
 	struct s_env	*next;
 }	t_env;
@@ -66,14 +68,14 @@ typedef struct s_envbuilt
 {
 	char	*name;
 	int		len;
-	void	(*e)(t_env *env);
+	int		(*e)(t_env *env);
 }	t_envbuilt;
 
 //BUILTINS COMMANDS
 typedef struct s_builtin
 {
 	char	*name;
-	void	(*f)(t_g *g);
+	int		(*f)(t_g *g);
 }	t_builtin;
 
 //GLOBAL STRUCT

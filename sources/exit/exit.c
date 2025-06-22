@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/20 16:26:40 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/21 20:50:03 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_exit_code(t_g *g)
 		{
 			if (!ft_isdigit(key[i]) && key[i] != '-')
 				return (return_code(g->env, 2), printf("minishell: exit: "
-							"%s: numeric argument required\n", key), -20);
+							"%s: numeric argument required\n", key), 255);
 			i++;
 		}
 		if (g->lst->next)
@@ -43,7 +43,7 @@ int	check_exit_code(t_g *g)
 }
 
 /*Clean tout ce qui peut être allouer en mémoire*/
-void	free_n_exit(t_g *g)
+int	free_n_exit(t_g *g)
 {
 	int	return_code;
 
@@ -52,7 +52,7 @@ void	free_n_exit(t_g *g)
 	else
 		return_code = 0;
 	if (return_code == -20)
-		return ;
+		return (1);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
