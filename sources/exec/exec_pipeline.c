@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/22 15:05:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/22 16:42:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	int last_status = 0;
 	int cmd_idx = 0;
 
+	printf("[debug] redir_cmd_idx = %d\n", g->redir_cmd_idx);
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
@@ -133,6 +134,8 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			t_list *old_lst = NULL;
 			//redirect stdin or stdout
 			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
+			printf("[child %s] cmd_idx = %d, redir_cmd_idx = %d\n",
+       			cmds->argv[0], cmd_idx, g->redir_cmd_idx);
 			if (cmd_idx == g->redir_cmd_idx)
 				redirect_std_to_file(g);
 			if (prev_fd != -1)
@@ -140,11 +143,23 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
+			// 2) pipe vers la commande suivante, mais **seulement** si
+			//    CE segment ne fait **pas** de redirection vers un fichier
 			if (cmds->next)
 			{
-				close(pipefd[0]);
-				dup2(pipefd[1], STDOUT_FILENO);
-				close(pipefd[1]);
+				if (cmd_idx != g->redir_cmd_idx)
+				{
+					// on pipe normalement
+					close(pipefd[0]);
+					dup2(pipefd[1], STDOUT_FILENO);
+					close(pipefd[1]);
+				}
+				else
+				{
+					// on neutralise le pipe : aucun write end pour cette commande
+					close(pipefd[0]);
+					close(pipefd[1]);
+				}
 			}
 
 			//Construction de sub_lst à partir de cmds->argv
@@ -213,119 +228,3 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	return (1);
 }
 
-int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
-{
-    int    pipefd[2];
-    int    prev_fd = -1;
-    int     status = 0;
-    int     last_status = 0;
-    pid_t  pid;
-	int cmd_idx = 0;
-
-	while (cmds)
-	{
-		if (cmds->next && pipe(pipefd) == -1)
-		{
-			perror("pipe");
-			return (0);
-		}
-
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("fork");
-			return (0);
-		}
-
-		if (pid == 0)  /* === CHILD === */
-		{
-			t_list *sub_lst = NULL;
-			t_list *old_lst = NULL;
-			//redirect stdin or stdout
-			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
-			if (cmd_idx == g->redir_cmd_idx)
-				redirect_std_to_file(g);
-			/* 1) Si on lit dans un pipe précédent, redirige stdin */
-			if (prev_fd != -1)
-			{
-				dup2(prev_fd, STDIN_FILENO);
-				close(prev_fd);
-			}
-
-			/* 2) Si une commande suit, redirige stdout vers ce pipe */
-			if (cmds->next)
-			{
-				close(pipefd[0]);
-				dup2(pipefd[1], STDOUT_FILENO);
-				close(pipefd[1]);
-			}
-
-			 /*  C. Construction de sub_lst à partir de cmds->argv */
-			for (int k = 0; cmds->argv[k] != NULL; k++)
-			{
-				t_list *node = ft_lstnew(ft_strdup(cmds->argv[k]));
-				if (!sub_lst)
-					sub_lst = node;           // premier nœud → tête de liste
-				else
-					ft_lstadd_back(&sub_lst, node);
-			}
-            /* 3) Builtins “envbuilt” (env/export/unset) dans un pipeline */
-            for (int i = 0; g->envbuilt[i].name; i++)
-            {
-                if (ft_strncmp(cmds->argv[0], g->envbuilt[i].name, ft_strlen(g->envbuilt[i].name)) == 0)
-                {
-                    g->envbuilt[i].e(g->env);
-                    exit(0);
-                }
-            }
-			
-            /* 4) Builtins classiques (cd/pwd/echo/exit) dans un pipeline */
-            for (int i = 0; g->builtin[i].name; i++)
-            {
-                if (ft_strncmp(cmds->argv[0], g->builtin[i].name, ft_strlen(g->builtin[i].name)) == 0)
-                {
-					/* E.1 Sauvegarde de l’ancienne liste et bascule */
-					old_lst = g->lst;
-					g->lst = sub_lst;
-					/* E.2 Appel du builtin sur sub_lst */
-                    g->builtin[i].f(g);
-					/* E.3 Restauration et libération */
-					g->lst = old_lst;
-					ft_lstclear(&sub_lst, free);
-                    exit(0);
-                }
-            }
-            /* 5) Commande externe */
-            char *path = get_path(cmds->argv[0], envp);
-            if (!path)
-            {
-                fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
-                return_code(g->env, 1);
-                exit(127);
-            }
-            execve(path, cmds->argv, envp);
-
-			/* si execve échoue */
-			perror("execve");
-			exit(1);
-		}
-
-		/* === PARENT === */
-		if (prev_fd != -1)
-			close(prev_fd);
-		if (cmds->next)
-		{
-			close(pipefd[1]);
-			prev_fd = pipefd[0];
-		}
-		cmds = cmds->next;
-		cmd_idx++;
-	}
-
-   while (wait(&status) > 0)
-        last_status = status;
-
-    /* stocker dans $?: */
-    return_code(g->env, WEXITSTATUS(last_status));
-    return 1;
-}
