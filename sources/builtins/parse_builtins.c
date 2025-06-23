@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/21 20:43:27 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/23 16:06:03 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
 /*init chaque builtin avec sa fonction correspondante*/
-void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
+void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 {
 	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
 	if (!(*envbuilt))
@@ -39,7 +39,7 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[2].e = &f_unset;
 }
 
-static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
+static int	builtins_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 {
 	t_list	*tmp;
 	int		i;
@@ -68,7 +68,7 @@ static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
 /*Check s'il y a une builtin dans la commande
 puis appelle sa fonction correspondante
 et applique les redirections si besoin*/
-int	is_command(t_g *g)
+int	builtins(t_g *g)
 {
 	t_list	*tmp;
 	int		i;
@@ -83,7 +83,7 @@ int	is_command(t_g *g)
 		i = 0;
 		while (i < 4)
 		{
-			if (is_command_2(g->env, tmp, g->envbuilt))
+			if (builtins_2(g->env, tmp, g->envbuilt))
 				return (1);
 			if ((ft_strcmp((char *)tmp->content, g->builtin[i].name)) == 0)
 			{

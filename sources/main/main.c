@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/22 22:36:30 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/23 16:15:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,42 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 static void	exec_parsing(t_g *g)
 {
-	if (is_redirection(g))
+	if (!validate_redirection_syntax(g->lst))
+		return ;
+
+	g->cmds = parse_commands(g->lst);
+	// DEBUG
+	t_cmd *cmd = g->cmds;
+	int   idx = 0;
+	while (cmd)
 	{
-		if (is_pipe(g->lst))
-		{
-			g->cmds = parse_commands(g->lst);
-			//DEBUG CMD
-			t_cmd *cmd = g->cmds;
-			int   idx = 0;
-			while (cmd)
-			{
-				printf("[parse] commande %d :", idx++);
-				for (int j = 0; cmd->argv[j]; j++)
-					printf(" '%s'", cmd->argv[j]);
-				printf("\n");
-				cmd = cmd->next;
-			}
-			//FIN DEBUG
-			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-			{
-				printf("%s: command not found\n", (char *)g->lst->content);
-				return_code(g->env, 1);
-			}
-			free_cmds(g->cmds);
-		}
-		else if (!is_command(g))
-		{
-			g->cmds = parse_commands(g->lst);
-			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-			{
-				printf("%s: command not found\n", (char *)g->lst->content);
-				return_code(g->env, 1);
-			}
-			free_cmds(g->cmds);
-		}
-		restore_std(g);
+		printf("[parse] commande %d :", idx++);
+		for (int j = 0; cmd->argv && cmd->argv[j]; j++)
+			printf(" '%s'", cmd->argv[j]);
+		printf("\n");
+		cmd = cmd->next;
 	}
+	// FIN DEBUG
+	if (is_pipe(g->lst))
+	{
+		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+		{
+			printf("%s: command not found\n", (char *)g->lst->content);
+			return_code(g->env, 1);
+		}
+	}
+	else if (!builtins(g))  // commande simple mais pas un builtin
+	{
+		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+		{
+			printf("%s: command not found\n", (char *)g->lst->content);
+			return_code(g->env, 1);
+		}
+	}
+	free_cmds(g->cmds);
+	restore_std(g);
 }
+
 
 int	msh_while(t_g *g)
 {

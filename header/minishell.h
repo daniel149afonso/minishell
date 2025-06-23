@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/22 23:22:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/23 16:30:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int  heredoc_was_interrupted(void);
 
 //FT_INIT_COMMANDS
 void	init_global_struct(t_g **g, char **envp);
-void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins);
-int		is_command(t_g *g);
+void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins);
+int		builtins(t_g *g);
 int     ft_cd(t_g *g);
 int 	ft_pwd(t_g *g);
 int 	ft_echo(t_g *g);
@@ -44,7 +44,7 @@ void	add_env_node(t_env **env, const char *str);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
-int     check_if_var(t_env *env);
+int		check_if_var(t_env *env);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
 int 	f_unset(t_env *env);
@@ -58,6 +58,14 @@ char	*get_env_value(t_env *env, char *var_name);
 //HANDLE QUOTES
 int		check_quotes(char *token);
 void	remove_quotes(t_list **lst);
+
+//REDIRECTIONS CMDS
+int		validate_redirection_syntax(t_list *lst);
+int		redirect_cmd_io(t_cmd *cmd);
+int		is_redirection_token(char *token);
+int		store_stdout_redir(t_cmd *cmd, t_list *redir);
+int		store_append_redir(t_cmd *cmd, t_list *redir);
+int		store_stdin_redir(t_cmd *cmd, t_list *redir);
 
 //REDIRECTIONS
 int		is_redirection(t_g *g);
@@ -88,7 +96,7 @@ char	**ft_splitou(char const *s);
 
 //FREE ERROR AND EXIT
 void	ft_free_lst(t_list **lst);
-int 	free_n_exit(t_g *g);
+int		free_n_exit(t_g *g);
 
 // UTILS
 int		is_space(int c);

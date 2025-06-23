@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/23 00:35:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/23 15:42:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	int	code = 0;
 	int status;
 	int last_status = 0;
-	int cmd_idx = 0;
 
-	//printf("[debug] redir_cmd_idx = %d\n", g->redir_cmd_idx);
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
@@ -134,10 +132,9 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			t_list *old_lst = NULL;
 			
 			//redirect stdin or stdout
-			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
-			// printf("[child %s] cmd_idx = %d, redir_cmd_idx = %d\n",
-       		// 	cmds->argv[0], cmd_idx, g->redir_cmd_idx);
-			redirect_std_to_file(g);
+			
+			if (redirect_cmd_io(cmds))
+				exit(1); // en cas d'erreur d'ouverture de fichier
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);
@@ -204,7 +201,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			prev_fd = pipefd[0];
 		}
 		cmds = cmds->next;
-		cmd_idx++;
 	}
 
 	// Wait and capture last_pid status

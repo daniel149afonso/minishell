@@ -40,6 +40,7 @@ SRCS := \
   $(REDIR_DIR)/redirection.c  \
   $(REDIR_DIR)/redirection_2.c \
   $(REDIR_DIR)/redirection_3.c \
+  $(REDIR_DIR)/redirection_cmd.c \
   $(REDIR_DIR)/redir_parsing.c \
   $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \
