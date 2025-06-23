@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/23 15:32:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/23 20:18:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,40 @@ int	handle_pipe_token(t_cmd **head, t_cmd **curr, char ***args, int *i)
 	return (0);
 }
 
-int	handle_redirection_token(t_list **tmp, t_cmd *cmd)
+int	handle_redirection_token(t_list **tmp, t_cmd **curr, t_cmd **head, char ***args, int *i)
 {
 	t_list *redir = *tmp;
 
 	if (!redir || !redir->next)
 		return (1); // erreur de syntaxe
 
-	if (!ft_strcmp(redir->content, "<"))
-		return (store_stdin_redir(cmd, redir)), *tmp = redir->next->next, 0;
-	else if (!ft_strcmp(redir->content, ">"))
-		return (store_stdout_redir(cmd, redir)), *tmp = redir->next->next, 0;
-	else if (!ft_strcmp(redir->content, ">>"))
-		return (store_append_redir(cmd, redir)), *tmp = redir->next->next, 0;
+	// Si aucune commande n'a encore été créée, on en crée une maintenant
+	if (!*curr)
+	{
+		(*args)[*i] = NULL;
+		t_cmd *new = create_new_cmd(*args);
+		if (!new)
+			return (1);
+		*head = new;
+		*curr = new;
+		*args = malloc(sizeof(char *) * 100);
+		if (!*args)
+			return (1);
+		*i = 0;
+	}
 
-	// Pour l’instant, on ignore `<<`
+	if (!ft_strcmp(redir->content, "<"))
+		store_stdin_redir(*curr, redir);
+	else if (!ft_strcmp(redir->content, ">"))
+		store_stdout_redir(*curr, redir);
+	else if (!ft_strcmp(redir->content, ">>"))
+		store_append_redir(*curr, redir);
+	// ignore << pour le moment
+
+	*tmp = redir->next->next;
 	return (0);
 }
+
 
 t_cmd	*parse_commands(t_list *lst)
 {
@@ -91,7 +108,7 @@ t_cmd	*parse_commands(t_list *lst)
 		}
 		else if (is_redirection_token(tmp->content))
 		{
-			if (handle_redirection_token(&tmp, curr))
+			if (handle_redirection_token(&tmp, &curr, &head, &args, &i))
 				return (NULL);
 			continue;
 		}
