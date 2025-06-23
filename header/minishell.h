@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/21 20:46:27 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/22 23:22:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 # include "minishell_stru.h"
 
-//MAIN SIGNAL
+//SIGNAL
 void	sigint_handler(int sig);
+void	heredoc_sigint_handler(int sig);
+void init_heredoc_signals(void);
+void restore_shell_signals(void);
+int  heredoc_was_interrupted(void);
 
 //FT_INIT_COMMANDS
 void	init_global_struct(t_g **g, char **envp);
@@ -61,7 +65,7 @@ void	remove_redir_token(t_list **lst);
 void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
 void	redirect_std_to_file(t_g *g);
-int		double_stdin(t_list *redir, t_list **herdoc, t_env *env, int turn);
+int		double_stdin(t_list *redir, t_list **herdoc, t_env *env);
 void	apply_redirections(t_g *g);
 
 //EXECUTION NO BUILTS

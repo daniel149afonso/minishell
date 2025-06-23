@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/22 14:59:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/22 23:18:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_g	t_g;
 
 typedef struct s_cmd
 {
+    char   *infile;    // nom du fichier de stdin ou NULL
+    char   *outfile;   // nom du fichier de stdout ou NULL
+    int     append;    // 0 = >, 1 = >>
 	char			**argv;
 	struct s_cmd	*next;
 }	t_cmd;

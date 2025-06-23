@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/22 16:42:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/23 00:35:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	int last_status = 0;
 	int cmd_idx = 0;
 
-	printf("[debug] redir_cmd_idx = %d\n", g->redir_cmd_idx);
+	//printf("[debug] redir_cmd_idx = %d\n", g->redir_cmd_idx);
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
@@ -132,36 +132,23 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		{
 			t_list *sub_lst = NULL;
 			t_list *old_lst = NULL;
+			
 			//redirect stdin or stdout
 			printf("[child %s] g->fd_stdout = %d\n", cmds->argv[0], g->fd_stdout);
-			printf("[child %s] cmd_idx = %d, redir_cmd_idx = %d\n",
-       			cmds->argv[0], cmd_idx, g->redir_cmd_idx);
-			if (cmd_idx == g->redir_cmd_idx)
-				redirect_std_to_file(g);
+			// printf("[child %s] cmd_idx = %d, redir_cmd_idx = %d\n",
+       		// 	cmds->argv[0], cmd_idx, g->redir_cmd_idx);
+			redirect_std_to_file(g);
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-			// 2) pipe vers la commande suivante, mais **seulement** si
-			//    CE segment ne fait **pas** de redirection vers un fichier
 			if (cmds->next)
 			{
-				if (cmd_idx != g->redir_cmd_idx)
-				{
-					// on pipe normalement
-					close(pipefd[0]);
-					dup2(pipefd[1], STDOUT_FILENO);
-					close(pipefd[1]);
-				}
-				else
-				{
-					// on neutralise le pipe : aucun write end pour cette commande
-					close(pipefd[0]);
-					close(pipefd[1]);
-				}
+				close(pipefd[0]);
+				dup2(pipefd[1], STDOUT_FILENO);
+				close(pipefd[1]);
 			}
-
 			//Construction de sub_lst à partir de cmds->argv
 			for (int k = 0; cmds->argv[k] != NULL; k++)
 			{

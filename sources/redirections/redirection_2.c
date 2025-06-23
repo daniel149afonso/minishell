@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/15 19:32:36 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:08:05 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 /*Traite << stdin, ouvre un heredoc qui recoit les entrees de l'utilisateur
 jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
-int	double_stdin(t_list *redir, t_list **heredoc, t_env *env, int turn)
+int	double_stdin(t_list *redir, t_list **heredoc, t_env *env)
 {
 	char	*occur;
 	char	*buffer;
 
-	buffer = ft_calloc(1, 1);
-	if (!buffer)
-		return (1);
 	occur = ((char *)redir->next->content);
 	while (1)
 	{
@@ -29,15 +26,19 @@ int	double_stdin(t_list *redir, t_list **heredoc, t_env *env, int turn)
 		if (buffer)
 		{
 			if (!ft_strcmp(buffer, occur))
+			{
+				free(buffer);
 				break ;
-			if (turn)
+			}
+			if (!*heredoc)
 				*heredoc = ft_lstnew(expand_variables(ft_strdup(buffer), env));
 			else
 				ft_lstadd_back(heredoc,
 					ft_lstnew(expand_variables(ft_strdup(buffer), env)));
-			turn = 0;
+			free(buffer);  // Ici UNIQUEMENT
 		}
-		free(buffer);
+		else
+			break ; // readline retourne NULL (CTRL+D)
 	}
 	return (0);
 }

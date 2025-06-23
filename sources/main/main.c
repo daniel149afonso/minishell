@@ -6,20 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/22 14:59:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/22 22:36:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
 
 static void	free_for_nextl(char *input, t_list *lst)
 {
@@ -34,6 +25,7 @@ static void	exec_parsing(t_g *g)
 		if (is_pipe(g->lst))
 		{
 			g->cmds = parse_commands(g->lst);
+			//DEBUG CMD
 			t_cmd *cmd = g->cmds;
 			int   idx = 0;
 			while (cmd)
@@ -44,6 +36,7 @@ static void	exec_parsing(t_g *g)
 				printf("\n");
 				cmd = cmd->next;
 			}
+			//FIN DEBUG
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 			{
 				printf("%s: command not found\n", (char *)g->lst->content);
