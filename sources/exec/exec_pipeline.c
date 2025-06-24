@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/23 15:42:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 15:30:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,21 +131,20 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			t_list *sub_lst = NULL;
 			t_list *old_lst = NULL;
 			
-			//redirect stdin or stdout
-			
-			if (redirect_cmd_io(cmds))
-				exit(1); // en cas d'erreur d'ouverture de fichier
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-			if (cmds->next)
+			if (cmds->next && !cmds->outfile)
 			{
 				close(pipefd[0]);
 				dup2(pipefd[1], STDOUT_FILENO);
 				close(pipefd[1]);
 			}
+			//redirect stdin or stdout
+			if (redirect_cmd_io(cmds) != 0)
+				exit(1);
 			//Construction de sub_lst à partir de cmds->argv
 			for (int k = 0; cmds->argv[k] != NULL; k++)
 			{
