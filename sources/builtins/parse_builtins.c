@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/23 16:06:03 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 18:53:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,60 +39,56 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[2].e = &f_unset;
 }
 
-static int	builtins_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
+// builtins_2 : teste les builtins d’environnement (export/unset/env)
+static int builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
-	t_list	*tmp;
-	int		i;
-	int		code;
+    int i;
+    int code;
 
-	code = 0;
-	while (lst)
-	{
-		tmp = lst->next;
-		i = 0;
-		while (i < 3)
-		{
-			if (ft_strcmp((char *)lst->content, envbuilt[i].name) == 0)
-			{
-				code = envbuilt[i].e(env);
-				return_code(env, code);
-				return (1);
-			}
-			i++;
-		}
-		lst = tmp;
-	}
-	return (0);
+    // Rien à faire si pas d'arguments
+    if (!cmd->argv || !cmd->argv[0])
+        return 0;
+
+    i = 0;
+    while (envbuilt[i].name)
+    {
+        if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
+        {
+            code = envbuilt[i].e(env);
+            return_code(env, code);
+            return 1;
+        }
+        i++;
+    }
+    return 0;
 }
 
-/*Check s'il y a une builtin dans la commande
-puis appelle sa fonction correspondante
-et applique les redirections si besoin*/
-int	builtins(t_g *g)
+// builtins : teste les builtins classiques (echo, cd, pwd, exit) et les redirs
+int builtins(t_g *g, t_cmd *cmd)
 {
-	t_list	*tmp;
-	int		i;
-	int		code;
+    int i;
+    int code;
 
-	g->env->lst = g->lst;
-	tmp = g->lst;
-	code = 0;
-	apply_redirections(g);
-	while (tmp)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			if (builtins_2(g->env, tmp, g->envbuilt))
-				return (1);
-			if ((ft_strcmp((char *)tmp->content, g->builtin[i].name)) == 0)
-			{
-				code = g->builtin[i].f(g);
-				return (return_code(g->env, code), 1);
-			}
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+    // 2) Env builtins
+    if (builtins_2(g->env, cmd, g->envbuilt))
+        return 1;
+
+    // 3) Builtins classiques
+    i = 0;
+    while (g->builtin[i].name)
+    {
+        if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
+        {
+			//Appliquer les redirections de cette commande
+			if (redirect_cmd_io(cmd) != 0)
+				return 1;
+            code = g->builtin[i].f(g);
+            return_code(g->env, code);
+            return 1;
+        }
+        i++;
+    }
+    // 4) Ce n'est pas un builtin
+    return 0;
 }
+

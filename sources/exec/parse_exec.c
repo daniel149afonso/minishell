@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/24 18:39:24 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 21:37:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,71 +77,76 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 	return 0;
 }
 
+#define ARGS_SIZE 100
+
 t_cmd *parse_commands(t_list *lst)
 {
-    t_cmd  *head = NULL, *curr = NULL;
+    t_cmd  *head = NULL;
+    t_cmd  *curr = NULL;
     char   **args = NULL;
     int     i = 0;
     t_list *tmp = lst;
 
     while (tmp)
     {
-        // 1) REDIRECTION
+        // 1) REDIRECTION : on crée la commande si besoin avant d’y attacher la redirection
         if (is_redirection_token(tmp->content))
         {
-            // erreur si pas de commande ET pas d'args
-            if (!curr && (!args || i == 0))
+            // Si on a accumulé des arguments, finaliser cette commande
+            if (args && i > 0)
+            {
+                args[i] = NULL;
+                t_cmd *new = create_new_cmd(args);
+                if (!new) return NULL;
+                if (!head) head = new;
+                else        curr->next = new;
+                curr = new;
+                // Préparer pour la suite
+                args = NULL;
+                i = 0;
+            }
+            // Si après cela curr reste NULL, c’est une erreur de syntaxe
+            else if (!curr)
             {
                 printf("minishell: syntax error near unexpected token `newline'\n");
                 return NULL;
             }
-            // si on a des args accumulés, on crée la commande avant la redirection
-            if (!curr && args && i > 0)
-            {
-                args[i] = NULL;
-                curr = create_new_cmd(args);
-                if (!curr) return NULL;
-                head = curr;
-                // ► on réalloue args pour la suite, i redevient 0
-                args = malloc(sizeof(char *) * 100);
-                if (!args) return NULL;
-                i = 0;
-            }
 
-            // on attache la redirection à curr
+            // Attacher la redirection à curr
             handle_redirection_token(&tmp, &curr);
             continue;
         }
 
-        // 2) PIPE
+        // 2) PIPE : on termine la commande courante
         if (ft_strcmp(tmp->content, "|") == 0)
         {
-            // autoriser uniquement si une commande existe à gauche
-            if (i == 0 && curr == NULL)
+            // Si on a accumulé des arguments, finaliser cette commande
+            if (args && i > 0)
+            {
+                args[i] = NULL;
+                t_cmd *new = create_new_cmd(args);
+                if (!new) return NULL;
+                if (!head) head = new;
+                else        curr->next = new;
+                curr = new;
+                args = NULL;
+                i = 0;
+            }
+            // Sinon, si curr est NULL (pas de commande avant le pipe), c’est une erreur
+            else if (!curr)
             {
                 printf("minishell: syntax error near unexpected token `|'\n");
                 return NULL;
             }
-            // terminer argv[]
-            args[i] = NULL;
-            // créer le nouveau t_cmd
-            t_cmd *new = create_new_cmd(args);
-            if (!new) return NULL;
-            if (!head) head = new;
-            else        curr->next = new;
-            curr = new;
-            // préparer le buffer d'args pour la prochaine commande
-            args = malloc(sizeof(char *) * 100);
-            if (!args) return NULL;
-            i = 0;
+
             tmp = tmp->next;
             continue;
         }
 
-        // 3) ARGUMENT NORMAL
+        // 3) ARGUMENT NORMAL : accumuler dans args[]
         if (!args)
         {
-            args = malloc(sizeof(char *) * 100);
+            args = malloc(sizeof(char *) * ARGS_SIZE);
             if (!args) return NULL;
             i = 0;
         }
@@ -149,24 +154,33 @@ t_cmd *parse_commands(t_list *lst)
         tmp = tmp->next;
     }
 
-    // 4) DERNIÈRE COMMANDE
+    // 4) FIN DE LISTE : terminer la dernière commande si nécessaire
     if ((args && i > 0) || (curr && (curr->infile || curr->outfile)))
     {
-        if (args)
+        if (args && i > 0)
         {
             args[i] = NULL;
             t_cmd *new = create_new_cmd(args);
             if (!new) return NULL;
             if (!head) head = new;
             else        curr->next = new;
-            curr = new;
+        }
+        else
+        {
+            // pas d’args mais des redirs sur curr existant : rien à faire
+            free(args);
         }
     }
     else
+    {
         free(args);
+    }
 
     return head;
 }
+
+
+
 
 
 

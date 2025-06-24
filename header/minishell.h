@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/23 16:30:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 18:43:29 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int  heredoc_was_interrupted(void);
 //FT_INIT_COMMANDS
 void	init_global_struct(t_g **g, char **envp);
 void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins);
-int		builtins(t_g *g);
+int		builtins(t_g *g, t_cmd *cmd);
 int     ft_cd(t_g *g);
 int 	ft_pwd(t_g *g);
 int 	ft_echo(t_g *g);

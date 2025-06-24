@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/24 18:39:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 19:25:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	exec_parsing(t_g *g)
 		}
 		
 		printf("\n");
-		// printf("Infile: '%s'\n", cmd->infile);
-		// printf("Append: '%d'\n", cmd->append);
-		// printf("Outfile: '%s'\n", cmd->outfile);
+		printf("Infile: '%s'\n", cmd->infile);
+		printf("Append: '%d'\n", cmd->append);
+		printf("Outfile: '%s'\n", cmd->outfile);
 		cmd = cmd->next;
 	}
 	// FIN DEBUG
@@ -49,7 +49,7 @@ static void	exec_parsing(t_g *g)
 			return_code(g->env, 1);
 		}
 	}
-	else if (!builtins(g))  // commande simple mais pas un builtin
+	else if (!builtins(g, g->cmds))  // commande simple mais pas un builtin
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 		{
