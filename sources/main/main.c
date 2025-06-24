@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/24 15:17:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 18:39:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	exec_parsing(t_g *g)
 		}
 		
 		printf("\n");
-		printf("Infile: '%s'\n", cmd->infile);
-		printf("Append: '%d'\n", cmd->append);
-		printf("Outfile: '%s'\n", cmd->outfile);
+		// printf("Infile: '%s'\n", cmd->infile);
+		// printf("Append: '%d'\n", cmd->append);
+		// printf("Outfile: '%s'\n", cmd->outfile);
 		cmd = cmd->next;
 	}
 	// FIN DEBUG

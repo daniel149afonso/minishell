@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/24 15:48:04 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 18:39:24 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,65 +89,55 @@ t_cmd *parse_commands(t_list *lst)
         // 1) REDIRECTION
         if (is_redirection_token(tmp->content))
         {
-            // Si on n'a ni commande, ni args => erreur
+            // erreur si pas de commande ET pas d'args
             if (!curr && (!args || i == 0))
             {
-                fprintf(stderr,
-                    "minishell: syntax error: no command before redirection\n");
+                printf("minishell: syntax error near unexpected token `newline'\n");
                 return NULL;
             }
-            // Si on a des args non transformés en commande, on crée la commande
+            // si on a des args accumulés, on crée la commande avant la redirection
             if (!curr && args && i > 0)
             {
                 args[i] = NULL;
                 curr = create_new_cmd(args);
                 if (!curr) return NULL;
                 head = curr;
-                args = NULL;
+                // ► on réalloue args pour la suite, i redevient 0
+                args = malloc(sizeof(char *) * 100);
+                if (!args) return NULL;
                 i = 0;
             }
 
-            // Maintenant curr existe, on y attache la redirection
+            // on attache la redirection à curr
             handle_redirection_token(&tmp, &curr);
             continue;
         }
 
-        // 2) PIPE : on termine la commande courante
-		if (ft_strcmp(tmp->content, "|") == 0)
-		{
-			// 2.1 – erreur si on n'a mis aucun argument
-			if (i == 0)
-			{
-				printf("minishell: syntax error near unexpected token `|'\n");
-				return NULL;
-			}
+        // 2) PIPE
+        if (ft_strcmp(tmp->content, "|") == 0)
+        {
+            // autoriser uniquement si une commande existe à gauche
+            if (i == 0 && curr == NULL)
+            {
+                printf("minishell: syntax error near unexpected token `|'\n");
+                return NULL;
+            }
+            // terminer argv[]
+            args[i] = NULL;
+            // créer le nouveau t_cmd
+            t_cmd *new = create_new_cmd(args);
+            if (!new) return NULL;
+            if (!head) head = new;
+            else        curr->next = new;
+            curr = new;
+            // préparer le buffer d'args pour la prochaine commande
+            args = malloc(sizeof(char *) * 100);
+            if (!args) return NULL;
+            i = 0;
+            tmp = tmp->next;
+            continue;
+        }
 
-			// 2.2 – on termine argv[] de la commande courante
-			args[i] = NULL;
-
-			// 2.3 – on crée la nouvelle t_cmd
-			t_cmd *new = create_new_cmd(args);
-			if (!new)
-				return NULL;
-
-			// 2.4 – on l'ajoute à la liste
-			if (!head)
-				head = new;
-			else
-				curr->next = new;
-			curr = new;
-
-			// 2.5 – préparation pour la commande suivante
-			args = malloc(sizeof(char *) * 100);
-			if (!args)
-				return NULL;
-			i = 0;
-
-			// 2.6 – on avance au token d'après et on continue la boucle
-			tmp = tmp->next;
-			continue;
-		}
-		
         // 3) ARGUMENT NORMAL
         if (!args)
         {
@@ -156,12 +146,10 @@ t_cmd *parse_commands(t_list *lst)
             i = 0;
         }
         args[i++] = ft_strdup(tmp->content);
-
-        // on ne crée pas encore la commande ; on attend la redirection, le pipe, ou la fin
         tmp = tmp->next;
     }
 
-    // 4) FIN DE LISTE : créer la dernière commande si on a accumulé args ou redirs
+    // 4) DERNIÈRE COMMANDE
     if ((args && i > 0) || (curr && (curr->infile || curr->outfile)))
     {
         if (args)
@@ -179,6 +167,7 @@ t_cmd *parse_commands(t_list *lst)
 
     return head;
 }
+
 
 
 
