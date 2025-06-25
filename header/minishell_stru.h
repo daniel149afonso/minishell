@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/22 23:18:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 14:09:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_envbuilt
 typedef struct s_builtin
 {
 	char	*name;
-	int		(*f)(t_g *g);
+	int		(*f)(t_g *g, t_cmd *cmds);
 }	t_builtin;
 
 //GLOBAL STRUCT

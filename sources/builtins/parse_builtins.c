@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/24 18:53:39 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 14:09:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int builtins(t_g *g, t_cmd *cmd)
 			//Appliquer les redirections de cette commande
 			if (redirect_cmd_io(cmd) != 0)
 				return 1;
-            code = g->builtin[i].f(g);
+            code = g->builtin[i].f(g, cmd);
             return_code(g->env, code);
             return 1;
         }

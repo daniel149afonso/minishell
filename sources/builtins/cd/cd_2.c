@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:03:06 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/14 20:12:39 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 14:44:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	set_home_path(char **path)
 
 /*Met à jour le chemin et check s'il y a trop d'argument
 après la commande CD*/
-int	set_path(t_list *lst, char **path)
+int	set_path(t_cmd *cmds, char **path)
 {
-	*path = (char *)lst->next->content;
-	if (lst->next->next)
+	*path = cmds->argv[1];
+	if (cmds->argv && cmds->argv[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (0);

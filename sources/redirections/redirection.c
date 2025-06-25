@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/23 15:56:17 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 15:46:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,54 +101,3 @@ int	validate_redirection_syntax(t_list *lst)
 	return (1);
 }
 
-// /*Cherche une redirection si une erreur return 0*/
-// int	is_redirection(t_g *g)
-// {
-// 	t_list	*tmp;
-
-// 	tmp = g->lst;
-// 	if (parsing_redir(g->lst))
-// 		return (0);
-// 	//Parse command commence là!!!!!!!!!!
-// 	while (tmp)
-// 	{
-// 		if (check_redirection(g, tmp))
-// 			return (0);
-// 		tmp = tmp->next;
-// 	}
-// 	remove_redir_token(&g->lst);
-// 	remove_quotes(&g->lst);
-// 	return (1);
-// }
-// int is_redirection(t_g *g)
-// {
-//     t_list *tmp = g->lst;
-//     int      idx = 0;
-
-//     // parcourir toute la ligne tant qu'on n'a pas trouvé > ou <
-//     while (tmp)
-//     {
-//         if (check_redirection(g, tmp))  // ton test existant
-//         {
-//             g->redir_cmd_idx = idx;
-//             break;
-//         }
-//         if (strcmp((char*)tmp->content, "|") == 0)
-//             idx++;
-//         tmp = tmp->next;
-//     }
-
-//     // ton code existant de parsing_redir / remove_redir_token...
-//     if (parsing_redir(g->lst))
-//         return (0);
-//     tmp = g->lst;
-//     while (tmp)
-//     {
-//         if (check_redirection(g, tmp))
-//             return (0);
-//         tmp = tmp->next;
-//     }
-//     remove_redir_token(&g->lst);
-//     remove_quotes(&g->lst);
-//     return (1);
-// }
