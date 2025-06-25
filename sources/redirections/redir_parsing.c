@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 21:37:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/24 15:36:24 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*right_redir(t_list *lst)
 		return ("<<");
 	if (!right && !ft_strcmp((char *)lst->next->content, ">>"))
 		return (">>");
+	if (!right && !ft_strcmp((char *)lst->next->content, "|"))
+		return ("|");
 	right = ft_strcmp((char *)lst->content, ">>");
 	if (!right && !ft_strcmp((char *)lst->next->content, "<"))
 		return ("<");
@@ -53,6 +55,8 @@ char	*right_redir(t_list *lst)
 		return (">");
 	if (!right && !ft_strcmp((char *)lst->next->content, ">>"))
 		return (">>");
+	if (!right && !ft_strcmp((char *)lst->next->content, "|"))
+		return ("|");
 	return (NULL);
 }
 
@@ -68,6 +72,8 @@ char	*left_redir(t_list *lst)
 		return ("<<");
 	if (!left && !ft_strcmp((char *)lst->next->content, ">>"))
 		return (">>");
+	if (!left && !ft_strcmp((char *)lst->next->content, "|"))
+		return ("|");
 	left = ft_strcmp((char *)lst->content, "<<");
 	if (!left && !ft_strcmp((char *)lst->next->content, "<"))
 		return ("<");
@@ -77,6 +83,8 @@ char	*left_redir(t_list *lst)
 		return (">");
 	if (!left && !ft_strcmp((char *)lst->next->content, ">>"))
 		return (">>");
+	if (!left && !ft_strcmp((char *)lst->next->content, "|"))
+		return ("|");
 	return (NULL);
 }
 
@@ -102,9 +110,11 @@ int	is_mixed_redir(t_list *lst)
 	return (0);
 }
 
-/*Parse les redirections mélangés et celles où l'argument est manquant*/
+/*Parse les redirections mélangés et celles où l'argument est manquant + pipe seul argument*/
 int	parsing_redir(t_list *lst)
 {
+	if (!ft_strcmp((char *)lst->content, "|"))
+		return (printf("minishell: syntax error near unexpected token `|'\n"), 1);
 	while (lst)
 	{
 		if (is_missing_arg(lst))

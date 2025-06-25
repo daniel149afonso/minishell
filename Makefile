@@ -14,6 +14,7 @@ EXIT_DIR   := sources/exit
 UTLS_DIR   := sources/utils
 REDIR_DIR  := sources/redirections
 PARSING_DIR:= sources/parse_var_quotes
+SIGNALS_DIR:= sources/signals
 EXEC_DIR   := sources/exec
 
 # FILES
@@ -38,13 +39,14 @@ SRCS := \
   $(PARSING_DIR)/handle_quotes.c \
   $(REDIR_DIR)/redirection.c  \
   $(REDIR_DIR)/redirection_2.c \
-  $(REDIR_DIR)/redirection_3.c \
+  $(REDIR_DIR)/redirection_cmd.c \
   $(REDIR_DIR)/redir_parsing.c \
   $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \
   $(UTLS_DIR)/utils_2.c       \
   $(EXEC_DIR)/exec_pipeline.c \
-  $(EXEC_DIR)/parse_exec.c
+  $(EXEC_DIR)/parse_exec.c \
+  $(SIGNALS_DIR)/signal.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

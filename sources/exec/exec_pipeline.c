@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 01:55:44 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 18:06:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	int	code = 0;
 	int status;
 	int last_status = 0;
-	t_list *sub_lst = NULL;
-	t_list *old_lst = NULL;
 
 	while (cmds)
 	{
@@ -124,20 +122,21 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 			return (perror("fork"), 0);
 		if (pid == 0) // CHILD
 		{
-			redirect_std_to_file(g);
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-			if (cmds->next)
+			if (cmds->next && !cmds->outfile)
 			{
 				close(pipefd[0]);
 				dup2(pipefd[1], STDOUT_FILENO);
 				close(pipefd[1]);
 			}
-			for (int i = 0; cmds->argv[i]; i++)
-				ft_lstadd_back(&sub_lst, ft_lstnew(ft_strdup(cmds->argv[i])));
+			//redirect stdin or stdout
+			if (redirect_cmd_io(cmds) != 0)
+				exit(1);
+			// Builtins with env (export/unset/env)
 			for (int i = 0; g->envbuilt[i].name; i++)
 			{
 				if (!ft_strncmp(cmds->argv[0], g->envbuilt[i].name,
@@ -152,11 +151,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
 						ft_strlen(g->builtin[i].name) + 1))
 				{
-					old_lst = g->lst;
-					g->lst = sub_lst;
-					code = g->builtin[i].f(g);
-					g->lst = old_lst;
-					ft_lstclear(&sub_lst, free);
+					code = g->builtin[i].f(g, g->cmds);
 					exit(code);
 				}
 			}
@@ -181,8 +176,9 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		cmds = cmds->next;
 	}
 	while ((wait(&status)) > 0)
-			last_status = status;
+		last_status = status;
 	if (WIFEXITED(last_status))
 		return_code(g->env, WEXITSTATUS(last_status));
 	return (1);
 }
+

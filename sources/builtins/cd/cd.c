@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/21 20:23:03 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 14:37:14 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ int	save_oldpwd(t_env **env, char **oldpwd)
 
 /*Check CD avec arguments = change de dossier,
 CD sans argument = HOME*/
-int	resolve_path(t_list *lst, char **path)
+int	resolve_path(t_cmd *cmds, char **path)
 {
-	if (lst->next && lst->next->content)
-		return (set_path(lst, path));
+	if (cmds->argv && cmds->argv[1])
+		return (set_path(cmds, path));
 	else
 		return (set_home_path(path));
 }
 
 /*Appel echo qui chande de repertoire tout en modifiant les variables:
 OLD_PWD et PWD*/
-int	ft_cd(t_g *g)
+int	ft_cd(t_g *g, t_cmd *cmds)
 {
 	char	*path;
 	char	*oldpwd;
@@ -80,7 +80,7 @@ int	ft_cd(t_g *g)
 	newpwd = NULL;
 	if (!save_oldpwd(&g->env, &oldpwd))
 		return (1);
-	if (!resolve_path(g->lst, &path))
+	if (!resolve_path(cmds, &path))
 		return (1);
 	result = chdir(path);
 	if (result != 0)

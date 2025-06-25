@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 01:21:13 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 18:07:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_g	t_g;
 
 typedef struct s_cmd
 {
+    char   *infile;    // nom du fichier de stdin ou NULL
+    char   *outfile;   // nom du fichier de stdout ou NULL
+    int     append;    // 0 = >, 1 = >>
 	char			**argv;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -76,7 +79,7 @@ typedef struct s_envbuilt
 typedef struct s_builtin
 {
 	char	*name;
-	int		(*f)(t_g *g);
+	int		(*f)(t_g *g, t_cmd *cmds);
 }	t_builtin;
 
 //GLOBAL STRUCT

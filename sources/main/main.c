@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 01:22:31 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 18:02:51 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
 
 static void	free_for_nextl(char *input, t_list *lst)
 {
@@ -29,41 +20,31 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 static void	exec_parsing(t_g *g)
 {
-	if (is_redirection(g))
+	if (!validate_redirection_syntax(g->lst))
+		return ;
+	remove_quotes(&g->lst);
+	g->cmds = parse_commands(g->lst);
+	print_debug_command(g->cmds);
+	if (is_pipe(g->lst))
 	{
-		if (is_pipe(g->lst))
+		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 		{
-			g->cmds = parse_commands(g->lst);
-			//t_cmd *cmd = g->cmds;
-			//int   idx = 0;
-			/*while (cmd)
-			{
-				printf("[parse] commande %d :", idx++);
-				for (int j = 0; cmd->argv[j]; j++)
-					printf(" '%s'", cmd->argv[j]);
-				printf("\n");
-				cmd = cmd->next;
-			}*/
-			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-			{
-				printf("%s: command not found\n", (char *)g->lst->content);
-				return_code(g->env, 1);
-			}
-			free_cmds(g->cmds);
+			printf("%s: command not found\n", (char *)g->lst->content);
+			return_code(g->env, 1);
 		}
-		else if (!is_command(g))
-		{
-			g->cmds = parse_commands(g->lst);
-			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-			{
-				printf("%s: command not found\n", (char *)g->lst->content);
-				return_code(g->env, 1);
-			}
-			free_cmds(g->cmds);
-		}
-		restore_std(g);
 	}
+	else if (!builtins(g, g->cmds))
+	{
+		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+		{
+			printf("%s: command not found\n", (char *)g->lst->content);
+			return_code(g->env, 1);
+		}
+	}
+	free_cmds(g->cmds);
+	restore_std(g);
 }
+
 
 int	msh_while(t_g *g)
 {
@@ -98,11 +79,8 @@ int	main(int ac, char **av, char **envp)
 		if (msh_while(g))
 			return (1);
 		if (!g->input)
-			return (free_n_exit(g), 0);
+			return (free_n_exit(g, g->cmds), 0);
 		free_for_nextl(g->input, g->lst);
 	}
 	return (0);
 }
-
-//sigint_handler:
-//remet une nouvelle ligne, clean l’input, réaffiche le prompt

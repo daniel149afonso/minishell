@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/21 20:43:27 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 14:09:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
 /*init chaque builtin avec sa fonction correspondante*/
-void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
+void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 {
 	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
 	if (!(*envbuilt))
@@ -39,60 +39,56 @@ void	ft_init_commands(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[2].e = &f_unset;
 }
 
-static int	is_command_2(t_env *env, t_list *lst, t_envbuilt *envbuilt)
+// builtins_2 : teste les builtins d’environnement (export/unset/env)
+static int builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
-	t_list	*tmp;
-	int		i;
-	int		code;
+    int i;
+    int code;
 
-	code = 0;
-	while (lst)
-	{
-		tmp = lst->next;
-		i = 0;
-		while (i < 3)
-		{
-			if (ft_strcmp((char *)lst->content, envbuilt[i].name) == 0)
-			{
-				code = envbuilt[i].e(env);
-				return_code(env, code);
-				return (1);
-			}
-			i++;
-		}
-		lst = tmp;
-	}
-	return (0);
+    // Rien à faire si pas d'arguments
+    if (!cmd->argv || !cmd->argv[0])
+        return 0;
+
+    i = 0;
+    while (envbuilt[i].name)
+    {
+        if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
+        {
+            code = envbuilt[i].e(env);
+            return_code(env, code);
+            return 1;
+        }
+        i++;
+    }
+    return 0;
 }
 
-/*Check s'il y a une builtin dans la commande
-puis appelle sa fonction correspondante
-et applique les redirections si besoin*/
-int	is_command(t_g *g)
+// builtins : teste les builtins classiques (echo, cd, pwd, exit) et les redirs
+int builtins(t_g *g, t_cmd *cmd)
 {
-	t_list	*tmp;
-	int		i;
-	int		code;
+    int i;
+    int code;
 
-	g->env->lst = g->lst;
-	tmp = g->lst;
-	code = 0;
-	apply_redirections(g);
-	while (tmp)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			if (is_command_2(g->env, tmp, g->envbuilt))
-				return (1);
-			if ((ft_strcmp((char *)tmp->content, g->builtin[i].name)) == 0)
-			{
-				code = g->builtin[i].f(g);
-				return (return_code(g->env, code), 1);
-			}
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+    // 2) Env builtins
+    if (builtins_2(g->env, cmd, g->envbuilt))
+        return 1;
+
+    // 3) Builtins classiques
+    i = 0;
+    while (g->builtin[i].name)
+    {
+        if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
+        {
+			//Appliquer les redirections de cette commande
+			if (redirect_cmd_io(cmd) != 0)
+				return 1;
+            code = g->builtin[i].f(g, cmd);
+            return_code(g->env, code);
+            return 1;
+        }
+        i++;
+    }
+    // 4) Ce n'est pas un builtin
+    return 0;
 }
+

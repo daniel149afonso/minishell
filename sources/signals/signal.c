@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_3.c                                    :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/14 21:15:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/15 19:30:39 by apiscopo         ###   ########.fr       */
+/*   Created: 2025/06/22 22:35:01 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/25 17:48:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-/*Restaure la sortie standard dans le terminal*/
-void	restore_std(t_g *g)
+/*remet une nouvelle ligne, clean l’input, réaffiche le prompt*/
+void	sigint_handler(int sig)
 {
-	if (g->s_stdout != -1)
-	{
-		dup2(g->s_stdout, STDOUT_FILENO);
-		close(g->s_stdout);
-	}
-	if (g->s_stdin != -1)
-	{
-		dup2(g->s_stdin, STDIN_FILENO);
-		close(g->s_stdin);
-	}
+	(void)sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }

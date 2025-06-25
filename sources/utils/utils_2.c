@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 01:29:12 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 18:08:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,25 @@ void	return_code(t_env *env, int error_code)
 {
 		env->error_code = error_code;
 		env->var_error_code = error_code;
+}
+
+/*DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND: 
+Pour chaque commande vérifie s'il est accompagné d'un fichier in, out ou append */
+void	print_debug_command(t_cmd *cmd)
+{
+	int   idx = 0;
+	while (cmd)
+	{
+		printf("[parse] commande %d :", idx++);
+		for (int j = 0; cmd->argv && cmd->argv[j]; j++)
+		{
+			printf(" '%s'", cmd->argv[j]);
+		}
+		printf("\n");
+		//Check vers quel fichier chaque cmd est redirigé
+		// printf("Infile: '%s'\n", cmd->infile);
+		// printf("Append: '%d'\n", cmd->append);
+		// printf("Outfile: '%s'\n", cmd->outfile);
+		cmd = cmd->next;
+	}
 }
