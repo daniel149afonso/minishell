@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 15:30:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:06:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 					exit(code);
 				}
 			}
-			// Builtins classiques (cd/echo/exit/pwd)
 			for (int i = 0; g->builtin[i].name; i++)
 			{
 				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
@@ -156,18 +155,17 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 					exit(code);
 				}
 			}
-			// External command
 			char *path = get_path(cmds->argv[0], envp);
 			if (!path)
 			{
-				fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+				printf("%s", cmds->argv[0]);
+				perror(": command not found\n");
 				exit(127);
 			}
 			execve(path, cmds->argv, envp);
 			perror("execve");
 			exit(1);
 		}
-		// PARENT
 		if (prev_fd != -1)
 			close(prev_fd);
 		if (cmds->next)
@@ -177,7 +175,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		}
 		cmds = cmds->next;
 	}
-	// Wait and capture last_pid status
 	while ((wait(&status)) > 0)
 		last_status = status;
 	if (WIFEXITED(last_status))

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 14:09:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:07:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	int				error_code;
+	int				var_error_code;
 	t_list			*lst;
 	struct s_env	*next;
 }	t_env;
@@ -90,7 +91,7 @@ typedef struct s_g
 	int			s_stdout;
 	int			fd_stdout;
 	int			fd_stdin;
-	int			redir_cmd_idx;
+	int			error_code;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;

@@ -6,3 +6,4 @@
 *.out
 *.identifiers
 minishell
+minishell_tester

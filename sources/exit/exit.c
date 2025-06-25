@@ -6,40 +6,59 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 16:51:09 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:06:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-/*Verifie le code de sortie s'il existe*/
-int	check_exit_code(t_g *g)
-{
-	int		i;
-	char	*key;
+#include <unistd.h>  // pour write, si tu choisis cette option
 
-	i = 0;
-	key = NULL;
-	g->lst = g->lst->next;
-	if (g->lst)
-	{
-		key = extract_check_key((char *)g->lst->content);
-		if (!key)
-			return (0);
-		while (key[i])
-		{
-			if (!ft_isdigit(key[i]) && key[i] != '-')
-				return (return_code(g->env, 2), printf("minishell: exit: "
-							"%s: numeric argument required\n", key), 255);
-			i++;
-		}
-		if (g->lst->next)
-			return (return_code(g->env, 2),
-				printf("minishell: exit: too much args\n"), -20);
-		i = ft_atoi(key);
-		return (free(key), i);
-	}
-	return (0);
+/* Vérifie qu’on a bien un entier, avec un +/- optionnel en première position */
+int is_valid_numeric_arg(const char *str)
+{
+    int i = 0;
+    if (!str || !*str)
+        return (0);
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    if (!str[i])  // juste "+" ou "-"
+        return (0);
+    while (str[i])
+    {
+        if (!ft_isdigit(str[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int check_exit_code(t_g *g)
+{
+    char	*key;
+	int		code;
+
+    g->lst = g->lst->next;
+	code = 0;
+    if (g->lst)
+    {
+        key = extract_check_key((char *)g->lst->content);
+        if (!key)
+            return (0);
+        if (!is_valid_numeric_arg(key))
+        {
+            return_code(g->env, 2);
+            ft_putstr_fd("exit: ", 2);
+            return (ft_putstr_fd("numeric argument required\n", 2), 255);
+        }
+        if (g->lst->next)
+            return (return_code(g->env, 2), ft_putstr_fd("minishell: exit: "
+					"too many arguments\n", 2), -20);
+        code = ft_atoi(key);
+        free(key);
+        return (code);
+    }
+    return (0);
 }
 
 /*Clean tout ce qui peut être allouer en mémoire*/

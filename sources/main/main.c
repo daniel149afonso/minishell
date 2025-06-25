@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 17:49:23 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:02:51 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,7 @@ static void	exec_parsing(t_g *g)
 		return ;
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
-	// DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND: Pour chaque commande vérifie s'il est accompagné d'un fichier in, out ou append
-	// t_cmd *cmd = g->cmds;
-	// int   idx = 0;
-	// while (cmd)
-	// {
-	// 	printf("[parse] commande %d :", idx++);
-	// 	for (int j = 0; cmd->argv && cmd->argv[j]; j++)
-	// 	{
-	// 		printf(" '%s'", cmd->argv[j]);
-	// 	}
-	// 	printf("\n");
-	// 	printf("Infile: '%s'\n", cmd->infile);
-	// 	printf("Append: '%d'\n", cmd->append);
-	// 	printf("Outfile: '%s'\n", cmd->outfile);
-	// 	cmd = cmd->next;
-	// }
-	// FIN DEBUG
+	print_debug_command(g->cmds);
 	if (is_pipe(g->lst))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))

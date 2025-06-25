@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 17:51:02 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:04:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ char	*extract_check_key(char *str);
 void	f_bubblesort(t_env *head);
 int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
+void	print_debug_command(t_cmd *cmd);
 
 #endif
