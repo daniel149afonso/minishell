@@ -6,11 +6,9 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/21 20:52:30 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 01:55:44 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../header/minishell.h"
 
@@ -19,7 +17,6 @@
  A NORMER QUAND FINIS
 
 */
-
 
 void free_cmds(t_cmd *cmds)
 {
@@ -107,7 +104,6 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
-
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
 	int pipefd[2];
@@ -123,11 +119,9 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
 			return (perror("pipe"), 0);
-
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), 0);
-
 		if (pid == 0) // CHILD
 		{
 			redirect_std_to_file(g);
@@ -142,12 +136,8 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				dup2(pipefd[1], STDOUT_FILENO);
 				close(pipefd[1]);
 			}
-
-			// Sub list argv
 			for (int i = 0; cmds->argv[i]; i++)
 				ft_lstadd_back(&sub_lst, ft_lstnew(ft_strdup(cmds->argv[i])));
-
-			// Builtins with env (export/unset/env)
 			for (int i = 0; g->envbuilt[i].name; i++)
 			{
 				if (!ft_strncmp(cmds->argv[0], g->envbuilt[i].name,
@@ -157,8 +147,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 					exit(code);
 				}
 			}
-
-			// Builtins classiques (cd/echo/exit/pwd)
 			for (int i = 0; g->builtin[i].name; i++)
 			{
 				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
@@ -172,19 +160,17 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 					exit(code);
 				}
 			}
-			// External command
 			char *path = get_path(cmds->argv[0], envp);
 			if (!path)
 			{
-				fprintf(stderr, "%s: command not found\n", cmds->argv[0]);
+				printf("%s", cmds->argv[0]);
+				perror(": command not found\n");
 				exit(127);
 			}
 			execve(path, cmds->argv, envp);
 			perror("execve");
 			exit(1);
 		}
-
-		// PARENT
 		if (prev_fd != -1)
 			close(prev_fd);
 		if (cmds->next)
@@ -194,8 +180,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		}
 		cmds = cmds->next;
 	}
-
-	// Wait and capture last_pid status
 	while ((wait(&status)) > 0)
 			last_status = status;
 	if (WIFEXITED(last_status))

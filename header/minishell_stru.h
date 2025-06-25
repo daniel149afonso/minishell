@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/21 20:24:28 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 01:21:13 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	int				error_code;
+	int				var_error_code;
 	t_list			*lst;
 	struct s_env	*next;
 }	t_env;
@@ -87,6 +88,7 @@ typedef struct s_g
 	int			s_stdout;
 	int			fd_stdout;
 	int			fd_stdin;
+	int			error_code;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;

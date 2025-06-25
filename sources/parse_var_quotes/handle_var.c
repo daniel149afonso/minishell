@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/15 20:54:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 01:23:57 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,18 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	char	*val;
 
 	(*i)++;
+	val = NULL;
 	var = extract_var_name(str, i);
+	if ((ft_strncmp(var, "?", ft_strlen(var))) == 0)
+	{
+		*res = ft_itoa(env->var_error_code);
+		free(var);
+		return ;
+	}
 	val = get_env_value(env, var);
 	if (val)
 		*res = ft_join_and_free(*res, val);
+	free(val);
 	free(var);
 }
 

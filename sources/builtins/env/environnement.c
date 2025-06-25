@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/21 20:25:18 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 01:24:43 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	init_env(t_env **env, char **envp)
 		add_env_node(env, envp[i]);
 		i++;
 	}
-	if (envp)
-		add_env_node(env, "?=0");
 }
 
 /*---------------------------

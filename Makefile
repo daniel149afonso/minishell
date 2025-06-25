@@ -53,7 +53,7 @@ OBJS = $(SRCS:.c=.o)
 HEAD = header/push_swap.h
 
 # Compiler and flags
-CC = cc -Wall -Wextra -Werror #-g -fsanitize=address
+CC = cc -Wall -Wextra -Werror -g #-g -fsanitize=address
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Darwin)

@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/20 21:34:29 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/25 01:22:31 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static void	exec_parsing(t_g *g)
 		if (is_pipe(g->lst))
 		{
 			g->cmds = parse_commands(g->lst);
-			t_cmd *cmd = g->cmds;
-			int   idx = 0;
-			while (cmd)
+			//t_cmd *cmd = g->cmds;
+			//int   idx = 0;
+			/*while (cmd)
 			{
 				printf("[parse] commande %d :", idx++);
 				for (int j = 0; cmd->argv[j]; j++)
 					printf(" '%s'", cmd->argv[j]);
 				printf("\n");
 				cmd = cmd->next;
-			}
+			}*/
 			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 			{
 				printf("%s: command not found\n", (char *)g->lst->content);
