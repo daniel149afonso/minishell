@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 18:08:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/26 19:03:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,24 @@ void	return_code(t_env *env, int error_code)
 Pour chaque commande vérifie s'il est accompagné d'un fichier in, out ou append */
 void	print_debug_command(t_cmd *cmd)
 {
-	int   idx = 0;
+	int	idx;
+	int	j;
+
+	idx = 0;
 	while (cmd)
 	{
+		j = 0;
 		printf("[parse] commande %d :", idx++);
-		for (int j = 0; cmd->argv && cmd->argv[j]; j++)
+		while (cmd->argv && cmd->argv[j])
 		{
 			printf(" '%s'", cmd->argv[j]);
+			j++;
 		}
 		printf("\n");
 		//Check vers quel fichier chaque cmd est redirigé
-		// printf("Infile: '%s'\n", cmd->infile);
-		// printf("Append: '%d'\n", cmd->append);
-		// printf("Outfile: '%s'\n", cmd->outfile);
+		printf("Infile: '%s'\n", cmd->infile);
+		printf("Append: '%d'\n", cmd->append);
+		printf("Outfile: '%s'\n", cmd->outfile);
 		cmd = cmd->next;
 	}
 }
