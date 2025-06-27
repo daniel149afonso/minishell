@@ -1,13 +1,14 @@
 # Commandes status:
 
 ## infos à jour:
-export ne marche plus car il faut utiliser cmd au lieu de lst
 
 ls > test.txt > out.txt ne marche pas
 
 builtins simple avec redirection ne marche pas
 
 certaines pipeline avec echo ne marche pas
+
+certains messages d'erreur a corigger
 
 ## cd (changement de dossier - Daniel): ✅
 
