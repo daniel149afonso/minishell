@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 18:02:51 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/25 22:01:06 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	exec_parsing(t_g *g)
 		return ;
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
-	print_debug_command(g->cmds);
+	g->env->lst = g->lst;
+	//print_debug_command(g->cmds);
 	if (is_pipe(g->lst))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
