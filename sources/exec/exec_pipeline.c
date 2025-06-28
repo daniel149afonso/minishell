@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/25 18:06:02 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/06/28 03:31:38 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/28 03:31:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@
 
 void free_cmds(t_cmd *cmds)
 {
-	t_cmd *tmp;
+	
+	int		i;
+	t_cmd	*tmp;
+
+	i = 0;
 	while (cmds)
 	{
 		tmp = cmds->next;
-		int i = 0;
+		
 		while (cmds->argv[i])
 			free(cmds->argv[i++]);
 		free(cmds->argv);
+		free(cmds->infile);
+		free(cmds->outfile);
 		free(cmds);
 		cmds = tmp;
 	}
@@ -127,11 +133,11 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-			if (cmds->next && !cmds->outfile)
+			if (cmds->next)
 			{
-				close(pipefd[0]);
 				dup2(pipefd[1], STDOUT_FILENO);
 				close(pipefd[1]);
+				close(pipefd[0]);
 			}
 			//redirect stdin or stdout
 			if (redirect_cmd_io(cmds) != 0)
@@ -151,7 +157,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
 						ft_strlen(g->builtin[i].name) + 1))
 				{
-					code = g->builtin[i].f(g, g->cmds);
+					code = g->builtin[i].f(g, cmds);
 					exit(code);
 				}
 			}
