@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 18:04:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/28 15:12:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		parsing_redir(t_list *lst);
 int		double_stdin(t_list *redir, t_list **herdoc, t_env *env);
 
 //REDIRECTIONS COMMANDS
-int		redirect_cmd_io(t_cmd *cmd);
+int		redirect_cmd_io(t_g *g, t_cmd *cmd);
 int		is_redirection_token(char *token);
 int		store_stdout_redir(t_cmd *cmd, t_list *redir);
 int		store_append_redir(t_cmd *cmd, t_list *redir);

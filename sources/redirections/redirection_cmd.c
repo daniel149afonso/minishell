@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/23 16:29:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/28 15:19:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int store_stdin_redir(t_cmd *cmd, t_list *redir)
 	return (0);
 }
 
-int	redirect_cmd_io(t_cmd *cmd)
+int	redirect_cmd_io(t_g *g, t_cmd *cmd)
 {
 	int	fd;
 	// Redirection d'entrée
@@ -65,6 +65,7 @@ int	redirect_cmd_io(t_cmd *cmd)
 			perror(cmd->infile);
 			return (1);
 		}
+		g->s_stdin = dup(STDIN_FILENO);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
@@ -78,6 +79,7 @@ int	redirect_cmd_io(t_cmd *cmd)
 			perror(cmd->outfile);
 			return (1);
 		}
+		g->s_stdout = dup(STDOUT_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}

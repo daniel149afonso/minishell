@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 03:31:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/28 03:31:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/28 15:12:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				close(pipefd[0]);
 			}
 			//redirect stdin or stdout
-			if (redirect_cmd_io(cmds) != 0)
+			if (redirect_cmd_io(g, cmds) != 0)
 				exit(1);
 			// Builtins with env (export/unset/env)
 			for (int i = 0; g->envbuilt[i].name; i++)
