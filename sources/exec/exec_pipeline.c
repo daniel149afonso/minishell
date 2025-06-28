@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/27 19:53:37 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/06/28 03:31:38 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/06/28 03:31:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,6 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		{
 			close(pipefd[1]);
 			prev_fd = pipefd[0];
-		}
-		else if (pipefd[0] > 0)  // 💡 sécuriser une fermeture éventuelle du dernier read-end
-		{
-			close(pipefd[0]);
 		}
 		cmds = cmds->next;
 	}
