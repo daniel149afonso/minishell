@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/26 23:37:23 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/27 19:53:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 				if (!ft_strncmp(cmds->argv[0], g->builtin[i].name,
 						ft_strlen(g->builtin[i].name) + 1))
 				{
-					code = g->builtin[i].f(g, g->cmds);
+					code = g->builtin[i].f(g, cmds);
 					exit(code);
 				}
 			}
@@ -178,6 +178,10 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		{
 			close(pipefd[1]);
 			prev_fd = pipefd[0];
+		}
+		else if (pipefd[0] > 0)  // 💡 sécuriser une fermeture éventuelle du dernier read-end
+		{
+			close(pipefd[0]);
 		}
 		cmds = cmds->next;
 	}
