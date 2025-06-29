@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/28 15:12:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/29 18:06:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
 int		double_stdin(t_list *redir, t_list **herdoc, t_env *env);
 
-//REDIRECTIONS COMMANDS
-int		redirect_cmd_io(t_g *g, t_cmd *cmd);
-int		is_redirection_token(char *token);
-int		store_stdout_redir(t_cmd *cmd, t_list *redir);
-int		store_append_redir(t_cmd *cmd, t_list *redir);
-int		store_stdin_redir(t_cmd *cmd, t_list *redir);
-
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
 void	free_split(char **arr);
@@ -78,6 +71,14 @@ t_cmd	*parse_commands(t_list *lst);
 int		is_pipe(t_list *lst);
 int		handle_redirection_token(t_list **tmp, t_cmd **curr);
 t_cmd	*create_new_cmd(char **args);
+
+//REDIRECTIONS COMMANDS
+int		redirect_cmd_io(t_g *g, t_cmd *cmd);
+int		is_redirection_token(char *token);
+int		store_stdout_redir(t_cmd *cmd, t_list *redir);
+int		store_append_redir(t_cmd *cmd, t_list *redir);
+int		store_stdin_redir(t_cmd *cmd, t_list *redir);
+int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
 
 //SIGNAL
 void	sigint_handler(int sig);
