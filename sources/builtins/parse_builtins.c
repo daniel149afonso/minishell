@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 14:09:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/29 15:31:42 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,53 +42,53 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 // builtins_2 : teste les builtins d’environnement (export/unset/env)
 static int builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
-    int i;
-    int code;
+	int i;
+	int code;
 
-    // Rien à faire si pas d'arguments
-    if (!cmd->argv || !cmd->argv[0])
-        return 0;
+	// Rien à faire si pas d'arguments
+	if (!cmd->argv || !cmd->argv[0])
+		return (0);
 
-    i = 0;
-    while (envbuilt[i].name)
-    {
-        if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
-        {
-            code = envbuilt[i].e(env);
-            return_code(env, code);
-            return 1;
-        }
-        i++;
-    }
-    return 0;
+	i = 0;
+	while (envbuilt[i].name)
+	{
+		if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
+		{
+			code = envbuilt[i].e(env);
+			return_code(env, code);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 // builtins : teste les builtins classiques (echo, cd, pwd, exit) et les redirs
 int builtins(t_g *g, t_cmd *cmd)
 {
-    int i;
-    int code;
+	int i;
+	int code;
 
-    // 2) Env builtins
-    if (builtins_2(g->env, cmd, g->envbuilt))
-        return 1;
+	// 2) Env builtins
+	if (builtins_2(g->env, cmd, g->envbuilt))
+		return (1);
 
-    // 3) Builtins classiques
-    i = 0;
-    while (g->builtin[i].name)
-    {
-        if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
-        {
+	// 3) Builtins classiques
+	i = 0;
+	while (g->builtin[i].name)
+	{
+		if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
+		{
 			//Appliquer les redirections de cette commande
-			if (redirect_cmd_io(cmd) != 0)
-				return 1;
-            code = g->builtin[i].f(g, cmd);
-            return_code(g->env, code);
-            return 1;
-        }
-        i++;
-    }
-    // 4) Ce n'est pas un builtin
-    return 0;
+			if (redirect_cmd_io(g, cmd) != 0)
+				return (1);
+			code = g->builtin[i].f(g, cmd);
+			return_code(g->env, code);
+			return (1);
+		}
+		i++;
+	}
+	// 4) Ce n'est pas un builtin
+	return (0);
 }
 

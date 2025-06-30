@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 14:07:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/27 19:56:46 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,6 @@ void	display_with_args(t_cmd *cmds)
 		printf("\n");
 }
 
-// void	display_with_args(t_list *arg)
-// {
-// 	int		newline;
-
-// 	newline = 1;
-// 	while (arg && arg->content && ft_strnstr((char *)arg->content, "-n", 2))
-// 	{
-// 		if (!is_valid_option((char *)arg->content))
-// 			break ;
-// 		arg = arg->next;
-// 		newline = 0;
-// 	}
-// 	while (arg && arg->content)
-// 	{
-// 		display_content((char *)arg->content);
-// 		if (arg->next && arg->next->content)
-// 			write(1, " ", 1);
-// 		arg = arg->next;
-// 	}
-// 	if (newline)
-// 		printf("\n");
-// }
-
 /*Appel la fonction echo*/
 int	ft_echo(t_g *g, t_cmd *cmds)
 {
@@ -99,13 +76,4 @@ int	ft_echo(t_g *g, t_cmd *cmds)
 	else
 		printf("\n");
 	return (0);
-
-	// t_list	*arg;
-
-	// arg = g->lst->next;
-	// if (arg && arg->content)
-	// 	display_with_args(arg);
-	// else
-	// 	printf("\n");
-	// return (0);
 }

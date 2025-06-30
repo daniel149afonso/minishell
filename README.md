@@ -1,13 +1,17 @@
 # Commandes status:
 
 ## infos à jour:
-export ne marche plus car il faut utiliser cmd au lieu de lst
+
+<< pas encore implémenté
 
 ls > test.txt > out.txt ne marche pas
 
-builtins simple avec redirection ne marche pas
+cat puis ctrl-c affiche 2x le prompt
 
-certaines pipeline avec echo ne marche pas
+echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
+
+certains messages d'erreur a corigger
+
 
 ## cd (changement de dossier - Daniel): ✅
 

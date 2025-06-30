@@ -6,17 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/23 16:29:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/29 18:40:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-int	is_redirection_token(char *token)
-{
-	return (!ft_strcmp(token, "<") || !ft_strcmp(token, ">") ||
-			!ft_strcmp(token, ">>") || !ft_strcmp(token, "<<"));
-}
 
 int store_stdout_redir(t_cmd *cmd, t_list *redir)
 {
@@ -53,33 +47,15 @@ int store_stdin_redir(t_cmd *cmd, t_list *redir)
 	return (0);
 }
 
-int	redirect_cmd_io(t_cmd *cmd)
+int store_heredoc_redir(t_cmd *cmd, t_list *redir)
 {
-	int	fd;
-	// Redirection d'entrée
-	if (cmd->infile)
-	{
-		fd = open(cmd->infile, O_RDONLY);
-		if (fd < 0)
-		{
-			perror(cmd->infile);
-			return (1);
-		}
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
-	// Redirection de sortie
-	if (cmd->outfile)
-	{
-		int flags = O_WRONLY | O_CREAT | (cmd->append ? O_APPEND : O_TRUNC);
-		fd = open(cmd->outfile, flags, 0644);
-		if (fd < 0)
-		{
-			perror(cmd->outfile);
-			return (1);
-		}
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-	}
+	if (!redir || !redir->next || !redir->next->content)
+		return (1);
+
+	if (cmd->delimitor)
+		free(cmd->delimitor);
+	cmd->delimitor = ft_strdup((char *)redir->next->content);
+	cmd->heredoc = 1;
 	return (0);
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 19:15:37 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/30 19:25:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@
 
 void free_cmds(t_cmd *cmds)
 {
-	t_cmd *tmp;
+	
+	int		i;
+	t_cmd	*tmp;
+
+	i = 0;
 	while (cmds)
 	{
 		tmp = cmds->next;
-		int i = 0;
+		
 		while (cmds->argv[i])
 			free(cmds->argv[i++]);
 		free(cmds->argv);
+		free(cmds->infile);
+		free(cmds->outfile);
 		free(cmds);
 		cmds = tmp;
 	}
