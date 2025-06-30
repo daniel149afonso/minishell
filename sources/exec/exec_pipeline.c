@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 19:25:22 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 19:42:37 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, int *pipefd, char **envp)
 			dup2(pipefd[1], STDOUT_FILENO);
 			close(pipefd[1]);
 		}
-		if (redirect_cmd_io(cmds) != 0)
+		if (redirect_cmd_io(g, cmds) != 0)
 			exit(1);
 		g->cmd = parse_cmd_exec(g, cmds);
 		get_access(g->cmd, cmds, envp);
@@ -208,4 +208,3 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	return 1;
 }
-
