@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 19:33:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 19:44:24 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,3 @@ int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	return 1;
 }
-
