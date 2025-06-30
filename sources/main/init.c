@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 18:06:48 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/27 21:02:10 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+static void	update_lvl(t_env *env)
+{
+	char	*lvl_c;
+	int		lvl;
+	
+	lvl_c = NULL;
+	lvl = 0;
+	while (env)
+	{
+		if ((ft_strncmp(env->key, "SHLVL", 5)) == 0)
+		{
+			lvl = ft_atoi(env->value);
+			lvl_c = ft_itoa(lvl + 1);
+			free(env->value);
+			env->value = lvl_c;
+			break ;
+		}
+		env = env->next;
+	}
+}
 
 void	init_global_struct(t_g **g, char **envp)
 {
@@ -19,7 +40,8 @@ void	init_global_struct(t_g **g, char **envp)
 		return ;
 	ft_memset(*g, 0, sizeof(t_g));
 	init_env(&((*g)->env), envp);
-	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));\
+	update_lvl((*g)->env);
+	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->env->var_error_code = 0;
 	(*g)->env->error_code = 0;
 	(*g)->s_stdin = -1;
