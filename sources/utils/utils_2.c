@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/29 18:41:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 15:46:49 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,18 @@ void	print_debug_command(t_cmd *cmd)
 		printf("Delimitor: '%s'\n", cmd->delimitor);
 		printf("Outfile: '%s'\n", cmd->outfile);
 		cmd = cmd->next;
+	}
+}
+
+void	ft_print_array(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		ft_putstr_fd(strs[i], 1);
+		write(1, "\n", 2);
+		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/29 16:04:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 18:22:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_cmd
 	int				append;
 	int				heredoc;
 	char 			*delimitor;
+	char			**text;
 	struct s_cmd	*next;
 }	t_cmd;
 

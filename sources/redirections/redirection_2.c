@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/29 18:41:31 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 18:23:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,61 @@
 /*Traite << stdin, ouvre un heredoc qui recoit les entrees de l'utilisateur
 jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
 
-int	double_stdin(t_list *redir, t_list **heredoc, t_env *env)
-{
-	char	*occur;
-	char	*buffer;
+// int	double_stdin(t_list *redir, t_list **heredoc, t_env *env)
+// {
+// 	char	*occur;
+// 	char	*buffer;
 
-	occur = ((char *)redir->next->content);
+// 	occur = ((char *)redir->next->content);
+// 	while (1)
+// 	{
+// 		buffer = readline("> ");
+// 		if (buffer)
+// 		{
+// 			if (!ft_strcmp(buffer, occur))
+// 			{
+// 				free(buffer);
+// 				break ;
+// 			}
+// 			if (!*heredoc)
+// 				*heredoc = ft_lstnew(expand_variables(ft_strdup(buffer), env));
+// 			else
+// 				ft_lstadd_back(heredoc,
+// 					ft_lstnew(expand_variables(ft_strdup(buffer), env)));
+// 			free(buffer);  // Ici UNIQUEMENT
+// 		}
+// 		else
+// 			break ; // readline retourne NULL (CTRL+D)
+// 	}
+// 	return (0);
+// }
+
+int	double_stdin(t_cmd *cmd, t_env *env)
+{
+	char	*buffer;
+	int		i;
+
+	i = 0;
+	cmd->text = malloc(sizeof(char *) * 100);
+	if (!cmd->text)
+		return (1);
 	while (1)
 	{
 		buffer = readline("> ");
 		if (buffer)
 		{
-			if (!ft_strcmp(buffer, occur))
+			if (!ft_strcmp(buffer, (char *)cmd->delimitor))
 			{
 				free(buffer);
 				break ;
 			}
-			if (!*heredoc)
-				*heredoc = ft_lstnew(expand_variables(ft_strdup(buffer), env));
-			else
-				ft_lstadd_back(heredoc,
-					ft_lstnew(expand_variables(ft_strdup(buffer), env)));
+			cmd->text[i] = expand_variables(ft_strdup(buffer), env);
+			i++;
 			free(buffer);  // Ici UNIQUEMENT
 		}
-		else
-			break ; // readline retourne NULL (CTRL+D)
 	}
+	cmd->text[i] = NULL;
+	//ft_print_array(cmd->text);
 	return (0);
 }
 
@@ -77,9 +106,9 @@ int	redirect_cmd_io(t_g *g, t_cmd *cmd)
 	}
 	if (cmd->heredoc)
 	{
-		
+		if (double_stdin(cmd, g->env) == 1)
+			return (1);
 	}
-	
 	return (0);
 }
 

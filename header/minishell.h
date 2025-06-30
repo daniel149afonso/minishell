@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/29 18:06:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 15:54:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	remove_quotes(t_list **lst);
 int		validate_redirection_syntax(t_list *lst);
 void	restore_std(t_g *g);
 int		parsing_redir(t_list *lst);
-int		double_stdin(t_list *redir, t_list **herdoc, t_env *env);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
@@ -104,5 +103,6 @@ void	f_bubblesort(t_env *head);
 int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	print_debug_command(t_cmd *cmd);
+void	ft_print_array(char **strs);
 
 #endif
