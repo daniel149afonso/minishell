@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/30 18:22:22 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 19:30:49 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,15 @@ typedef struct s_g
 {
 	char		*input;
 	char		**result;
+	char		*cmd;
 	int			s_stdin;
 	int			s_stdout;
 	int			fd_stdout;
 	int			fd_stdin;
 	int			error_code;
+	int			status;
+	int			last_status;
+	int			prev_fd;
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;

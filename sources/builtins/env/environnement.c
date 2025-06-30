@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 01:24:43 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/27 04:25:22 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pour initier un environnement
 -----------------------------*/
 void	init_env(t_env **env, char **envp)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (envp[i])

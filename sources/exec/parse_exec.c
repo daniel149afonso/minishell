@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/29 18:48:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 19:29:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 	redir = *tmp;
 	if (!redir || !redir->next)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		perror("minishell: syntax error near unexpected token `newline'\n");
 		return (1);
 	}
 	if (!ft_strcmp(redir->content, "<"))
