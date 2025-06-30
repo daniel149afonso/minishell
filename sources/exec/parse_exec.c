@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/25 17:52:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 19:17:06 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 	redir = *tmp;
 	if (!redir || !redir->next)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		perror("minishell: syntax error near unexpected token `newline'\n");
 		return (1);
 	}
 	if (!ft_strcmp(redir->content, "<"))
@@ -76,7 +76,7 @@ int handle_redir_safely(t_list **lst, t_cmd **head, t_cmd **curr,
     }
     else if (!*curr)
     {
-        printf("minishell: syntax error near unexpected token `newline'\n");
+        perror("minishell: syntax error near unexpected token `newline'\n");
         return 0;
     }
     return !handle_redirection_token(lst, curr);

@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/27 21:02:10 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/30 19:10:34 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ void	init_global_struct(t_g **g, char **envp)
 	init_env(&((*g)->env), envp);
 	update_lvl((*g)->env);
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
-	(*g)->env->var_error_code = 0;
-	(*g)->env->error_code = 0;
 	(*g)->s_stdin = -1;
 	(*g)->s_stdout = -1;
 	(*g)->fd_stdout = -1;
 	(*g)->fd_stdin = -1;
+	(*g)->prev_fd = -1;
+	(*g)->env->var_error_code = 0;
+	(*g)->env->error_code = 0;
+	(*g)->last_status = 0;
+	(*g)->status = 0;
+	(*g)->cmd = NULL;
 }

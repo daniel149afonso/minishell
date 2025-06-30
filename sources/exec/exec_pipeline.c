@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/27 03:53:49 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/06/30 19:15:37 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,94 +104,102 @@ char *get_path(char *cmd, char **envp)
 	return NULL;
 }
 
+static void	get_access(char *cmd, t_cmd *cmds, char **envp)
+{
+	char	*path;
+	
+	path = NULL;
+	if (strchr(cmd, '/'))
+	{
+		path = strdup(cmd);
+		if (!path || access(path, X_OK) != 0)
+			return (perror(cmd), free(path), exit(127));
+	}
+	else
+	{
+		path = get_path(cmd, envp);
+		if (!path)
+			return (printf("%s: ", cmd), perror("command not found\n"),
+				exit(127));
+	}
+	execve(path, cmds->argv, envp);
+	perror("execve");
+	exit(1);
+}
+
+static char    *parse_cmd_exec(t_g *g, t_cmd *cmds)
+{
+	char    *cmd;
+	int     i;
+
+	i = 0;
+	while (g->envbuilt[i].name)
+	{
+		if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
+			exit(g->envbuilt[i].e(g->env));
+		i++;
+	}
+	i = 0;
+	while (g->builtin[i].name)
+	{
+		if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+			exit(g->builtin[i].f(g, g->cmds));
+		i++;
+	}
+	cmd = cmds->argv[0];
+	return (cmd);
+}
+
+static void	check_pid(int pid, t_g *g, t_cmd *cmds, int *pipefd, char **envp)
+{
+	if (pid == 0)
+	{
+		if (g->prev_fd != -1)
+		{
+			dup2(g->prev_fd, STDIN_FILENO);
+			close(g->prev_fd);
+		}
+		if (cmds->next && !cmds->outfile)
+		{
+			close(pipefd[0]);
+			dup2(pipefd[1], STDOUT_FILENO);
+			close(pipefd[1]);
+		}
+		if (redirect_cmd_io(cmds) != 0)
+			exit(1);
+		g->cmd = parse_cmd_exec(g, cmds);
+		get_access(g->cmd, cmds, envp);
+		if (g->cmd)
+			free (g->cmd);
+	}
+}
+
 int exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-    int    pipefd[2];
-    int    prev_fd = -1;
-    pid_t  pid;
-    int    status;
-    int    last_status = 0;
+	int    pipefd[2];
+	pid_t  pid;
 
-    while (cmds)
-    {
-        if (cmds->next && pipe(pipefd) == -1)
-            return (perror("pipe"), 0);
-        pid = fork();
-        if (pid == -1)
-            return (perror("fork"), 0);
-
-        if (pid == 0) // CHILD
-        {
-            if (prev_fd != -1)
-            {
-                dup2(prev_fd, STDIN_FILENO);
-                close(prev_fd);
-            }
-            if (cmds->next && !cmds->outfile)
-            {
-                close(pipefd[0]);
-                dup2(pipefd[1], STDOUT_FILENO);
-                close(pipefd[1]);
-            }
-            // redirections
-            if (redirect_cmd_io(cmds) != 0)
-                exit(1);
-
-            // builtins envbuilt
-            for (int i = 0; g->envbuilt[i].name; i++)
-                if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
-                    exit(g->envbuilt[i].e(g->env));
-
-            // builtins classiques
-            for (int i = 0; g->builtin[i].name; i++)
-                if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
-                    exit(g->builtin[i].f(g, g->cmds));
-
-            /* === nouvelle logique pour les chemins avec '/' === */
-            char *cmd = cmds->argv[0];
-            char *path;
-            if (strchr(cmd, '/'))
-            {
-                path = strdup(cmd);
-                if (!path || access(path, X_OK) != 0)
-                {
-                    perror(cmd);
-                    free(path);
-                    exit(127);
-                }
-            }
-            else
-            {
-                path = get_path(cmd, envp);
-                if (!path)
-                {
-                    fprintf(stderr, "%s: command not found\n", cmd);
-                    exit(127);
-                }
-            }
-
-            execve(path, cmds->argv, envp);
-            perror("execve");
-            exit(1);
-        }
-
-        // PARENT
-        if (prev_fd != -1)
-            close(prev_fd);
-        if (cmds->next)
-        {
-            close(pipefd[1]);
-            prev_fd = pipefd[0];
-        }
-        cmds = cmds->next;
-    }
-
-    // attendre les enfants et récupérer le dernier code
-    while (wait(&status) > 0)
-        last_status = status;
-
-    if (WIFEXITED(last_status))
-        return_code(g->env, WEXITSTATUS(last_status));
-    return 1;
+	while (cmds)
+	{
+		if (cmds->next && pipe(pipefd) == -1)
+			return (perror("pipe"), 0);
+		pid = fork();
+		if (pid == -1)
+			return (perror("fork"), 0);
+		check_pid(pid, g, cmds, pipefd, envp);
+		if (g->prev_fd != -1)
+			close(g->prev_fd);
+		if (cmds->next)
+		{
+			close(pipefd[1]);
+			g->prev_fd = pipefd[0];
+		}
+		cmds = cmds->next;
+	}
+	while (wait(&g->status) > 0)
+		g->last_status = g->status;
+	if (WIFEXITED(g->last_status))
+		return_code(g->env, WEXITSTATUS(g->last_status));
+	return 1;
 }
 
