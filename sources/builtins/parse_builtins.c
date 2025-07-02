@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/02 18:52:59 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/03 00:05:12 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*init chaque builtin avec sa fonction correspondante*/
 void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 {
-	*envbuilt = malloc(sizeof(t_envbuilt) * 5);
+	*envbuilt = malloc(sizeof(t_envbuilt) * 4);
 	if (!(*envbuilt))
 		return ;
-	*builtins = malloc(sizeof(t_builtin) * 8);
+	*builtins = malloc(sizeof(t_builtin) * 5);
 	if (!(*builtins))
 		return ;
 	(*builtins)[0].name = "cd";
@@ -37,6 +37,8 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[1].e = &ft_exp;
 	(*envbuilt)[2].name = "unset";
 	(*envbuilt)[2].e = &f_unset;
+	(*envbuilt)[3].name = NULL;
+	(*envbuilt)[3].e = NULL;
 }
 
 static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)

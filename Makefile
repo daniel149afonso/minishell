@@ -46,8 +46,7 @@ SRCS := \
   $(UTLS_DIR)/utils_2.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
-  $(EXEC_DIR)/exec_utils.c \
-  $(SIGNALS_DIR)/signal.c
+  $(EXEC_DIR)/exec_utils.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
@@ -56,7 +55,7 @@ OBJS = $(SRCS:.c=.o)
 HEAD = header/push_swap.h
 
 # Compiler and flags
-CC = cc -Wall -Wextra -Werror -g #-g -fsanitize=address
+CC = cc -Wall -Wextra -Werror -g -O0 #-g -fsanitize=address
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Darwin)

@@ -7,3 +7,5 @@
 *.identifiers
 minishell
 minishell_tester
+launch.sh
+readline.supp

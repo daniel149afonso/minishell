@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/30 19:10:34 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/03 01:07:52 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,15 @@ void	init_global_struct(t_g **g, char **envp)
 	if (!*g)
 		return ;
 	ft_memset(*g, 0, sizeof(t_g));
-	init_env(&((*g)->env), envp);
-	update_lvl((*g)->env);
+	if (envp)
+	{
+		init_env(&((*g)->env), envp);
+		update_lvl((*g)->env);		
+	}
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;
 	(*g)->s_stdout = -1;
 	(*g)->fd_stdout = -1;
 	(*g)->fd_stdin = -1;
 	(*g)->prev_fd = -1;
-	(*g)->env->var_error_code = 0;
-	(*g)->env->error_code = 0;
-	(*g)->last_status = 0;
-	(*g)->status = 0;
-	(*g)->cmd = NULL;
 }

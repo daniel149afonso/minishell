@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/30 15:54:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 01:05:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ int		store_stdout_redir(t_cmd *cmd, t_list *redir);
 int		store_append_redir(t_cmd *cmd, t_list *redir);
 int		store_stdin_redir(t_cmd *cmd, t_list *redir);
 int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
-
-//SIGNAL
-void	sigint_handler(int sig);
 
 //FT_INIT_LIST | INIT LIST COMMANDS PARSED
 void	ft_init_lst(t_list **lst, char **tokens);

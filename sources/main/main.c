@@ -6,11 +6,27 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/03 00:07:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 01:42:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+int g_in_prompt;
+
+static void	sigint_handler(int sig)
+{
+    (void)sig;
+    if (g_in_prompt)
+    {
+        rl_replace_line("", 0);
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_redisplay();
+    }
+    else
+		return ;
+}
 
 static void	free_for_nextl(char *input, t_list *lst)
 {
@@ -50,11 +66,14 @@ int	msh_while(t_g *g)
 {
 	if (g->input && *g->input)
 	{
-		g->result = search_var(ft_splitou(g->input), g->env);
-		if (!g->result)
-			return (1);
-		ft_init_lst(&g->lst, g->result);
-		exec_parsing(g);
+		if (g->env)
+		{
+			g->result = search_var(ft_splitou(g->input), g->env);
+			if (!g->result)
+				return (1);
+			ft_init_lst(&g->lst, g->result);
+			exec_parsing(g);
+		}
 	}
 	return (0);
 }
@@ -69,12 +88,12 @@ int	main(int ac, char **av, char **envp)
 	init_global_struct(&g, envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-	if (!g->env)
-		return (printf(RED "No ENV for the shell detected\nEXIT\n" RE), 1);
 	while (1)
 	{
 		g->lst = NULL;
+		g_in_prompt = 1;
 		g->input = readline(GREEN "minishell$ " RE);
+		g_in_prompt = 0;
 		add_history(g->input);
 		if (msh_while(g))
 			return (1);
