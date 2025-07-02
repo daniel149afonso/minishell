@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/02 23:36:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 00:46:34 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,7 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	free_split(envp);
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
+	if (WIFSIGNALED(g->status) && WTERMSIG(g->status) == SIGINT)
+        write(STDOUT_FILENO, "\n", 1);
 	return (1);
 }
