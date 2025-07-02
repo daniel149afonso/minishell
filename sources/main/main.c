@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/02 20:05:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 00:40:06 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+int g_in_prompt;
+
+void	sigint_handler(int sig)
+{
+    (void)sig;
+    if (g_in_prompt)
+    {
+        rl_replace_line("", 0);
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_redisplay();
+    }
+    else
+		return ;
+}
 
 static void	free_for_nextl(char *input, t_list *lst)
 {
@@ -74,7 +90,9 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g->lst = NULL;
+		g_in_prompt = 1;
 		g->input = readline(GREEN "minishell$ " RE);
+		g_in_prompt = 0;
 		add_history(g->input);
 		if (msh_while(g))
 			return (1);
