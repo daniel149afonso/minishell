@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 21:04:38 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/02 18:51:15 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	exec_parsing(t_g *g)
 	free_cmds(g->cmds);
 	restore_std(g);
 }
-
 
 int	msh_while(t_g *g)
 {
