@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/30 19:29:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/02 18:52:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_cmd *parse_single_command(t_list **lst)
 	ft_memset(cmd, 0, sizeof(t_cmd));
 	cmd->argv = malloc(sizeof(char *) * 100);
 	if (!cmd->argv)
-		return free(cmd), NULL;
+		return (free(cmd), NULL);
 	while (*lst && ft_strcmp((*lst)->content, "|") != 0)
 	{
 		if (is_redirection_token((*lst)->content))
@@ -115,7 +115,7 @@ t_cmd *parse_commands(t_list *lst)
 		curr = cmd;
 
 		if (lst && ft_strcmp(lst->content, "|") == 0)
-			lst = lst->next; // sauter le pipe
+			lst = lst->next;
 	}
 	return head;
 }
