@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/02 20:04:20 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/02 23:36:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			free (g->cmd);
 	}
 	if (g->prev_fd != -1)
+	{
 		close(g->prev_fd);
+		g->prev_fd = -1;
+	}
 }
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
