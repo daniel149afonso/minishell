@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 19:42:37 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/02 17:56:02 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 	path = NULL;
 	if (strchr(cmd, '/'))
 	{
-		path = strdup(cmd);
+		path = ft_strdup(cmd);
 		if (!path || access(path, X_OK) != 0)
 			return (perror(cmd), free(path), exit(127));
 	}
@@ -141,14 +141,14 @@ static char    *parse_cmd_exec(t_g *g, t_cmd *cmds)
 	i = 0;
 	while (g->envbuilt[i].name)
 	{
-		if (strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
+		if (ft_strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
 			exit(g->envbuilt[i].e(g->env));
 		i++;
 	}
 	i = 0;
 	while (g->builtin[i].name)
 	{
-		if (strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
 			exit(g->builtin[i].f(g, g->cmds));
 		i++;
 	}

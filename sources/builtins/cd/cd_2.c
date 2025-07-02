@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:03:06 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 14:44:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/06/30 21:06:32 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	set_home_path(char **path)
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (0);
 	}
-	printf("Home path: %s\n", *path);
 	return (1);
 }
 
