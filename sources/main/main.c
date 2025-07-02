@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/03 00:40:06 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/03 01:12:08 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int g_in_prompt;
 
-void	sigint_handler(int sig)
+static void	sigint_handler(int sig)
 {
     (void)sig;
     if (g_in_prompt)
@@ -66,11 +66,14 @@ int	msh_while(t_g *g)
 {
 	if (g->input && *g->input)
 	{
-		g->result = search_var(ft_splitou(g->input), g->env);
-		if (!g->result)
-			return (1);
-		ft_init_lst(&g->lst, g->result);
-		exec_parsing(g);
+		if (g->env)
+		{
+			g->result = search_var(ft_splitou(g->input), g->env);
+			if (!g->result)
+				return (1);
+			ft_init_lst(&g->lst, g->result);
+			exec_parsing(g);
+		}
 	}
 	return (0);
 }
@@ -85,8 +88,6 @@ int	main(int ac, char **av, char **envp)
 	init_global_struct(&g, envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-	if (!g->env)
-		return (printf(RED "No ENV for the shell detected\nEXIT\n" RE), 1);
 	while (1)
 	{
 		g->lst = NULL;
