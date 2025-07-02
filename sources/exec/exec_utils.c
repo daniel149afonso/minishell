@@ -6,13 +6,13 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/02 18:39:01 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/02 18:49:53 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-void	sfree_cmds(t_cmd *cmds)
+void	free_cmds(t_cmd *cmds)
 {
 	int		i;
 	t_cmd	*tmp;
