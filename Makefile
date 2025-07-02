@@ -46,6 +46,7 @@ SRCS := \
   $(UTLS_DIR)/utils_2.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
+  $(EXEC_DIR)/exec_utils.c \
   $(SIGNALS_DIR)/signal.c
 
 # Objects

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/30 19:30:49 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/02 18:12:41 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_g
 	int			status;
 	int			last_status;
 	int			prev_fd;
+	int			pipefd[2];
 	t_env		*env;
 	t_builtin	*builtin;
 	t_envbuilt	*envbuilt;
