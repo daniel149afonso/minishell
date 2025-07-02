@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/02 18:40:12 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/02 23:36:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 	char	*path;
 
 	path = NULL;
-	if (strchr(cmd, '/'))
+	if (ft_strchr(cmd, '/'))
 	{
 		path = ft_strdup(cmd);
 		if (!path || access(path, X_OK) != 0)
@@ -66,6 +66,7 @@ static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
 	char	*cmd;
 	int		i;
 
+	cmd = NULL;
 	i = 0;
 	while (g->envbuilt[i].name)
 	{
@@ -77,7 +78,7 @@ static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
 	while (g->builtin[i].name)
 	{
 		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
-			exit(g->builtin[i].f(g, g->cmds));
+			exit(g->builtin[i].f(g, cmds));
 		i++;
 	}
 	cmd = cmds->argv[0];
@@ -107,7 +108,10 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			free (g->cmd);
 	}
 	if (g->prev_fd != -1)
+	{
 		close(g->prev_fd);
+		g->prev_fd = -1;
+	}
 }
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
