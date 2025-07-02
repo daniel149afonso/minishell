@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/02 18:15:31 by bullestico       ###   ########.fr       */
+/*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
+/*   Updated: 2025/07/02 18:40:12 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 	}
 	while (wait(&g->status) > 0)
 		g->last_status = g->status;
+	free_split(envp);
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	return (1);
