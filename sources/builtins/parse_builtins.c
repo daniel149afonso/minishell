@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/03 03:08:28 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 07:13:17 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[3].e = NULL;
 }
 
+static int	is_credit(t_cmd *cmd)
+{
+	if ((ft_strcmp(cmd->argv[0], "credits")) == 0)
+	{
+		print_credits();
+		return (1);
+	}
+	return (0);
+}
+
 static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
 	int	i;
@@ -60,10 +70,12 @@ static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 		}
 		i++;
 	}
+	if (is_credit(cmd))
+		return (1);
 	return (0);
 }
 
-int builtins(t_g *g, t_cmd *cmd)
+int	builtins(t_g *g, t_cmd *cmd)
 {
 	int	i;
 	int	code;

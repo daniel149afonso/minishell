@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 01:05:54 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/03 07:11:22 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	print_debug_command(t_cmd *cmd);
 void	ft_print_array(char **strs);
+
+// CREDITS
+void	print_credits(void);
 
 #endif
