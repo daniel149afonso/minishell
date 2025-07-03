@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 01:05:54 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:01:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		store_stdout_redir(t_cmd *cmd, t_list *redir);
 int		store_append_redir(t_cmd *cmd, t_list *redir);
 int		store_stdin_redir(t_cmd *cmd, t_list *redir);
 int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
+int		handle_heredoc(t_g *g, t_cmd *cmds, t_env *env);
 
 //FT_INIT_LIST | INIT LIST COMMANDS PARSED
 void	ft_init_lst(t_list **lst, char **tokens);

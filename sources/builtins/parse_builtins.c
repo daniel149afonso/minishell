@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/03 03:08:28 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 22:08:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[3].e = NULL;
 }
 
-static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
+static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
 	int	i;
 	int	code;
@@ -54,6 +54,8 @@ static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 	{
 		if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
 		{
+			if (redirect_cmd_io(g, cmd) != 0)
+				return (1);
 			code = envbuilt[i].e(env);
 			return_code(env, code);
 			return (1);
@@ -70,7 +72,7 @@ int builtins(t_g *g, t_cmd *cmd)
 
 	if (!cmd->argv || !cmd->argv[0])
 		return (0);
-	if (builtins_2(g->env, cmd, g->envbuilt))
+	if (builtins_2(g, g->env, cmd, g->envbuilt))
 		return (1);
 	i = 0;
 	code = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/21 20:26:33 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/03 22:39:48 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ static int	check_arg(char *value)
 	return (1);
 }
 
-static void    print_error_env(char *value, t_list *tmp)
+static void	print_error_env(char *value, t_list *tmp)
 {
+
 	value = extract_check_key(tmp->content);
-	printf("export: `%s': not a valid identifier\n", value);
+	write(STDERR_FILENO, "minishell: export: `", 21);
+	write(STDERR_FILENO, value, ft_strlen(value));
+	write(STDERR_FILENO, "': not a valid identifier\n", 27);
 	free(value);
 	return ;
 }
