@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/02 20:04:56 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 03:13:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	is_pipe(t_list *lst)
 	}
 	return (0);
 }
-	//POUR LIGNE 41 DE FONCTIONS FREE_CMD_LIST();
-		// Libère les redirs si	nécessaire (si t_list allouée dynamiquement)
-		// free_t_list(cmds->infile);
-		// free_t_list(cmds->outfile);
-		//???? c est quoi ca daniel ????
 
 void	free_cmd_list(t_cmd *cmds)
 {

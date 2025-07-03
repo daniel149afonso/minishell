@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/03 00:46:34 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/03 03:36:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,17 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 		g->prev_fd = -1;
 	}
 }
-
-int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
+int	execution(t_g *g, t_cmd *cmds, char **envp)
 {
 	pid_t	pid;
 
 	while (cmds)
 	{
 		if (cmds->next && pipe(g->pipefd) == -1)
-			return (perror("pipe"), 0);
+			return (perror("pipe"), 1);
 		pid = fork();
 		if (pid == -1)
-			return (perror("fork"), 0);
+			return (perror("fork"), 1);
 		check_pid(pid, g, cmds, envp);
 		if (cmds->next)
 		{
@@ -133,12 +132,24 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		}
 		cmds = cmds->next;
 	}
+	return (1);
+}
+int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
+{
+	if (!cmds->argv || !cmds->argv[0])
+	{
+		if (redirect_cmd_io(g, cmds) != 0)
+			return (0);
+		return (1);
+	}
+	if (!execution(g, cmds, envp))
+		return (1);
 	while (wait(&g->status) > 0)
 		g->last_status = g->status;
 	free_split(envp);
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	if (WIFSIGNALED(g->status) && WTERMSIG(g->status) == SIGINT)
-        write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 	return (1);
 }
