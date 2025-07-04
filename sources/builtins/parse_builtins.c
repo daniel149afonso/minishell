@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 03:05:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 03:41:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 	int	i;
 	int	code;
 
-	if (!cmd->argv || !cmd->argv[0])
-		return (0);
 	i = 0;
 	code = 0;
 	while (envbuilt[i].name)
@@ -69,7 +67,7 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 				if (handle_heredoc(g, cmd, g->env) == 1)
 					return (0);
 			}
-			if (handle_heredoc(g, cmd, g->env) == 1 || redirect_cmd_io(g, cmd) != 0)
+			if (redirect_cmd_io(g, cmd) != 0)
 				return (1);
 			code = envbuilt[i].e(env);
 			return_code(env, code);
@@ -105,8 +103,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 			if (redirect_cmd_io(g, cmd) != 0)
 				return (1);
 			code = g->builtin[i].f(g, cmd);
-			return_code(g->env, code);
-			return (1);
+			return (return_code(g->env, code), 1);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/03 22:06:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 03:44:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int handle_heredoc(t_g *g, t_cmd *cmd, t_env *env)
 
     if (pipe(pipefd) == -1)
         return (perror("pipe"), 1);
-
     while (1)
     {
         buffer = readline("> ");
@@ -37,7 +36,6 @@ int handle_heredoc(t_g *g, t_cmd *cmd, t_env *env)
         free(buffer);
     }
     close(pipefd[1]);  // terminé d’écrire
-
     // Injecter dans stdin
     g->s_stdin = dup(STDIN_FILENO);       // sauvegarde
     dup2(pipefd[0], STDIN_FILENO);        // redirection
@@ -78,12 +76,6 @@ int	redirect_cmd_io(t_g *g, t_cmd *cmd)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
-	//Pas encore fini
-	// if (cmd->heredoc)
-	// {
-	// 	if (double_stdin(g, cmd, g->env) == 1)
-	// 		return (1);
-	// }
 	return (0);
 }
 
