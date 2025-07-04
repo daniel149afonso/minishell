@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/04 15:53:17 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 00:54:59 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-char	*get_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*full;
-	int		i;
-
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
-		i++;
-	if (!envp[i])
-		return (NULL);
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		full = ft_strjoin(paths[i], "/");
-		full = ft_strjoin_free(full, cmd, 1);
-		if (access(full, X_OK) == 0)
-			return (free_split(paths), full);
-		free(full);
-		i++;
-	}
-	free_split(paths);
-	return (NULL);
-}
 
 static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 {
@@ -140,6 +114,7 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 	}
 	return (1);
 }
+
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
 	if (!cmds->argv || !cmds->argv[0])
