@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/02 19:09:25 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 03:44:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,41 @@
 
 /*Traite << stdin, ouvre un heredoc qui recoit les entrees de l'utilisateur
 jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
-int	double_stdin(t_cmd *cmd, t_env *env)
+int handle_heredoc(t_g *g, t_cmd *cmd, t_env *env)
 {
-	char	*buffer;
-	int		i;
+    char *buffer;
+    int pipefd[2];
 
-	i = 0;
-	cmd->text = malloc(sizeof(char *) * 100);
-	if (!cmd->text)
-		return (1);
-	while (1)
-	{
-		buffer = readline("> ");
-		if (buffer)
-		{
-			if (!ft_strcmp(buffer, (char *)cmd->delimitor))
-			{
-				free(buffer);
-				break ;
-			}
-			cmd->text[i] = expand_variables(ft_strdup(buffer), env);
-			i++;
-			free(buffer);  // Ici UNIQUEMENT
-		}
-	}
-	cmd->text[i] = NULL;
-	//ft_print_array(cmd->text);
-	return (0);
+    if (pipe(pipefd) == -1)
+        return (perror("pipe"), 1);
+    while (1)
+    {
+        buffer = readline("> ");
+        if (!buffer || !ft_strcmp(buffer, cmd->delimitor))
+        {
+            free(buffer);
+            break;
+        }
+        char *expanded = expand_variables(buffer, env);
+        write(pipefd[1], expanded, ft_strlen(expanded));
+        write(pipefd[1], "\n", 1);  // simulate newline
+        free(expanded);
+        free(buffer);
+    }
+    close(pipefd[1]);  // terminé d’écrire
+    // Injecter dans stdin
+    g->s_stdin = dup(STDIN_FILENO);       // sauvegarde
+    dup2(pipefd[0], STDIN_FILENO);        // redirection
+    close(pipefd[0]);                     // fermeture read-end
+    return (0);
 }
-/* Redirige stdin ou stdout en fonction 
+
+/* Redirige stdin ou stdout 
 */
 int	redirect_cmd_io(t_g *g, t_cmd *cmd)
 {
 	int	fd;
-	// Redirection d'entrée
+
 	if (cmd->infile)
 	{
 		fd = open(cmd->infile, O_RDONLY);
@@ -74,12 +75,6 @@ int	redirect_cmd_io(t_g *g, t_cmd *cmd)
 		g->s_stdout = dup(STDOUT_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-	}
-	//Pas encore fini
-	if (cmd->heredoc)
-	{
-		if (double_stdin(cmd, g->env) == 1)
-			return (1);
 	}
 	return (0);
 }

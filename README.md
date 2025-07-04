@@ -5,8 +5,6 @@
 
 ## infos à jour:
 
-<< pas encore implémenté
-
 ls > test.txt > out.txt ne marche pas
 
 echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/03 03:36:30 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 22:48:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 {
 	if (pid == 0)
 	{
-		if (g->prev_fd != -1)
+		if (g->prev_fd != -1 && !cmds->heredoc)
 		{
 			dup2(g->prev_fd, STDIN_FILENO);
 			close(g->prev_fd);
@@ -113,17 +113,23 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 		g->prev_fd = -1;
 	}
 }
+
 int	execution(t_g *g, t_cmd *cmds, char **envp)
 {
 	pid_t	pid;
 
 	while (cmds)
 	{
+		if (cmds->heredoc)
+		{
+			if (handle_heredoc(g, cmds, g->env) == 1)
+				return (0);
+		}
 		if (cmds->next && pipe(g->pipefd) == -1)
-			return (perror("pipe"), 1);
+			return (perror("pipe"), 0);
 		pid = fork();
 		if (pid == -1)
-			return (perror("fork"), 1);
+			return (perror("fork"), 0);
 		check_pid(pid, g, cmds, envp);
 		if (cmds->next)
 		{

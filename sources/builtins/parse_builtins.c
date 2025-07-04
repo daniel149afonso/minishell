@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/03 07:13:17 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/04 03:41:19 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,24 @@ static int	is_credit(t_cmd *cmd)
 	return (0);
 }
 
-static int	builtins_2(t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
+static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
 	int	i;
 	int	code;
 
-	if (!cmd->argv || !cmd->argv[0])
-		return (0);
 	i = 0;
 	code = 0;
 	while (envbuilt[i].name)
 	{
 		if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
 		{
+			if (cmd->heredoc)
+			{
+				if (handle_heredoc(g, cmd, g->env) == 1)
+					return (0);
+			}
+			if (redirect_cmd_io(g, cmd) != 0)
+				return (1);
 			code = envbuilt[i].e(env);
 			return_code(env, code);
 			return (1);
@@ -82,7 +87,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 
 	if (!cmd->argv || !cmd->argv[0])
 		return (0);
-	if (builtins_2(g->env, cmd, g->envbuilt))
+	if (builtins_2(g, g->env, cmd, g->envbuilt))
 		return (1);
 	i = 0;
 	code = 0;
@@ -90,11 +95,15 @@ int	builtins(t_g *g, t_cmd *cmd)
 	{
 		if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
 		{
+			if (cmd->heredoc)
+			{
+				if (handle_heredoc(g, cmd, g->env) == 1)
+					return (0);
+			}
 			if (redirect_cmd_io(g, cmd) != 0)
 				return (1);
 			code = g->builtin[i].f(g, cmd);
-			return_code(g->env, code);
-			return (1);
+			return (return_code(g->env, code), 1);
 		}
 		i++;
 	}
