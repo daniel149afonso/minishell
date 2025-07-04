@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 00:54:59 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 01:05:46 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 	{
 		path = ft_strdup(cmd);
 		if (!path || access(path, X_OK) != 0)
-			return (perror(cmd), free(path), exit(127));
+			return (write(2, cmd, ft_strlen(cmd)),
+				perror(": command not found\n"), exit(127));
 	}
 	else
 	{
 		path = get_path(cmd, envp);
 		if (!path)
-			return (printf("%s: ", cmd), perror("command not found\n"),
-				exit(127));
+			return (write(2, cmd, ft_strlen(cmd)),
+				perror(": command not found\n"), exit(127));
 	}
 	execve(path, cmds->argv, envp);
 	perror("execve");
@@ -129,10 +130,10 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		return (1);
 	while (wait(&g->status) > 0)
 		g->last_status = g->status;
-	free_split(envp);
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	if (WIFSIGNALED(g->status) && WTERMSIG(g->status) == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
+	free_split(envp);
 	return (1);
 }
