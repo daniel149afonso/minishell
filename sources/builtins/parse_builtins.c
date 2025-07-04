@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 02:52:36 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 03:05:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ void	init_builtins(t_envbuilt **envbuilt, t_builtin **builtins)
 	(*envbuilt)[3].e = NULL;
 }
 
+static int	is_credit(t_cmd *cmd)
+{
+	if ((ft_strcmp(cmd->argv[0], "credits")) == 0)
+	{
+		print_credits();
+		return (1);
+	}
+	return (0);
+}
+
 static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 {
 	int	i;
@@ -67,10 +77,12 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 		}
 		i++;
 	}
+	if (is_credit(cmd))
+		return (1);
 	return (0);
 }
 
-int builtins(t_g *g, t_cmd *cmd)
+int	builtins(t_g *g, t_cmd *cmd)
 {
 	int	i;
 	int	code;

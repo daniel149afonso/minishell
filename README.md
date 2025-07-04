@@ -1,8 +1,9 @@
+<img width="664" alt="image" src="https://github.com/user-attachments/assets/a12918ec-35e3-4e41-a5ef-8780b92c3364" />
+
+
 # Commandes status:
 
 ## infos à jour:
-
-<< pas encore implémenté
 
 ls > test.txt > out.txt ne marche pas
 

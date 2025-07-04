@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 21:01:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 02:55:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,8 @@ int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	print_debug_command(t_cmd *cmd);
 void	ft_print_array(char **strs);
+
+// CREDITS
+void	print_credits(void);
 
 #endif
