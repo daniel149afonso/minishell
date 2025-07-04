@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/04 16:41:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 16:45:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	redirect_stdin(t_g *g, t_cmd *cmd)
 	}
 	return (0);
 }
-
+/*Redirige stdout vers un fichier: APPEND ajoute, TRUNC remplace*/
 int	redirect_stdout(t_g *g, t_cmd *cmd)
 {
 	int fd;
@@ -70,9 +70,9 @@ int	redirect_stdout(t_g *g, t_cmd *cmd)
 	if (cmd->outfile)
 	{
 		if (cmd->append)
-			flags = O_WRONLY | O_CREAT | O_APPEND | O_TRUNC;
+			flags = O_WRONLY | O_CREAT | O_APPEND;
 		else
-			flags = O_WRONLY | O_CREAT;
+			flags = O_WRONLY | O_CREAT | O_TRUNC;
 		fd = open(cmd->outfile, flags, 0644);
 		if (fd < 0)
 		{
