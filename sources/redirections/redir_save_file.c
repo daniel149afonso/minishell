@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_cmd.c                                  :+:      :+:    :+:   */
+/*   redir_identify.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/29 18:40:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 16:21:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int store_stdout_redir(t_cmd *cmd, t_list *redir)
 {
 	if (!redir || !redir->next || !redir->next->content)
-		return (1); // erreur de syntaxe
+		return (1);
 
 	if (cmd->outfile)
 		free(cmd->outfile);

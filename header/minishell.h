@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/04 02:55:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 16:06:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,16 @@ void	remove_quotes(t_list **lst);
 //REDIRECTIONS
 int		validate_redirection_syntax(t_list *lst);
 void	restore_std(t_g *g);
-int		parsing_redir(t_list *lst);
+int		is_missing_arg(t_list *lst);
+
+//REDIRECTIONS COMMANDS
+int		redirect_cmd_io(t_g *g, t_cmd *cmd);
+int		is_redirection_token(char *token);
+int		store_stdout_redir(t_cmd *cmd, t_list *redir);
+int		store_append_redir(t_cmd *cmd, t_list *redir);
+int		store_stdin_redir(t_cmd *cmd, t_list *redir);
+int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
+int		handle_heredoc(t_g *g, t_cmd *cmds, t_env *env);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
@@ -70,15 +79,6 @@ t_cmd	*parse_commands(t_list *lst);
 int		is_pipe(t_list *lst);
 int		handle_redirection_token(t_list **tmp, t_cmd **curr);
 t_cmd	*create_new_cmd(char **args);
-
-//REDIRECTIONS COMMANDS
-int		redirect_cmd_io(t_g *g, t_cmd *cmd);
-int		is_redirection_token(char *token);
-int		store_stdout_redir(t_cmd *cmd, t_list *redir);
-int		store_append_redir(t_cmd *cmd, t_list *redir);
-int		store_stdin_redir(t_cmd *cmd, t_list *redir);
-int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
-int		handle_heredoc(t_g *g, t_cmd *cmds, t_env *env);
 
 //FT_INIT_LIST | INIT LIST COMMANDS PARSED
 void	ft_init_lst(t_list **lst, char **tokens);

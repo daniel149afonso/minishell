@@ -37,9 +37,9 @@ SRCS := \
   $(PARSING_DIR)/handle_var.c \
   $(PARSING_DIR)/handle_var_2.c \
   $(PARSING_DIR)/handle_quotes.c \
-  $(REDIR_DIR)/redirection.c  \
-  $(REDIR_DIR)/redirection_2.c \
-  $(REDIR_DIR)/redirection_cmd.c \
+  $(REDIR_DIR)/redir_parsing_utils.c  \
+  $(REDIR_DIR)/redir_restore_std.c \
+  $(REDIR_DIR)/redir_save_file.c \
   $(REDIR_DIR)/redir_parsing.c \
   $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \

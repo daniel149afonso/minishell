@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 03:41:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 15:52:31 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,12 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 int	builtins(t_g *g, t_cmd *cmd)
 {
 	int	i;
-	int	code;
 
 	if (!cmd->argv || !cmd->argv[0])
 		return (0);
 	if (builtins_2(g, g->env, cmd, g->envbuilt))
 		return (1);
 	i = 0;
-	code = 0;
 	while (g->builtin[i].name)
 	{
 		if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
@@ -102,8 +100,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 			}
 			if (redirect_cmd_io(g, cmd) != 0)
 				return (1);
-			code = g->builtin[i].f(g, cmd);
-			return (return_code(g->env, code), 1);
+			return (return_code(g->env, g->builtin[i].f(g, cmd)), 1);
 		}
 		i++;
 	}

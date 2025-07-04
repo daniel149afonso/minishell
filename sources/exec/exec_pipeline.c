@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/03 22:48:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 15:53:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
 	if (!cmds->argv || !cmds->argv[0])
 	{
+		if (handle_heredoc(g, cmds, g->env) == 1)
+			return (0);
 		if (redirect_cmd_io(g, cmds) != 0)
 			return (0);
 		return (1);
