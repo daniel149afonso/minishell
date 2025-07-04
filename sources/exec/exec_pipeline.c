@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/03 22:00:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/03 22:48:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 		if (cmds->heredoc)
 		{
 			if (handle_heredoc(g, cmds, g->env) == 1)
-				return (1);
+				return (0);
 		}
 		if (cmds->next && pipe(g->pipefd) == -1)
-			return (perror("pipe"), 1);
+			return (perror("pipe"), 0);
 		pid = fork();
 		if (pid == -1)
-			return (perror("fork"), 1);
+			return (perror("fork"), 0);
 		check_pid(pid, g, cmds, envp);
 		if (cmds->next)
 		{

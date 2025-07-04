@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/03 01:42:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/04 02:49:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	exec_parsing(t_g *g)
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
 	g->env->lst = g->lst;
-	print_debug_command(g->cmds);
+	//print_debug_command(g->cmds);
 	if (is_pipe(g->lst))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
