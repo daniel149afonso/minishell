@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/05 15:05:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 16:23:28 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,10 @@ int redirect_cmd_std(t_g *g, t_cmd *cmd)
 			fd = open(r->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (r->type == 3) // >>
 			fd = open(r->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-
+		// HEredoc à gérer
 		if (fd < 0)
 		{
+			
 			perror(r->file);
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 15:29:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 16:05:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 		{
 			if (cmd->heredoc)
 			{
+				printf("Je suis rentré\n");
 				if (handle_heredoc(g, cmd, g->env) == 1)
 					return (0);
 			}
