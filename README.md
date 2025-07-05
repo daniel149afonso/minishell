@@ -5,7 +5,9 @@
 
 ## infos à jour:
 
-ls > test.txt > out.txt ne marche pas
+ctrl-c et ctrl-d dans un heredoc ne marche pas
+
+echo naruto > test.txt | echo uzumaki > out.txt, ça n'ecrit que dans out.txt
 
 echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
 
