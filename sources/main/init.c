@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 01:07:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/05 07:44:23 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	update_lvl(t_env *env)
 {
 	char	*lvl_c;
 	int		lvl;
-	
+
 	lvl_c = NULL;
 	lvl = 0;
 	while (env)
@@ -42,7 +42,7 @@ void	init_global_struct(t_g **g, char **envp)
 	if (envp)
 	{
 		init_env(&((*g)->env), envp);
-		update_lvl((*g)->env);		
+		update_lvl((*g)->env);	
 	}
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;

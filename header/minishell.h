@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 00:51:40 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 07:52:34 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	print_debug_command(t_cmd *cmd);
 void	ft_print_array(char **strs);
+void	is_debug_active(t_g *g, char *debug);
 
 // CREDITS
 void	print_credits(void);

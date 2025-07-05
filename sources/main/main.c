@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/05 02:01:19 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 07:52:51 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 static void	exec_parsing(t_g *g)
 {
-	if (!validate_redirection_syntax(g->lst))
-		return ;
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
 	g->env->lst = g->lst;
-	//print_debug_command(g->cmds);
+	if (g->debug_option)
+		print_debug_command(g->cmds);
 	if (is_pipe(g->lst))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
@@ -58,12 +57,12 @@ static void	exec_parsing(t_g *g)
 			return_code(g->env, 1);
 		}
 	}
-	free_cmds(g->cmds);
-	restore_std(g);
+	return (free_cmds(g->cmds), restore_std(g));
 }
 
-int	msh_while(t_g *g)
+static int	msh_while(t_g *g)
 {
+	add_history(g->input);
 	if (g->input && *g->input)
 	{
 		if (g->env)
@@ -72,6 +71,8 @@ int	msh_while(t_g *g)
 			if (!g->result)
 				return (1);
 			ft_init_lst(&g->lst, g->result);
+			if (!validate_redirection_syntax(g->lst))
+				return (0);
 			exec_parsing(g);
 		}
 	}
@@ -83,9 +84,9 @@ int	main(int ac, char **av, char **envp)
 	t_g	*g;
 
 	(void)ac;
-	(void)**av;
 	g = NULL;
 	init_global_struct(&g, envp);
+	is_debug_active(g, av[1]);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -94,7 +95,6 @@ int	main(int ac, char **av, char **envp)
 		g_in_prompt = 1;
 		g->input = readline(GREEN "minishell$ " RE);
 		g_in_prompt = 0;
-		add_history(g->input);
 		if (msh_while(g))
 			return (1);
 		if (!g->input)
