@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/04 02:49:56 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 02:01:19 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int g_in_prompt;
+int	g_in_prompt;
 
 static void	sigint_handler(int sig)
 {
-    (void)sig;
-    if (g_in_prompt)
-    {
-        rl_replace_line("", 0);
-        write(1, "\n", 1);
-        rl_on_new_line();
-        rl_redisplay();
-    }
-    else
+	(void)sig;
+	if (g_in_prompt)
+	{
+		rl_replace_line("", 0);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
 		return ;
 }
 
