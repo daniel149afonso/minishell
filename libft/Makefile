@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2025/04/18 19:49:22 by daafonso         ###   ########.fr        #
+#    Updated: 2025/07/05 09:03:00 by bullestico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,40 +48,52 @@ ft_strtrim.c \
 ft_tolower.c \
 ft_toupper.c
 
-BONUS 		= ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
-			ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
-			ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
+BONUS = ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
+		ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
+		ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
 
-SRCSALL 	= 		${SRC} ${BONUS}
+SRCSALL 	= ${SRC} ${BONUS}
+OBJS		= ${SRC:.c=.o}
+OBJSALL		= ${SRCSALL:.c=.o}
 
-OBJS		=		$(SRC:.c=.o)
+CC			= cc
+RM			= rm -f
+CFLAGS		= -Wall -Wextra -Werror
 
-OBJSALL		=		${SRCSALL:.c=.o}
+NAME		= libft.a
 
-CC			= 		cc
-RM			= 		rm -f
-CFLAGS		= 		-Wall -Wextra -Werror
+# Build all
+all: $(NAME)
 
-NAME		=		libft.a
+$(NAME): $(OBJS)
+	@printf "\rCreating $(NAME)..."
+	@ar rcs $(NAME) $(OBJS)
+	@printf "\r$(NAME) created successfully.\n"
 
+# Bonus rule
+bonus: ${OBJSALL}
+	@printf "\rBuilding bonus into $(NAME)..."
+	@ar rcs $(NAME) ${OBJSALL}
+	@printf "\rLIBFT Bonus objects added successfully.\n"
 
-all:		$(NAME)
-
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
-
-bonus:		${OBJSALL}
-			ar rcs $(NAME) $(OBJSALL)
-
+# Compile .c into .o
 %.o: %.c
-			$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\rCompiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean object files
 clean:
-			$(RM) $(OBJS) $(OBJSALL)
+	@printf "\rCleaning object files..."
+	@$(RM) $(OBJS) $(OBJSALL)
+	@printf "\rLIBFT object files cleaned.\n"
 
-fclean:		clean
-			$(RM) $(NAME)
+# Clean all
+fclean: clean
+	@printf "\rRemoving $(NAME)..."
+	@$(RM) $(NAME)
+	@printf "\rLIBFT removed.\n"
 
-re:			fclean all
+# Full rebuild
+re: fclean all
 
-.PHONY:		all clean fclean re bonus
+.PHONY: all clean fclean re bonus

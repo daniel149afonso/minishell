@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 00:53:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 15:29:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	**get_envp_array(t_env *env);
 void	free_cmds(t_cmd *cmds);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
+char	*check_binary_file(char *path, char *cmd);
 
 //PARSING COMMANDS
 t_cmd	*parse_commands(t_list *lst);
@@ -99,6 +100,7 @@ int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	print_debug_command(t_cmd *cmd);
 void	ft_print_array(char **strs);
+void	is_debug_active(t_g *g, char *debug);
 
 // CREDITS
 void	print_credits(void);

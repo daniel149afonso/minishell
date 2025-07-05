@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/04 22:02:15 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 15:28:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	update_lvl(t_env *env)
 {
 	char	*lvl_c;
 	int		lvl;
-	
+
 	lvl_c = NULL;
 	lvl = 0;
 	while (env)
@@ -42,7 +42,7 @@ void	init_global_struct(t_g **g, char **envp)
 	if (envp)
 	{
 		init_env(&((*g)->env), envp);
-		update_lvl((*g)->env);
+		update_lvl((*g)->env);	
 	}
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;

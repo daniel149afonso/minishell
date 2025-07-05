@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/02 18:49:53 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 02:06:10 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_cmds(t_cmd *cmds)
 	int		i;
 	t_cmd	*tmp;
 
+	if (!cmds)
+		return ;
 	i = 0;
 	while (cmds)
 	{
@@ -83,6 +85,8 @@ void	free_split(char **arr)
 {
 	int	i;
 
+	if (!arr)
+		return ;
 	i = 0;
 	while (arr && arr[i])
 		free(arr[i++]);

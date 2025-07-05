@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 20:37:01 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 15:29:27 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 {
 	int	i;
 
-	if (!cmd->argv || !cmd->argv[0])
+	if (!cmd->argv || !cmd->argv[0] || !g->env)
 		return (0);
 	if (builtins_2(g, g->env, cmd, g->envbuilt))
 		return (1);

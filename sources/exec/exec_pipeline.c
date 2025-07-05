@@ -6,37 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/04 20:37:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 15:29:18 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-char	*get_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*full;
-	int		i;
-
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
-		i++;
-	if (!envp[i])
-		return (NULL);
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		full = ft_strjoin(paths[i], "/");
-		full = ft_strjoin_free(full, cmd, 1);
-		if (access(full, X_OK) == 0)
-			return (free_split(paths), full);
-		free(full);
-		i++;
-	}
-	free_split(paths);
-	return (NULL);
-}
 
 static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 {
@@ -44,21 +18,24 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 
 	path = NULL;
 	if (ft_strchr(cmd, '/'))
-	{
-		path = ft_strdup(cmd);
-		if (!path || access(path, X_OK) != 0)
-			return (perror(cmd), free(path), exit(127));
-	}
+		path = check_binary_file(path, cmd);
 	else
 	{
 		path = get_path(cmd, envp);
 		if (!path)
-			return (printf("%s: ", cmd), perror("command not found\n"),
-				exit(127));
+			return (write(2, cmd, ft_strlen(cmd)),
+				perror(": command not found\n"), exit(127));
 	}
 	execve(path, cmds->argv, envp);
-	perror("execve");
-	exit(1);
+	if (path)
+		free(path);
+	if (errno == ENOENT)
+		exit(127);
+	else if (errno == EACCES)
+		exit(126);
+	else
+		return (write(2, cmd, ft_strlen(cmd)), perror(": execution error"),
+			exit(127));
 }
 
 static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
@@ -140,6 +117,7 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 	}
 	return (1);
 }
+
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
 	if (!cmds->argv || !cmds->argv[0])
@@ -154,10 +132,10 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		return (1);
 	while (wait(&g->status) > 0)
 		g->last_status = g->status;
-	free_split(envp);
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
 	if (WIFSIGNALED(g->status) && WTERMSIG(g->status) == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
+	free_split(envp);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/25 01:23:57 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 01:44:10 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	**search_var(char **strs, t_env *env)
 	char	*var;
 
 	i = 0;
+	if (!env)
+		return (strs);
 	while (strs[i])
 	{
 		var = expand_variables(strs[i], env);

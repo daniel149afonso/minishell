@@ -47,18 +47,15 @@ SRCS := \
   $(UTLS_DIR)/credits.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
-  $(EXEC_DIR)/exec_utils.c
-
+  $(EXEC_DIR)/exec_utils.c \
+  $(EXEC_DIR)/exec_utils_2.c
 # Objects
 OBJS = $(SRCS:.c=.o)
 
-# Headers
-HEAD = header/push_swap.h
-
 # Compiler and flags
-CC = cc -Wall -Wextra -Werror -g -O0 #-g -fsanitize=address
-UNAME := $(shell uname)
+CC = gcc -Wall -Wextra -Werror #-fsanitize=address,undefined -fno-omit-frame-pointer -g -O0
 
+UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
     CFLAGS += -I/opt/homebrew/opt/readline/include
     LDFLAGS += -L/opt/homebrew/opt/readline/lib -lreadline -lhistory

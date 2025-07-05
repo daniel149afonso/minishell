@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 16:38:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 07:54:00 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+void	is_debug_active(t_g *g, char *debug)
+{
+	if (debug)
+	{
+		if ((strncmp(debug, "debug", ft_strlen(debug))) == 0)
+		{
+			printf(RED"\n---DEBUG MODE IS NOW ACTIVE---\n\n"RE);
+			g->debug_option = 1;
+		}
+	}
+}
 
 int	is_var_char(char c)
 {
