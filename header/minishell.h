@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/04 16:06:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 00:53:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,9 @@ void	restore_std(t_g *g);
 int		is_missing_arg(t_list *lst);
 
 //REDIRECTIONS COMMANDS
-int		redirect_cmd_io(t_g *g, t_cmd *cmd);
+int		redirect_cmd_std(t_g *g, t_cmd *cmd);
 int		is_redirection_token(char *token);
-int		store_stdout_redir(t_cmd *cmd, t_list *redir);
-int		store_append_redir(t_cmd *cmd, t_list *redir);
-int		store_stdin_redir(t_cmd *cmd, t_list *redir);
-int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
+void	store_redirection(t_cmd *cmd, char *file, int type);
 int		handle_heredoc(t_g *g, t_cmd *cmds, t_env *env);
 
 //EXECUTION

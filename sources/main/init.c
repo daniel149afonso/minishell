@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 01:07:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/04 22:02:15 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ void	init_global_struct(t_g **g, char **envp)
 	if (envp)
 	{
 		init_env(&((*g)->env), envp);
-		update_lvl((*g)->env);		
+		update_lvl((*g)->env);
 	}
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;
 	(*g)->s_stdout = -1;
-	(*g)->fd_stdout = -1;
-	(*g)->fd_stdin = -1;
 	(*g)->prev_fd = -1;
 }

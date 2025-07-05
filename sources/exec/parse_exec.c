@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 03:13:19 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/05 00:49:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 		return (1);
 	}
 	if (!ft_strcmp(redir->content, "<"))
-		store_stdin_redir(*curr, redir);
+		store_redirection(*curr, redir->next->content, 1);
 	else if (!ft_strcmp(redir->content, ">"))
-		store_stdout_redir(*curr, redir);
+		store_redirection(*curr, redir->next->content, 2);
 	else if (!ft_strcmp(redir->content, ">>"))
-		store_append_redir(*curr, redir);
+		store_redirection(*curr, redir->next->content, 3);
 	else if (!ft_strcmp(redir->content, "<<"))
-		store_heredoc_redir(*curr, redir);
+		store_redirection(*curr, redir->next->content, 4);
 	*tmp = redir->next->next;
 	return (0);
 }

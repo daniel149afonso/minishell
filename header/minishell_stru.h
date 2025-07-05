@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/03 00:38:20 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:24:48 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 //PREVIOUS DEFINITION OF GLOBAL
 typedef struct s_g	t_g;
 
+typedef struct s_redir {
+    char    *file;
+    int     type;   // e.g. 1 = >, 2 = >>, 3 = <, 4 = <<
+    struct  s_redir *next;
+}   t_redir;
+
 typedef struct s_cmd
 {
 	char			**argv;
@@ -41,7 +47,7 @@ typedef struct s_cmd
 	int				append;
 	int				heredoc;
 	char 			*delimitor;
-	char			**text;
+	t_redir			*redirections;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -92,8 +98,6 @@ typedef struct s_g
 	char		*cmd;
 	int			s_stdin;
 	int			s_stdout;
-	int			fd_stdout;
-	int			fd_stdin;
 	int			error_code;
 	int			status;
 	int			last_status;
