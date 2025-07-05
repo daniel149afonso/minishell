@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 01:49:14 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 17:13:09 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 	{
 		if (ft_strcmp(cmd->argv[0], envbuilt[i].name) == 0)
 		{
-			if (cmd->heredoc)
-			{
-				if (handle_heredoc(g, cmd, g->env) == 1)
-					return (0);
-			}
-			if (redirect_cmd_io(g, cmd) != 0)
+			if (redirect_cmd_std(g, cmd) != 0)
 				return (1);
 			code = envbuilt[i].e(env);
 			return_code(env, code);
@@ -93,12 +88,7 @@ int	builtins(t_g *g, t_cmd *cmd)
 	{
 		if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
 		{
-			if (cmd->heredoc)
-			{
-				if (handle_heredoc(g, cmd, g->env) == 1)
-					return (0);
-			}
-			if (redirect_cmd_io(g, cmd) != 0)
+			if (redirect_cmd_std(g, cmd) != 0)
 				return (1);
 			return (return_code(g->env, g->builtin[i].f(g, cmd)), 1);
 		}

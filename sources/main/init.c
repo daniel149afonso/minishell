@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:40:58 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 07:44:23 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 15:28:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,5 @@ void	init_global_struct(t_g **g, char **envp)
 	init_builtins((&(*g)->envbuilt), (&(*g)->builtin));
 	(*g)->s_stdin = -1;
 	(*g)->s_stdout = -1;
-	(*g)->fd_stdout = -1;
-	(*g)->fd_stdin = -1;
 	(*g)->prev_fd = -1;
 }
