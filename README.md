@@ -7,7 +7,7 @@
 
 ctrl-c et ctrl-d dans un heredoc ne marche pas
 
-echo naruto > test.txt | echo uzumaki > out.txt, ça n'ecrit que dans out.txt
+echo naruto > test.txt | echo uzumaki > out.txt: ça n'ecrit que dans out.txt la première redir semble être écrasée
 
 echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
 
