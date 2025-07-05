@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 07:41:56 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 08:26:41 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <signal.h>
 # include <signal.h>
 # include <fcntl.h>
 # include "../libft/libft.h"

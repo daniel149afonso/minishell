@@ -6,11 +6,30 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 01:05:46 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/05 08:47:22 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+
+
+char	*check_binary_file(char *path, char *cmd)
+{
+	struct stat	sb;
+
+	path = ft_strdup(cmd);
+	if (!path || access(path, X_OK) != 0)
+		return (write(2, cmd, ft_strlen(cmd)),
+			perror(": command not found\n"), exit(127), NULL);
+	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
+		return (write(2, cmd, ft_strlen(cmd)),
+			perror(": is a directory\n"), free(path), exit(126), NULL);
+	if (access(path, X_OK) != 0)
+		return (write(2, cmd, ft_strlen(cmd)),
+			perror(": permission denied\n"), free(path), exit(126), NULL);
+	return (path);
+}
 
 static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 {
@@ -18,12 +37,7 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 
 	path = NULL;
 	if (ft_strchr(cmd, '/'))
-	{
-		path = ft_strdup(cmd);
-		if (!path || access(path, X_OK) != 0)
-			return (write(2, cmd, ft_strlen(cmd)),
-				perror(": command not found\n"), exit(127));
-	}
+		path = check_binary_file(path, cmd);
 	else
 	{
 		path = get_path(cmd, envp);
@@ -32,8 +46,15 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 				perror(": command not found\n"), exit(127));
 	}
 	execve(path, cmds->argv, envp);
-	perror("execve");
-	exit(1);
+	if (path)
+		free(path);
+	if (errno == ENOENT)
+		exit(127);
+	else if (errno == EACCES)
+		exit(126);
+	else
+		return (write(2, cmd, ft_strlen(cmd)), perror(": execution error"),
+			exit(127));
 }
 
 static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
