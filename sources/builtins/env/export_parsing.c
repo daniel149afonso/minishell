@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 22:39:48 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/10 01:56:31 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	check_if_var(t_env *env)
 		if (value[0] == '=' || check_arg(value))
 		{
 			print_error_env(value, tmp);
-			return (1);
+			return (free(value), 1);
 		}
 		tmp = tmp->next;
 	}
@@ -114,5 +114,5 @@ int	check_if_var(t_env *env)
 			update_or_add_var(&env, (char *)arg->content);
 		arg = arg->next;
 	}
-	return (0);
+	return (free(value), 0);
 }

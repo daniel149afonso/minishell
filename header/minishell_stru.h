@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 15:29:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/10 01:57:49 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_g	t_g;
 
 typedef struct s_redir {
     char    *file;
-    int     type;   // e.g. 1 = >, 2 = >>, 3 = <, 4 = <<
+    int     type;
     struct  s_redir *next;
 }   t_redir;
 
@@ -56,7 +56,7 @@ typedef struct s_cmd
 typedef struct s_token
 {
 	char	*str;
-	int		quoted; // 0 = pas de quotes, 1 = simple, 2 = double
+	int		quoted;
 }	t_token;
 
 typedef struct s_quote_state
