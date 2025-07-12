@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/03 22:39:48 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/10 02:34:48 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	update_env_value_concat(t_env *env, char *arg)
 {
 	char	*key;
 	char	*value_next;
+	char	*tmp;
 	int		return_code;
 
 	return_code = 0;
@@ -49,14 +50,16 @@ static int	update_env_value_concat(t_env *env, char *arg)
 		if ((ft_strncmp(env->key, key, ft_strlen(key)) == 0))
 		{
 			value_next = extract_value((char *)arg);
+			tmp = env->value;
 			env->value = ft_strjoin(env->value, value_next);
+			free(tmp);
 			free(value_next);
 			return_code = 1;
-			return (return_code);
+			return (free(key), return_code);
 		}
 		env = env->next;
 	}
-	return (return_code);
+	return (free(key), return_code);
 }
 
 /*----------------------------------
@@ -67,20 +70,27 @@ static void	check_concat(t_env *env, char *arg)
 {
 	int		i;
 	char	*prmpt;
+	char	*to_free;
 
 	i = 0;
 	prmpt = extract_check_key(arg);
-	while(prmpt[i])
+	to_free = prmpt;
+	while(prmpt[i] && prmpt[i + 1])
 	{
 		if (prmpt[i] == '+' && prmpt[i + 1] == '=')
 		{
+			free(to_free);
 			prmpt = extract_key_concat(arg);
+			to_free = prmpt;
+			i = 0;
 			if (update_env_value_concat(env, arg))
-				return ;
+				return (free(to_free));
 			add_env_node_concat(&env, arg);
+			break ;
 		}
 		i++;
 	}
+	free(to_free);
 }
 
 /*----------------------------------
@@ -102,7 +112,7 @@ int	check_if_var(t_env *env)
 		if (value[0] == '=' || check_arg(value))
 		{
 			print_error_env(value, tmp);
-			return (1);
+			return (free(value), 1);
 		}
 		tmp = tmp->next;
 	}
@@ -114,5 +124,5 @@ int	check_if_var(t_env *env)
 			update_or_add_var(&env, (char *)arg->content);
 		arg = arg->next;
 	}
-	return (0);
+	return (free(value), 0);
 }
