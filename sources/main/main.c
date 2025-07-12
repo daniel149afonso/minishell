@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/05 15:28:21 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/12 16:06:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	exec_parsing(t_g *g)
 			return_code(g->env, 1);
 		}
 	}
-	return (free_cmds(g->cmds), restore_std(g));
+	return (restore_std(g), free_cmds(g->cmds));
 }
 
 static int	msh_while(t_g *g)

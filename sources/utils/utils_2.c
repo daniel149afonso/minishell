@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 07:54:00 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/12 16:49:31 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,6 @@ void	return_code(t_env *env, int error_code)
 /*DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND, HEREDOC, DELIMITOR*/
 void	print_debug_command(t_cmd *cmd)
 {
-	int	idx;
-	int	j;
-
-	idx = 0;
-	while (cmd)
-	{
-		j = 0;
-		printf("[parse] commande %d :", idx++);
-		while (cmd->argv && cmd->argv[j])
-		{
-			printf(" '%s'", cmd->argv[j]);
-			j++;
-		}
-		printf("\n");
-		printf("Infile: '%s'\n", cmd->infile);
-		printf("Append: '%d'\n", cmd->append);
-		printf("Heredoc: '%d'\n", cmd->heredoc);
-		printf("Delimitor: '%s'\n", cmd->delimitor);
-		printf("Outfile: '%s'\n", cmd->outfile);
-		cmd = cmd->next;
-	}
+	(void)cmd;
+	printf("EN PHASE DE TEST ARRIVE PROCHAINEMENT ^^\n");
 }
