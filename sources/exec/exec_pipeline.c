@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/13 20:39:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 23:39:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 		path = get_path(cmd, envp);
 		if (!path)
 			return (write(2, cmd, ft_strlen(cmd)),
-				perror(": command not found\n"), exit(127));
+				write(2, ": command not found\n", 20), exit(127));
 	}
 	execve(path, cmds->argv, envp);
 	if (path)
