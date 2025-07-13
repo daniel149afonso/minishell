@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/12 15:41:56 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 23:16:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int	builtins(t_g *g, t_cmd *cmd)
 		}
 		i++;
 	}
+	printf("Je ne suis pas une builtin\n");
 	return (0);
 }

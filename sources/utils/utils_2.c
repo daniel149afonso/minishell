@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/12 16:49:31 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 23:12:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,25 @@ void	return_code(t_env *env, int error_code)
 /*DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND, HEREDOC, DELIMITOR*/
 void	print_debug_command(t_cmd *cmd)
 {
-	(void)cmd;
-	printf("EN PHASE DE TEST ARRIVE PROCHAINEMENT ^^\n");
+	int	i;
+	int	number;
+
+	number = 0;
+	printf("DEBUG CONTENT:\n");
+	while (cmd)
+	{
+		i = 0;
+		if (cmd->argv[i])
+		{
+			printf("Command %d: ", number);
+			while (cmd->argv[i])
+			{
+				printf("'%s' ", cmd->argv[i]);
+				i++;
+			}
+		}
+		printf("\n");
+		number++;
+		cmd = cmd->next;
+	}
 }
