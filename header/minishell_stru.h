@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 14:03:43 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 18:07:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 typedef struct s_g	t_g;
 
 typedef struct s_redir {
-	char	*file;
-	int	type;
+	char			*file;
+	int				type;
+	int				heredoc_fd;
 	struct	s_redir *next;
 }	t_redir;
 

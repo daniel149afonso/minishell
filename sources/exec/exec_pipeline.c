@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/13 14:05:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 20:39:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,14 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 {
 	if (pid == 0)
 	{
-		if (g->prev_fd != -1)
-		{
-			dup2(g->prev_fd, STDIN_FILENO);
-			close(g->prev_fd);
-		}
-		if (cmds->next)
-		{
-			close(g->pipefd[0]);
-			dup2(g->pipefd[1], STDOUT_FILENO);
-			close(g->pipefd[1]);
-		}
+		setup_stdin(g, cmds);
+		setup_stdout(g, cmds);
 		if (apply_redirections(g, cmds) != 0)
 			return ;
 		g->cmd = parse_cmd_exec(g, cmds);
 		get_access(g->cmd, cmds, envp);
 		if (g->cmd)
-			free (g->cmd);
+			free(g->cmd);
 	}
 	if (g->prev_fd != -1)
 	{
@@ -117,12 +108,6 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-	if (!cmds->argv || !cmds->argv[0])
-	{
-		if (redirect_cmd_std(g, cmds) != 0)
-			return (0);
-		return (1);
-	}
 	if (!execution(g, cmds, envp))
 		return (1);
 	while (wait(&g->status) > 0)

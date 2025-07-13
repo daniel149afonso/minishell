@@ -39,6 +39,7 @@ SRCS := \
   $(PARSING_DIR)/handle_quotes.c \
   $(REDIR_DIR)/redir_parsing_utils.c  \
   $(REDIR_DIR)/redir_restore_std.c \
+  $(REDIR_DIR)/redir_heredoc.c \
   $(REDIR_DIR)/redir_save_file.c \
   $(REDIR_DIR)/redir_parsing.c \
   $(EXIT_DIR)/exit.c \

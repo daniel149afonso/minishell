@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 00:49:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 18:07:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 	return (0);
 }
 
-t_cmd	*parse_single_command(t_list **lst)
+t_cmd	*create_command(t_list **lst)
 {
 	t_cmd	*cmd;
 	int		i;
@@ -105,7 +105,7 @@ t_cmd	*parse_commands(t_list *lst)
 	cmd = NULL;
 	while (lst)
 	{
-		cmd = parse_single_command(&lst);
+		cmd = create_command(&lst);
 		if (!cmd)
 			return (free_cmd_list(head), NULL);
 		if (!head)

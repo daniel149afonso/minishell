@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 16:04:42 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 21:11:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,15 @@ int	is_mixed_redir(t_list *lst)
 	return (0);
 }
 
-/*Parse les redirections mélangés et celles où l'argument est manquant + pipe seul argument*/
+/*Parse les redirections mélangés et celles où l'argument est manquant 
++ pipe seul argument*/
 int	parsing_redir(t_list *lst)
 {
 	if (!ft_strcmp((char *)lst->content, "|"))
-		return (printf("minishell: syntax error near unexpected token `|'\n"), 1);
+	{
+		printf("minishell: syntax error near unexpected token `|'\n");
+		return (1);
+	}
 	while (lst)
 	{
 		if (is_missing_arg(lst))

@@ -6,16 +6,17 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/04 16:04:50 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 21:08:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Check si c'est une redirection*/
 int	is_redirection_token(char *token)
 {
-	return (!ft_strcmp(token, "<") || !ft_strcmp(token, ">") ||
-			!ft_strcmp(token, ">>") || !ft_strcmp(token, "<<"));
+	return (!ft_strcmp(token, "<") || !ft_strcmp(token, ">") \
+	|| !ft_strcmp(token, ">>") || !ft_strcmp(token, "<<"));
 }
 
 /*Check s'il y a un argument après la redirection,
@@ -37,6 +38,3 @@ int	is_missing_arg(t_list *lst)
 	}
 	return (0);
 }
-
-
-

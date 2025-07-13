@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/13 14:01:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 20:56:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		apply_redirections(t_g *g, t_cmd *cmd);
 int		redirect_cmd_std(t_g *g, t_cmd *cmd);
 int		is_redirection_token(char *token);
 void	store_redirection(t_cmd *cmd, char *file, int type);
-int		handle_heredoc(t_g *g, char *delimitor, t_env *env);
+int		handle_heredoc(t_g *g, char *delimitor, t_env *env, t_redir *redir);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
@@ -73,6 +73,8 @@ void	free_cmds(t_cmd *cmds);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
 char	*check_binary_file(char *path, char *cmd);
+void	setup_stdin(t_g *g, t_cmd *cmds);
+void	setup_stdout(t_g *g, t_cmd *cmds);
 
 //PARSING COMMANDS
 t_cmd	*parse_commands(t_list *lst);
