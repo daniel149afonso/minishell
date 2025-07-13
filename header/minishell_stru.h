@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/10 01:57:49 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/13 14:03:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,14 @@
 typedef struct s_g	t_g;
 
 typedef struct s_redir {
-    char    *file;
-    int     type;
-    struct  s_redir *next;
-}   t_redir;
+	char	*file;
+	int	type;
+	struct	s_redir *next;
+}	t_redir;
 
 typedef struct s_cmd
 {
 	char			**argv;
-	char			*infile;
-	char			*outfile;
-	int				append;
-	int				heredoc;
-	char 			*delimitor;
 	t_redir			*redirections;
 	struct s_cmd	*next;
 }	t_cmd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 02:06:10 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/13 14:02:49 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	free_cmds(t_cmd *cmds)
 
 	if (!cmds)
 		return ;
+	ft_free_redir(cmds->redirections);
 	i = 0;
 	while (cmds)
 	{
 		tmp = cmds->next;
 		while (cmds->argv[i])
 			free(cmds->argv[i++]);
-		free(cmds->argv);
-		free(cmds->infile);
-		free(cmds->outfile);
 		free(cmds);
 		cmds = tmp;
 	}

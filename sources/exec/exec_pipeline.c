@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/12 16:01:10 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 14:05:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 {
 	if (pid == 0)
 	{
-		if (g->prev_fd != -1 && !cmds->heredoc)
+		if (g->prev_fd != -1)
 		{
 			dup2(g->prev_fd, STDIN_FILENO);
 			close(g->prev_fd);
 		}
-		if (cmds->next && !cmds->outfile)
+		if (cmds->next)
 		{
 			close(g->pipefd[0]);
 			dup2(g->pipefd[1], STDOUT_FILENO);

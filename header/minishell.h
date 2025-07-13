@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/12 17:04:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/13 14:01:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
 
 //FREE ERROR AND EXIT
+void	ft_free_redir(t_redir *redir);
 void	ft_free_lst(t_list **lst);
 int		free_n_exit(t_g *g, t_cmd *cmds);
 
