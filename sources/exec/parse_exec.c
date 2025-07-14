@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/13 18:07:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 17:46:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,13 @@ int	is_pipe(t_list *lst)
 	return (0);
 }
 
-void	free_cmd_list(t_cmd *cmds)
+void    free_partial_argv(char **arr, int last_index)
 {
-	t_cmd	*tmp;
-	int		i;
+    int i = 0;
 
-	i = 0;
-	while (cmds)
-	{
-		tmp = cmds->next;
-		if (cmds->argv)
-		{
-			while (cmds->argv[i])
-				free(cmds->argv[i++]);
-			free(cmds->argv);
-		}
-		free(cmds);
-		cmds = tmp;
-		i = 0;
-	}
+    while (i < last_index)
+        free(arr[i++]);
+    free(arr);
 }
 
 int	handle_redirection_token(t_list **tmp, t_cmd **curr)
@@ -84,7 +72,7 @@ t_cmd	*create_command(t_list **lst)
 		if (is_redirection_token((*lst)->content))
 		{
 			if (handle_redirection_token(lst, &cmd))
-				return (free_cmds(cmd), NULL);
+				return (ft_free_all(cmd), NULL);
 			continue ;
 		}
 		cmd->argv[i++] = ft_strdup((*lst)->content);
@@ -107,7 +95,7 @@ t_cmd	*parse_commands(t_list *lst)
 	{
 		cmd = create_command(&lst);
 		if (!cmd)
-			return (free_cmd_list(head), NULL);
+			return (free_cmds(head), NULL);
 		if (!head)
 			head = cmd;
 		else

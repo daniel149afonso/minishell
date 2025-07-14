@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/13 20:56:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 17:06:02 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ int		handle_heredoc(t_g *g, char *delimitor, t_env *env, t_redir *redir);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
-void	free_split(char **arr);
 char	**get_envp_array(t_env *env);
-void	free_cmds(t_cmd *cmds);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
 char	*check_binary_file(char *path, char *cmd);
@@ -94,6 +92,9 @@ char	**ft_splitou(char const *s);
 void	ft_free_redir(t_redir *redir);
 void	ft_free_lst(t_list **lst);
 int		free_n_exit(t_g *g, t_cmd *cmds);
+void	free_cmds(t_cmd *cmds);
+void	free_split(char **arr);
+void	ft_free_all(t_cmd *cmd);
 
 // UTILS
 int		is_space(int c);

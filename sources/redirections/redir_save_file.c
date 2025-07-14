@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 21:09:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 17:36:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	store_redirection(t_cmd *cmd, char *file, int type)
 	if (!new)
 		return ;
 	new->file = ft_strdup(file);
+	if (!new->file)
+		return (free(new));
 	new->type = type;
 	new->heredoc_fd = -1;
 	new->next = NULL;

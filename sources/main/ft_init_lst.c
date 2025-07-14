@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/06/30 21:07:43 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/14 17:08:39 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	ft_init_lst(t_list **lst, char **tokens)
 			ft_lstadd_back(lst, ft_lstnew(ft_strdup(tokens[j])));
 		j++;
 	}
-	free_tokens(tokens);
-	//ft_put_lst(*lst);
+	free_split(tokens);
 }
 
 /*Affiche le contenu de chaque element de la liste*/
