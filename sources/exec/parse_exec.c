@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/14 17:46:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 23:46:38 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,10 @@ int	is_pipe(t_list *lst)
 	return (0);
 }
 
-void    free_partial_argv(char **arr, int last_index)
-{
-    int i = 0;
-
-    while (i < last_index)
-        free(arr[i++]);
-    free(arr);
-}
-
 int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 {
 	t_list	*redir;
+	int		type_redir;
 
 	redir = *tmp;
 	if (!redir || !redir->next)
@@ -43,13 +35,15 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 		return (1);
 	}
 	if (!ft_strcmp(redir->content, "<"))
-		store_redirection(*curr, redir->next->content, 1);
+		type_redir = 1;
 	else if (!ft_strcmp(redir->content, ">"))
-		store_redirection(*curr, redir->next->content, 2);
+		type_redir = 2;
 	else if (!ft_strcmp(redir->content, ">>"))
-		store_redirection(*curr, redir->next->content, 3);
+		type_redir = 3;
 	else if (!ft_strcmp(redir->content, "<<"))
-		store_redirection(*curr, redir->next->content, 4);
+		type_redir = 4;
+	if (store_redirection(*curr, redir->next->content, type_redir))
+		return (1);
 	*tmp = redir->next->next;
 	return (0);
 }
@@ -75,7 +69,8 @@ t_cmd	*create_command(t_list **lst)
 				return (ft_free_all(cmd), NULL);
 			continue ;
 		}
-		cmd->argv[i++] = ft_strdup((*lst)->content);
+		cmd->argv[i] = ft_strdup((*lst)->content);
+		i++;
 		*lst = (*lst)->next;
 	}
 	cmd->argv[i] = NULL;

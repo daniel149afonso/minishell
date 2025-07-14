@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/14 17:08:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 23:43:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	free_cmds(t_cmd *cmds)
 		tmp = cmds->next;
 		while (cmds->argv[i])
 			free(cmds->argv[i++]);
+		free(cmds->argv);
 		if (cmds->redirections)
 			ft_free_redir(cmds->redirections);
 		free(cmds);
@@ -73,6 +74,8 @@ void	free_split(char **arr)
 
 void	ft_free_all(t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
 	free_split(cmd->argv);
 	ft_free_redir(cmd->redirections);
 	free(cmd);
