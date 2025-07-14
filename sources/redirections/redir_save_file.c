@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 21:09:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 23:40:53 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 /*Enregistre chaque redir dans une liste de redirections:
 nom de fichier, type de redir*/
-void	store_redirection(t_cmd *cmd, char *file, int type)
+int	store_redirection(t_cmd *cmd, char *file, int type)
 {
 	t_redir	*new;
 	t_redir	*last;
 
 	new = malloc(sizeof(t_redir));
 	if (!new)
-		return ;
+		return (1);
 	new->file = ft_strdup(file);
+	if (!new->file)
+		return (free(new), 1);
 	new->type = type;
 	new->heredoc_fd = -1;
 	new->next = NULL;
@@ -35,4 +37,5 @@ void	store_redirection(t_cmd *cmd, char *file, int type)
 			last = last->next;
 		last->next = new;
 	}
+	return (0);
 }

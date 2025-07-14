@@ -9,6 +9,8 @@ ctrl-c et ctrl-d dans un heredoc ne marche pas
 
 << stop flux | << stop: seg fault quand arg en trop
 
+cd ded | pwd: pipeline avec erreur répété plusieurs fois seg fault invalid pointer
+
 echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
 
 certains messages d'erreur a corigger

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitou.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@42.fr>                  +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/15 19:28:54 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:01:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**ft_splitou(const char *s)
 			break ;
 		tok = get_next_token(s, &i);
 		if (!tok)
-			return (free_tokens(tokens), NULL);
+			return (free_split(tokens), NULL);
 		tokens[j++] = tok;
 	}
 	tokens[j] = NULL;
