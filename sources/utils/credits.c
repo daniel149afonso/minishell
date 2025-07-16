@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 07:02:03 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/16 18:13:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 21:06:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,3 @@ void	print_credits(void)
 	usleep(100000);
 	print_credits_2();
 }
-
-

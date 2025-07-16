@@ -6,14 +6,15 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/14 23:43:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 21:04:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
 void	ft_free_redir(t_redir *redir)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	tmp = NULL;
 	while (redir)
@@ -25,6 +26,7 @@ void	ft_free_redir(t_redir *redir)
 		redir = tmp;
 	}
 }
+
 void	ft_free_lst(t_list **lst)
 {
 	t_list	*tmp;
