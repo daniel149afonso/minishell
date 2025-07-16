@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_save_file.c                                  :+:      :+:    :+:   */
+/*   redir_save_restore.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:18:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/14 23:40:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 20:55:30 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,29 @@ int	store_redirection(t_cmd *cmd, char *file, int type)
 		last->next = new;
 	}
 	return (0);
+}
+/*Prepare (ouvre tous les fichiers) et applique les redirections*/
+int	redirect_cmd_std(t_g *g, t_cmd *cmd)
+{
+	if (prepare_redirections(g, cmd) != 0)
+		return (1);
+	if (apply_redirections(g, cmd) != 0)
+		return (1);
+	return (0);
+}
+/*Restaure la sortie et l'entrée standard dans le terminal*/
+void	restore_std(t_g *g)
+{
+	if (g->s_stdout != -1)
+	{
+		dup2(g->s_stdout, STDOUT_FILENO);
+		close(g->s_stdout);
+		g->s_stdout = -1;
+	}
+	if (g->s_stdin != -1)
+	{
+		dup2(g->s_stdin, STDIN_FILENO);
+		close(g->s_stdin);
+		g->s_stdin = -1;
+	}
 }

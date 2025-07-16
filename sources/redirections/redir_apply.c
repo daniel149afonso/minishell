@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_restore_std.c                                :+:      :+:    :+:   */
+/*   redir_apply.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/16 20:47:25 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 21:00:25 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
+/*Ouvre le fichier*/
 int open_target(char *file, int flags)
 {
 	int fd;
@@ -23,6 +24,7 @@ int open_target(char *file, int flags)
 	return (0);
 }
 
+/*Ouvre le fichier avec les bons flags*/
 int open_files(t_g *g, t_redir *r)
 {
 	if (r->type == 1)
@@ -38,9 +40,9 @@ int open_files(t_g *g, t_redir *r)
 		if (handle_heredoc(g, r->file, g->env, r) != 0)
 			return (1);
 	}
-    return (0);
+	return (0);
 }
-
+/*Ouvre tous les fichiers sans rediriger les stdin stdout*/
 int prepare_redirections(t_g *g, t_cmd *cmd)
 {
 	t_redir	*r;
@@ -55,6 +57,7 @@ int prepare_redirections(t_g *g, t_cmd *cmd)
 	return (0);
 }
 
+/*Redirige l'entrée ou la sortie vers le dernier fichier*/
 int	apply_last_redir(t_g *g, t_redir *r, t_redir *last_in, t_redir *last_out)
 {
 	int fd = -1;
@@ -86,9 +89,11 @@ int	apply_last_redir(t_g *g, t_redir *r, t_redir *last_in, t_redir *last_out)
 int	apply_redirections(t_g *g, t_cmd *cmd)
 {
 	t_redir *r;
-	t_redir *last_in = NULL;
-	t_redir *last_out = NULL;
+	t_redir *last_in;
+	t_redir *last_out;
 
+	last_in = NULL;
+	last_out = NULL;
 	r = cmd->redirections;
 	while (r)
 	{
@@ -108,28 +113,3 @@ int	apply_redirections(t_g *g, t_cmd *cmd)
 	return (0);
 }
 
-int	redirect_cmd_std(t_g *g, t_cmd *cmd)
-{
-	if (prepare_redirections(g, cmd) != 0)
-		return (1);
-	if (apply_redirections(g, cmd) != 0)
-		return (1);
-	return (0);
-}
-
-/*Restaure la sortie et l'entrée standard dans le terminal*/
-void	restore_std(t_g *g)
-{
-	if (g->s_stdout != -1)
-	{
-		dup2(g->s_stdout, STDOUT_FILENO);
-		close(g->s_stdout);
-		g->s_stdout = -1;
-	}
-	if (g->s_stdin != -1)
-	{
-		dup2(g->s_stdin, STDIN_FILENO);
-		close(g->s_stdin);
-		g->s_stdin = -1;
-	}
-}
