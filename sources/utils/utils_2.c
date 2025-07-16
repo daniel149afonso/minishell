@@ -6,23 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 23:12:22 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 18:12:29 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	is_debug_active(t_g *g, char *debug)
-{
-	if (debug)
-	{
-		if ((strncmp(debug, "debug", ft_strlen(debug))) == 0)
-		{
-			printf(RED"\n---DEBUG MODE IS NOW ACTIVE---\n\n"RE);
-			g->debug_option = 1;
-		}
-	}
-}
 
 int	is_var_char(char c)
 {
@@ -48,28 +36,24 @@ void	return_code(t_env *env, int error_code)
 	env->var_error_code = error_code;
 }
 
-/*DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND, HEREDOC, DELIMITOR*/
-void	print_debug_command(t_cmd *cmd)
+int	is_space_command(char **strs)
 {
 	int	i;
-	int	number;
+	int	j;
 
-	number = 0;
-	printf("DEBUG CONTENT:\n");
-	while (cmd)
+	if (!strs)
+		return (1);
+	i = 0;
+	while (strs[i])
 	{
-		i = 0;
-		if (cmd->argv[i])
+		j = 0;
+		while (strs[i][j])
 		{
-			printf("Command %d: ", number);
-			while (cmd->argv[i])
-			{
-				printf("'%s' ", cmd->argv[i]);
-				i++;
-			}
+			if (!is_space(strs[i][j]))
+				return (0);
+			j++;
 		}
-		printf("\n");
-		number++;
-		cmd = cmd->next;
+		i++;
 	}
+	return (1);
 }

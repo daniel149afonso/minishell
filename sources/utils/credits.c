@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   credits.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 07:02:03 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/03 08:31:23 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/16 18:13:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,5 @@ void	print_credits(void)
 	usleep(100000);
 	print_credits_2();
 }
+
+

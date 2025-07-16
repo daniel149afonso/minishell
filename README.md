@@ -5,9 +5,13 @@
 
 ## infos à jour:
 
+only space seg fault
+
+echo $?+$?: marche pas + leaks
+
 ctrl-c et ctrl-d dans un heredoc ne marche pas
 
-<< stop flux | << stop: seg fault quand arg en trop
+<< stop flux | << stop: affiche l'erreur entre heredoc
 
 cd ded | pwd: pipeline avec erreur répété plusieurs fois seg fault invalid pointer
 

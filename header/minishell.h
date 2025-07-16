@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/14 22:51:40 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 18:10:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_free_all(t_cmd *cmd);
 
 // UTILS
 int		is_space(int c);
+int		is_space_command(char **strs);
 char	*ft_join_and_free(char *text, char *buffer);
 void	free_env(t_env **env);
 char	*extract_check_key(char *str);
