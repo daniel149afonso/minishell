@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/05 01:44:10 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/17 05:37:52 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	char	*val;
 
 	(*i)++;
-	val = NULL;
 	var = extract_var_name(str, i);
-	if ((ft_strncmp(var, "?", ft_strlen(var))) == 0)
-	{
-		*res = ft_itoa(env->var_error_code);
-		free(var);
-		return ;
-	}
-	val = get_env_value(env, var);
+	if (ft_strcmp(var, "?") == 0)
+		val = ft_itoa(env->var_error_code);
+	else
+		val = get_env_value(env, var);
+
 	if (val)
+	{
 		*res = ft_join_and_free(*res, val);
-	free(val);
+		free(val);
+	}
 	free(var);
 }
 
