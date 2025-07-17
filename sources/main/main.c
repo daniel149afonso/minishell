@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/16 21:05:04 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 21:58:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_in_prompt;
 
-static void	sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
 	(void)sig;
 	if (g_in_prompt)

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 21:07:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 22:58:51 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	handle_heredoc(t_g *g, char *delimitor, t_env *env, t_redir *redir)
 	(void)g;
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), 1);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		buffer = readline("> ");
@@ -39,5 +41,44 @@ int	handle_heredoc(t_g *g, char *delimitor, t_env *env, t_redir *redir)
 	}
 	close(pipefd[1]);
 	redir->heredoc_fd = pipefd[0];
+	return (0);
+}
+
+int open_all_heredocs(t_g *g, t_redir *redir)
+{
+    while (redir)
+    {
+        if (redir->type == 4)
+        {
+            pid_t pid = fork();
+            if (pid == 0)
+            {
+                signal(SIGINT, SIG_DFL);
+                exit(handle_heredoc(g, redir->file, g->env, redir));
+            }
+            else if (pid > 0)
+            {
+                int status;
+                waitpid(pid, &status, 0);
+                if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+                    return (1);
+            }
+            else
+                return (perror("fork"), 1);
+        }
+        redir = redir->next;
+    }
+    return (0);
+}
+
+
+int	collect_heredocs(t_g *g, t_cmd *cmds)
+{
+	while (cmds)
+	{
+		if (open_all_heredocs(g, cmds->redirections) != 0)
+			return (1);
+		cmds = cmds->next;
+	}
 	return (0);
 }

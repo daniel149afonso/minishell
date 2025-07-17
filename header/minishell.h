@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/16 18:10:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 22:50:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINISHELL_H
 
 # include "minishell_stru.h"
+
+//MAIN
+void	sigint_handler(int sig);
 
 //FT_INIT_BUILTINS
 void	init_global_struct(t_g **g, char **envp);
@@ -64,6 +67,7 @@ int		redirect_cmd_std(t_g *g, t_cmd *cmd);
 int		is_redirection_token(char *token);
 int		store_redirection(t_cmd *cmd, char *file, int type);
 int		handle_heredoc(t_g *g, char *delimitor, t_env *env, t_redir *redir);
+int		collect_heredocs(t_g *g, t_cmd *cmds);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);

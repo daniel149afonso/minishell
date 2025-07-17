@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/13 23:39:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/16 22:40:13 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 {
 	pid_t	pid;
 
+	if (collect_heredocs(g, cmds) != 0)
+		return (0); // heredoc échoué (SIGINT ou erreur)
 	while (cmds)
 	{
 		if (prepare_redirections(g, cmds) != 0)
