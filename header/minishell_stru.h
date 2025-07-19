@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/18 16:05:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/19 16:43:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@
 
 //PREVIOUS DEFINITION OF GLOBAL
 typedef struct s_g	t_g;
+
+typedef struct s_state
+{
+	int	in_prompt;
+	int	interrupted;
+}	t_state;
+
+extern t_state g_state;
 
 typedef struct s_redir
 {

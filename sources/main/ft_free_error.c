@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/16 21:04:36 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/19 17:07:04 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,18 @@ void	free_cmds(t_cmd *cmds)
 	int		i;
 	t_cmd	*tmp;
 
-	if (!cmds)
+	if (!cmds || cmds->argv)
 		return ;
 	while (cmds)
 	{
 		i = 0;
 		tmp = cmds->next;
-		while (cmds->argv[i])
-			free(cmds->argv[i++]);
-		free(cmds->argv);
+		if (cmds->argv)
+		{
+			while (cmds->argv[i])
+				free(cmds->argv[i++]);
+			free(cmds->argv);
+		}
 		if (cmds->redirections)
 			ft_free_redir(cmds->redirections);
 		free(cmds);

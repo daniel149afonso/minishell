@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/18 18:20:43 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/19 16:06:38 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 {
 	pid_t	pid;
 
-	if (collect_heredocs(g, cmds) != 0)
-		return (0); // heredoc échoué (SIGINT ou erreur)
 	while (cmds)
 	{
 		if (prepare_redirections(g, cmds) != 0)
@@ -110,13 +108,16 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-	if (g->interrupted)
+	if (collect_heredocs(g, cmds) != 0 || g->interrupted)
 	{
+		printf ("Interruption\n");
 		g->interrupted = 0;
 		restore_std(g);
 		free_cmds(g->cmds);
-		return (1); // ne pas exécuter la commande
+		free_split(envp);
+		return (1); // stop immédiat
 	}
+	printf("Intteruption: %d\n", g->interrupted);
 	if (!execution(g, cmds, envp))
 		return (1);
 	while (wait(&g->status) > 0)
