@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/27 19:56:46 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/17 05:30:25 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	display_content(char *str)
 }
 
 /*Affiche l'argument et traite s'il y a l'option "-n"*/
-void	display_with_args(t_cmd *cmds)
+static void	display_with_args(t_cmd *cmds)
 {
 	int		newline;
 	int		i;
