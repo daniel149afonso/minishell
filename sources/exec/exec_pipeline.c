@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/16 22:40:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/18 18:20:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,13 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
+	if (g->interrupted)
+	{
+		g->interrupted = 0;
+		restore_std(g);
+		free_cmds(g->cmds);
+		return (1); // ne pas exécuter la commande
+	}
 	if (!execution(g, cmds, envp))
 		return (1);
 	while (wait(&g->status) > 0)

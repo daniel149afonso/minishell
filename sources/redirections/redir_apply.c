@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/16 21:09:12 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/18 18:11:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	open_target(char *file, int flags)
 /*Ouvre le fichier avec les bons flags*/
 int	open_files(t_g *g, t_redir *r)
 {
+	(void)g;
 	if (r->type == 1)
 		return (open_target(r->file, O_RDONLY));
 	else if (r->type == 2)
@@ -35,10 +36,11 @@ int	open_files(t_g *g, t_redir *r)
 		return (open_target(r->file, O_WRONLY | O_CREAT | O_APPEND));
 	else if (r->type == 4)
 	{
-		if (g->s_stdin == -1)
-			g->s_stdin = dup(STDIN_FILENO);
-		if (handle_heredoc(g, r->file, g->env, r) != 0)
-			return (1);
+		return (0);
+		// if (g->s_stdin == -1)
+		// 	g->s_stdin = dup(STDIN_FILENO);
+		// if (handle_heredoc(g, r->file, g->env, r) != 0)
+		// 	return (1);
 	}
 	return (0);
 }
