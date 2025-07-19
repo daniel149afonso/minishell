@@ -50,8 +50,7 @@ SRCS := \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
   $(EXEC_DIR)/exec_utils.c \
-  $(EXEC_DIR)/exec_utils_2.c \
-  $(SIGNALS_DIR)/signal.c 
+  $(EXEC_DIR)/exec_utils_2.c
 # Objects
 OBJS = $(SRCS:.c=.o)
 
