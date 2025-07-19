@@ -5,7 +5,15 @@
 
 ## infos à jour:
 
-ls > test.txt > out.txt ne marche pas
+only space seg fault
+
+echo $?+$?: marche pas + leaks
+
+ctrl-c et ctrl-d dans un heredoc ne marche pas
+
+<< stop flux | << stop: affiche l'erreur entre heredoc
+
+cd ded | pwd: pipeline avec erreur répété plusieurs fois seg fault invalid pointer
 
 echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
 

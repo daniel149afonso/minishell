@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_concat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:11:52 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:14:58 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/16 21:06:24 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*extract_key_concat(char *str)
 	return (ft_substr(str, 0, i));
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 
 /*---------------------------
 Va rajouter une variable uniquement pour le cas +=

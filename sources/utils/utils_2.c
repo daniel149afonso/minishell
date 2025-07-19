@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/05 07:54:00 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/16 21:07:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	is_debug_active(t_g *g, char *debug)
-{
-	if (debug)
-	{
-		if ((strncmp(debug, "debug", ft_strlen(debug))) == 0)
-		{
-			printf(RED"\n---DEBUG MODE IS NOW ACTIVE---\n\n"RE);
-			g->debug_option = 1;
-		}
-	}
-}
 
 int	is_var_char(char c)
 {
@@ -48,28 +36,24 @@ void	return_code(t_env *env, int error_code)
 	env->var_error_code = error_code;
 }
 
-/*DEBUG COMMANDS: REDIR INFILE, OUTFILE, APPEND, HEREDOC, DELIMITOR*/
-void	print_debug_command(t_cmd *cmd)
+int	is_space_command(char **strs)
 {
-	int	idx;
+	int	i;
 	int	j;
 
-	idx = 0;
-	while (cmd)
+	if (!strs)
+		return (1);
+	i = 0;
+	while (strs[i])
 	{
 		j = 0;
-		printf("[parse] commande %d :", idx++);
-		while (cmd->argv && cmd->argv[j])
+		while (strs[i][j])
 		{
-			printf(" '%s'", cmd->argv[j]);
+			if (!is_space(strs[i][j]))
+				return (0);
 			j++;
 		}
-		printf("\n");
-		printf("Infile: '%s'\n", cmd->infile);
-		printf("Append: '%d'\n", cmd->append);
-		printf("Heredoc: '%d'\n", cmd->heredoc);
-		printf("Delimitor: '%s'\n", cmd->delimitor);
-		printf("Outfile: '%s'\n", cmd->outfile);
-		cmd = cmd->next;
+		i++;
 	}
+	return (1);
 }

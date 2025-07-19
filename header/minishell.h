@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 08:52:48 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/18 18:59:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINISHELL_H
 
 # include "minishell_stru.h"
+
+//MAIN
+void	sigint_handler(int sig);
 
 //FT_INIT_BUILTINS
 void	init_global_struct(t_g **g, char **envp);
@@ -56,24 +59,24 @@ void	remove_quotes(t_list **lst);
 int		validate_redirection_syntax(t_list *lst);
 void	restore_std(t_g *g);
 int		is_missing_arg(t_list *lst);
+int		prepare_redirections(t_g *g, t_cmd *cmd);
+int		apply_redirections(t_g *g, t_cmd *cmd);
 
 //REDIRECTIONS COMMANDS
-int		redirect_cmd_io(t_g *g, t_cmd *cmd);
+int		redirect_cmd_std(t_g *g, t_cmd *cmd);
 int		is_redirection_token(char *token);
-int		store_stdout_redir(t_cmd *cmd, t_list *redir);
-int		store_append_redir(t_cmd *cmd, t_list *redir);
-int		store_stdin_redir(t_cmd *cmd, t_list *redir);
-int		store_heredoc_redir(t_cmd *cmd, t_list *redir);
-int		handle_heredoc(t_g *g, t_cmd *cmds, t_env *env);
+int		store_redirection(t_cmd *cmd, char *file, int type);
+int		handle_heredoc(char *delimitor, t_env *env, int write_fd);
+int		collect_heredocs(t_g *g, t_cmd *cmds);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
-void	free_split(char **arr);
 char	**get_envp_array(t_env *env);
-void	free_cmds(t_cmd *cmds);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
 char	*check_binary_file(char *path, char *cmd);
+void	setup_stdin(t_g *g, t_cmd *cmds);
+void	setup_stdout(t_g *g, t_cmd *cmds);
 
 //PARSING COMMANDS
 t_cmd	*parse_commands(t_list *lst);
@@ -90,11 +93,16 @@ void	free_tokens(char **tokens);
 char	**ft_splitou(char const *s);
 
 //FREE ERROR AND EXIT
+void	ft_free_redir(t_redir *redir);
 void	ft_free_lst(t_list **lst);
 int		free_n_exit(t_g *g, t_cmd *cmds);
+void	free_cmds(t_cmd *cmds);
+void	free_split(char **arr);
+void	ft_free_all(t_cmd *cmd);
 
 // UTILS
 int		is_space(int c);
+int		is_space_command(char **strs);
 char	*ft_join_and_free(char *text, char *buffer);
 void	free_env(t_env **env);
 char	*extract_check_key(char *str);

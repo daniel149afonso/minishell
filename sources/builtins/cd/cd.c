@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/06/25 14:37:14 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/14 23:57:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	add_env_var(t_env **env, const char *key, const char *value)
 
 /*Check PWD et OLD_PWD met à jour si existe ou
 ajoute sinon*/
-void	set_env_value(t_env **env, const char *key, const char *value)
+static void	set_env_value(t_env **env, char *key, char *value)
 {
 	if (update_env_if_exists(*env, key, value))
 		return ;
-	add_env_var(env, key, value);
+	add_env_var(env, (const char *)key, (const char *)value);
 }
 
 /*Met à jour OLD_PWD*/
@@ -79,20 +79,17 @@ int	ft_cd(t_g *g, t_cmd *cmds)
 	oldpwd = NULL;
 	newpwd = NULL;
 	if (!save_oldpwd(&g->env, &oldpwd))
-		return (1);
+		return (free(oldpwd), 1);
 	if (!resolve_path(cmds, &path))
-		return (1);
+		return (free(oldpwd), 1);
 	result = chdir(path);
 	if (result != 0)
-		return (perror("minishell: cd"), 1);
+		return (perror("minishell: cd"), free(oldpwd), 1);
 	else
 	{
 		if (!get_current_path(&newpwd))
-		{
-			perror("cd");
-			return (1);
-		}
+			return (perror("cd"), free(oldpwd), 1);
 		set_env_value(&g->env, "PWD", newpwd);
 	}
-	return (0);
+	return (free(newpwd), free(oldpwd), 0);
 }

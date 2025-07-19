@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 08:49:23 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/16 21:04:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,41 @@ char	*get_path(char *cmd, char **envp)
 	}
 	free_split(paths);
 	return (NULL);
+}
+
+void	setup_stdin(t_g *g, t_cmd *cmds)
+{
+	t_redir	*r;
+
+	r = cmds->redirections;
+	while (r)
+	{
+		if (r->type == 4)
+		{
+			if (r->heredoc_fd != -1)
+			{
+				if (g->s_stdin == -1)
+					g->s_stdin = dup(STDIN_FILENO);
+				dup2(r->heredoc_fd, STDIN_FILENO);
+				close(r->heredoc_fd);
+				return ;
+			}
+		}
+		r = r->next;
+	}
+	if (g->prev_fd != -1)
+	{
+		dup2(g->prev_fd, STDIN_FILENO);
+		close(g->prev_fd);
+	}
+}
+
+void	setup_stdout(t_g *g, t_cmd *cmds)
+{
+	if (cmds->next)
+	{
+		close(g->pipefd[0]);
+		dup2(g->pipefd[1], STDOUT_FILENO);
+		close(g->pipefd[1]);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/05 08:17:51 by bullestico       ###   ########.fr       */
+/*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
+/*   Updated: 2025/07/18 18:20:18 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_in_prompt;
 
-static void	sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
 	(void)sig;
 	if (g_in_prompt)
@@ -57,7 +57,7 @@ static void	exec_parsing(t_g *g)
 			return_code(g->env, 1);
 		}
 	}
-	return (free_cmds(g->cmds), restore_std(g));
+	return (restore_std(g), free_cmds(g->cmds));
 }
 
 static int	msh_while(t_g *g)
@@ -70,6 +70,8 @@ static int	msh_while(t_g *g)
 			g->result = search_var(ft_splitou(g->input), g->env);
 			if (!g->result)
 				return (1);
+			else if (is_space_command(g->result))
+				return (free_split(g->result), 0);
 			ft_init_lst(&g->lst, g->result);
 			if (!validate_redirection_syntax(g->lst))
 				return (0);

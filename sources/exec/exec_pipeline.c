@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 08:51:34 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/19 18:08:37 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 		path = get_path(cmd, envp);
 		if (!path)
 			return (write(2, cmd, ft_strlen(cmd)),
-				perror(": command not found\n"), exit(127));
+				write(2, ": command not found\n", 20), exit(127));
 	}
 	execve(path, cmds->argv, envp);
 	if (path)
@@ -66,23 +66,14 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 {
 	if (pid == 0)
 	{
-		if (g->prev_fd != -1 && !cmds->heredoc)
-		{
-			dup2(g->prev_fd, STDIN_FILENO);
-			close(g->prev_fd);
-		}
-		if (cmds->next && !cmds->outfile)
-		{
-			close(g->pipefd[0]);
-			dup2(g->pipefd[1], STDOUT_FILENO);
-			close(g->pipefd[1]);
-		}
-		if (redirect_cmd_io(g, cmds) != 0)
-			exit(1);
+		setup_stdin(g, cmds);
+		setup_stdout(g, cmds);
+		if (apply_redirections(g, cmds) != 0)
+			return ;
 		g->cmd = parse_cmd_exec(g, cmds);
 		get_access(g->cmd, cmds, envp);
 		if (g->cmd)
-			free (g->cmd);
+			free(g->cmd);
 	}
 	if (g->prev_fd != -1)
 	{
@@ -97,11 +88,8 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 
 	while (cmds)
 	{
-		if (cmds->heredoc)
-		{
-			if (handle_heredoc(g, cmds, g->env) == 1)
-				return (0);
-		}
+		if (prepare_redirections(g, cmds) != 0)
+			return (0);
 		if (cmds->next && pipe(g->pipefd) == -1)
 			return (perror("pipe"), 0);
 		pid = fork();
@@ -120,12 +108,12 @@ int	execution(t_g *g, t_cmd *cmds, char **envp)
 
 int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 {
-	if (!cmds->argv || !cmds->argv[0])
+	if (collect_heredocs(g, cmds) != 0 || g->interrupted)
 	{
-		if (handle_heredoc(g, cmds, g->env) == 1)
-			return (0);
-		if (redirect_cmd_io(g, cmds) != 0)
-			return (0);
+		g->interrupted = 0;
+		restore_std(g);
+		free_cmds(g->cmds);
+		free_split(envp);
 		return (1);
 	}
 	if (!execution(g, cmds, envp))

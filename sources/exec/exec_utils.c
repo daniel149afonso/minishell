@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/05 02:06:10 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/14 17:03:01 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-void	free_cmds(t_cmd *cmds)
-{
-	int		i;
-	t_cmd	*tmp;
-
-	if (!cmds)
-		return ;
-	i = 0;
-	while (cmds)
-	{
-		tmp = cmds->next;
-		while (cmds->argv[i])
-			free(cmds->argv[i++]);
-		free(cmds->argv);
-		free(cmds->infile);
-		free(cmds->outfile);
-		free(cmds);
-		cmds = tmp;
-	}
-}
 
 static int	for_envp(t_env *tmp)
 {
@@ -79,16 +58,4 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_s1)
 	if (free_s1)
 		free(s1);
 	return (res);
-}
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr && arr[i])
-		free(arr[i++]);
-	free(arr);
 }

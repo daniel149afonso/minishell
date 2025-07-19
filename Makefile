@@ -38,13 +38,15 @@ SRCS := \
   $(PARSING_DIR)/handle_var_2.c \
   $(PARSING_DIR)/handle_quotes.c \
   $(REDIR_DIR)/redir_parsing_utils.c  \
-  $(REDIR_DIR)/redir_restore_std.c \
-  $(REDIR_DIR)/redir_save_file.c \
+  $(REDIR_DIR)/redir_apply.c \
+  $(REDIR_DIR)/redir_heredoc.c \
+  $(REDIR_DIR)/redir_save_restore.c \
   $(REDIR_DIR)/redir_parsing.c \
   $(EXIT_DIR)/exit.c \
   $(UTLS_DIR)/utils.c         \
   $(UTLS_DIR)/utils_2.c       \
   $(UTLS_DIR)/credits.c       \
+  $(UTLS_DIR)/debug.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
   $(EXEC_DIR)/exec_utils.c \
@@ -53,7 +55,7 @@ SRCS := \
 OBJS = $(SRCS:.c=.o)
 
 # Compiler and flags
-CC = gcc -Wall -Wextra -Werror #-fsanitize=address,undefined -fno-omit-frame-pointer -g -O0
+CC = gcc -Wall -Wextra -Werror -g -O0 #-fsanitize=address,undefined -fno-omit-frame-pointer -g -O0
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
