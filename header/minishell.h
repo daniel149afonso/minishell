@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/18 18:59:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/20 15:24:52 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define MINISHELL_H
 
 # include "minishell_stru.h"
-
-//MAIN
-void	sigint_handler(int sig);
 
 //FT_INIT_BUILTINS
 void	init_global_struct(t_g **g, char **envp);
@@ -109,8 +106,10 @@ char	*extract_check_key(char *str);
 void	f_bubblesort(t_env *head);
 int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
-void	print_debug_command(t_cmd *cmd);
 void	ft_print_array(char **strs);
+
+// DEBUG
+void	print_debug_command(t_cmd *cmd);
 void	is_debug_active(t_g *g, char *debug);
 
 // CREDITS

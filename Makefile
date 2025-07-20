@@ -13,7 +13,7 @@ CMD_DIR_ECHO := sources/builtins/echo
 EXIT_DIR   := sources/exit
 UTLS_DIR   := sources/utils
 REDIR_DIR  := sources/redirections
-PARSING_DIR:= sources/parse_var_quotes
+PARSING_DIR:= sources/expand
 SIGNALS_DIR:= sources/signals
 EXEC_DIR   := sources/exec
 
@@ -34,8 +34,8 @@ SRCS := \
   $(CMD_DIR_ENV)/export_parsing.c       \
   $(CMD_DIR_ENV)/export_concat.c  \
   $(CMD_DIR_ENV)/unset.c          \
-  $(PARSING_DIR)/handle_var.c \
-  $(PARSING_DIR)/handle_var_2.c \
+  $(PARSING_DIR)/expand_var.c \
+  $(PARSING_DIR)/expand_var_utils.c \
   $(PARSING_DIR)/handle_quotes.c \
   $(REDIR_DIR)/redir_parsing_utils.c  \
   $(REDIR_DIR)/redir_apply.c \
