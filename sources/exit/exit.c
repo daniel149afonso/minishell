@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/05 01:11:28 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/20 15:37:45 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 {
 	int	return_code;
 
-	(void)cmds;
+	free_cmds(cmds);
 	if (g->lst)
 		return_code = check_exit_code(g);
 	else
