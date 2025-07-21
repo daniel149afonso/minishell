@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/20 15:23:55 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/21 01:40:16 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,22 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
-static void	exec_parsing(t_g *g)
+static void exec_parsing(t_g *g)
 {
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
 	g->env->lst = g->lst;
 	if (g->debug_option)
 		print_debug_command(g->cmds);
-	if (is_pipe(g->lst))
+	if (collect_heredocs(g, g->cmds) != 0 || g->interrupted)
+	{
+		g->interrupted = 0;
+		restore_std(g);
+		free_cmds(g->cmds);
+		g->cmds = NULL;
+		return;
+	}
+	if (is_pipe(g->lst) || !builtins(g, g->cmds))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 		{
@@ -49,16 +57,11 @@ static void	exec_parsing(t_g *g)
 			return_code(g->env, 1);
 		}
 	}
-	else if (!collect_heredocs(g, g->cmds) && !builtins(g, g->cmds))
-	{
-		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
-		{
-			printf("%s: command not found\n", (char *)g->lst->content);
-			return_code(g->env, 1);
-		}
-	}
-	return (restore_std(g), free_cmds(g->cmds));
+	restore_std(g);
+	free_cmds(g->cmds);
+	g->cmds = NULL;
 }
+
 
 static int	msh_while(t_g *g)
 {
