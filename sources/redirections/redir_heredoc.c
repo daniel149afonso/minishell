@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/20 15:22:27 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/21 22:35:43 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,43 @@ int	handle_heredoc(char *delimitor, t_env *env, int write_fd)
 	return (0);
 }
 
-int	open_all_heredocs(t_g *g, t_redir *redir)
+int open_single_heredoc(t_g *g, t_redir *r)
+{
+	int		pipefd[2];
+	pid_t	pid;
+	int		status;
+
+	if (pipe(pipefd) == -1)
+		return (perror("pipe"), 1);
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"), 1);
+	if (pid == 0)
+	{
+		close(pipefd[0]);
+		handle_heredoc(r->file, g->env, pipefd[1]);
+		exit(0);
+	}
+	close(pipefd[1]);
+	r->heredoc_fd = pipefd[0];
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	{
+		write(1, "\n", 1);
+		g->interrupted = 1;
+		return (return_code(g->env, 130), 1);
+	}
+	return (0);
+}
+
+int open_all_heredocs(t_g *g, t_redir *redir)
 {
 	while (redir)
 	{
 		if (redir->type == 4)
 		{
-			int pipefd[2];
-			if (pipe(pipefd) == -1)
-				return (perror("pipe"), 1);
-			pid_t pid = fork();
-			if (pid == 0)
-			{
-				close(pipefd[0]);
-				handle_heredoc(redir->file, g->env, pipefd[1]);
-				exit(0);
-			}
-			else if (pid > 0)
-			{
-				close(pipefd[1]);
-				redir->heredoc_fd = pipefd[0];
-				int status;
-				waitpid(pid, &status, 0);
-				if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-				{
-					write(1, "\n", 1);
-					g->interrupted = 1;
-					return (1);
-				}
-			}
-			else
-				return (perror("fork"), 1);
+			if (open_single_heredoc(g, redir) != 0)
+				return (1);
 		}
 		redir = redir->next;
 	}
