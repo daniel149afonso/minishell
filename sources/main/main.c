@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/21 01:40:16 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/22 17:59:54 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	free_for_nextl(char *input, t_list *lst)
 	ft_lstclear(&lst, free);
 }
 
-static void exec_parsing(t_g *g)
+static void	exec_parsing(t_g *g)
 {
 	remove_quotes(&g->lst);
 	g->cmds = parse_commands(g->lst);
@@ -47,7 +47,7 @@ static void exec_parsing(t_g *g)
 		restore_std(g);
 		free_cmds(g->cmds);
 		g->cmds = NULL;
-		return;
+		return ;
 	}
 	if (is_pipe(g->lst) || !builtins(g, g->cmds))
 	{
@@ -61,7 +61,6 @@ static void exec_parsing(t_g *g)
 	free_cmds(g->cmds);
 	g->cmds = NULL;
 }
-
 
 static int	msh_while(t_g *g)
 {
