@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/20 15:37:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/21 01:33:59 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 {
 	int	return_code;
 
-	free_cmds(cmds);
+	(void)cmds;
 	if (g->lst)
 		return_code = check_exit_code(g);
 	else

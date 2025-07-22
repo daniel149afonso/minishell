@@ -1,95 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_var.c                                       :+:      :+:    :+:   */
+/*   handle_var_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/20 00:00:18 by daniel149af      ###   ########.fr       */
+/*   Created: 2025/05/26 20:55:58 by daafonso          #+#    #+#             */
+/*   Updated: 2025/06/15 20:58:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-/*Check si la variable existe dans l'env, si oui elle l'expanse
-sinon elle est traitée comme une string normale*/
-void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
+/*Extrait le nom de la variable*/
+char	*extract_var_name(char *str, int *i)
 {
-	char	*var;
-	char	*val;
+	int		len;
+	int		j;
+	char	*name;
 
-	(*i)++;
-	var = extract_var_name(str, i);
-	if (ft_strcmp(var, "?") == 0)
-		val = ft_itoa(env->var_error_code);
-	else
-		val = get_env_value(env, var);
-	if (val)
+	len = 0;
+	while (str[*i + len] && is_var_char(str[*i + len]))
+		len++;
+	name = malloc(len + 1);
+	if (!name)
+		return (0);
+	j = 0;
+	while (j < len)
 	{
-		*res = ft_join_and_free(*res, val);
-		free(val);
+		name[j] = str[*i + j];
+		j++;
 	}
-	free(var);
+	name[j] = '\0';
+	*i += len;
+	return (name);
 }
 
-/*Reconstruis la string en ajoutant char par char*/
-void	add_char_to_result(char *str, char **res, int *i)
+/*Cherche le nom de la variable dans l'env,
+si trouvé on récupère sa valeur*/
+char	*get_env_value(t_env *env, char *var_name)
 {
-	char	c[2];
+	t_env	*tmp;
+	char	*value;
 
-	c[0] = str[*i];
-	c[1] = '\0';
-	*res = ft_join_and_free(*res, c);
-	(*i)++;
-}
-
-/*Cherche une variable qui commence par $ entre double quotes ou non
-mais ne fait rien si elle est entre single quote*/
-char	*expand_variables(char *str, t_env *env)
-{
-	int		i;
-	int		in_single;
-	int		in_double;
-	char	*res;
-
-	i = 0;
-	in_single = 0;
-	in_double = 0;
-	res = ft_calloc(1, 1);
-	if (!res)
-		return (NULL);
-	while (str[i])
+	value = NULL;
+	while (env)
 	{
-		if (str[i] == '\'' && !in_double)
-			in_single = !in_single;
-		else if (str[i] == '"' && !in_single)
-			in_double = !in_double;
-		else if (str[i] == '$' && !in_single)
+		tmp = env->next;
+		if (ft_strcmp(env->key, var_name) == 0)
 		{
-			handle_variable_expansion(str, &res, &i, env);
-			continue ;
+			value = ft_strdup(env->value);
+			if (!value)
+				return (NULL);
 		}
-		add_char_to_result(str, &res, &i);
+		env = tmp;
 	}
-	return (res);
-}
-
-/*Parcours chaque token pour chercher s'il y a une variable*/
-char	**search_var(char **strs, t_env *env)
-{
-	int		i;
-	char	*var;
-
-	i = 0;
-	if (!env)
-		return (strs);
-	while (strs[i])
-	{
-		var = expand_variables(strs[i], env);
-		free(strs[i]);
-		strs[i] = var;
-		i++;
-	}
-	return (strs);
+	return (value);
 }
