@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 14:03:17 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 21:10:23 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ft_free_all(t_cmd *cmd);
 int		is_space(int c);
 int		is_space_command(char **strs);
 char	*ft_join_and_free(char *text, char *buffer);
-void	free_env(t_env **env);
+void	free_env(t_env *env);
 char	*extract_check_key(char *str);
 void	f_bubblesort(t_env *head);
 int		is_var_char(char c);

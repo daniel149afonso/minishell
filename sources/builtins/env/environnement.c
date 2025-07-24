@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 09:23:54 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:50:18 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ void	init_env(t_env **env, char **envp)
 	}
 }
 
+static void	add_env_node_2(t_env *new, t_env *tmp, t_env **env)
+{
+	tmp = *env;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
 /*---------------------------
 Fonction appelé par l'init pour
 ajouter les nodes correspondante a la
@@ -39,9 +47,10 @@ void	add_env_node(t_env **env, const char *str)
 	t_env	*tmp;
 	char	*equal_sign;
 
-	new = malloc(sizeof(t_env));
+	new = ft_calloc(1, sizeof(t_env));
 	if (!new)
 		return ;
+	tmp = NULL;
 	equal_sign = ft_strchr(str, '=');
 	if (equal_sign)
 	{
@@ -57,12 +66,7 @@ void	add_env_node(t_env **env, const char *str)
 	if (!*env)
 		*env = new;
 	else
-	{
-		tmp = *env;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+		add_env_node_2(new, tmp, env);
 }
 
 /*---------------------------
