@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 17:54:57 by daafonso          #+#    #+#             */
-/*   Updated: 2024/10/21 12:45:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 20:42:34 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
+	if (!lst || !*lst)
+		return ;
 	tmp = *lst;
 	while (*lst)
 	{

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 20:26:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 21:29:23 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 		return (1);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
-	if (g->env->lst)
-		ft_lstclear(&g->env->lst, free);
 	if (g->env)
 		free_env(&g->env);
 	if (g->builtin)
