@@ -7,6 +7,8 @@
 
 echo $?: conditional jump
 
+commande exit leaks
+
 ## cd (changement de dossier - Daniel): ✅
 
 gestion de dossier✅
