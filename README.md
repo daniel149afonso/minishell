@@ -5,9 +5,9 @@
 
 ## infos à jour:
 
-echo $?: conditional jump
+TOUT MARCHE INSHALLAH
 
-commande exit leaks
+unset leak
 
 ## cd (changement de dossier - Daniel): ✅
 

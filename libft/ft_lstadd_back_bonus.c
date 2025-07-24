@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 17:03:32 by daafonso          #+#    #+#             */
-/*   Updated: 2024/10/20 23:05:22 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 22:25:41 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	if (*lst)
 	{
 		t = ft_lstlast(*lst);
-		t->next = &*new;
+		t->next = new;
 	}
 	else
 		*lst = new;

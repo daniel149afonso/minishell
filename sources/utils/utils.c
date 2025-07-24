@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 21:10:06 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:08:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_env(t_env *env)
 	while (tmp)
 	{
 		next = tmp->next;
+		// if (tmp->lst)
+		// 	ft_lstclear(&tmp->lst, free);
 		free(tmp->key);
 		free(tmp->value);
 		free(tmp);

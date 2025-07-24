@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/21 01:35:34 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 23:37:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
 	while (g->envbuilt[i].name)
 	{
 		if (ft_strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
-			exit(g->envbuilt[i].e(g->env));
+			exit(g->envbuilt[i].e(g->env, g->lst));
 		i++;
 	}
 	i = 0;
