@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/20 15:24:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 14:03:17 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		get_current_path(char **path);
 int		set_path(t_cmd *cmds, char **path);
 int		set_home_path(char **path);
 int		update_env_if_exists(t_env *env, const char *key, const char *value);
+void	print_error_path(char *path);
 
 //ENVIRONNEMENT BUILTINS
 int		ft_exp(t_env *env);
