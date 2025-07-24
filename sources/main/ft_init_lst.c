@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/24 15:41:31 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 16:12:35 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_init_lst(t_list **lst, char **tokens)
 		j++;
 	}
 	free_split(tokens);
-	ft_put_lst(*lst);
 }
 
 /*Affiche le contenu de chaque element de la liste*/
