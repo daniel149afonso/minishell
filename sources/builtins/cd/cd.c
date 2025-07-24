@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 22:09:29 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/14 23:57:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 15:28:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_cd(t_g *g, t_cmd *cmds)
 		return (free(oldpwd), 1);
 	result = chdir(path);
 	if (result != 0)
-		return (perror("minishell: cd"), free(oldpwd), 1);
+		return (perror(path), free(oldpwd), 1);
 	else
 	{
 		if (!get_current_path(&newpwd))
