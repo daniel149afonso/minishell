@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 21:10:08 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:30:55 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 		free(g->builtin);
 	if (g->envbuilt)
 		free(g->envbuilt);
+	if (g->cmd)
+		free_cmds(g->cmds);
 	free(g);
 	printf(RED "exit\n" RE);
 	exit (return_code);
