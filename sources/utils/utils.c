@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:27:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/04 22:12:15 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:10:06 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	is_space(int c)
 	return (0);
 }
 
-void	free_env(t_env **env)
+void	free_env(t_env *env)
 {
 	t_env	*tmp;
 	t_env	*next;
 
-	tmp = *env;
+	tmp = env;
 	while (tmp)
 	{
 		next = tmp->next;
@@ -33,7 +33,7 @@ void	free_env(t_env **env)
 		free(tmp);
 		tmp = next;
 	}
-	*env = NULL;
+	env = NULL;
 }
 
 char	*extract_check_key(char *str)

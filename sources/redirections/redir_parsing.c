@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:14:05 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 21:11:44 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 15:56:22 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*right_redir(t_list *lst)
 	int	right;
 
 	right = ft_strcmp((char *)lst->content, ">");
+	if (!right && !ft_strcmp((char *)lst->next->content, ">"))
+		return (">");
 	if (!right && !ft_strcmp((char *)lst->next->content, "<"))
 		return ("<");
 	if (!right && !ft_strcmp((char *)lst->next->content, "<<"))
@@ -46,6 +48,8 @@ char	*left_redir(t_list *lst)
 	int	left;
 
 	left = ft_strcmp((char *)lst->content, "<");
+	if (!left && !ft_strcmp((char *)lst->next->content, "<"))
+		return ("<");
 	if (!left && !ft_strcmp((char *)lst->next->content, ">"))
 		return (">");
 	if (!left && !ft_strcmp((char *)lst->next->content, "<<"))

@@ -7,7 +7,7 @@
 
 echo $?: conditional jump
 
-echo salut> > test.txt doit retourner une erreur à voir si je corrige ce détail car franchement flemme...
+commande exit leaks
 
 ## cd (changement de dossier - Daniel): ✅
 

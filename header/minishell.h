@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/20 15:24:52 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 21:10:23 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		get_current_path(char **path);
 int		set_path(t_cmd *cmds, char **path);
 int		set_home_path(char **path);
 int		update_env_if_exists(t_env *env, const char *key, const char *value);
+void	print_error_path(char *path);
 
 //ENVIRONNEMENT BUILTINS
 int		ft_exp(t_env *env);
@@ -101,7 +102,7 @@ void	ft_free_all(t_cmd *cmd);
 int		is_space(int c);
 int		is_space_command(char **strs);
 char	*ft_join_and_free(char *text, char *buffer);
-void	free_env(t_env **env);
+void	free_env(t_env *env);
 char	*extract_check_key(char *str);
 void	f_bubblesort(t_env *head);
 int		is_var_char(char c);

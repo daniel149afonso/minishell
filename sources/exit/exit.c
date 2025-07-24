@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/21 01:33:59 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 21:10:08 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
-		free_env(&g->env);
+		free_env(g->env);
 	if (g->builtin)
 		free(g->builtin);
 	if (g->envbuilt)

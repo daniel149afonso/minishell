@@ -5,6 +5,7 @@
 *.DStore
 *.out
 *.identifiers
+>
 minishell
 minishell_tester
 launch.sh
