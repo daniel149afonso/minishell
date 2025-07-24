@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/13 23:25:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 09:44:09 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,18 @@ int	builtins(t_g *g, t_cmd *cmd)
 {
 	int	i;
 
+	i = 0;
+	while (cmd->argv[i])
+	{
+		if (ft_strchr(cmd->argv[i], '|'))
+			return (0);
+		i++;
+	}
+	i = 0;
 	if (!cmd->argv || !cmd->argv[0] || !g->env)
 		return (0);
 	if (builtins_2(g, g->env, cmd, g->envbuilt))
 		return (1);
-	i = 0;
 	while (g->builtin[i].name)
 	{
 		if (ft_strcmp(cmd->argv[0], g->builtin[i].name) == 0)
