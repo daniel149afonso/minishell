@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:25:36 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/17 05:30:25 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/24 15:10:20 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	display_with_args(t_cmd *cmds)
 
 	i = 1;
 	newline = 1;
-	while (cmds->argv && ft_strnstr(cmds->argv[i], "-n", 2))
+	while (cmds->argv[i] && ft_strnstr(cmds->argv[i], "-n", 2))
 	{
 		if (!is_valid_option(cmds->argv[i]))
 			break ;

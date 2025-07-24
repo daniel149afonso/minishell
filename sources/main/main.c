@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/22 17:59:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 09:42:44 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ static void	free_for_nextl(char *input, t_list *lst)
 
 static void	exec_parsing(t_g *g)
 {
-	remove_quotes(&g->lst);
-	g->cmds = parse_commands(g->lst);
-	g->env->lst = g->lst;
-	if (g->debug_option)
-		print_debug_command(g->cmds);
 	if (collect_heredocs(g, g->cmds) != 0 || g->interrupted)
 	{
 		g->interrupted = 0;
@@ -49,7 +44,15 @@ static void	exec_parsing(t_g *g)
 		g->cmds = NULL;
 		return ;
 	}
-	if (is_pipe(g->lst) || !builtins(g, g->cmds))
+	if (is_pipe(g->lst))
+		{
+			if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
+				{
+					printf("%s: command not found\n", (char *)g->lst->content);
+					return_code(g->env, 1);
+				}
+		}
+	else if (!builtins(g, g->cmds))
 	{
 		if (!exec_pipeline(g, g->cmds, get_envp_array(g->env)))
 		{
@@ -58,8 +61,6 @@ static void	exec_parsing(t_g *g)
 		}
 	}
 	restore_std(g);
-	free_cmds(g->cmds);
-	g->cmds = NULL;
 }
 
 static int	msh_while(t_g *g)
@@ -77,7 +78,14 @@ static int	msh_while(t_g *g)
 			ft_init_lst(&g->lst, g->result);
 			if (!validate_redirection_syntax(g->lst))
 				return (0);
+			remove_quotes(&g->lst);
+			g->cmds = parse_commands(g->lst);
+			g->env->lst = g->lst;
+			if (g->debug_option)
+				print_debug_command(g->cmds);
 			exec_parsing(g);
+			free_cmds(g->cmds);
+			g->cmds = NULL;
 		}
 	}
 	return (0);
