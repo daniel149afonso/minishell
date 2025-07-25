@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/25 18:08:40 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:39:24 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	open_single_heredoc(t_g *g, t_redir *r)
 	{
 		close(pipefd[0]);
 		handle_heredoc(r->file, g->env, pipefd[1]);
-		exit(0);
+		free_n_exit_child(g, NULL, NULL, 0);
 	}
 	close(pipefd[1]);
 	r->heredoc_fd = pipefd[0];
