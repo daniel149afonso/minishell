@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 18:28:23 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:02:02 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ char	**get_envp_array(t_env *env)
 
 void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code)
 {
-	if (cmds)
-		free_cmds(cmds);
+	g->cmd = NULL;
+	(void)cmds;
+	if (g->cmds)
+		free_cmds(g->cmds);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
