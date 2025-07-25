@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 20:17:13 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:06:22 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,27 @@
 
 static void	get_access(t_g *g, char *cmd, t_cmd *cmds, char **envp)
 {
-	char	*path;
-
-	path = NULL;
+	g->path = NULL;
 	if (ft_strchr(cmd, '/'))
-		path = check_binary_file(g, envp, path, cmd);
+		g->path = check_binary_file(g, cmds, envp, cmd);
 	else
 	{
-		path = get_path(cmd, envp);
-		if (!path)
+		g->path = get_path(cmd, envp);
+		if (!g->path)
 			return (write(2, cmd, ft_strlen(cmd)),
 				write(2, ": command not found\n", 20), free_n_exit_child(g, cmds,
 					envp, 127));
 	}
-	execve(path, cmds->argv, envp);
-	if (path)
-		free(path);
+	execve(g->path, cmds->argv, envp);
+	if (g->path)
+		free(g->path);
 	if (errno == ENOENT)
-		free_n_exit_child(g, NULL, envp, 127);
+		free_n_exit_child(g, cmds, envp, 127);
 	else if (errno == EACCES)
-		free_n_exit_child(g, NULL, envp, 126);
+		free_n_exit_child(g, cmds, envp, 126);
 	else
 		return (write(2, cmd, ft_strlen(cmd)), perror(": execution error"),
-			free_n_exit_child(g, NULL, envp, 127));
+			free_n_exit_child(g, cmds, envp, 127));
 }
 
 static char	*parse_cmd_exec(char **envp, t_g *g, t_cmd *cmds)
@@ -89,7 +87,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			dup2(open("/dev/null", O_RDONLY), STDIN_FILENO);
 			dup2(open("/dev/null", O_WRONLY), STDOUT_FILENO);
 			free(g->cmd);
-			free_n_exit_child(g, NULL, envp, 127);
+			free_n_exit_child(g, cmds, envp, 127);
 		}
 		free(g->cmd);
 	}

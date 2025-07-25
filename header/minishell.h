@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 18:02:38 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:47:58 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ int		is_redirection_token(char *token);
 int		store_redirection(t_cmd *cmd, char *file, int type);
 int		handle_heredoc(char *delimitor, t_env *env, int write_fd);
 int		collect_heredocs(t_g *g, t_cmd *cmds);
+char	*right_redir(t_list *lst);
+char	*left_redir(t_list *lst);
 
 //EXECUTION
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1);
 char	**get_envp_array(t_env *env);
 int		exec_pipeline(t_g *g, t_cmd *cmds, char **envp);
 char	*get_path(char *cmd, char **envp);
-char	*check_binary_file(t_g *g, char **envp, char *path, char *cmd);
+char	*check_binary_file(t_g *g, t_cmd *cmds, char **envp, char *cmd);
 void	setup_stdin(t_g *g, t_cmd *cmds);
 void	setup_stdout(t_g *g, t_cmd *cmds);
 void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code);
