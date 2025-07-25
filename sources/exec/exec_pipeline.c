@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 17:19:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:24:50 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	get_access(t_g *g, char *cmd, t_cmd *cmds, char **envp)
 
 	path = NULL;
 	if (ft_strchr(cmd, '/'))
-		path = check_binary_file(path, cmd);
+		path = check_binary_file(g, envp, path, cmd);
 	else
 	{
 		path = get_path(cmd, envp);
@@ -39,26 +39,34 @@ static void	get_access(t_g *g, char *cmd, t_cmd *cmds, char **envp)
 			free_n_exit_child(g, NULL, envp, 127));
 }
 
-static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
+static char	*parse_cmd_exec(char **envp, t_g *g, t_cmd *cmds)
 {
 	char	*cmd;
 	int		i;
+	int		error_code;
 
 	cmd = NULL;
 	i = 0;
+	error_code = 0;
 	if (!cmds->argv || !cmds->argv[0])
 		return (ft_strdup(""));
 	while (g->envbuilt[i].name)
 	{
 		if (ft_strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
-			exit(g->envbuilt[i].e(g->env, g->lst));
+		{
+			error_code = g->envbuilt[i].e(g->env, g->lst);
+			free_n_exit_child(g, cmds, envp, error_code);
+		}
 		i++;
 	}
 	i = 0;
 	while (g->builtin[i].name)
 	{
 		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
-			exit(g->builtin[i].f(g, cmds));
+		{
+			error_code = g->builtin[i].f(g, cmds);
+			free_n_exit_child(g, cmds, envp, error_code);
+		}
 		i++;
 	}
 	cmd = cmds->argv[0];
@@ -73,7 +81,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 		setup_stdout(g, cmds);
 		if (apply_redirections(g, cmds) != 0)
 			return ;
-		g->cmd = parse_cmd_exec(g, cmds);
+		g->cmd = parse_cmd_exec(envp, g, cmds);
 		if (g->cmd && g->cmd[0] != '\0')
 			get_access(g, g->cmd, cmds, envp);
 		else
@@ -81,7 +89,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			dup2(open("/dev/null", O_RDONLY), STDIN_FILENO);
 			dup2(open("/dev/null", O_WRONLY), STDOUT_FILENO);
 			free(g->cmd);
-			exit(0);
+			free_n_exit_child(g, NULL, envp, 127);
 		}
 		free(g->cmd);
 	}

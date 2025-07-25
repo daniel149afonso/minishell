@@ -3,29 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/16 21:04:07 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 18:04:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-char	*check_binary_file(char *path, char *cmd)
+char	*check_binary_file(t_g *g, char **envp, char *path, char *cmd)
 {
 	struct stat	sb;
 
 	path = ft_strdup(cmd);
 	if (!path || access(path, X_OK) != 0)
 		return (write(2, cmd, ft_strlen(cmd)),
-			perror(": command not found\n"), exit(127), NULL);
+			perror(": command not found\n"), free_n_exit_child(g, NULL,
+				envp, 127), NULL);
 	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
 		return (write(2, cmd, ft_strlen(cmd)),
-			perror(": is a directory\n"), free(path), exit(126), NULL);
+			perror(": is a directory\n"), free(path), free_n_exit_child(g,
+				NULL, envp, 127), NULL);
 	if (access(path, X_OK) != 0)
 		return (write(2, cmd, ft_strlen(cmd)),
-			perror(": permission denied\n"), free(path), exit(126), NULL);
+			perror(": permission denied\n"), free(path), free_n_exit_child(g,
+				NULL, envp, 127), NULL);
 	return (path);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 17:19:56 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:28:23 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	**get_envp_array(t_env *env)
 
 void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code)
 {
-	(void)cmds;
+	if (cmds)
+		free_cmds(cmds);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)
@@ -61,10 +62,10 @@ void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code)
 		free(g->builtin);
 	if (g->envbuilt)
 		free(g->envbuilt);
-	if (g->cmd)
-		free_cmds(g->cmds);
 	if (envp)
 		free_split(envp);
+	if (g->input)
+		free(g->input);
 	free(g);
 	exit (error_code);
 }
