@@ -1,0 +1,7 @@
+{
+    readline_is_bad
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    ...
+    obj:*/libreadline.so.*
+}
