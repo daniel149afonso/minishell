@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/24 23:28:21 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 00:50:41 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_env
 	char			*value;
 	int				error_code;
 	int				var_error_code;
-	t_list			*lst;
 	struct s_env	*next;
 }	t_env;
 

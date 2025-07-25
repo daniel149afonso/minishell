@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 00:24:53 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 00:51:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 		return (1);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
-	if (g->lst)
-		printf("Address lst %p\n", g->lst);
-	else
-		printf("Lst est vide\n");
 	if (g->env)
 		free_env(g->env);
 	if (g->builtin)

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 23:25:01 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 00:56:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ ou va allez update les variables avec "check_if_var"
 int	ft_exp(t_env *env, t_list *lst)
 {
 	t_env	*tmp;
-	//t_list	*lst;
 
 	tmp = env;
-	//lst = env->lst;
 	if (!lst || !lst->next)
 	{
 		f_bubblesort(tmp);

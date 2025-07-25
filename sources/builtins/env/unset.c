@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:08:41 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 23:22:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 01:05:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ static void	del_var(t_env *env, char *arg)
 			free(curr->key);
 			free(curr->value);
 			free(curr);
-			return ;
+			return (free(key));
 		}
 		prev = curr;
 		curr = curr->next;
 	}
+	if (key)
+		free(key);
 }
 
 int	f_unset(t_env *env, t_list *lst)
 {
 	t_list	*arg;
 
-	//arg = env->lst->next;
 	arg = lst;
 	while (arg)
 	{

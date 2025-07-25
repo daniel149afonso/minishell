@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/25 00:26:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 00:50:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int	msh_while(t_g *g)
 				return (0);
 			remove_quotes(&g->lst);
 			g->cmds = parse_commands(g->lst);
-			//g->env->lst = g->lst;
 			if (g->debug_option)
 				print_debug_command(g->cmds);
 			exec_parsing(g);
