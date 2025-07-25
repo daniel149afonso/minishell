@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 18:28:23 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:54:03 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ char	**get_envp_array(t_env *env)
 
 void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code)
 {
-	if (cmds)
-		free_cmds(cmds);
+	(void)cmds;
+	if (g->cmds)
+		free_cmds(g->cmds);
 	if (g->lst)
 		ft_lstclear(&g->lst, free);
 	if (g->env)

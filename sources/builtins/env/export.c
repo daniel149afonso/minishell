@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 00:56:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 20:51:24 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
+static int	f_redirec(t_list *lst)
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	if (tmp && tmp->content)
+	{
+		if (!right_redir(lst) || !left_redir(lst))
+			return (1);
+	}
+	return (0);
+}
+
 /*---------------------------
 Fonction de base export qui va 
 écrire les variables existante si aucun argument
@@ -80,7 +93,7 @@ int	ft_exp(t_env *env, t_list *lst)
 	t_env	*tmp;
 
 	tmp = env;
-	if (!lst || !lst->next)
+	if (!lst || !lst->next || f_redirec(lst))
 	{
 		f_bubblesort(tmp);
 		while (tmp)
