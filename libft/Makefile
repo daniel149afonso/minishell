@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+         #
+#    By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2025/07/05 09:03:00 by bullestico       ###   ########.fr        #
+#    Updated: 2025/07/25 16:33:36 by daafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ SRCSALL 	= ${SRC} ${BONUS}
 OBJS		= ${SRC:.c=.o}
 OBJSALL		= ${SRCSALL:.c=.o}
 
-CC			= cc
+CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror
 
