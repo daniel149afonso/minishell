@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/06/21 20:31:37 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/25 00:56:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,11 @@ Fonction de base export qui va
 écrire les variables existante si aucun argument
 ou va allez update les variables avec "check_if_var"
 ---------------------------*/
-int	ft_exp(t_env *env)
+int	ft_exp(t_env *env, t_list *lst)
 {
 	t_env	*tmp;
-	t_list	*lst;
 
 	tmp = env;
-	lst = env->lst;
 	if (!lst || !lst->next)
 	{
 		f_bubblesort(tmp);
@@ -96,7 +94,7 @@ int	ft_exp(t_env *env)
 	}
 	else
 	{
-		if (check_if_var(env))
+		if (check_if_var(env, lst))
 			return (1);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/16 21:06:09 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 04:01:12 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,23 +97,21 @@ permet de check si un la commande
 est bien écrite et si il faut += ou juste
 ajouter ou update une variable
 ----------------------------------*/
-int	check_if_var(t_env *env)
+int	check_if_var(t_env *env, t_list *lst)
 {
 	t_list	*arg;
 	t_list	*tmp;
 	char	*value;
 
-	arg = env->lst->next;
-	tmp = env->lst->next;
+	arg = lst->next;
+	tmp = lst->next;
 	while (tmp)
 	{
 		value = extract_check_key(tmp->content);
 		if (value[0] == '=' || check_arg(value))
-		{
-			print_error_env(value, tmp);
-			return (free(value), 1);
-		}
+			return (print_error_env(value, tmp), free(value), 1);
 		tmp = tmp->next;
+		free(value);
 	}
 	while (arg)
 	{
@@ -123,5 +121,5 @@ int	check_if_var(t_env *env)
 			update_or_add_var(&env, (char *)arg->content);
 		arg = arg->next;
 	}
-	return (free(value), 0);
+	return (0);
 }

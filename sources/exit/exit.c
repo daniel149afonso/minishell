@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/24 21:30:55 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:51:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	check_exit_code(t_g *g)
 {
 	char	*key;
 	int		code;
+	t_list	*tmp;
 
-	g->lst = g->lst->next;
+	tmp = g->lst->next;
 	code = 0;
-	if (g->lst)
+	if (tmp)
 	{
-		key = extract_check_key((char *)g->lst->content);
+		key = extract_check_key((char *)tmp->content);
 		if (!key)
 			return (0);
 		if (!is_valid_numeric_arg(key))
@@ -51,7 +52,7 @@ int	check_exit_code(t_g *g)
 			ft_putstr_fd("exit: ", 2);
 			return (ft_putstr_fd("numeric argument required\n", 2), 255);
 		}
-		if (g->lst->next)
+		if (tmp->next)
 			return (return_code(g->env, 2), ft_putstr_fd("minishell: exit: "
 					"too many arguments\n", 2), -20);
 		code = ft_atoi(key);

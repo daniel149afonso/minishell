@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:01:11 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/24 16:12:35 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/24 22:36:47 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 puis assemble chaque element pour former une liste chainée*/
 void	ft_init_lst(t_list **lst, char **tokens)
 {
-	int		j;
+	int	j;
 
 	j = 0;
 	while (tokens[j])

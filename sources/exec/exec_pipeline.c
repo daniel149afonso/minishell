@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/21 01:35:34 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 03:56:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
 
 	cmd = NULL;
 	i = 0;
+	if (!cmds->argv || !cmds->argv[0])
+		return (ft_strdup(""));
 	while (g->envbuilt[i].name)
 	{
 		if (ft_strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
-			exit(g->envbuilt[i].e(g->env));
+			exit(g->envbuilt[i].e(g->env, g->lst));
 		i++;
 	}
 	i = 0;
@@ -71,9 +73,16 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 		if (apply_redirections(g, cmds) != 0)
 			return ;
 		g->cmd = parse_cmd_exec(g, cmds);
-		get_access(g->cmd, cmds, envp);
-		if (g->cmd)
+		if (g->cmd && g->cmd[0] != '\0')
+			get_access(g->cmd, cmds, envp);
+		else
+		{
+			dup2(open("/dev/null", O_RDONLY), STDIN_FILENO);
+			dup2(open("/dev/null", O_WRONLY), STDOUT_FILENO);
 			free(g->cmd);
+			exit(0);
+		}
+		free(g->cmd);
 	}
 	if (g->prev_fd != -1)
 	{

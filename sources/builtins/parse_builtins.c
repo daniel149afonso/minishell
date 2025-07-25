@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:18:30 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/24 09:44:09 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:26:09 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	builtins_2(t_g *g, t_env *env, t_cmd *cmd, t_envbuilt *envbuilt)
 		{
 			if (redirect_cmd_std(g, cmd) != 0)
 				return (1);
-			code = envbuilt[i].e(env);
+			code = envbuilt[i].e(env, g->lst);
 			return_code(env, code);
 			return (1);
 		}

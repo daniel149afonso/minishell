@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/20 23:23:13 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 00:17:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ void	ft_free_redir(t_redir *redir)
 		free(redir);
 		redir = tmp;
 	}
-}
-
-void	ft_free_lst(t_list **lst)
-{
-	t_list	*tmp;
-
-	tmp = NULL;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
 }
 
 void	free_cmds(t_cmd *cmds)

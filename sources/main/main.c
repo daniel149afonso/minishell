@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/24 20:29:13 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:50:58 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static void	sigint_handler(int sig)
 		return ;
 }
 
-static void	free_for_nextl(char *input, t_list *lst)
+static void	free_for_nextl(char *input, t_list **lst)
 {
-	free (input);
-	ft_lstclear(&lst, free);
+	if (input)
+		free (input);
+	if (lst && *lst)
+		ft_lstclear(lst, free);
 }
 
 static void	exec_parsing(t_g *g)
@@ -80,7 +82,6 @@ static int	msh_while(t_g *g)
 				return (0);
 			remove_quotes(&g->lst);
 			g->cmds = parse_commands(g->lst);
-			g->env->lst = g->lst;
 			if (g->debug_option)
 				print_debug_command(g->cmds);
 			exec_parsing(g);
@@ -111,7 +112,7 @@ int	main(int ac, char **av, char **envp)
 			return (1);
 		if (!g->input)
 			return (free_n_exit(g, g->cmds), 0);
-		free_for_nextl(g->input, g->lst);
+		free_for_nextl(g->input, &g->lst);
 	}
 	return (0);
 }
