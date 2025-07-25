@@ -1,15 +1,0 @@
-[?2004h[0;32mminishell$ [0m
-[?2004l[?2004h[0;32mminishell$ [0m
-[?2004l[?2004h[0;32mminishell$ [0mls
-[?2004lMakefile
-README.md
-header
-libft
-minishell
-readline.supp
-sources
-valgrind.log
-[?2004h[0;32mminishell$ [0mcaca
-[?2004l[?2004h[0;32mminishell$ [0m[?2004l
-[0;31mexit
-[0m

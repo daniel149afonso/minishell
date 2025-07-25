@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:19:37 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/25 00:17:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 17:28:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_free_redir(t_redir *redir)
 		free(redir);
 		redir = tmp;
 	}
+	redir = NULL;
 }
 
 void	free_cmds(t_cmd *cmds)
@@ -49,6 +50,8 @@ void	free_cmds(t_cmd *cmds)
 		free(cmds);
 		cmds = tmp;
 	}
+	free(cmds);
+	cmds = NULL;
 }
 
 void	free_split(char **arr)

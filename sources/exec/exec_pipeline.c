@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 03:56:11 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 17:19:13 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static void	get_access(char *cmd, t_cmd *cmds, char **envp)
+static void	get_access(t_g *g, char *cmd, t_cmd *cmds, char **envp)
 {
 	char	*path;
 
@@ -24,18 +24,19 @@ static void	get_access(char *cmd, t_cmd *cmds, char **envp)
 		path = get_path(cmd, envp);
 		if (!path)
 			return (write(2, cmd, ft_strlen(cmd)),
-				write(2, ": command not found\n", 20), exit(127));
+				write(2, ": command not found\n", 20), free_n_exit_child(g, cmds,
+					envp, 127));
 	}
 	execve(path, cmds->argv, envp);
 	if (path)
 		free(path);
 	if (errno == ENOENT)
-		exit(127);
+		free_n_exit_child(g, NULL, envp, 127);
 	else if (errno == EACCES)
-		exit(126);
+		free_n_exit_child(g, NULL, envp, 126);
 	else
 		return (write(2, cmd, ft_strlen(cmd)), perror(": execution error"),
-			exit(127));
+			free_n_exit_child(g, NULL, envp, 127));
 }
 
 static char	*parse_cmd_exec(t_g *g, t_cmd *cmds)
@@ -74,7 +75,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			return ;
 		g->cmd = parse_cmd_exec(g, cmds);
 		if (g->cmd && g->cmd[0] != '\0')
-			get_access(g->cmd, cmds, envp);
+			get_access(g, g->cmd, cmds, envp);
 		else
 		{
 			dup2(open("/dev/null", O_RDONLY), STDIN_FILENO);

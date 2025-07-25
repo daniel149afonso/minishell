@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/14 17:03:01 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/25 17:19:56 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,25 @@ char	**get_envp_array(t_env *env)
 	}
 	envp[i] = NULL;
 	return (envp);
+}
+
+void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code)
+{
+	(void)cmds;
+	if (g->lst)
+		ft_lstclear(&g->lst, free);
+	if (g->env)
+		free_env(g->env);
+	if (g->builtin)
+		free(g->builtin);
+	if (g->envbuilt)
+		free(g->envbuilt);
+	if (g->cmd)
+		free_cmds(g->cmds);
+	if (envp)
+		free_split(envp);
+	free(g);
+	exit (error_code);
 }
 
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1)
