@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 20:51:24 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:03:16 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,20 @@ void	update_or_add_var(t_env **env, char *arg)
 		free(value);
 }
 
-static int	f_redirec(t_list *lst)
+static void	print_sorted_export(t_env *env)
 {
-	t_list	*tmp;
+	t_env	*tmp;
 
-	tmp = lst;
-	if (tmp && tmp->content)
+	f_bubblesort(env);
+	tmp = env;
+	while (tmp)
 	{
-		if (!right_redir(lst) || !left_redir(lst))
-			return (1);
+		printf("declare -x %s", tmp->key);
+		if (tmp->value)
+			printf("=\"%s\"", tmp->value);
+		printf("\n");
+		tmp = tmp->next;
 	}
-	return (0);
 }
 
 /*---------------------------
@@ -88,28 +91,28 @@ Fonction de base export qui va
 écrire les variables existante si aucun argument
 ou va allez update les variables avec "check_if_var"
 ---------------------------*/
+
+
 int	ft_exp(t_env *env, t_list *lst)
 {
-	t_env	*tmp;
+	t_list	*arg;
 
-	tmp = env;
-	if (!lst || !lst->next || f_redirec(lst))
+	if (!lst || !lst->next)
 	{
-		f_bubblesort(tmp);
-		while (tmp)
-		{
-			printf("declare -x %s", tmp->key);
-			if (tmp->value)
-				printf("=\"%s\"", tmp->value);
-			printf("\n");
-			tmp = tmp->next;
-		}
-	}
-	else
-	{
-		if (check_if_var(env, lst))
-			return (1);
+		print_sorted_export(env);
 		return (0);
 	}
+	arg = lst->next;
+	while (arg)
+	{
+		if (!is_valid_export_argument(arg->content))
+		{
+			print_sorted_export(env);
+			return (0);
+		}
+		arg = arg->next;
+	}
+	if (check_if_var(env, lst))
+		return (1);
 	return (0);
 }

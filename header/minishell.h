@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/26 07:21:05 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/26 11:58:38 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		check_if_var(t_env *env, t_list *lst);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
 int		f_unset(t_env *env, t_list *lst);
+int     is_valid_export_argument(char *str);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
