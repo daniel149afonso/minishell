@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 19:43:24 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:20:46 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,23 @@ void	setup_stdout(t_g *g, t_cmd *cmds)
 		close(g->pipefd[0]);
 		dup2(g->pipefd[1], STDOUT_FILENO);
 		close(g->pipefd[1]);
+	}
+}
+
+void	second_parse_cmd(t_g *g, t_cmd *cmds, char **envp)
+{
+	int	i;
+	int	error_code;
+
+	i = 0;
+	error_code = 0;
+	while (g->builtin[i].name)
+	{
+		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
+		{
+			error_code = g->builtin[i].f(g, cmds);
+			free_n_exit_child(g, cmds, envp, error_code);
+		}
+		i++;
 	}
 }

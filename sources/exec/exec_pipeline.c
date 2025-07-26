@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/25 21:06:22 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:22:09 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,7 @@ static char	*parse_cmd_exec(char **envp, t_g *g, t_cmd *cmds)
 		}
 		i++;
 	}
-	i = 0;
-	while (g->builtin[i].name)
-	{
-		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
-		{
-			error_code = g->builtin[i].f(g, cmds);
-			free_n_exit_child(g, cmds, envp, error_code);
-		}
-		i++;
-	}
+	second_parse_cmd(g, cmds, envp);
 	cmd = cmds->argv[0];
 	return (cmd);
 }

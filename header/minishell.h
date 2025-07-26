@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 20:47:58 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:21:05 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*check_binary_file(t_g *g, t_cmd *cmds, char **envp, char *cmd);
 void	setup_stdin(t_g *g, t_cmd *cmds);
 void	setup_stdout(t_g *g, t_cmd *cmds);
 void	free_n_exit_child(t_g *g, t_cmd *cmds, char **envp, int error_code);
+void	second_parse_cmd(t_g *g, t_cmd *cmds, char **envp);
 
 //PARSING COMMANDS
 t_cmd	*parse_commands(t_list *lst);

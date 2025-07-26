@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:48:48 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/20 15:45:10 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/26 07:22:45 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	handle_redirection_token(t_list **tmp, t_cmd **curr)
 	int		type_redir;
 
 	redir = *tmp;
+	type_redir = 0;
 	if (!redir || !redir->next)
 	{
 		perror("minishell: syntax error near unexpected token `newline'\n");
