@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/27 15:33:45 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/28 00:05:06 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ char	*check_binary_file(t_g *g, char **envp, char *cmd)
 	if (stat(g->path, &sb) == 0 && S_ISDIR(sb.st_mode))
 		return (write(2, cmd, ft_strlen(cmd)),
 			perror(": is a directory\n"), free(g->path), free_n_exit_child(g,
-				 envp, 126), NULL);
+				envp, 126), NULL);
 	if (access(g->path, X_OK) != 0)
 		return (write(2, cmd, ft_strlen(cmd)),
 			perror(": permission denied\n"), free(g->path), free_n_exit_child(g,
-				 envp, 126), NULL);
+				envp, 126), NULL);
 	return (g->path);
 }
 

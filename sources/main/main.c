@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/25 18:09:38 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/27 23:51:56 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		g->lst = NULL;
 		g_in_prompt = 1;
-		g->input = readline(GREEN "minishell$ " RE);
+		g->input = readline(PROMPT);
 		g_in_prompt = 0;
 		if (msh_while(g))
 			return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/27 15:35:10 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/28 00:02:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		check_if_var(t_env *env, t_list *lst);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
 int		f_unset(t_env *env, t_list *lst);
-int     is_valid_export_argument(char *str);
+int		is_valid_export_argument(char *str);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
