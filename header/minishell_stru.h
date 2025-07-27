@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/25 19:39:02 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 00:08:09 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRU_H
 # define MINISHELL_STRU_H
 
+# define PROMPT "\001\033[0;32m\002minishell$ \001\033[0m\002"
+# define MINISHELL "minishell$ "
+# define NONE	"\001"
+# define START	"\002"
 # define RED	"\033[0;31m"
 # define GREEN	"\033[0;32m"
 # define BLUE	"\033[0;34m"

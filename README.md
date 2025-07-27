@@ -7,9 +7,8 @@
 
 TOUT MARCHE INSHALLAH
 
-echo ded> test.txt > out.txt | pwd | cat << st | echo bonjour | cd | export a=323 | env | pwd > out.txt | << st | echo bonjour
+echo salut > test.txt > out.txt | pwd | cat << st | echo bonjour | cd | export a=323 | env | pwd > out.txt | << st | echo bonjour
 
-leak parse command
 
 ## cd (changement de dossier - Daniel): ✅
 
