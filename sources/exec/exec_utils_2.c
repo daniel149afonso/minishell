@@ -6,29 +6,29 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/26 07:20:46 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/27 15:33:45 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-char	*check_binary_file(t_g *g, t_cmd *cmds, char **envp, char *cmd)
+char	*check_binary_file(t_g *g, char **envp, char *cmd)
 {
 	struct stat	sb;
 
 	g->path = ft_strdup(cmd);
 	if (!g->path || access(g->path, X_OK) != 0)
 		return (write(2, cmd, ft_strlen(cmd)),
-			perror(": command not found\n"), free_n_exit_child(g, cmds,
+			perror(": command not found\n"), free_n_exit_child(g,
 				envp, 127), NULL);
 	if (stat(g->path, &sb) == 0 && S_ISDIR(sb.st_mode))
 		return (write(2, cmd, ft_strlen(cmd)),
 			perror(": is a directory\n"), free(g->path), free_n_exit_child(g,
-				cmds, envp, 127), NULL);
+				 envp, 126), NULL);
 	if (access(g->path, X_OK) != 0)
 		return (write(2, cmd, ft_strlen(cmd)),
 			perror(": permission denied\n"), free(g->path), free_n_exit_child(g,
-				cmds, envp, 127), NULL);
+				 envp, 126), NULL);
 	return (g->path);
 }
 
@@ -107,7 +107,7 @@ void	second_parse_cmd(t_g *g, t_cmd *cmds, char **envp)
 		if (ft_strcmp(cmds->argv[0], g->builtin[i].name) == 0)
 		{
 			error_code = g->builtin[i].f(g, cmds);
-			free_n_exit_child(g, cmds, envp, error_code);
+			free_n_exit_child(g, envp, error_code);
 		}
 		i++;
 	}
