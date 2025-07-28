@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 00:37:41 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/28 00:05:06 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/28 15:03:15 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ char	*check_binary_file(t_g *g, char **envp, char *cmd)
 
 	g->path = ft_strdup(cmd);
 	if (!g->path || access(g->path, X_OK) != 0)
-		return (write(2, cmd, ft_strlen(cmd)),
+		return (free(g->path), write(2, cmd, ft_strlen(cmd)),
 			perror(": command not found\n"), free_n_exit_child(g,
 				envp, 127), NULL);
 	if (stat(g->path, &sb) == 0 && S_ISDIR(sb.st_mode))
-		return (write(2, cmd, ft_strlen(cmd)),
+		return (free(g->path), write(2, cmd, ft_strlen(cmd)),
 			perror(": is a directory\n"), free(g->path), free_n_exit_child(g,
 				envp, 126), NULL);
 	if (access(g->path, X_OK) != 0)
-		return (write(2, cmd, ft_strlen(cmd)),
+		return (free(g->path), write(2, cmd, ft_strlen(cmd)),
 			perror(": permission denied\n"), free(g->path), free_n_exit_child(g,
 				envp, 126), NULL);
 	return (g->path);

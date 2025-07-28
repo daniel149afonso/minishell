@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 04:01:12 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/28 16:06:47 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,14 @@ permet de check si un la commande
 est bien écrite et si il faut += ou juste
 ajouter ou update une variable
 ----------------------------------*/
-int	check_if_var(t_env *env, t_list *lst)
+int	check_if_var(t_env *env, t_list **lst)
 {
 	t_list	*arg;
 	t_list	*tmp;
 	char	*value;
 
-	arg = lst->next;
-	tmp = lst->next;
+	arg = *lst;
+	tmp = *lst;
 	while (tmp)
 	{
 		value = extract_check_key(tmp->content);

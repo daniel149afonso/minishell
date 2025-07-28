@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 18:23:21 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:00:01 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ int	check_exit_code(t_g *g)
 		if (!is_valid_numeric_arg(key))
 		{
 			return_code(g->env, 2);
-			ft_putstr_fd("exit: ", 2);
-			return (ft_putstr_fd("numeric argument required\n", 2), 255);
+			return (free(key),
+				ft_putstr_fd("exit: numeric argument required\n", 2), 255);
 		}
 		if (tmp->next)
-			return (return_code(g->env, 2), ft_putstr_fd("minishell: exit: "
-					"too many arguments\n", 2), -20);
+			return (return_code(g->env, 2), ft_putstr_fd("exit: "
+					"too many arguments\n", 2), free(key), -20);
 		code = ft_atoi(key);
-		free(key);
-		return (code);
+		return (free(key), code);
 	}
 	return (0);
 }

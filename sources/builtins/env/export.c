@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 00:03:32 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/28 16:07:43 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	ft_exp(t_env *env, t_list *lst)
 		}
 		arg = arg->next;
 	}
-	if (check_if_var(env, lst))
+	if (check_if_var(env, &lst))
 		return (1);
 	return (0);
 }
