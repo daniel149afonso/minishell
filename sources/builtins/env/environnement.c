@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/26 12:02:40 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/28 18:21:23 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	add_env_node(t_env **env, const char *str)
 	else
 	{
 		new->key = ft_strndup(str, ft_strlen(str));
-		new->value = ft_strdup("");
+		new->value = NULL;
 	}
 	new->next = NULL;
 	if (!*env)
