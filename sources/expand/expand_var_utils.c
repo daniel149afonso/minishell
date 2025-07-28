@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/25 21:18:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:13:00 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	char	*val;
 
 	(*i)++;
+	if (!str[*i] || is_space(str[*i]) || str[*i] == '"' || str[*i] == '\''
+		|| str[*i] == '$')
+	{
+		*res = ft_join_and_free(*res, ft_strdup("$"));
+		return;
+	}
 	var = extract_var_name(str, i);
 	if (ft_strcmp(var, "?") == 0)
 		val = ft_itoa(env->var_error_code);
 	else
 		val = get_env_value(env, var);
 	if (!val)
-		val = ft_strdup("$");
+		val = ft_strdup("");
 	if (val)
 	{
 		*res = ft_join_and_free(*res, val);
