@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/25 21:18:52 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:24:06 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	char	*val;
 
 	(*i)++;
+	if (!str[*i] || is_space(str[*i]) || str[*i] == '"' || str[*i] == '\''
+		|| str[*i] == '$')
+	{
+		*res = ft_join_and_free(*res, ft_strdup("$"));
+		return ;
+	}
 	var = extract_var_name(str, i);
 	if (ft_strcmp(var, "?") == 0)
 		val = ft_itoa(env->var_error_code);
 	else
 		val = get_env_value(env, var);
 	if (!val)
-		val = ft_strdup("$");
+		val = ft_strdup("");
 	if (val)
 	{
 		*res = ft_join_and_free(*res, val);

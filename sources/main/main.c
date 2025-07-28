@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:05:02 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/27 23:51:56 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/28 15:15:37 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	g_in_prompt;
 
 static void	sigint_handler(int sig)
 {
-	(void)sig;
 	if (g_in_prompt)
 	{
+		(void)sig;
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -100,10 +100,10 @@ int	main(int ac, char **av, char **envp)
 	g = NULL;
 	init_global_struct(&g, envp);
 	is_debug_active(g, av[1]);
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
 		g->lst = NULL;
 		g_in_prompt = 1;
 		g->input = readline(PROMPT);

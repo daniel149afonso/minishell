@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/27 15:23:47 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/28 15:24:29 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+void	child_sig(int sig)
+{
+	(void)sig;
+	ft_putendl_fd("quit (core dump)\n", 2);
+}
 
 static int	for_envp(t_env *tmp)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 00:02:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/28 15:57:07 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	add_env_node(t_env **env, const char *str);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
-int		check_if_var(t_env *env, t_list *lst);
+int		check_if_var(t_env *env, t_list **lst);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
 int		f_unset(t_env *env, t_list *lst);
@@ -80,6 +80,7 @@ void	setup_stdin(t_g *g, t_cmd *cmds);
 void	setup_stdout(t_g *g, t_cmd *cmds);
 void	free_n_exit_child(t_g *g, char **envp, int error_code);
 void	second_parse_cmd(t_g *g, t_cmd *cmds, char **envp);
+void	child_sig(int sig);
 
 //PARSING COMMANDS
 t_cmd	*parse_commands(t_list *lst);

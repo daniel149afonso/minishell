@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/27 15:35:36 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/28 16:34:22 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	get_access(t_g *g, char *cmd, t_cmd *cmds, char **envp)
 				write(2, ": command not found\n", 20), free_n_exit_child(g,
 					envp, 127));
 	}
+	signal(SIGQUIT, SIG_DFL);
 	execve(g->path, cmds->argv, envp);
 	if (g->path)
 		free(g->path);
@@ -121,7 +122,9 @@ int	exec_pipeline(t_g *g, t_cmd *cmds, char **envp)
 		g->last_status = g->status;
 	if (WIFEXITED(g->last_status))
 		return_code(g->env, WEXITSTATUS(g->last_status));
-	if (WIFSIGNALED(g->status) && WTERMSIG(g->status) == SIGINT)
+	if (WTERMSIG(g->status) == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
+	if (WIFSIGNALED(g->status) && !(WTERMSIG(g->status) == SIGINT))
 		write(STDOUT_FILENO, "\n", 1);
 	free_split(envp);
 	return (1);
