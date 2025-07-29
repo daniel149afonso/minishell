@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/29 11:43:41 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:32:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_g
 	char		**result;
 	char		*cmd;
 	char		*path;
+	char		*prompt;
 	int			s_stdin;
 	int			s_stdout;
 	int			interrupted;

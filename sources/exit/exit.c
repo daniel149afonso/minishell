@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 18:27:08 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:48:26 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,20 @@ int	check_exit_code(t_g *g)
 	return (0);
 }
 
+void	check_return_code(t_g *g, int *return_code)
+{
+	if (g->lst)
+		*return_code = check_exit_code(g);
+	else
+		*return_code = 0;
+}
+
 /*Clean tout ce qui peut être allouer en mémoire*/
 int	free_n_exit(t_g *g, t_cmd *cmds)
 {
 	int	return_code;
 
-	if (g->lst)
-		return_code = check_exit_code(g);
-	else
-		return_code = 0;
+	check_return_code(g, &return_code);
 	if (return_code == -20)
 		return (1);
 	if (g->lst)
@@ -86,6 +91,8 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 		free(g->cmd);
 	if (g->input)
 		free(g->input);
+	if (g->prompt)
+		free(g->prompt); 
 	free(g);
 	printf(RED "exit\n" RE);
 	exit (return_code);

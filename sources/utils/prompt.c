@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 11:35:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 14:22:07 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/07/29 18:52:48 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,31 @@ static char	*get_home(void)
 	return (cwd);
 }
 
-char	*prompt(void)
+char	*ft_prompt(void)
 {
-    char    *username;
-    char    *result;
+	char	*username;
+	char	*result;
 	char	*home;
 
-    result = ft_strdup(PROMPT);
-    if (!result)
-        return ("ERR");
-    username = getenv("USER");
+	result = ft_strdup(PROMPT);
+	if (!result)
+		return ("ERR");
+	username = getenv("USER");
 	if (!username)
 		username = "unknown";
-    result = ft_strjoin(result, username);
-	result = ft_strjoin(result, "\001\033[0m\002:\001\033[0;34m\002");
+	result = ft_join_and_free(result, username);
+	result = ft_join_and_free(result, "\001\033[0m\002:\001\033[0;34m\002");
 	home = get_home();
 	if (!home)
 		return ("ERR");
-	result = ft_strjoin(result, home);
+	result = ft_join_and_free(result, home);
 	if (!result)
-		return ("ERR");
-	result = ft_strjoin(result, "\001\033[0;34m\002\001\033[0m");
+		return (free(home), "ERR");
+	result = ft_join_and_free(result, "\001\033[0;34m\002\001\033[0m");
 	if (!result)
-		return ("ERR");
-	result = ft_strjoin(result, "\001\033[0m\002:\001\033[0;33m\002❯ \001\033[0m");
+		return (free(home), "ERR");
+	result = ft_join_and_free(result, "\001\033[0m\002:\001\033[0;33m\002❯ \001\033[0m");
 	if (!result)
-		return ("ERR");
-	return (result);
+		return (free(home), "ERR");
+	return (free(home), result);
 }
