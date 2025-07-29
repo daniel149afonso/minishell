@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 11:35:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 12:17:20 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:22:07 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ char	*prompt(void)
 	result = ft_strjoin(result, home);
 	if (!result)
 		return ("ERR");
-	result = ft_strjoin(result, "\001\033[0;34m\002$\001\033[0m");
+	result = ft_strjoin(result, "\001\033[0;34m\002\001\033[0m");
 	if (!result)
 		return ("ERR");
-	result = ft_strjoin(result, "\001\033[0;33m\002:❯ \001\033[0m");
+	result = ft_strjoin(result, "\001\033[0m\002:\001\033[0;33m\002❯ \001\033[0m");
 	if (!result)
 		return ("ERR");
 	return (result);

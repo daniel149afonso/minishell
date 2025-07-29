@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 13:14:47 by daafonso          #+#    #+#              #
-#    Updated: 2025/07/25 16:33:36 by daafonso         ###   ########.fr        #
+#    Updated: 2025/07/29 14:26:29 by bullestico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,32 +66,32 @@ NAME		= libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@printf "\rCreating $(NAME)..."
+	@printf "\rCreating $(NAME)...			"
 	@ar rcs $(NAME) $(OBJS)
-	@printf "\r$(NAME) created successfully.\n"
+	@printf "\r$(NAME) created successfully.		\n"
 
 # Bonus rule
 bonus: ${OBJSALL}
 	@printf "\rBuilding bonus into $(NAME)..."
 	@ar rcs $(NAME) ${OBJSALL}
-	@printf "\rLIBFT Bonus objects added successfully.\n"
+	@printf "\rLIBFT Bonus objects added successfully.			\n"
 
 # Compile .c into .o
 %.o: %.c
-	@printf "\rCompiling $<..."
+	@printf "\rCompiling $<...					"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean object files
 clean:
-	@printf "\rCleaning object files..."
+	@printf "\rCleaning object files...			"
 	@$(RM) $(OBJS) $(OBJSALL)
-	@printf "\rLIBFT object files cleaned.\n"
+	@printf "\rLIBFT object files cleaned.			\n"
 
 # Clean all
 fclean: clean
-	@printf "\rRemoving $(NAME)..."
+	@printf "\rRemoving $(NAME)...			"
 	@$(RM) $(NAME)
-	@printf "\rLIBFT removed.\n"
+	@printf "\rLIBFT removed.					\n"
 
 # Full rebuild
 re: fclean all
