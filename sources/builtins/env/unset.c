@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:08:41 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/25 01:05:08 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/29 11:10:11 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ static void	del_var(t_env *env, char *arg)
 		free(key);
 }
 
-int	f_unset(t_env *env, t_list *lst)
+int	f_unset(t_env *env, t_list *lst, t_cmd *cmds)
 {
 	t_list	*arg;
 
+	(void)cmds;
 	arg = lst;
 	while (arg)
 	{

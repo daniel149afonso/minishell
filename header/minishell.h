@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 15:57:07 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:39:11 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
 # include "minishell_stru.h"
 
 //FT_INIT_BUILTINS
@@ -22,7 +21,6 @@ int		builtins(t_g *g, t_cmd *cmd);
 int		ft_cd(t_g *g, t_cmd *cmds);
 int		ft_pwd(t_g *g, t_cmd *cmds);
 int		ft_echo(t_g *g, t_cmd *cmds);
-int		ft_env(t_env *env, t_list *lst);
 
 //CD BUILTINS
 int		get_current_path(char **path);
@@ -32,17 +30,18 @@ int		update_env_if_exists(t_env *env, const char *key, const char *value);
 void	print_error_path(char *path);
 
 //ENVIRONNEMENT BUILTINS
-int		ft_exp(t_env *env, t_list *lst);
+int		ft_exp(t_env *env, t_list *lst, t_cmd *cmds);
 void	init_env(t_env **env, char **envp);
 void	add_env_node(t_env **env, const char *str);
 char	*extract_key(char *str);
 char	*extract_value(char *str);
 void	update_or_add_var(t_env **env, char *arg);
-int		check_if_var(t_env *env, t_list **lst);
+int		check_if_var(t_env *env, t_cmd *cmds);
 void	add_env_node_concat(t_env **env, const char *str);
 char	*extract_key_concat(char *str);
-int		f_unset(t_env *env, t_list *lst);
+int		f_unset(t_env *env, t_list *lst, t_cmd *cmds);
 int		is_valid_export_argument(char *str);
+int		ft_env(t_env *env, t_list *lst, t_cmd *cmds);
 
 //HANDLE VARIABLES
 char	**search_var(char **strs, t_env *env);
@@ -114,6 +113,7 @@ void	f_bubblesort(t_env *head);
 int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	ft_print_array(char **strs);
+char	*prompt(void);
 
 // DEBUG
 void	print_debug_command(t_cmd *cmd);

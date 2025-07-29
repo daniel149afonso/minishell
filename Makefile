@@ -47,6 +47,7 @@ SRCS := \
   $(UTLS_DIR)/utils_2.c       \
   $(UTLS_DIR)/credits.c       \
   $(UTLS_DIR)/debug.c       \
+  $(UTLS_DIR)/prompt.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
   $(EXEC_DIR)/exec_utils.c \

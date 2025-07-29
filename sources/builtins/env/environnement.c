@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 23:08:37 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 18:21:23 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:12:12 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ void	add_env_node(t_env **env, const char *str)
 Builtin de la commande env pour
 afficher l'environnment comme dans bash
 ---------------------------*/
-int	ft_env(t_env *env, t_list *lst)
+int	ft_env(t_env *env, t_list *lst, t_cmd *cmds)
 {
 	t_env	*tmp;
 
+	(void)cmds;
 	(void)lst;
 	tmp = env;
 	while (tmp)
