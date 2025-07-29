@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:41:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 16:06:47 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:23:42 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ static int	check_arg(char *value)
 	return (1);
 }
 
-static void	print_error_env(char *value, t_list *tmp)
+static void	print_error_env(char *value, char *tmp)
 {
-	value = extract_check_key(tmp->content);
+	value = extract_check_key(tmp);
 	write(STDERR_FILENO, "minishell: export: `", 21);
 	write(STDERR_FILENO, value, ft_strlen(value));
 	write(STDERR_FILENO, "': not a valid identifier\n", 27);
 	free(value);
-	return ;
 }
 
 /*----------------------------------
@@ -97,29 +96,28 @@ permet de check si un la commande
 est bien écrite et si il faut += ou juste
 ajouter ou update une variable
 ----------------------------------*/
-int	check_if_var(t_env *env, t_list **lst)
+int	check_if_var(t_env *env, t_cmd *cmds)
 {
-	t_list	*arg;
-	t_list	*tmp;
 	char	*value;
+	int		i;
 
-	arg = *lst;
-	tmp = *lst;
-	while (tmp)
+	i = 1;
+	while (cmds->argv[i])
 	{
-		value = extract_check_key(tmp->content);
+		value = extract_check_key(cmds->argv[i]);
 		if (value[0] == '=' || check_arg(value))
-			return (print_error_env(value, tmp), free(value), 1);
-		tmp = tmp->next;
+			return (print_error_env(value, cmds->argv[i]), free(value), 1);
 		free(value);
+		i++;
 	}
-	while (arg)
+	i = 1;
+	while (cmds->argv[i])
 	{
-		if (ft_strchr(arg->content, '+'))
-			check_concat(env, (char *)arg->content);
+		if (ft_strchr(cmds->argv[i], '+'))
+			check_concat(env, cmds->argv[i]);
 		else
-			update_or_add_var(&env, (char *)arg->content);
-		arg = arg->next;
+			update_or_add_var(&env, cmds->argv[i]);
+		i++;
 	}
 	return (0);
 }

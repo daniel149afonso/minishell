@@ -47,6 +47,7 @@ SRCS := \
   $(UTLS_DIR)/utils_2.c       \
   $(UTLS_DIR)/credits.c       \
   $(UTLS_DIR)/debug.c       \
+  $(UTLS_DIR)/prompt.c       \
   $(EXEC_DIR)/exec_pipeline.c \
   $(EXEC_DIR)/parse_exec.c \
   $(EXEC_DIR)/exec_utils.c \
@@ -76,17 +77,17 @@ $(NAME): $(OBJS) $(LIBFT)
 	@printf "\rCompiling $(NAME)..."
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LDFLAGS)
 
-	@printf "\r\033[0;32m$(NAME) compiled successfully.\n\033[0m"
+	@printf "\r\033[0;32m$(NAME) compiled successfully.\t\t\n\033[0m"
 
 # Compile libft
 $(LIBFT):
 	@printf "\rCompiling libft..."
 	@make bonus -C libft/ --no-print-directory
-	@printf "\r\033[0;32mLibft compiled successfully.\n\033[0m"
+	@printf "\r\033[0;32mLibft compiled successfully.\t\t\n\033[0m"
 
 # Compilation des fichiers .o à partir des .c
 %.o: %.c $(HEAD)
-	@printf "\rCompiling $<...               "
+	@printf "\rCompiling $<...                    "
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean objects
@@ -94,14 +95,14 @@ clean:
 	@printf "\rCleaning object files..."
 	@$(RM) $(OBJS)
 	@make clean -C libft/ --no-print-directory
-	@printf "\rObject files cleaned.\n"
+	@printf "\rObject files cleaned.          \n"
 
 # Clean everything
 fclean: clean
-	@printf "\rRemoving $(NAME)..."
+	@printf "\rRemoving $(NAME)...         "
 	@$(RM) $(NAME)
 	@make fclean -C libft/ --no-print-directory
-	@printf "\r$(NAME) removed.\n"
+	@printf "\r$(NAME) removed.\t\t\t\n"
 
 # Recompile
 re: fclean all

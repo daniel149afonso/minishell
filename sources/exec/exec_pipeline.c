@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/28 16:34:22 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:24:07 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*parse_cmd_exec(char **envp, t_g *g, t_cmd *cmds)
 	{
 		if (ft_strcmp(cmds->argv[0], g->envbuilt[i].name) == 0)
 		{
-			error_code = g->envbuilt[i].e(g->env, g->lst);
+			error_code = g->envbuilt[i].e(g->env, g->lst, cmds);
 			free_n_exit_child(g, envp, error_code);
 		}
 		i++;

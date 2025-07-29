@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/28 15:24:29 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:24:21 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_s1)
 {
 	char	*res;
 
+	if (!s2)
+		return (s1);
 	res = ft_strjoin(s1, s2);
 	if (free_s1)
 		free(s1);

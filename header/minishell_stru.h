@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/28 14:43:26 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:43:41 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRU_H
 # define MINISHELL_STRU_H
 
-# define PROMPT "\001\033[0;32m\002minishell$ \001\033[0m\002"
-# define MINISHELL "minishell$ "
+# define PROMPT "\001\033[0;32m\002mini@"
 # define NONE	"\001"
 # define START	"\002"
 # define RED	"\033[0;31m"
@@ -80,7 +79,7 @@ typedef struct s_env
 typedef struct s_envbuilt
 {
 	char	*name;
-	int		(*e)(t_env *env, t_list *lst);
+	int		(*e)(t_env *env, t_list *lst, t_cmd *cmds);
 }	t_envbuilt;
 
 //BUILTINS COMMANDS

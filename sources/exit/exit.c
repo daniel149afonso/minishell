@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 15:00:01 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:27:08 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_exit_code(t_g *g)
 		{
 			return_code(g->env, 2);
 			return (free(key),
-				ft_putstr_fd("exit: numeric argument required\n", 2), 255);
+				ft_putstr_fd("exit: numeric argument required\n", 2), 2);
 		}
 		if (tmp->next)
 			return (return_code(g->env, 2), ft_putstr_fd("exit: "

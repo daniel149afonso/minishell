@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:51:01 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/28 16:07:43 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:25:55 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,15 @@ Fonction de base export qui va
 écrire les variables existante si aucun argument
 ou va allez update les variables avec "check_if_var"
 ---------------------------*/
-int	ft_exp(t_env *env, t_list *lst)
+int	ft_exp(t_env *env, t_list *lst, t_cmd *cmds)
 {
-	t_list	*arg;
-
-	if (!lst || !lst->next)
+	(void)lst;
+	if (!cmds || !cmds->argv[1])
 	{
 		print_sorted_export(env);
 		return (0);
 	}
-	arg = lst->next;
-	while (arg)
-	{
-		if (!is_valid_export_argument(arg->content))
-		{
-			print_sorted_export(env);
-			return (0);
-		}
-		arg = arg->next;
-	}
-	if (check_if_var(env, &lst))
+	if (check_if_var(env, cmds))
 		return (1);
 	return (0);
 }
