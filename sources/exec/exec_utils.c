@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:00:49 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/28 18:24:21 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:53:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	free_n_exit_child(t_g *g, char **envp, int error_code)
 		free_split(envp);
 	if (g->input)
 		free(g->input);
+	if (g->prompt)
+		free(g->prompt);
 	if (g)
 		free(g);
 	exit (error_code);

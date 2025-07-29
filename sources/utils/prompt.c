@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 11:35:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 17:05:37 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/29 18:52:48 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ static char	*get_home(void)
 	return (cwd);
 }
 
-char	*prompt(void)
+char	*ft_prompt(void)
 {
-    char    *username;
-    char    *result;
+	char	*username;
+	char	*result;
 	char	*home;
 
-    result = ft_strdup(PROMPT);
-    if (!result)
-        return ("ERR");
-    username = getenv("USER");
+	result = ft_strdup(PROMPT);
+	if (!result)
+		return ("ERR");
+	username = getenv("USER");
 	if (!username)
 		username = "unknown";
-    result = ft_join_and_free(result, username);
+	result = ft_join_and_free(result, username);
 	result = ft_join_and_free(result, "\001\033[0m\002:\001\033[0;34m\002");
 	home = get_home();
 	if (!home)

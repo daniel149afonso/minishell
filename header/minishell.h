@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 11:39:11 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:53:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	f_bubblesort(t_env *head);
 int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	ft_print_array(char **strs);
-char	*prompt(void);
+char	*ft_prompt(void);
 
 // DEBUG
 void	print_debug_command(t_cmd *cmd);
