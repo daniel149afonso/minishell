@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/31 21:17:12 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/08/01 00:15:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	handle_heredoc(t_g *g, char *delimitor, t_env *env, int write_fd)
 		handle_variable(buffer, env, write_fd);
 	}
 	close(write_fd);
-	//free_n_exit_child(g, NULL, 130);
 	return (0);
 }
 

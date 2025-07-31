@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/31 21:17:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/08/01 00:17:25 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int		is_missing_arg(t_list *lst);
 int		prepare_redirections(t_g *g, t_cmd *cmd);
 int		apply_redirections(t_g *g, t_cmd *cmd);
 void	heredoc_sigint_handler(int sig);
+t_g		*get_heredoc_context(t_g *new_context);
 
 //REDIRECTIONS COMMANDS
 int		redirect_cmd_std(t_g *g, t_cmd *cmd);
