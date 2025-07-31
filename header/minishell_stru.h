@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/29 18:32:36 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 18:48:50 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define PROMPT "\001\033[0;32m\002mini@"
 # define NONE	"\001"
+# define PROUT	"\001\033[0m\002:\001\033[0;33m\002❯ \001\033[0m"
 # define START	"\002"
 # define RED	"\033[0;31m"
 # define GREEN	"\033[0;32m"

@@ -56,7 +56,7 @@ SRCS := \
 OBJS = $(SRCS:.c=.o)
 
 # Compiler and flags
-CC = gcc -Wall -Wextra -Werror #-fsanitize=address,undefined -fno-omit-frame-pointer -g -O0
+CC = gcc -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer -g -O0
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)

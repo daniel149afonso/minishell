@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_apply.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:04:03 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/21 03:23:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 14:06:28 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	apply_last_redir(t_g *g, t_redir *r, t_redir *last_in, t_redir *last_out)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
-	if (r == last_out)
+	else if (r == last_out)
 	{
 		if (r->type == 2)
 			fd = open(r->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);

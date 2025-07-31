@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/31 17:24:22 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 17:50:57 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	open_single_heredoc(t_g *g, t_redir *r)
 	{
 		write(1, "\n", 1);
 		g->interrupted = 1;
-		return (return_code(g->env, 130), 1);
+		return (close(pipefd[0]), return_code(g->env, 130), 1);
 	}
-	return (0);
+	return (close(pipefd[0]), 0);
 }
 
 /*Détecte si la redirection est un heredoc*/
