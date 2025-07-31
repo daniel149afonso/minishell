@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 11:35:12 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 18:52:48 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 18:49:08 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_prompt(void)
 	result = ft_join_and_free(result, "\001\033[0;34m\002\001\033[0m");
 	if (!result)
 		return (free(home), "ERR");
-	result = ft_join_and_free(result, "\001\033[0m\002:\001\033[0;33m\002❯ \001\033[0m");
+	result = ft_join_and_free(result, PROUT);
 	if (!result)
 		return (free(home), "ERR");
 	return (free(home), result);

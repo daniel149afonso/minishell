@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:52:22 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/16 21:07:00 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 17:49:07 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,16 @@ int	is_space_command(char **strs)
 		i++;
 	}
 	return (1);
+}
+
+void	close_fd_heredoc(void)
+{
+	int	fd;
+
+	fd = open("/dev/null", O_RDONLY);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	fd = open("/dev/null", O_WRONLY);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }

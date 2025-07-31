@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:20:03 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/31 14:02:01 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:15:40 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	handle_variable(char *buffer, t_env *env, int write_fd)
 
 /*Traite << stdin, ouvre un heredoc qui recoit les entrees de l'utilisateur
 jusqu'a ce que l'occurence de fermeture soit entre, erreur return 1*/
-int	handle_heredoc(char *delimitor, t_env *env, int write_fd)
+int	handle_heredoc(t_g *g, char *delimitor, t_env *env, int write_fd)
 {
 	char	*buffer;
 
 	buffer = NULL;
-	signal(SIGINT, SIG_DFL);
+	get_heredoc_context(g);
+	signal(SIGINT, heredoc_sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
@@ -46,7 +47,7 @@ int	handle_heredoc(char *delimitor, t_env *env, int write_fd)
 		if (!buffer)
 		{
 			close(write_fd);
-			exit(130);
+			free_n_exit_child(g, NULL, 130);
 		}
 		if (!ft_strcmp(buffer, delimitor))
 		{
@@ -74,7 +75,7 @@ int	open_single_heredoc(t_g *g, t_redir *r)
 	if (pid == 0)
 	{
 		close(pipefd[0]);
-		handle_heredoc(r->file, g->env, pipefd[1]);
+		handle_heredoc(g, r->file, g->env, pipefd[1]);
 		free_n_exit_child(g, NULL, 0);
 	}
 	close(pipefd[1]);

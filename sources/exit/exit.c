@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:14:17 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 18:48:26 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 18:42:10 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	free_n_exit(t_g *g, t_cmd *cmds)
 	if (g->input)
 		free(g->input);
 	if (g->prompt)
-		free(g->prompt); 
+		free(g->prompt);
 	free(g);
 	printf(RED "exit\n" RE);
 	exit (return_code);

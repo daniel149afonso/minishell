@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:15:35 by daafonso          #+#    #+#             */
-/*   Updated: 2025/07/28 18:19:12 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 18:43:28 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_variable_expansion(char *str, char **res, int *i, t_env *env)
 	if (!str[*i] || is_space(str[*i]) || str[*i] == '"' || str[*i] == '\''
 		|| str[*i] == '$')
 	{
-		*res = ft_join_and_free(*res, ft_strdup("$"));
+		*res = ft_join_and_free(*res, "$");
 		return ;
 	}
 	var = extract_var_name(str, i);
