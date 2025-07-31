@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:51:32 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/07/29 17:53:57 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/07/31 17:01:36 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		is_var_char(char c);
 void	return_code(t_env *env, int error_code);
 void	ft_print_array(char **strs);
 char	*ft_prompt(void);
+void	close_fd_heredoc(void);
 
 // DEBUG
 void	print_debug_command(t_cmd *cmd);

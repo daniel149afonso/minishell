@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:40:09 by bullestico        #+#    #+#             */
-/*   Updated: 2025/07/29 11:24:07 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/07/31 17:01:11 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ static void	check_pid(int pid, t_g *g, t_cmd *cmds, char **envp)
 			get_access(g, g->cmd, cmds, envp);
 		else
 		{
-			dup2(open("/dev/null", O_RDONLY), STDIN_FILENO);
-			dup2(open("/dev/null", O_WRONLY), STDOUT_FILENO);
+			close_fd_heredoc();
 			free(g->cmd);
 			free_n_exit_child(g, envp, 127);
 		}
