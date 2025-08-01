@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_parsing_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:04:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/31 21:20:04 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/08/01 15:31:21 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ t_g	*get_heredoc_context(t_g *new_context)
 
 	if (new_context)
 		context = new_context;
-	return context;
+	return (context);
 }
 
 void	heredoc_sigint_handler(int sig)
 {
+	t_g	*g;
+
 	(void)sig;
 	write(1, "\n", 1);
-	t_g *g = get_heredoc_context(NULL);
+	g = get_heredoc_context(NULL);
 	if (g)
 		free_n_exit_child(g, NULL, 130);
-	exit(130);
 }

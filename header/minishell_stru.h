@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_stru.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:55:38 by daniel149af       #+#    #+#             */
-/*   Updated: 2025/07/31 21:18:45 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/08/01 15:31:37 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_g	t_g;
 
 typedef struct s_heredoc_context
 {
-	t_g *g;
+	t_g	*g;
 }	t_heredoc_context;
 
 typedef struct s_redir
