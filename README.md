@@ -2,7 +2,7 @@
 
 # Minishell
 
-Minishell is a small command-line shell written in C that replicates core functionalities of Unix shells like `bash`. It's a project focused on deepening knowledge of process management, I/O redirection, parsing, and system calls.
+Minishell — Unix shell written in C. Implements command parsing, pipes, redirections, environment variables, built-in commands, process management, and signal handling.
 
 ## 🚀 Features
 
